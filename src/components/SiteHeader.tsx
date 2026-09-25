@@ -1,9 +1,24 @@
+"use client"
+
 import Link from "next/link"
-import { LOCALE_LABELS, LOCALES, pickLocale, type Locale } from "@/lib/i18n"
+import { usePathname } from "next/navigation"
+import { LOCALE_LABELS, LOCALES, pickLocale, type Locale, isLocale } from "@/lib/i18n"
 import { nav } from "@/lib/fixtures"
 import { buildWhatsAppUrl } from "@/lib/whatsapp"
 
+function swapLocalePath(pathname: string, nextLocale: Locale): string {
+  const parts = pathname.split("/")
+  // ["", "id", "products", "..."]
+  if (parts.length >= 2 && isLocale(parts[1])) {
+    parts[1] = nextLocale
+    const next = parts.join("/")
+    return next || `/${nextLocale}`
+  }
+  return `/${nextLocale}`
+}
+
 export function SiteHeader({ locale }: { locale: Locale }) {
+  const pathname = usePathname() || `/${locale}`
   const wa = buildWhatsAppUrl({ locale, templateKey: "contact" })
   return (
     <header className="sticky top-0 z-50 border-b border-black/10 bg-[#0b3d2e] text-white">
@@ -27,7 +42,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             {LOCALES.map((code) => (
               <Link
                 key={code}
-                href={`/${code}`}
+                href={swapLocalePath(pathname, code)}
                 className={`rounded px-1.5 py-0.5 text-[10px] font-semibold ${
                   code === locale ? "bg-white text-[#0b3d2e]" : "border border-white/30"
                 }`}

@@ -15,7 +15,6 @@ export default async function CareersPage({ params }: { params: Promise<{ locale
       <header>
         <h1 className="text-4xl font-bold">{pickLocale(c.heroTitle, locale)}</h1>
         <p className="mt-3 text-black/70">{pickLocale(c.heroLead, locale)}</p>
-        <p className="mt-2 text-xs text-black/50">applyMode = {mode} (config switch)</p>
       </header>
       <div className="space-y-4">
         {active.map((job) => (
