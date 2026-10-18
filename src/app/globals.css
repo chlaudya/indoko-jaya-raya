@@ -22,24 +22,61 @@
   --header-offset: 96px;
   /* Catalog filter sticks under the scrolled bar (12px + 64px + 8px). */
   --filter-sticky-top: 84px;
-  /* Height of the hero's green curve (scales with width; the copy overlaps its solid lower ~30%). */
-  --hero-cap: clamp(72px, 14vw, 210px);
-  --hero-cap-lg: clamp(220px, 22vw, 320px);
-  /* Height of the Misi→white curve under the pillar cards. */
-  --band-curve: clamp(56px, 9vw, 150px);
-  /* Half the height of a 4:5 pillar card (1 col: first card; 3 cols: the row) = where the forest ends. */
-  --pillar-split: calc((100vw - 40px) * 0.625);
+  /* Home hero (≥1024px): top of the copy block, so the headline starts at ~430/900 of the hero. */
+  --hero-copy-top: calc(47.8% - 2.25rem);
+  /* zh/hi headline key phrase only (never body text): 3.71:1 on #2f7d3e, accepted under the large-text rule (headline ≥32px). */
+  --hero-accent-cjk: #c8e6a0;
+  /* Home pillar cards straddle green → cream: half a 4:5 card (1 col: first card; 3 cols: the row). */
+  --pillar-split: calc((100vw - 40px) * 0.25 + 86px); /* ≈ half a white card: (2:1 photo + ~172px text block) / 2 */
+  --band-curve: clamp(48px, 8vw, 120px);
+  /* Home pillar cards pulled up into the hero (≥1024px only; the stacked layout below keeps 0). */
+  --pillar-pull: 0px;
+  /* Headline lines at ≥1024px, for the pull-up maths (vi wraps to 3 at 1440). */
+  --hero-lines: 2;
+  --hero-line: calc(1.1 * clamp(2rem, 2.6vw, 2.75rem));
+}
+
+html[lang="vi"] {
+  --hero-lines: 3;
+}
+
+/* vi headline is longer: wrap to 3 lines at every ≥1024 width so line 1 never reaches the wave edge (it did at 1280). */
+html[lang="vi"] [data-hero] h1 {
+  max-width: min(560px, 13em);
 }
 
 @media (min-width: 768px) {
   :root {
-    --pillar-split: calc((100vw - 64px - 48px) / 3 * 0.625);
+    --pillar-split: calc((100vw - 64px - 48px) / 3 * 0.25 + 86px);
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279.98px) {
+  :root {
+    --hero-copy-top: calc(56% - 2.25rem);
   }
 }
 
 @media (min-width: 1024px) {
   :root {
-    --pillar-split: calc((min(100vw, 1376px) - 96px - 48px) / 3 * 0.625);
+    --pillar-split: calc((min(100vw, 1280px) - 64px - 48px) / 3 * 0.25 + 86px);
+  }
+}
+
+/*
+ * Card tops sit 64px under the CTA row (y≈710 at 1440×900, ≈79svh), overlapping the hero like Cargill's.
+ * CTA bottom = copy top (k·H − 36px) + copy block (169px eyebrow/lead/buttons + lines × line height), H = hero height.
+ * Card top = H − pull + 8px (section pt-2)  ⇒  pull = (1 − k)·H − 36px − 169px − lines·line − 64px + 8px.
+ */
+@media (min-width: 1024px) and (max-width: 1279.98px) {
+  :root {
+    --pillar-pull: max(0px, calc(0.44 * max(100svh, 600px) - 189px - var(--hero-lines) * var(--hero-line)));
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --pillar-pull: max(0px, calc(0.522 * max(100svh, 600px) - 189px - var(--hero-lines) * var(--hero-line)));
   }
 }
 
@@ -51,6 +88,10 @@
   --color-ivory: #f5f3ea;
   --color-charcoal: #17201b;
   --color-muted: #5a665f;
+  /* Light sage-mist surface (Home Misi + pillars). */
+  --color-mist: #eef2ea;
+  /* Home hero wave green (designer value; white text 5.1:1). */
+  --color-hero-green: #2f7d3e;
 }
 
 html {
@@ -114,6 +155,16 @@ body {
   letter-spacing: -0.015em;
 }
 
+/* zh / hi headings: Noto Serif (set on <html> only for those locales, see layout.tsx). */
+html[lang^="zh"] .display {
+  font-family: var(--font-noto-serif-sc), "Noto Serif SC", "Songti SC", var(--font-cormorant), Georgia, serif;
+  letter-spacing: 0;
+}
+html[lang="hi"] .display {
+  font-family: var(--font-noto-serif-deva), "Noto Serif Devanagari", "Kohinoor Devanagari", var(--font-cormorant), Georgia, serif;
+  letter-spacing: 0;
+}
+
 .display .nums,
 .nums {
   font-variant-numeric: lining-nums tabular-nums;
@@ -126,6 +177,16 @@ body {
 
 .display-h1 {
   font-size: var(--text-h1);
+}
+
+/* Home hero photos: focal point per slide (HeroSlider sets --pos / --pos-m inline). */
+.hero-photo {
+  object-position: var(--pos-m, center);
+}
+@media (min-width: 1024px) {
+  .hero-photo {
+    object-position: var(--pos, center);
+  }
 }
 
 /* Subpage hero headline: sized for the capped photo hero (≤600px tall; 30px floor fits 360px phones). */

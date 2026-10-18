@@ -28,6 +28,10 @@ Mapped 1:1 from `docs/design/wireframes-v1.md`.
 - `settings.waTransport`: `api` | `wame`
 - `settings.applyMode`: `wa` | `form` | `both`
 
+## Client pending
+- Replace mock trust stats (`home.stats`: 3 of 4 defaults are `isMock: true`; they render until replaced)
+- Approve draft zh / vi / hi copy: see `docs/i18n-draft-strings.md`
+
 ## P0
 - `settings.waTargets` admin-configurable
 - `settings.waTemplates` per-CTA context (`{{productName}}`, `{{jobTitle}}`)

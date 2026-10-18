@@ -66,6 +66,15 @@ export const IMAGES = {
     src: `${DIR}/card-pillar-farmers.webp`,
     alt: { id: "Petani dan pekerja menyortir hasil panen", en: "Farmers and workers sorting the harvest" },
   },
+  // Home pillar cards (4:3 crops of client originals; shown in a 2:1 frame with object-fit: cover).
+  cardPillarCornHandful: {
+    src: `${DIR}/card-pillar-corn-handful.webp`,
+    alt: { id: "Segenggam pipilan jagung di kedua telapak tangan", en: "A double handful of shelled corn", zh: "双手捧着的脱粒玉米", vi: "Một vốc hạt ngô trong hai bàn tay", hi: "दोनों हथेलियों में भरे मक्के के दाने" },
+  },
+  cardPillarDryingTarp: {
+    src: `${DIR}/card-pillar-drying-tarp.webp`,
+    alt: { id: "Petani bercaping menarik terpal penjemuran dengan latar perbukitan", en: "Farmer in a woven hat pulling a drying tarp, hills behind", zh: "头戴斗笠的农民拉着晾晒篷布，背后是山丘", vi: "Người nông dân đội nón lá kéo tấm bạt phơi, phía sau là đồi núi", hi: "पहाड़ियों के सामने सुखाने की तिरपाल खींचता बुनी टोपी पहने किसान" },
+  },
   cardPillarCommodities: {
     src: `${DIR}/card-pillar-commodities.webp`,
     alt: { id: "Segenggam pipilan jagung", en: "A handful of shelled corn kernels" },
@@ -113,6 +122,41 @@ export const IMAGES = {
   galleryWarehouse: {
     src: `${DIR}/card-gallery-warehouse.webp`,
     alt: { id: "Gudang penyimpanan komoditi", en: "Commodity storage warehouse" },
+  },
+  // Home hero slides: client originals, cropped by the designer (2400×1350).
+  heroSlide1: {
+    src: `${DIR}/hero-slide-1.webp`,
+    alt: { id: "Petani bercaping menyortir kacang mete", en: "Farmers in woven hats sorting cashew nuts", zh: "头戴斗笠的农民正在分拣腰果", vi: "Nông dân đội nón lá đang phân loại hạt điều", hi: "बुनी टोपी पहने किसान काजू छांटते हुए" },
+  },
+  heroSlide2: {
+    src: `${DIR}/hero-slide-2.webp`,
+    alt: { id: "Kedua tangan menggenggam pipilan jagung", en: "Hands holding shelled corn", zh: "双手捧着脱粒玉米", vi: "Hai bàn tay nâng những hạt ngô", hi: "हथेलियों में मक्के के दाने" },
+  },
+  heroSlide3: {
+    src: `${DIR}/hero-slide-3.webp`,
+    alt: { id: "Petani bercaping dengan latar langit", en: "Farmer in a woven hat against the sky", zh: "头戴斗笠的农民，以天空为背景", vi: "Người nông dân đội nón lá trên nền trời", hi: "आसमान की पृष्ठभूमि में बुनी टोपी पहने किसान" },
+  },
+  heroSlide4: {
+    src: `${DIR}/hero-slide-4.webp`,
+    alt: { id: "Kacang mete gelondong di telapak tangan", en: "Raw cashew nuts in a hand", zh: "手中的生腰果", vi: "Hạt điều thô trong lòng bàn tay", hi: "हथेली में कच्चे काजू" },
+  },
+  heroSlide5: {
+    src: `${DIR}/hero-slide-5.webp`,
+    alt: { id: "Kacang tanah dijemur di atas terpal", en: "Peanuts drying on a tarp", zh: "摊在篷布上晾晒的花生", vi: "Đậu phộng phơi trên tấm bạt", hi: "तिरपाल पर सूखती मूंगफली" },
+  },
+  // Contact hero: client warehouse photo (IMG_8844).
+  heroContactWarehouse: {
+    src: `${DIR}/hero-contact-warehouse.webp`,
+    alt: { id: "Interior gudang beratap baja dengan tumpukan karung", en: "Warehouse interior with a steel roof and stacked sacks", zh: "钢结构屋顶的仓库内部，堆放着麻袋", vi: "Bên trong nhà kho mái thép với các bao hàng xếp chồng", hi: "स्टील की छत वाले गोदाम के अंदर रखी बोरियां" },
+  },
+  // Commodity cards: stock placeholders (Pexels) until the client sends product photos (see manifest.json).
+  cardKacangHijau: {
+    src: `${DIR}/card-kacang-hijau.webp`,
+    alt: { id: "Biji kacang hijau", en: "Mung beans", zh: "绿豆", vi: "Hạt đậu xanh", hi: "साबुत मूंग के दाने" },
+  },
+  cardKopi: {
+    src: `${DIR}/card-kopi.webp`,
+    alt: { id: "Biji kopi mentah (kopi hijau)", en: "Raw green coffee beans", zh: "未烘焙的生咖啡豆", vi: "Hạt cà phê nhân xanh chưa rang", hi: "बिना भुनी हरी कॉफ़ी बीन्स" },
   },
 } satisfies Record<string, { src: string; alt: LString }>
 

@@ -103,13 +103,14 @@ export const ui = {
   companyMenu: { id: "Menu perusahaan", en: "Company menu" },
   heroCarousel: { id: "Foto unggulan", en: "Featured photos" },
   slideOf: { id: "{n} dari {total}", en: "{n} of {total}" },
-  showSlide: { id: "Tampilkan foto {n} dari {total}", en: "Show photo {n} of {total}" },
   pauseSlideshow: { id: "Jeda tayangan foto", en: "Pause slideshow" },
   playSlideshow: { id: "Putar tayangan foto", en: "Play slideshow" },
   openMenu: { id: "Buka menu", en: "Open menu" },
   closeMenu: { id: "Tutup menu", en: "Close menu" },
   ourMission: { id: "Misi kami", en: "Our mission" },
   keyFacts: { id: "Sekilas", en: "At a glance" },
+  // DRAFT zh / vi / hi
+  whyChooseUs: { id: "Mengapa memilih kami", en: "Why choose us", zh: "为何选择我们", vi: "Vì sao chọn chúng tôi", hi: "हमें क्यों चुनें" },
   footerCompany: { id: "Perusahaan", en: "Company" },
   footerProducts: { id: "Produk", en: "Products" },
   footerCareers: { id: "Karier", en: "Careers" },
@@ -200,6 +201,7 @@ export const products: Product[] = [
   },
   {
     slug: "kacang-hijau",
+    image: "cardKacangHijau",
     kind: "product",
     category: "kacang-kacangan",
     name: { id: "Kacang Hijau", en: "Mung Bean" },
@@ -229,6 +231,7 @@ export const products: Product[] = [
   },
   {
     slug: "kopi",
+    image: "cardKopi",
     kind: "product",
     category: "kopi",
     featured: true,
@@ -445,7 +448,9 @@ export type FeatureBlock = {
   href: string
   tone: Tone
 }
-export type StatItem = { value: string; label: LString }
+/** `isMock` marks placeholder numbers that must be replaced before launch (they still render, like CMS content). */
+export type StatItem = { value: string; label: LString; isMock?: boolean }
+export type TrustItem = { title: LString; body: LString }
 
 export const redesign = {
   tagline: {
@@ -455,11 +460,36 @@ export const redesign = {
   home: {
     /** Optional hero video (CMS: home.heroVideo). Empty = poster/placeholder only. */
     heroVideo: "" as string,
-    /** Hero photo slider, in order (CMS: home.heroSlides[]; alt text comes from images.ts meta). */
-    heroSlides: ["heroFarmersSorting", "sectionCashewSorting", "sectionTruckLoading"] as ImageKey[],
+    /**
+     * Hero photo slider, in order (CMS: home.heroSlides[]; alt text comes from images.ts meta).
+     * All 5: designer's crops of client photos (people + the commodities we trade). Center on all.
+     * `positionMobile` (optional) frames the top photo band under 1024px; a CMS image hotspot overrides both.
+     */
+    heroSlides: [
+      { image: "heroSlide1", position: "center" },
+      { image: "heroSlide2", position: "center" },
+      { image: "heroSlide3", position: "center" },
+      { image: "heroSlide4", position: "center" },
+      { image: "heroSlide5", position: "center" },
+    ] as { image: ImageKey; position?: string; positionMobile?: string; hotspot?: { x: number; y: number } }[],
     heroTitle: {
       id: "Agrobisnis lokal untuk pasar nasional dan internasional.",
       en: "Local agribusiness for national and international markets.",
+      // DRAFT zh / vi / hi (designer drafts, pending client review; see docs/i18n-draft-strings.md)
+      zh: "立足本土的农业企业，面向国内与国际市场。",
+      vi: "Doanh nghiệp nông nghiệp địa phương cho thị trường trong nước và quốc tế.",
+      hi: "राष्ट्रीय और अंतरराष्ट्रीय बाज़ारों के लिए स्थानीय कृषि व्यवसाय।",
+    } as LString,
+    /**
+     * Phrase inside heroTitle that is emphasised: italic in Latin scripts (id/en/vi), accent colour with no italic in
+     * zh/hi (--hero-accent-cjk). Must match heroTitle exactly per locale.
+     */
+    heroTitleEmphasis: {
+      id: "nasional dan internasional.",
+      en: "national and international markets.",
+      zh: "国内与国际",
+      vi: "trong nước và quốc tế",
+      hi: "राष्ट्रीय और अंतरराष्ट्रीय",
     } as LString,
     missionPoints: [
       {
@@ -565,10 +595,87 @@ export const redesign = {
 }
 
 /**
- * Stats strip (CMS: home.stats[]). Empty until the client supplies real
- * numbers — the strip does not render while this is empty.
+ * Trust stats (CMS default for home.stats[]). Display rule: every filled entry (value + label) shows and the row
+ * re-centres; with none filled the row is hidden. Only "7 Komoditi" is real; the rest are MOCK until the client
+ * confirms numbers (tracked in docs/cms/schema-freeze-v1.md → Client pending). Label zh / vi / hi are DRAFT.
  */
-export const homeStats: StatItem[] = []
+export const homeStats: StatItem[] = [
+  // MOCK, replace before launch
+  {
+    value: "10+",
+    label: { id: "Tahun pengalaman", en: "Years of experience", zh: "年行业经验", vi: "Năm kinh nghiệm", hi: "वर्षों का अनुभव" },
+    isMock: true,
+  },
+  // MOCK, replace before launch
+  {
+    value: "500+",
+    label: { id: "Mitra petani", en: "Farmer partners", zh: "合作农户", vi: "Nông dân đối tác", hi: "किसान साझेदार" },
+    isMock: true,
+  },
+  // MOCK, replace before launch
+  {
+    value: "1.000+",
+    label: { id: "Ton per tahun", en: "Tonnes a year", zh: "吨/年", vi: "Tấn mỗi năm", hi: "टन प्रति वर्ष" },
+    isMock: true,
+  },
+  // Real: the 7 catalog commodities.
+  { value: "7", label: { id: "Komoditi", en: "Commodities", zh: "种农产品", vi: "Mặt hàng nông sản", hi: "जिंसें" } },
+]
+
+/**
+ * "Why choose us" cards (CMS default for home.trustPoints[]). Copy drafted from the brief's mission; all 5 locales
+ * are DRAFT pending client review (docs/i18n-draft-strings.md). No certification claims.
+ */
+export const whyChoose: TrustItem[] = [
+  {
+    title: {
+      id: "Langsung dari petani lokal",
+      en: "Direct from local farmers",
+      zh: "直接来自本地农户",
+      vi: "Trực tiếp từ nông dân địa phương",
+      hi: "सीधे स्थानीय किसानों से",
+    },
+    body: {
+      id: "Kami membeli langsung dari petani lokal dengan harga yang kompetitif.",
+      en: "We buy directly from local farmers, at competitive prices.",
+      zh: "我们以有竞争力的价格直接向本地农户收购。",
+      vi: "Chúng tôi thu mua trực tiếp từ nông dân địa phương với giá cạnh tranh.",
+      hi: "हम स्थानीय किसानों से सीधे, प्रतिस्पर्धी कीमतों पर ख़रीदते हैं।",
+    },
+  },
+  {
+    title: {
+      id: "Kualitas di setiap tahap",
+      en: "Quality at every step",
+      zh: "每个环节都重品质",
+      vi: "Chất lượng ở mọi khâu",
+      hi: "हर चरण में गुणवत्ता",
+    },
+    body: {
+      id: "Kualitas dan keberlanjutan kami jaga di setiap tahap, dari penjemuran hingga pengiriman.",
+      en: "Quality and sustainability at every step, from drying to shipping.",
+      zh: "从晾晒到发货，我们在每个环节坚持品质与可持续。",
+      vi: "Chúng tôi giữ vững chất lượng và tính bền vững ở mọi khâu, từ phơi sấy đến giao hàng.",
+      hi: "सुखाने से लेकर शिपिंग तक, हम हर चरण में गुणवत्ता और स्थिरता बनाए रखते हैं।",
+    },
+  },
+  {
+    title: {
+      id: "Untuk pembeli nasional dan internasional",
+      en: "Built for national and international buyers",
+      zh: "服务国内与国际买家",
+      vi: "Dành cho người mua trong nước và quốc tế",
+      hi: "राष्ट्रीय और अंतरराष्ट्रीय ख़रीदारों के लिए",
+    },
+    body: {
+      id: "Melayani pembeli nasional dan internasional, dengan kontak cepat lewat WhatsApp.",
+      en: "Serving national and international buyers, with fast contact on WhatsApp.",
+      zh: "服务国内与国际买家，可通过 WhatsApp 快速联系。",
+      vi: "Phục vụ người mua trong nước và quốc tế, liên hệ nhanh qua WhatsApp.",
+      hi: "राष्ट्रीय और अंतरराष्ट्रीय ख़रीदारों की सेवा, WhatsApp पर तुरंत संपर्क के साथ।",
+    },
+  },
+]
 
 /** Visible WA number, or null while the configured number is still a placeholder. */
 export function visiblePhone(): string | null {

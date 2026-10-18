@@ -27,7 +27,7 @@ export function PageHeader({
 }) {
   if (variant === "compact" && locale) {
     return (
-      <HeroFullBleed locale={locale} image={image} eyebrow={eyebrow} title={title} lead={lead} height="short" titleSize="display-h1" strongScrimMobile={strongScrimMobile}>
+      <HeroFullBleed locale={locale} image={image} eyebrow={eyebrow} title={title} lead={lead} height="short" strongScrimMobile={strongScrimMobile}>
         {children}
       </HeroFullBleed>
     )

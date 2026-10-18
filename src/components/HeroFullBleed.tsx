@@ -1,20 +1,8 @@
-import Image from "next/image"
-import { pickLocale, type Locale } from "@/lib/i18n"
-import { IMAGES, type ImageKey } from "@/lib/images"
-import { ui } from "@/lib/fixtures"
-import { HeroSlider } from "./HeroSlider"
-
-/**
- * Home ("tall") frame. Mobile (<1024): photo band ≈ top 55% of the viewport, curve
- * under it, copy on green. The photo layer only spans band + curve on mobile (so the
- * 16:9 crop isn't blown up to the full hero height). Desktop: the photo fills the frame
- * and the green block (curve + copy) is anchored to the bottom-left.
- */
-const TALL = {
-  section: "min-h-[max(100svh,600px)]",
-  spacer: "h-[max(calc(55svh-var(--hero-cap)),220px)] lg:h-auto lg:min-h-[140px]",
-  photo: "h-[max(55svh,calc(220px+var(--hero-cap)))]",
-}
+import Image from "next/image";
+import { pickLocale, type Locale } from "@/lib/i18n";
+import { IMAGES, type ImageKey } from "@/lib/images";
+import { ui } from "@/lib/fixtures";
+import { HeroSlider } from "./HeroSlider";
 
 /**
  * Subpage hero heights, all widths. `min-h-fit` lets the box grow instead of
@@ -23,50 +11,97 @@ const TALL = {
 const SUB_HEIGHTS = {
   medium: "h-[min(65svh,600px)]",
   short: "h-[min(50svh,480px)]",
-}
+};
+
+/** A Home hero slide: image + focal point (CSS object-position). A CMS hotspot (0..1) wins when present. */
+export type HeroSlideRef = {
+  image: ImageKey;
+  /** Desktop (≥1024px) object-position; `positionMobile` for the photo band on smaller screens. */
+  position?: string;
+  positionMobile?: string;
+  hotspot?: { x: number; y: number };
+};
+
+const slidePosition = (slide: HeroSlideRef) =>
+  slide.hotspot
+    ? `${Math.round(slide.hotspot.x * 1000) / 10}% ${Math.round(slide.hotspot.y * 1000) / 10}%`
+    : (slide.position ?? "center");
 
 /**
- * Curve edges. Mobile/tablet: a gentle wave (green below ~68% of the cap at every x),
- * so full-width copy can start at 72%. Desktop: a sweep from high on the left to low on
- * the right (green below 54% of the cap for the left 62%), so the copy, capped at
- * ~56vw, can rise into the cap while the photo stays visible further down on the right.
+ * Home frame (Cargill-style wave), designer values on a 1440×900 grid, stretched to the hero with
+ * preserveAspectRatio="none" so the curve stays continuous. Solid green (no blur) fills below the
+ * wave; the lime band is the same curve lifted 45px at the ends / ~12px at the dip and sits BEHIND
+ * the green, so it reads wide at the edges and thin in the middle. The photo shows in the bowl.
  */
-const CAP_EDGE_MOBILE = "M0 64C380 -8 820 262 1440 120"
-const CAP_EDGE_DESKTOP = "M0 30C420 20 900 200 1440 250"
+const WAVE_GREEN = "M0,180 C320,190 600,560 900,570 C1100,575 1300,400 1440,190 L1440,900 L0,900 Z";
+const WAVE_LIME = "M0,135 C320,145 600,548 900,558 C1100,563 1300,355 1440,145 L1440,900 L0,900 Z";
+/** Phones/tablets (<1024px): one gentle wave under the photo (viewBox 1440×160). */
+const WAVE_GREEN_M = "M0,70 C380,30 900,150 1440,64 L1440,160 L0,160 Z";
+const WAVE_LIME_M = "M0,26 C380,-14 900,138 1440,20 L1440,160 L0,160 Z";
 
-function CapSvg({ edge, viewHeight, className }: { edge: string; viewHeight: number; className: string }) {
-  return (
-    <svg
-      aria-hidden="true"
-      focusable="false"
-      data-hero-cap=""
-      viewBox={`0 0 1440 ${viewHeight}`}
-      preserveAspectRatio="none"
-      className={`w-full ${className}`}
-    >
-      <path d={`${edge}L1440 ${viewHeight}L0 ${viewHeight}Z`} fill="var(--color-forest)" />
-      {/* Decorative thin line along the edge (not text). */}
-      <path d={edge} transform="translate(0 -10)" fill="none" stroke="#a8b89c" strokeWidth="2" vectorEffect="non-scaling-stroke" />
-    </svg>
-  )
-}
+/**
+ * <1024px: photo band = top 55svh (+ the wave cap, which overlaps it); the green starts at 55svh
+ * and fills the rest of the full-height hero. ≥1024px: photo and overlay cover the whole hero.
+ */
+const TALL_PHOTO = "absolute inset-x-0 top-0 h-[calc(55svh+3.5rem)] sm:h-[calc(55svh+5rem)] lg:h-full";
+const TALL_OVERLAY =
+  "relative mt-[calc(55svh-3.5rem)] sm:mt-[calc(55svh-5rem)] flex min-h-[calc(max(100svh,600px)-55svh+3.5rem)] sm:min-h-[calc(max(100svh,600px)-55svh+5rem)] flex-col lg:absolute lg:inset-0 lg:mt-0 lg:min-h-0";
 
-/** Green "continuous frame" edge: forest fill + thin decorative #a8b89c line above it. */
-export function HeroCap() {
+/**
+ * Overlay above the photos: the wave (desktop: full hero; <1024px: a cap under the photo band)
+ * and the copy, which always sits on solid green. Desktop copy is left-aligned with the floating
+ * header bar (max(24px, (100% − 1280px) / 2)), headline from ~48% of the hero height, max 540px.
+ * 1024–1279px: the stretched wave sits higher relative to the copy, so the copy is 440px wide,
+ * the headline 44px and it starts at ~56% (keeps every line on solid green).
+ */
+function WaveFrame({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <CapSvg edge={CAP_EDGE_MOBILE} viewHeight={240} className="block h-[var(--hero-cap)] lg:hidden" />
-      <CapSvg edge={CAP_EDGE_DESKTOP} viewHeight={300} className="hidden h-[var(--hero-cap-lg)] lg:block" />
+      <svg
+        aria-hidden="true"
+        focusable="false"
+        viewBox="0 0 1440 900"
+        preserveAspectRatio="none"
+        className="pointer-events-none absolute inset-0 hidden size-full lg:block"
+      >
+        <path d={WAVE_LIME} fill="#a8d27a" fillOpacity="0.7" />
+        <path d={WAVE_GREEN} fill="var(--color-hero-green)" />
+      </svg>
+      <svg
+        aria-hidden="true"
+        focusable="false"
+        viewBox="0 0 1440 160"
+        preserveAspectRatio="none"
+        className="pointer-events-none relative block h-14 w-full sm:h-20 lg:hidden"
+      >
+        <path d={WAVE_LIME_M} fill="#a8d27a" fillOpacity="0.7" />
+        <path d={WAVE_GREEN_M} fill="var(--color-hero-green)" />
+      </svg>
+      <div className="relative -mt-px flex-1 bg-hero-green px-5 pt-2 pb-10 sm:px-8 lg:absolute lg:top-[var(--hero-copy-top)] lg:left-[max(24px,calc((100%-1280px)/2))] lg:mt-0 lg:w-[min(540px,calc(100%-48px))] lg:max-xl:w-[440px] lg:flex-none lg:bg-transparent lg:p-0">
+        {children}
+      </div>
     </>
-  )
+  );
 }
 
 /**
- * Hero with the curved green frame: photo (or crossfading slides on Home) top-right,
- * a forest curve sweeping up from bottom-left, and the statement on the green.
- * The bottom is solid forest (#123b2a) so a following forest band reads as one
- * surface. `data-hero` lets the floating header overlay it (globals.css).
+ * Home ("tall") hero: full-height photo (or crossfading slides) with the copy on a solid
+ * green wave (Cargill-style frame). Subpages (medium/short) use the capped photo-only PhotoHero.
+ * `data-hero` lets the floating header overlay it (globals.css).
  */
+/** Wrap the first occurrence of `phrase` in <em>; falls back to the plain title when it isn't found. */
+function renderEmphasis(title: string, phrase?: string) {
+  const i = phrase ? title.indexOf(phrase) : -1;
+  if (!phrase || i < 0) return title;
+  return (
+    <>
+      {title.slice(0, i)}
+      <em>{phrase}</em>
+      {title.slice(i + phrase.length)}
+    </>
+  );
+}
+
 export function HeroFullBleed({
   locale,
   image,
@@ -74,103 +109,134 @@ export function HeroFullBleed({
   videoSrc,
   eyebrow,
   title,
+  titleEmphasis,
   lead,
   children,
   height = "tall",
-  titleSize = "display-xl",
   as: Heading = "h1",
   strongScrimMobile = false,
 }: {
-  locale: Locale
-  image?: ImageKey
-  /** 2+ images turn the photo into an auto slider (Home only). */
-  slides?: ImageKey[]
-  videoSrc?: string
-  eyebrow?: string
-  title: string
-  lead?: string
-  children?: React.ReactNode
-  /** tall = Home (full height, curved frame); medium/short = capped photo-only subpage heroes. */
-  height?: "tall" | keyof typeof SUB_HEIGHTS
-  titleSize?: "display-xl" | "display-h1"
-  as?: "h1" | "h2"
+  locale: Locale;
+  image?: ImageKey;
+  /** 2+ slides turn the photo into an auto slider (Home only). */
+  slides?: HeroSlideRef[];
+  videoSrc?: string;
+  eyebrow?: string;
+  title: string;
+  /** Home: phrase inside `title` set in italic; the rest stays upright (roman). */
+  titleEmphasis?: string;
+  lead?: string;
+  children?: React.ReactNode;
+  /** tall = Home (full height, green wave frame); medium/short = capped photo-only subpage heroes. */
+  height?: "tall" | keyof typeof SUB_HEIGHTS;
+  as?: "h1" | "h2";
   /** Subpage heroes only: stronger copy scrim under 768px. */
-  strongScrimMobile?: boolean
+  strongScrimMobile?: boolean;
 }) {
-  const frame = TALL
-  const meta = image ? IMAGES[image] : undefined
-  const isSlider = Boolean(slides && slides.length > 1)
+  const meta = image ? IMAGES[image] : undefined;
+  const isSlider = Boolean(slides && slides.length > 1);
 
   if (height !== "tall") {
     return (
-      <PhotoHero locale={locale} image={image} heightClass={SUB_HEIGHTS[height]} eyebrow={eyebrow} title={title} lead={lead} as={Heading} compact={height === "short"} strongScrimMobile={strongScrimMobile}>
+      <PhotoHero
+        locale={locale}
+        image={image}
+        heightClass={SUB_HEIGHTS[height]}
+        eyebrow={eyebrow}
+        title={title}
+        lead={lead}
+        as={Heading}
+        compact={height === "short"}
+        strongScrimMobile={strongScrimMobile}
+      >
         {children}
       </PhotoHero>
-    )
+    );
   }
 
+  // White on #2f7d3e is 5.1:1; tinted/translucent white would drop below 4.5:1.
+  const copy = (
+    <div className="fade-up">
+      {eyebrow && <p className="label text-white!">{eyebrow}</p>}
+      <Heading
+        className={`display mt-4 max-w-[560px] text-[clamp(2rem,2.6vw,2.75rem)] leading-[1.1]! text-balance ${
+          // Latin scripts: italic key phrase. zh/hi (Cormorant has no glyphs): lime, same weight, upright.
+          locale === "zh" || locale === "hi" ? "[&_em]:not-italic [&_em]:text-[var(--hero-accent-cjk)]" : "[&_em]:italic"
+        }`}
+      >
+        {renderEmphasis(title, titleEmphasis)}
+      </Heading>
+      {lead && (
+        <p className="mt-4 line-clamp-3 max-w-xl text-lg leading-snug text-white">
+          {lead}
+        </p>
+      )}
+      {children && (
+        <div className="mt-5 flex flex-wrap items-center gap-3">{children}</div>
+      )}
+    </div>
+  );
+
   return (
-    <section data-hero className={`relative isolate flex flex-col overflow-hidden bg-forest text-white ${frame.section}`}>
+    <section
+      data-hero
+      className="relative isolate flex min-h-[max(100svh,600px)] flex-col overflow-hidden bg-hero-green text-white"
+    >
       {isSlider && slides ? (
         <HeroSlider
-          photoClassName={`absolute inset-x-0 top-0 lg:bottom-0 lg:h-auto ${frame.photo}`}
-          slides={slides.map((key) => ({ src: IMAGES[key].src, alt: pickLocale(IMAGES[key].alt, locale) }))}
+          slides={slides.map((slide) => ({
+            src: IMAGES[slide.image].src,
+            alt: pickLocale(IMAGES[slide.image].alt, locale),
+            position: slidePosition(slide),
+            positionMobile: slide.hotspot ? slidePosition(slide) : slide.positionMobile,
+          }))}
+          photoClassName={TALL_PHOTO}
+          overlayClassName={TALL_OVERLAY}
           labels={{
             carousel: pickLocale(ui.heroCarousel, locale),
             slide: pickLocale(ui.slideOf, locale),
-            show: pickLocale(ui.showSlide, locale),
             pause: pickLocale(ui.pauseSlideshow, locale),
             play: pickLocale(ui.playSlideshow, locale),
           }}
-        />
+        >
+          <WaveFrame>{copy}</WaveFrame>
+        </HeroSlider>
       ) : (
-        <div className={`absolute inset-x-0 top-0 lg:bottom-0 lg:h-auto ${frame.photo}`}>
-          {meta ? (
-            <Image src={meta.src} alt={pickLocale(meta.alt, locale)} fill preload sizes="100vw" className="object-cover" />
-          ) : (
-            <div className="ph ph-field absolute inset-0" />
-          )}
-          {videoSrc && (
-            <video
-              className="absolute inset-0 size-full object-cover motion-reduce:hidden"
-              autoPlay
-              muted
-              loop
-              playsInline
-              poster={meta?.src}
-              aria-hidden="true"
-            >
-              <source src={videoSrc} />
-            </video>
-          )}
-        </div>
-      )}
-
-      {/* Photo band (mobile: fixed height; desktop: whatever the copy leaves). */}
-      <div aria-hidden="true" className={`shrink-0 lg:flex-1 ${frame.spacer}`} />
-
-      {/* Green block: curve + copy. z-10 keeps it above the photo; slider controls sit at z-20. */}
-      <div className="relative z-10 flex flex-1 flex-col lg:flex-none">
-        <HeroCap />
-        <div className="-mt-px flex-1 bg-forest">
-          {/* Pull the copy up into the solid part of the curve (mobile: 28% of the cap; desktop: 40%). */}
-          <div
-            className={`site-wrap relative -mt-[calc(var(--hero-cap)*0.28)] pt-2 lg:-mt-[calc(var(--hero-cap-lg)*0.4)] ${
-              isSlider ? "pb-24 lg:pb-20" : "pb-14 lg:pb-20"
-            }`}
-          >
-            {/* Desktop width cap keeps the copy inside the green part of the sweep (see CAP_EDGE_DESKTOP). */}
-            <div className="fade-up max-w-4xl lg:max-w-[min(60rem,56vw)]">
-              {eyebrow && <p className="label text-soft-sage!">{eyebrow}</p>}
-              <Heading className={`display ${titleSize} mt-4 text-balance`}>{title}</Heading>
-              {lead && <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/85 lg:text-xl">{lead}</p>}
-              {children && <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">{children}</div>}
-            </div>
+        <div className="relative flex flex-1 flex-col">
+          <div className={TALL_PHOTO}>
+            {meta ? (
+              <Image
+                src={meta.src}
+                alt={pickLocale(meta.alt, locale)}
+                fill
+                preload
+                sizes="100vw"
+                className="object-cover"
+              />
+            ) : (
+              <div className="ph ph-field absolute inset-0" />
+            )}
+            {videoSrc && (
+              <video
+                className="absolute inset-0 size-full object-cover motion-reduce:hidden"
+                autoPlay
+                muted
+                loop
+                playsInline
+                poster={meta?.src}
+                aria-hidden="true"
+              >
+                <source src={videoSrc} />
+              </video>
+            )}
+          </div>
+          <div className={TALL_OVERLAY}>
+            <WaveFrame>{copy}</WaveFrame>
           </div>
         </div>
-      </div>
+      )}
     </section>
-  )
+  );
 }
 
 /**
@@ -191,24 +257,34 @@ function PhotoHero({
   strongScrimMobile = false,
   as: Heading,
 }: {
-  locale: Locale
-  image?: ImageKey
-  heightClass: string
+  locale: Locale;
+  image?: ImageKey;
+  heightClass: string;
   /** Darker local scrim under 768px for photos whose bright areas sit behind phone-width copy (Katalog). */
-  strongScrimMobile?: boolean
-  eyebrow?: string
-  title: string
-  lead?: string
-  children?: React.ReactNode
-  compact: boolean
-  as: "h1" | "h2"
+  strongScrimMobile?: boolean;
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  children?: React.ReactNode;
+  compact: boolean;
+  as: "h1" | "h2";
 }) {
-  const meta = image ? IMAGES[image] : undefined
+  const meta = image ? IMAGES[image] : undefined;
   return (
-    <section data-hero className={`relative isolate flex min-h-fit flex-col overflow-hidden bg-forest text-white ${heightClass}`}>
+    <section
+      data-hero
+      className={`relative isolate flex min-h-fit flex-col overflow-hidden bg-forest text-white ${heightClass}`}
+    >
       <div className="absolute inset-0 -z-10">
         {meta ? (
-          <Image src={meta.src} alt={pickLocale(meta.alt, locale)} fill preload sizes="100vw" className="object-cover" />
+          <Image
+            src={meta.src}
+            alt={pickLocale(meta.alt, locale)}
+            fill
+            preload
+            sizes="100vw"
+            className="object-cover"
+          />
         ) : (
           <div className="ph ph-field absolute inset-0" />
         )}
@@ -230,11 +306,21 @@ function PhotoHero({
             className={`absolute -inset-12 -z-10 rounded-[64px] bg-black/55 blur-xl ${strongScrimMobile ? "max-md:bg-black/70" : ""}`}
           />
           {eyebrow && <p className="label text-white!">{eyebrow}</p>}
-          <Heading className="display display-sub mt-3 text-balance lg:mt-4">{title}</Heading>
-          {lead && <p className="mt-3 max-w-xl text-base leading-relaxed text-white lg:mt-4 lg:text-lg">{lead}</p>}
-          {children && <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 lg:mt-7">{children}</div>}
+          <Heading className="display display-sub mt-3 text-balance lg:mt-4">
+            {title}
+          </Heading>
+          {lead && (
+            <p className="mt-3 max-w-xl text-base leading-relaxed text-white lg:mt-4 lg:text-lg">
+              {lead}
+            </p>
+          )}
+          {children && (
+            <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 lg:mt-7">
+              {children}
+            </div>
+          )}
         </div>
       </div>
     </section>
-  )
+  );
 }

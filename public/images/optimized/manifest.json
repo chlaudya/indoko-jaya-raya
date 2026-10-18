@@ -258,5 +258,121 @@
     "quality": 45,
     "kb": 96.7,
     "pass": true
+  },
+  {
+    "name": "hero-slide-1.webp",
+    "source": "IMG_8764.HEIC",
+    "kind": "hero",
+    "width": 2400,
+    "height": 1350,
+    "kb": 189.2,
+    "pass": true,
+    "origin": "client original, cropped by the designer",
+    "note": "cashew sorters"
+  },
+  {
+    "name": "hero-slide-2.webp",
+    "source": "client original (file not specified by the designer)",
+    "kind": "hero",
+    "width": 2400,
+    "height": 1350,
+    "kb": 182.2,
+    "pass": true,
+    "origin": "client original, cropped by the designer",
+    "note": "hands holding corn"
+  },
+  {
+    "name": "hero-slide-3.webp",
+    "source": "IMG_8865.HEIC",
+    "kind": "hero",
+    "width": 2400,
+    "height": 1350,
+    "kb": 119.1,
+    "pass": true,
+    "origin": "client original, cropped by the designer",
+    "note": "farmer against the sky"
+  },
+  {
+    "name": "hero-slide-4.webp",
+    "source": "client original (file not specified by the designer)",
+    "kind": "hero",
+    "width": 2400,
+    "height": 1350,
+    "kb": 265.8,
+    "pass": true,
+    "origin": "client original, cropped by the designer",
+    "note": "raw cashews in a hand"
+  },
+  {
+    "name": "hero-slide-5.webp",
+    "source": "client original (file not specified by the designer)",
+    "kind": "hero",
+    "width": 2400,
+    "height": 1350,
+    "kb": 295.5,
+    "pass": true,
+    "origin": "client original, cropped by the designer",
+    "note": "peanuts drying on a tarp"
+  },
+  {
+    "name": "hero-contact-warehouse.webp",
+    "source": "IMG_8844.HEIC",
+    "kind": "hero",
+    "width": 2400,
+    "height": 1350,
+    "quality": 50,
+    "kb": 274.6,
+    "pass": true,
+    "origin": "client original"
+  },
+  {
+    "name": "card-kacang-hijau.webp",
+    "source": "https://www.pexels.com/photo/7420814/",
+    "kind": "card",
+    "width": 960,
+    "height": 1200,
+    "quality": 40,
+    "kb": 95.3,
+    "pass": true,
+    "photographer": "Vie Studio",
+    "license": "Pexels",
+    "status": "stock-placeholder: replace with client photo"
+  },
+  {
+    "name": "card-kopi.webp",
+    "source": "https://www.pexels.com/photo/7125601/",
+    "kind": "card",
+    "width": 960,
+    "height": 1200,
+    "quality": 80,
+    "kb": 94.9,
+    "pass": true,
+    "photographer": "Michael Burrows",
+    "license": "Pexels",
+    "status": "stock-placeholder: replace with client photo"
+  },
+  {
+    "name": "card-pillar-corn-handful.webp",
+    "source": "IMG_8810.HEIC",
+    "kind": "card",
+    "width": 1200,
+    "height": 900,
+    "quality": 75,
+    "kb": 85.2,
+    "pass": true,
+    "origin": "client original",
+    "note": "Home pillar: Komoditi (4:3 crop)"
+  },
+  {
+    "name": "card-pillar-drying-tarp.webp",
+    "source": "IMG_8866.HEIC",
+    "kind": "card",
+    "width": 1200,
+    "height": 900,
+    "quality": 80,
+    "kb": 57.9,
+    "pass": true,
+    "origin": "client original",
+    "note": "Home pillar: Keberlanjutan (4:3 crop)"
   }
 ]

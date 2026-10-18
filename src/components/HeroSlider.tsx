@@ -1,11 +1,14 @@
 "use client"
 
 import Image from "next/image"
-import { useEffect, useRef, useState, useSyncExternalStore } from "react"
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react"
 
-export type HeroSlide = { src: string; alt: string }
+/** `position` = CSS object-position (focal point) ≥1024px, e.g. "center 35%"; `positionMobile` below that. */
+export type HeroSlide = { src: string; alt: string; position?: string; positionMobile?: string }
 
-const INTERVAL_MS = 6000
+/** Each photo holds 2s, then a 0.6s crossfade (cycle 2.6s), looping forever. */
+const HOLD_MS = 2000
+const FADE_MS = 600
 
 function subscribeReducedMotion(callback: () => void) {
   const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
@@ -20,89 +23,123 @@ function subscribeVisibility(callback: () => void) {
 }
 const getHidden = () => document.visibilityState === "hidden"
 
+/** Run once the page is idle (after load), with a timeout fallback. */
+function whenIdle(fn: () => void) {
+  let cancelled = false
+  let idleId: number | undefined
+  let timer: ReturnType<typeof setTimeout> | undefined
+  const run = () => {
+    if (cancelled) return
+    if ("requestIdleCallback" in window) idleId = window.requestIdleCallback(() => !cancelled && fn(), { timeout: 2000 })
+    else timer = setTimeout(() => !cancelled && fn(), 200)
+  }
+  if (document.readyState === "complete") run()
+  else window.addEventListener("load", run, { once: true })
+  return () => {
+    cancelled = true
+    window.removeEventListener("load", run)
+    if (idleId !== undefined) window.cancelIdleCallback(idleId)
+    if (timer) clearTimeout(timer)
+  }
+}
+
 /**
- * Crossfading photo layer for the home hero (headline/CTAs stay fixed outside it).
- * Auto-advances every 6s (0.8s fade); pauses on hover of the hero, keyboard
- * focus inside the controls, hidden tab, or the visible pause button; never
- * autoplays with prefers-reduced-motion. Only slide 1 is preloaded; the rest
- * mount shortly after hydration. Every layer is absolutely positioned (CLS 0).
+ * Crossfading photo layer for the Home hero, no visible controls. `children` (glass + copy) stay
+ * fixed above the photos (phones: in flow at the bottom; ≥768px: covering the hero).
+ * - Only slide 1 is preloaded; slides 2..n mount once the page is idle and the rotation only
+ *   advances to a slide whose image has loaded (never fades to a blank layer).
+ * - Pauses on mouse hover over the hero, focus inside it, a hidden tab, or the pause button
+ *   (keyboard-reachable, visually hidden until focused: WCAG 2.2.2).
+ * - prefers-reduced-motion: first photo only, no rotation, no button.
+ * - Inactive slides are aria-hidden; nothing is announced on rotation (aria-live="off").
+ * Every layer is absolutely positioned (CLS 0).
  */
 export function HeroSlider({
   slides,
   labels,
+  children,
   photoClassName = "absolute inset-0",
+  overlayClassName = "relative mt-auto md:absolute md:inset-0",
 }: {
   slides: HeroSlide[]
-  /** Box for the photo layers (controls stay positioned against the whole hero). */
+  /** Box for the photo layers. */
   photoClassName?: string
-  labels: { carousel: string; slide: string; show: string; pause: string; play: string }
+  /** Box for the overlay (children); the pause button is positioned against it. */
+  overlayClassName?: string
+  /** Overlay (glass + copy) rendered above the photos. */
+  children?: React.ReactNode
+  labels: { carousel: string; slide: string; pause: string; play: string }
 }) {
   const [index, setIndex] = useState(0)
-  const [mode, setMode] = useState<"auto" | "paused" | "playing">("auto")
+  const [paused, setPaused] = useState(false)
   const [hovered, setHovered] = useState(false)
   const [focusWithin, setFocusWithin] = useState(false)
-  const [loadRest, setLoadRest] = useState(false)
+  const [mountRest, setMountRest] = useState(false)
+  const [loaded, setLoaded] = useState<boolean[]>(() => slides.map((_, i) => i === 0))
   const rootRef = useRef<HTMLDivElement>(null)
   const reduced = useSyncExternalStore(subscribeReducedMotion, getReducedMotion, () => false)
   const hidden = useSyncExternalStore(subscribeVisibility, getHidden, () => false)
   const total = slides.length
+  const rotates = total > 1 && !reduced
+  const playing = rotates && !paused && !hovered && !focusWithin && !hidden
 
-  // User intent (what the pause/play button shows), independent of hover/focus.
-  const wantsPlay = mode === "playing" || (mode === "auto" && !reduced)
-  const playing = wantsPlay && !hovered && !focusWithin && !hidden && total > 1
-
-  // Hover anywhere on the hero (text included) pauses, not just the photo layer.
+  // Hover or keyboard focus anywhere in the hero (copy included) pauses, mouse only (taps would "hover" forever).
   useEffect(() => {
     const hero = rootRef.current?.closest("section")
     if (!hero) return
-    // Mouse only: a tap on touch screens would otherwise "hover" forever.
     const enter = (event: PointerEvent) => {
       if (event.pointerType === "mouse") setHovered(true)
     }
     const leave = () => setHovered(false)
+    const focusIn = () => setFocusWithin(true)
+    const focusOut = (event: FocusEvent) => {
+      if (!hero.contains(event.relatedTarget as Node | null)) setFocusWithin(false)
+    }
     hero.addEventListener("pointerenter", enter)
     hero.addEventListener("pointerleave", leave)
+    hero.addEventListener("focusin", focusIn)
+    hero.addEventListener("focusout", focusOut)
     return () => {
       hero.removeEventListener("pointerenter", enter)
       hero.removeEventListener("pointerleave", leave)
+      hero.removeEventListener("focusin", focusIn)
+      hero.removeEventListener("focusout", focusOut)
     }
   }, [])
 
-  // Mount slides 2..n after hydration so they never compete with the LCP image.
+  // Slides 2..n mount once the page is idle, well before their first turn (LCP stays slide 1).
   useEffect(() => {
-    const timer = setTimeout(() => setLoadRest(true), 1200)
-    return () => clearTimeout(timer)
+    if (!rotates) return
+    return whenIdle(() => setMountRest(true))
+  }, [rotates])
+
+  const markLoaded = useCallback((i: number) => {
+    setLoaded((prev) => (prev[i] ? prev : prev.map((v, j) => (j === i ? true : v))))
   }, [])
 
   useEffect(() => {
     if (!playing) return
     const timer = setInterval(() => {
-      setLoadRest(true)
-      setIndex((i) => (i + 1) % total)
-    }, INTERVAL_MS)
+      setIndex((current) => {
+        // Next slide whose image is ready; stay put if none is (no blank fades).
+        for (let step = 1; step < total; step++) {
+          const next = (current + step) % total
+          if (loaded[next]) return next
+        }
+        return current
+      })
+    }, HOLD_MS + FADE_MS)
     return () => clearInterval(timer)
-  }, [playing, total])
+  }, [playing, total, loaded])
 
-  const goTo = (i: number) => {
-    setLoadRest(true)
-    setIndex(i)
-  }
+  const shown = reduced ? 0 : index
 
   return (
-    <div
-      ref={rootRef}
-      role="region"
-      aria-roledescription="carousel"
-      aria-label={labels.carousel}
-      className="absolute inset-0"
-      onFocus={() => setFocusWithin(true)}
-      onBlur={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setFocusWithin(false)
-      }}
-    >
-      <div className={photoClassName} aria-live={playing ? "off" : "polite"}>
+    <div ref={rootRef} role="region" aria-roledescription="carousel" aria-label={labels.carousel} className="relative flex flex-1 flex-col">
+      <div className={photoClassName} aria-live="off">
         {slides.map((slide, i) => {
-          const active = i === index
+          if (i > 0 && (!mountRest || reduced)) return null
+          const active = i === shown
           return (
             <div
               key={slide.src}
@@ -110,62 +147,50 @@ export function HeroSlider({
               aria-roledescription="slide"
               aria-label={labels.slide.replace("{n}", String(i + 1)).replace("{total}", String(total))}
               aria-hidden={!active}
-              className={`absolute inset-0 motion-safe:transition-opacity motion-safe:duration-[800ms] motion-safe:ease-in-out ${
+              className={`absolute inset-0 motion-safe:transition-opacity motion-safe:duration-[600ms] motion-safe:ease-in-out ${
                 active ? "opacity-100" : "opacity-0"
               }`}
             >
-              {(i === 0 || loadRest) && (
-                <Image
-                  src={slide.src}
-                  alt={slide.alt}
-                  fill
-                  sizes="100vw"
-                  preload={i === 0}
-                  loading={i === 0 ? undefined : "lazy"}
-                  className="object-cover"
-                />
-              )}
+              <Image
+                src={slide.src}
+                alt={slide.alt}
+                fill
+                sizes="100vw"
+                preload={i === 0}
+                loading={i === 0 ? undefined : "eager"}
+                onLoad={() => markLoaded(i)}
+                className="hero-photo object-cover"
+                style={{ "--pos": slide.position ?? "center", "--pos-m": slide.positionMobile ?? slide.position ?? "center" } as React.CSSProperties}
+              />
             </div>
           )
         })}
       </div>
 
-      {total > 1 && (
-        <div className="absolute right-5 bottom-5 z-20 flex items-center gap-1 rounded-full bg-forest/85 p-1 text-white backdrop-blur-sm md:right-8 lg:right-12 lg:bottom-10">
-          {slides.map((slide, i) => (
-            <button
-              key={slide.src}
-              type="button"
-              onClick={() => goTo(i)}
-              aria-label={labels.show.replace("{n}", String(i + 1)).replace("{total}", String(total))}
-              aria-current={i === index ? "true" : undefined}
-              className="group inline-flex size-11 items-center justify-center rounded-full hover:bg-white/10"
-            >
-              <span
-                aria-hidden="true"
-                className={`block h-2 rounded-full motion-safe:transition-all ${i === index ? "w-6 bg-white" : "w-2 bg-white/60 group-hover:bg-white"}`}
-              />
-            </button>
-          ))}
+      <div className={overlayClassName}>
+        {children}
+
+        {/* Pause/play: keyboard-reachable, visually hidden until focused (then a white pill bottom-right). */}
+        {rotates && (
           <button
             type="button"
-            onClick={() => setMode(wantsPlay ? "paused" : "playing")}
-            aria-label={wantsPlay ? labels.pause : labels.play}
-            className="inline-flex size-11 items-center justify-center rounded-full border border-white/30 hover:bg-white/10"
+            onClick={() => setPaused((p) => !p)}
+            className="sr-only z-20 focus:not-sr-only focus:absolute focus:right-5 focus:top-0 focus:-translate-y-[calc(100%+12px)] focus:inline-flex focus:min-h-11 focus:items-center focus:gap-2 focus:rounded-full focus:bg-white focus:px-4 focus:text-sm focus:font-semibold focus:text-forest focus:shadow-[0_2px_14px_rgba(0,0,0,0.22)] lg:focus:top-auto lg:focus:right-12 lg:focus:bottom-10 lg:focus:translate-y-0"
           >
-            {wantsPlay ? (
+            {paused ? (
+              <svg viewBox="0 0 16 16" aria-hidden="true" className="size-4" fill="currentColor">
+                <path d="M4.5 2.8v10.4a.6.6 0 0 0 .9.5l8.2-5.2a.6.6 0 0 0 0-1L5.4 2.3a.6.6 0 0 0-.9.5Z" />
+              </svg>
+            ) : (
               <svg viewBox="0 0 16 16" aria-hidden="true" className="size-4" fill="currentColor">
                 <rect x="3.5" y="2.5" width="3" height="11" rx="0.8" />
                 <rect x="9.5" y="2.5" width="3" height="11" rx="0.8" />
               </svg>
-            ) : (
-              <svg viewBox="0 0 16 16" aria-hidden="true" className="size-4" fill="currentColor">
-                <path d="M4.5 2.8v10.4a.6.6 0 0 0 .9.5l8.2-5.2a.6.6 0 0 0 0-1L5.4 2.3a.6.6 0 0 0-.9.5Z" />
-              </svg>
             )}
+            {paused ? labels.play : labels.pause}
           </button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 }

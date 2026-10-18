@@ -2,7 +2,7 @@ import Link from "next/link"
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { isLocale, pickLocale, type Locale } from "@/lib/i18n"
-import { homeStats, pages, products, redesign, ui } from "@/lib/fixtures"
+import { homeStats, pages, products, redesign, ui, whyChoose } from "@/lib/fixtures"
 import type { ImageKey } from "@/lib/images"
 import { CardRail } from "@/components/CardRail"
 import { CommodityCard, RAIL_CARD_SIZES } from "@/components/CommodityCard"
@@ -11,14 +11,14 @@ import { HeroFullBleed } from "@/components/HeroFullBleed"
 import { InquirySection } from "@/components/InquirySection"
 import { PillarTiles } from "@/components/PillarTiles"
 import { PurposeBand } from "@/components/PurposeBand"
-import { StatsStrip } from "@/components/StatsStrip"
+import { TrustSection } from "@/components/TrustSection"
 import { TextLink } from "@/components/TextLink"
 import { WaButton, buttonClass } from "@/components/WaButton"
 
 const pillarImages: Record<string, ImageKey> = {
   people: "cardPillarFarmers",
-  products: "cardPillarCommodities",
-  planet: "cardPillarSustainability",
+  products: "cardPillarCornHandful",
+  planet: "cardPillarDryingTarp",
 }
 const featureImages: Record<string, ImageKey> = {
   about: "sectionTeamLoading",
@@ -47,14 +47,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <div>
-      {/* 1 · Full-height curved-frame hero: fixed copy on forest, crossfading photos */}
+      {/* 1 · Full-height hero: crossfading photos in the bowl of a green wave; copy on the green */}
       <HeroFullBleed
         locale={locale}
-        image={v2.heroSlides[0]}
+        image={v2.heroSlides[0].image}
         slides={v2.heroSlides}
-        titleSize="display-h1"
         eyebrow={pickLocale(content.heroEyebrow, locale)}
         title={pickLocale(v2.heroTitle, locale)}
+        titleEmphasis={pickLocale(v2.heroTitleEmphasis, locale)}
         lead={pickLocale(content.heroLead, locale)}
       >
         <WaButton locale={locale} templateKey="home" label={pickLocale(ui.partnerWithUs, locale)} variant="wa" />
@@ -63,18 +63,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </Link>
       </HeroFullBleed>
 
-      {/* 2 · Purpose band (misi) — same forest surface as the hero */}
-      <PurposeBand
-        continued
-        label={pickLocale(ui.ourMission, locale)}
-        title={pickLocale(content.introStatement, locale)}
-        points={v2.missionPoints.map((p) => pickLocale(p, locale))}
-      />
-
-      {/* 3 · Three pillars straddling the forest→white curve */}
+      {/* 2 · Three pillars: half on the hero green, half on cream */}
       <PillarTiles
         id="sustainability"
-        overlap
+        straddle
         locale={locale}
         label={pickLocale(ui.whyPartner, locale)}
         title={pickLocale(content.sustainabilityTitle, locale)}
@@ -85,6 +77,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           href: `/${locale}/${p.href}`,
           image: pillarImages[p.key],
         }))}
+      />
+
+      {/* 3 · Purpose band (misi) — same mist surface as the cream under the cards */}
+      <PurposeBand
+        continued
+        label={pickLocale(ui.ourMission, locale)}
+        title={pickLocale(content.introStatement, locale)}
+        points={v2.missionPoints.map((p) => pickLocale(p, locale))}
       />
 
       {/* 4 · Alternating feature: about (image left) */}
@@ -115,8 +115,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </FeatureSplit>
       )}
 
-      {/* 6 · Stats strip (hidden when empty) */}
-      {homeStats.length > 0 && <StatsStrip locale={locale} label={pickLocale(ui.keyFacts, locale)} stats={homeStats} />}
+      {/* 6 · Why choose us + trust stats (each half hides when empty) */}
+      <TrustSection
+        locale={locale}
+        title={pickLocale(ui.whyChooseUs, locale)}
+        statsLabel={pickLocale(ui.keyFacts, locale)}
+        points={whyChoose}
+        stats={homeStats}
+      />
 
       {/* 7 · Featured commodity rail */}
       <section className="bg-white">

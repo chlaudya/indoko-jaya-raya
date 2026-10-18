@@ -6,9 +6,6 @@ import { Photo } from "./Photo"
 
 export type PillarTileItem = { key: string; title: string; body: string; href: string; image?: ImageKey }
 
-/** Forest→white edge (right high, sweeping down to the left), viewBox 1440×160. */
-const BAND_EDGE = "M1440 0C1180 30 760 160 0 150"
-
 /** Three big image tiles with overlaid title + arrow (people / products / planet). */
 export function PillarTiles({
   locale,
@@ -16,18 +13,53 @@ export function PillarTiles({
   title,
   items,
   id,
-  overlap = false,
+  straddle = false,
 }: {
   locale: Locale
   label: string
   title?: string
   items: PillarTileItem[]
   id?: string
-  /** Header on forest; cards straddle a curve from forest (top half) to white (bottom half). */
-  overlap?: boolean
+  /**
+   * Home, right under the hero: the hero green carries on behind the top half of the cards, then a
+   * cream (mist) curve cuts across so the cards sit half on green, half on cream (Cargill-style).
+   */
+  straddle?: boolean
 }) {
+  // Home: white cards (2:1 photo on top, then label, title and Discover on white), ~25% shorter than the
+  // 4:5 tiles, so they can straddle the green → cream curve. Text sizes match the overlaid tiles.
+  const whiteCards = (
+    <ul className="grid gap-6 md:grid-cols-3">
+      {items.map((item) => (
+        <li key={item.key} className="reveal">
+          <Link
+            href={item.href}
+            className="group block overflow-hidden rounded-[8px] bg-white shadow-[0_18px_40px_-24px_rgba(13,30,22,0.45)]"
+          >
+            <Photo
+              image={item.image}
+              locale={locale}
+              aspect="aspect-[2/1]"
+              rounded={false}
+              zoom
+              sizes="(min-width: 1376px) 410px, (min-width: 768px) 31vw, 100vw"
+            />
+            <div className="p-6 lg:p-7">
+              <p className="label text-leaf">{label}</p>
+              <h3 className="display display-h3 mt-2 text-[clamp(1.75rem,2.6vw,2.25rem)] text-forest">{item.title}</h3>
+              <span className="text-link mt-1 text-leaf">
+                <span className="group-hover:underline">{pickLocale(ui.discover, locale)}</span>
+                <span aria-hidden="true" className="arrow">→</span>
+              </span>
+            </div>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  )
+
   const list = (
-    <ul className={`grid gap-6 md:grid-cols-3 ${overlap ? "" : "mt-12 lg:mt-16"}`}>
+    <ul className="mt-12 grid gap-6 md:grid-cols-3 lg:mt-16">
       {items.map((item) => (
         <li key={item.key} className="reveal">
           <Link href={item.href} className="group relative block overflow-hidden rounded-[8px] text-white">
@@ -54,30 +86,26 @@ export function PillarTiles({
     </ul>
   )
 
-  if (overlap) {
+  if (straddle) {
     return (
-      <section id={id} className="relative bg-white">
-        <div className="bg-forest text-white">
-          <div className="site-wrap pb-12 lg:pb-16">
-            <p className="label text-soft-sage!">{label}</p>
-            {title && <h2 className="display display-h2 mt-4 max-w-3xl text-white">{title}</h2>}
-          </div>
+      <section id={id} className="relative bg-mist lg:mt-[calc(-1*var(--pillar-pull))]">
+        {/* Heading kept for screen readers / outline; visually the cards read as the hero's continuation. */}
+        <div className="sr-only">
+          <p>{label}</p>
+          {title && <h2>{title}</h2>}
         </div>
-        <div className="relative">
-          {/* Forest continues behind the top half of the cards (--pillar-split), then curves down to white. */}
-          <div aria-hidden="true" className="absolute inset-x-0 -top-px h-[calc(var(--pillar-split)+2px)] bg-forest" />
-          <svg
-            aria-hidden="true"
-            focusable="false"
-            viewBox="0 0 1440 160"
-            preserveAspectRatio="none"
-            className="absolute inset-x-0 top-[var(--pillar-split)] block h-[var(--band-curve)] w-full"
-          >
-            <path d="M0 0H1440C1180 30 760 160 0 150Z" fill="var(--color-forest)" />
-            <path d={BAND_EDGE} transform="translate(0 10)" fill="none" stroke="#a8b89c" strokeWidth="2" vectorEffect="non-scaling-stroke" />
-          </svg>
-          <div className="site-wrap relative pb-16 lg:pb-24">{list}</div>
-        </div>
+        <div aria-hidden="true" className="absolute inset-x-0 -top-px h-[calc(var(--pillar-split)+1px)] bg-hero-green" />
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          viewBox="0 0 1440 160"
+          preserveAspectRatio="none"
+          className="absolute inset-x-0 top-[var(--pillar-split)] block h-[var(--band-curve)] w-full"
+        >
+          {/* Green bottom edge: deep on the left, cream sweeping up toward the right. */}
+          <path d="M0,0 H1440 V8 C1080,40 560,170 0,130 Z" fill="var(--color-hero-green)" />
+        </svg>
+        <div className="site-wrap relative pt-2 pb-16 lg:pb-24">{whiteCards}</div>
       </section>
     )
   }
