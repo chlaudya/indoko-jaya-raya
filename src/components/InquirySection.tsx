@@ -11,7 +11,7 @@ export function InquirySection({
   templateKey = "contact",
   tokens,
   label,
-  variant = "wa",
+  variant = "wa-on-dark",
   secondary,
 }: {
   locale: Locale

@@ -30,7 +30,7 @@ export function CareerCard({ job, locale }: { job: Job; locale: Locale }) {
       <div className="flex flex-wrap items-center gap-4 md:col-span-3 md:justify-end">
         {(mode === "wa" || mode === "both") && (
           <a href={wa} target="_blank" rel="noopener noreferrer" className="text-link text-forest">
-            <WhatsAppIcon className="size-4 text-[#1a9e4b]" />
+            <WhatsAppIcon className="size-4 text-leaf" />
             <span>{pickLocale(ui.applyWhatsApp, locale)}</span>
             <span aria-hidden="true" className="arrow">→</span>
           </a>

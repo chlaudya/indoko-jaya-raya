@@ -50,13 +50,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* 1 · Full-bleed hero with a single mission line */}
       <HeroFullBleed
         locale={locale}
-        image="heroDryingYard"
+        image="heroFarmersSorting"
         videoSrc={v2.heroVideo || undefined}
         eyebrow={pickLocale(content.heroEyebrow, locale)}
         title={pickLocale(v2.heroTitle, locale)}
         lead={pickLocale(content.heroLead, locale)}
       >
-        <WaButton locale={locale} templateKey="home" label={pickLocale(ui.partnerWithUs, locale)} />
+        <WaButton locale={locale} templateKey="home" label={pickLocale(ui.partnerWithUs, locale)} variant="wa" />
         <Link href={`/${locale}/products`} className={buttonClass("on-dark")}>
           {pickLocale(ui.exploreCommodities, locale)}
         </Link>
@@ -113,7 +113,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       )}
 
       {/* 6 · Stats strip (hidden when empty) */}
-      <StatsStrip locale={locale} label={pickLocale(ui.keyFacts, locale)} stats={homeStats()} />
+      {homeStats.length > 0 && <StatsStrip locale={locale} label={pickLocale(ui.keyFacts, locale)} stats={homeStats} />}
 
       {/* 7 · Featured commodity rail */}
       <section className="bg-white">
@@ -147,7 +147,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         locale={locale}
         title={pickLocale(content.inquiryTitle, locale)}
         templateKey="home"
-        secondary={{ href: `/${locale}/careers`, label: pickLocale(ui.viewPositions, locale) }}
+        secondary={{ href: `/${locale}/products`, label: pickLocale(ui.viewCommodities, locale) }}
       />
     </div>
   )

@@ -37,7 +37,7 @@ export default async function DryingServicePage({ params }: { params: Promise<{ 
         title={t(service.name)}
         lead={t(service.description)}
       >
-        <WaButton locale={locale} templateKey="drying" label={t(ui.discussRequirements)} />
+        <WaButton locale={locale} templateKey="drying" label={t(ui.discussRequirements)} variant="wa" />
       </HeroFullBleed>
 
       <FeatureSplit

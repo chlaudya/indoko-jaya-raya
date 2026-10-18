@@ -1,15 +1,19 @@
 import { buildWhatsAppUrl } from "@/lib/whatsapp"
 import type { Locale } from "@/lib/i18n"
 
-export type ButtonVariant = "primary" | "secondary" | "on-dark" | "inverse" | "wa"
+export type ButtonVariant = "primary" | "secondary" | "on-dark" | "inverse" | "wa" | "wa-secondary" | "wa-on-dark"
 
 const variants: Record<ButtonVariant, string> = {
   primary: "bg-forest text-white hover:bg-leaf",
   secondary: "border border-forest bg-transparent text-forest hover:bg-forest hover:text-white",
   "on-dark": "border border-white/60 bg-transparent text-white hover:bg-white hover:text-forest",
   inverse: "bg-white text-forest hover:bg-ivory",
-  // WhatsApp-green CTA; charcoal text keeps WCAG AA contrast on #25d366.
-  wa: "bg-wa text-charcoal hover:bg-wa-dark",
+  // Primary WA CTA (header + hero only): solid leaf green, white text (~8:1 contrast).
+  wa: "bg-leaf text-white hover:bg-forest",
+  // Secondary WA CTA everywhere else: leaf outline, same icon + prefill.
+  "wa-secondary": "border border-leaf bg-transparent text-leaf hover:bg-leaf hover:text-white",
+  // Secondary WA CTA on dark/green bands.
+  "wa-on-dark": "border border-white/70 bg-transparent text-white hover:bg-white hover:text-forest",
 }
 
 export function buttonClass(variant: ButtonVariant = "primary", className = "") {
@@ -37,7 +41,7 @@ export function WaButton({
   tokens,
   label,
   className = "",
-  variant = "wa",
+  variant = "wa-secondary",
 }: {
   locale: Locale
   templateKey: "home" | "product" | "drying" | "career" | "contact"

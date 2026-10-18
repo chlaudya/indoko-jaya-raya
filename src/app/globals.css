@@ -3,14 +3,12 @@
 :root {
   --color-forest: #123b2a;
   --color-green: #1f5a3d;
-  --color-sage: #6f8f62;
-  --color-soft-sage: #a8b89c;
+  --color-sage: #557048;
+  --color-soft-sage: #c3cfb8;
   --color-ivory: #f5f3ea;
   --color-white: #ffffff;
   --color-charcoal: #17201b;
-  --color-muted: #66736b;
-  --color-wa: #25d366;
-  --color-wa-dark: #1ebe5b;
+  --color-muted: #5a665f;
   --text-display: clamp(3rem, 7vw, 7rem);
   --text-h1: clamp(2.5rem, 5vw, 5rem);
   --text-h2: clamp(2rem, 4vw, 3.5rem);
@@ -26,13 +24,11 @@
 @theme {
   --color-forest: #123b2a;
   --color-leaf: #1f5a3d;
-  --color-sage: #6f8f62;
-  --color-soft-sage: #a8b89c;
+  --color-sage: #557048;
+  --color-soft-sage: #c3cfb8;
   --color-ivory: #f5f3ea;
   --color-charcoal: #17201b;
-  --color-muted: #66736b;
-  --color-wa: #25d366;
-  --color-wa-dark: #1ebe5b;
+  --color-muted: #5a665f;
 }
 
 html {

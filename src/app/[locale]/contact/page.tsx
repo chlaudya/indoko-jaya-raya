@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { isLocale, pickLocale, type Locale } from "@/lib/i18n"
-import { pages, siteSettings, ui, waDisplayNumber } from "@/lib/fixtures"
+import { pages, siteSettings, ui, visiblePhone } from "@/lib/fixtures"
 import { buildWhatsAppUrl } from "@/lib/whatsapp"
 import { WaButton } from "@/components/WaButton"
 
@@ -36,8 +36,9 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
             <dt className="label">{pickLocale(ui.whatsapp, locale)}</dt>
             <dd className="mt-2">
               <a href={wa} target="_blank" rel="noopener noreferrer" className="text-charcoal underline-offset-4 hover:text-forest hover:underline">
-                {waDisplayNumber()}
+                {visiblePhone() ?? pickLocale(ui.whatsapp, locale)}
               </a>
+              {!visiblePhone() && <span className="mt-1 block text-sm text-muted">{pickLocale(ui.numberPending, locale)}</span>}
             </dd>
           </div>
         </dl>

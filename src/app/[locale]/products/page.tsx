@@ -41,7 +41,7 @@ export default async function ProductsPage({
       <PageHeader
         variant="compact"
         locale={locale}
-        image="heroPeanutTexture"
+        image="heroWarehouse"
         eyebrow={pickLocale(ui.ourCommodities, locale)}
         title={pickLocale(pages.productsIndex.heroTitle, locale)}
         lead={pickLocale(pages.productsIndex.heroLead, locale)}

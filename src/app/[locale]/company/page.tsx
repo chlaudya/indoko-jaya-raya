@@ -33,7 +33,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ locale
       <PageHeader
         variant="compact"
         locale={locale}
-        image="heroWarehouse"
+        image="sectionWarehouseStock"
         eyebrow={t(content.heroTitle)}
         title={t(content.legalName)}
         lead={t(content.tagline)}

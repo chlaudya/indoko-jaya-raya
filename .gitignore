@@ -42,3 +42,6 @@ next-env.d.ts
 
 # raw source photos (use public/image/web/*.webp)
 public/image/*.HEIC
+
+# local scratch for scripts/optimize-images.mjs
+.tmp-redesign/

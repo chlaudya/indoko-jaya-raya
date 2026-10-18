@@ -7,6 +7,8 @@ export const siteSettings = {
   waTransport: "wame" as "wame" | "api",
   applyMode: "wa" as "wa" | "form" | "both",
   waTargets: [{ key: "default", label: "Sales", phoneE164: "6281234567890" }],
+  /** Placeholder WA number until the client confirms; hides the visible number (links still use waTargets). */
+  phonePending: true as boolean,
   waTemplates: {
     home: {
       id: "Halo Indoco Jaya Raya, saya ingin mengetahui lebih lanjut tentang perusahaan Anda.",
@@ -90,6 +92,8 @@ export const ui = {
   cvFormPending: { id: "Form unggah CV menyusul", en: "CV form pending" },
   contactTeam: { id: "Hubungi tim kami", en: "Talk with our team" },
   contactUs: { id: "Hubungi kami", en: "Contact us" },
+  viewCommodities: { id: "Lihat komoditi", en: "View commodities" },
+  numberPending: { id: "Nomor menyusul", en: "Number to follow" },
   watchProfile: { id: "Lihat profil", en: "View profile" },
   productsMenu: { id: "Produk", en: "Products" },
   browseByCategory: { id: "Telusuri kategori", en: "Browse by category" },
@@ -552,17 +556,14 @@ export const redesign = {
 }
 
 /**
- * Stats strip (CMS: home.stats[]). Only values derivable from real site data;
- * client numbers (capacity, export destinations) get added via CMS when confirmed.
+ * Stats strip (CMS: home.stats[]). Empty until the client supplies real
+ * numbers — the strip does not render while this is empty.
  */
-export function homeStats(): StatItem[] {
-  const commodityCount = products.filter((p) => p.kind === "product").length
-  const serviceCount = products.filter((p) => p.kind === "service").length
-  return [
-    { value: String(commodityCount), label: { id: "Komoditi dalam katalog", en: "Commodities in catalog" } },
-    { value: String(serviceCount), label: { id: "Layanan penjemuran", en: "Drying service" } },
-    { value: "5", label: { id: "Bahasa untuk pembeli global", en: "Languages for global buyers" } },
-  ]
+export const homeStats: StatItem[] = []
+
+/** Visible WA number, or null while the configured number is still a placeholder. */
+export function visiblePhone(): string | null {
+  return siteSettings.phonePending ? null : waDisplayNumber()
 }
 
 export function waDisplayNumber(): string {

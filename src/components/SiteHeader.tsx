@@ -4,7 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 import { pickLocale, type Locale } from "@/lib/i18n"
-import { categories, nav, redesign, ui, waDisplayNumber } from "@/lib/fixtures"
+import { categories, nav, redesign, ui } from "@/lib/fixtures"
 import { buildWhatsAppUrl } from "@/lib/whatsapp"
 import { LanguageSwitcher } from "./LanguageSwitcher"
 import { MegaMenu } from "./MegaMenu"
@@ -212,10 +212,10 @@ export function SiteHeader({ locale }: { locale: Locale }) {
               target="_blank"
               rel="noopener noreferrer"
               tabIndex={open ? 0 : -1}
-              className={`${buttonClass("wa")} w-full`}
+              className={`${buttonClass("wa-secondary")} w-full`}
             >
               <WhatsAppIcon />
-              {pickLocale(ui.requestInquiry, locale)} · {waDisplayNumber()}
+              {pickLocale(ui.requestInquiry, locale)}
             </a>
           </div>
         </div>

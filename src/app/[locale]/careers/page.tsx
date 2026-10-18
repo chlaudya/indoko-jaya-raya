@@ -25,7 +25,7 @@ export default async function CareersPage({ params }: { params: Promise<{ locale
     <div>
       <HeroFullBleed
         locale={locale}
-        image="heroFarmersSorting"
+        image="sectionTruckLoading"
         height="medium"
         eyebrow={pickLocale(ui.growWithUs, locale)}
         title={pickLocale(pages.careers.heroTitle, locale)}

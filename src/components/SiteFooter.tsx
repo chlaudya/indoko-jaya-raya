@@ -1,9 +1,8 @@
 import Link from "next/link"
 import { pickLocale, type Locale } from "@/lib/i18n"
-import { categories, siteSettings, ui, waDisplayNumber } from "@/lib/fixtures"
+import { categories, siteSettings, ui, visiblePhone } from "@/lib/fixtures"
 import { buildWhatsAppUrl } from "@/lib/whatsapp"
 import { LanguageSwitcher } from "./LanguageSwitcher"
-import { WhatsAppIcon, buttonClass } from "./WaButton"
 
 type Col = { title: string; links: { href: string; label: string; external?: boolean }[] }
 
@@ -40,7 +39,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
       title: t(ui.footerContact),
       links: [
         { href: `/${locale}/contact`, label: t(ui.contactTeam) },
-        { href: wa, label: `WhatsApp ${waDisplayNumber()}`, external: true },
+        { href: wa, label: visiblePhone() ? `WhatsApp ${visiblePhone()}` : t(ui.whatsapp), external: true },
       ],
     },
   ]
@@ -56,10 +55,6 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           <div className="lg:col-span-4 lg:col-start-9">
             <p className="label text-soft-sage!">{t(ui.address)}</p>
             <p className="mt-3 text-sm leading-relaxed text-ivory/75">{t(siteSettings.address)}</p>
-            <a href={wa} target="_blank" rel="noopener noreferrer" className={`${buttonClass("wa")} mt-6`}>
-              <WhatsAppIcon />
-              {t(ui.requestInquiry)}
-            </a>
           </div>
         </div>
 
