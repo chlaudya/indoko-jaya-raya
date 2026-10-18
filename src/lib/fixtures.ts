@@ -99,6 +99,8 @@ export const ui = {
   browseByCategory: { id: "Telusuri kategori", en: "Browse by category" },
   featuredCommodities: { id: "Komoditi unggulan", en: "Featured commodities" },
   viewAllCommodities: { id: "Lihat semua komoditi", en: "View all commodities" },
+  allCommodities: { id: "Semua komoditi", en: "All commodities" },
+  companyMenu: { id: "Menu perusahaan", en: "Company menu" },
   openMenu: { id: "Buka menu", en: "Open menu" },
   closeMenu: { id: "Tutup menu", en: "Close menu" },
   ourMission: { id: "Misi kami", en: "Our mission" },

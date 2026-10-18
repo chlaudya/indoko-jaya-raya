@@ -21,7 +21,7 @@ export function PillarTiles({
   id?: string
 }) {
   return (
-    <section id={id} className="scroll-mt-24 bg-white">
+    <section id={id} className="bg-white">
       <div className="site-wrap section-y">
         <p className="label">{label}</p>
         {title && <h2 className="display display-h2 mt-4 max-w-3xl text-forest">{title}</h2>}

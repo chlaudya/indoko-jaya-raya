@@ -50,6 +50,8 @@ export default async function ProductsPage({
         {/* Chips overlap the hero bottom, then stick under the header */}
         <CommodityFilter locale={locale} category={category} q={q} />
         <div className="site-wrap mt-12 lg:mt-16">
+          {/* h1 (hero) > h2 (this) > h3 (card titles) */}
+          <h2 className="sr-only">{pickLocale(ui.allCommodities, locale)}</h2>
           {filtered.length === 0 ? (
             <p className="text-muted">{pickLocale(ui.noMatches, locale)}</p>
           ) : (

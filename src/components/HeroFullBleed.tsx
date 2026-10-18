@@ -39,7 +39,7 @@ export function HeroFullBleed({
 }) {
   const meta = image ? IMAGES[image] : undefined
   return (
-    <section className={`relative isolate flex overflow-hidden bg-forest text-white ${heights[height]}`}>
+    <section data-hero className={`relative isolate flex overflow-hidden bg-forest text-white ${heights[height]}`}>
       <div className="absolute inset-0 -z-10">
         {meta ? (
           <Image src={meta.src} alt={pickLocale(meta.alt, locale)} fill preload sizes="100vw" className="object-cover" />
@@ -62,7 +62,7 @@ export function HeroFullBleed({
         <div className="absolute inset-0 bg-gradient-to-t from-[rgba(13,30,22,0.75)] via-[rgba(13,30,22,0.25)] to-transparent lg:hidden" />
         <div className="absolute inset-0 bg-[linear-gradient(to_top_right,rgba(13,30,22,0.88)_0%,rgba(13,30,22,0.55)_40%,rgba(13,30,22,0.05)_80%)]" />
       </div>
-      <div className={`site-wrap flex w-full flex-col justify-end ${bottom ? "pt-24 pb-28 lg:pb-32" : "py-16 lg:py-24"}`}>
+      <div className={`site-wrap flex w-full flex-col justify-end ${bottom ? "pt-32 pb-28 lg:pt-36 lg:pb-32" : "pt-32 pb-16 lg:pt-36 lg:pb-24"}`}>
         <div className="fade-up max-w-4xl">
           {eyebrow && <p className="label text-soft-sage!">{eyebrow}</p>}
           <Heading className={`display ${titleSize} mt-5 text-balance`}>{title}</Heading>

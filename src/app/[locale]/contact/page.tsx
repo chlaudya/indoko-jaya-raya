@@ -21,7 +21,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
   const wa = buildWhatsAppUrl({ locale, templateKey: "contact" })
 
   return (
-    <div className="grid bg-white lg:min-h-[calc(100vh-72px)] lg:grid-cols-2">
+    <div className="grid bg-white lg:min-h-[calc(100vh-var(--header-offset))] lg:grid-cols-2">
       {/* Left: address, contacts, WA */}
       <div className="site-wrap flex flex-col justify-center py-16 lg:mr-0 lg:max-w-[688px] lg:py-24">
         <p className="label">{pickLocale(ui.contactDetails, locale)}</p>

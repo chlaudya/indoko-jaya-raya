@@ -65,7 +65,7 @@ export function CommodityGrid({ products, locale }: { products: Product[]; local
     <ul className="grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
       {products.map((product) => (
         <li key={product.slug} className="reveal">
-          <CommodityCard product={product} locale={locale} headingLevel="h2" />
+          <CommodityCard product={product} locale={locale} />
         </li>
       ))}
     </ul>

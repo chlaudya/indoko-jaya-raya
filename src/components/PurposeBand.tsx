@@ -11,7 +11,7 @@ export function PurposeBand({
   id?: string
 }) {
   return (
-    <section id={id} className="scroll-mt-20 bg-forest text-white">
+    <section id={id} className="bg-forest text-white">
       <div className="site-wrap section-y">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">

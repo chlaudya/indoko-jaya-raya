@@ -21,7 +21,7 @@ function chipClass(active: boolean) {
 
 /**
  * Catalog filter row: category chips + search. Rendered overlapping the
- * bottom of the catalog hero and sticky under the main header.
+ * bottom of the catalog hero and sticky just under the floating header bar.
  */
 export function CommodityFilter({
   locale,
@@ -33,7 +33,7 @@ export function CommodityFilter({
   q?: string
 }) {
   return (
-    <div className="sticky top-16 z-30 lg:top-[72px]">
+    <div className="sticky top-[var(--filter-sticky-top)] z-30">
       <div className="site-wrap">
         <div className="-mt-12 flex flex-col gap-4 rounded-[8px] border border-charcoal/10 bg-white p-4 lg:-mt-14 lg:flex-row lg:items-center lg:justify-between lg:p-5">
           <nav aria-label={pickLocale(ui.ourCommodities, locale)} className="no-scrollbar -mx-1 flex gap-2 overflow-x-auto px-1">

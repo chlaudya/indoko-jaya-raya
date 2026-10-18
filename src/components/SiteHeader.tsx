@@ -3,12 +3,11 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
-import { pickLocale, type Locale } from "@/lib/i18n"
+import { LOCALE_LANG_TAGS, LOCALE_NATIVE_NAMES, LOCALES, pickLocale, type Locale } from "@/lib/i18n"
 import { categories, nav, redesign, ui } from "@/lib/fixtures"
 import { buildWhatsAppUrl } from "@/lib/whatsapp"
-import { LanguageSwitcher } from "./LanguageSwitcher"
-import { MegaMenu } from "./MegaMenu"
-import { UtilityBar } from "./UtilityBar"
+import { LanguageMenu, swapLocalePath } from "./LanguageSwitcher"
+import { MegaMenu, NavDropdown, navLinkClass } from "./MegaMenu"
 import { WhatsAppIcon, buttonClass } from "./WaButton"
 
 function itemHref(locale: Locale, href: string) {
@@ -18,7 +17,7 @@ function itemHref(locale: Locale, href: string) {
 
 function Logo({ locale }: { locale: Locale }) {
   return (
-    <Link href={`/${locale}`} className="flex shrink-0 items-center gap-2.5 text-forest">
+    <Link href={`/${locale}`} className="flex min-h-11 shrink-0 items-center gap-2.5 rounded-lg text-forest">
       <span aria-hidden="true" className="grid size-9 place-items-center rounded-full bg-forest text-sm font-semibold text-ivory">
         IJ
       </span>
@@ -69,62 +68,81 @@ export function SiteHeader({ locale }: { locale: Locale }) {
     }
   }, [open])
 
+  const isCurrent = (href: string) => !href.startsWith("#") && pathname === itemHref(locale, href)
+
   return (
-    <header className="sticky top-0 z-50 lg:-top-8">
-      <UtilityBar locale={locale} />
-      <div
-        className={`relative bg-white motion-safe:transition-shadow ${
-          scrolled ? "border-b border-charcoal/10 shadow-[0_1px_0_rgba(23,32,27,0.04)]" : "border-b border-transparent"
-        }`}
-      >
-        <div className="site-wrap flex h-16 items-center gap-8 lg:h-[72px]">
-          <Logo locale={locale} />
-          <nav className="hidden h-full flex-1 items-center justify-end gap-6 text-sm font-medium lg:flex xl:gap-8" aria-label="Primary">
-            {nav.map((item) =>
-              item.href === "products" ? (
-                <MegaMenu key={item.href} locale={locale} label={pickLocale(item.label, locale)} />
-              ) : (
-                <Link
+    // Floating bar: fixed over the hero (16px from top, 12px once scrolled). Pages without a
+    // hero get top padding from `main#content` in globals.css so nothing hides beneath it.
+    <header
+      className={`pointer-events-none fixed inset-x-0 z-50 px-6 motion-safe:transition-[top] motion-safe:duration-200 ${
+        scrolled ? "top-3" : "top-4"
+      }`}
+    >
+      <div className="pointer-events-auto relative mx-auto flex h-16 max-w-[1280px] items-center gap-4 rounded-2xl bg-white pr-2 pl-4 shadow-[0_10px_30px_-12px_rgba(23,32,27,0.28),0_1px_3px_rgba(23,32,27,0.08)] sm:pl-5 lg:gap-6 lg:pr-3">
+        <Logo locale={locale} />
+        <nav className="hidden h-full flex-1 items-center justify-center gap-1 lg:flex xl:gap-4" aria-label="Primary">
+          {nav.map((item) => {
+            const label = pickLocale(item.label, locale)
+            if (item.href === "products") return <MegaMenu key={item.href} locale={locale} label={label} />
+            if (item.href === "about")
+              return (
+                <NavDropdown
                   key={item.href}
+                  id="menu-company"
+                  label={label}
+                  menuLabel={`${label} — ${pickLocale(ui.companyMenu, locale)}`}
                   href={itemHref(locale, item.href)}
-                  className="inline-flex h-full items-center border-b-2 border-transparent text-charcoal/80 hover:border-forest hover:text-charcoal"
-                >
-                  {pickLocale(item.label, locale)}
-                </Link>
+                  items={[
+                    { href: `/${locale}/about`, label: pickLocale(ui.aboutUs, locale) },
+                    { href: `/${locale}/company`, label: pickLocale(ui.companyProfile, locale) },
+                  ]}
+                />
               )
-            )}
-          </nav>
-          <div className="ml-auto flex items-center gap-2 lg:ml-0">
-            <a
-              href={wa}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${contactLabel} — WhatsApp`}
-              className={`${buttonClass("wa")} max-sm:size-11 max-sm:px-0`}
-            >
-              <WhatsAppIcon className="size-5 sm:size-4" />
-              <span className="max-sm:sr-only">{contactLabel}</span>
-            </a>
-            <button
-              ref={menuButtonRef}
-              type="button"
-              className="inline-flex size-11 items-center justify-center rounded-full text-charcoal hover:bg-ivory lg:hidden"
-              aria-expanded={open}
-              aria-controls="mobile-nav"
-              aria-label={pickLocale(ui.openMenu, locale)}
-              onClick={() => setOpen(true)}
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true" className="size-6">
-                <path d="M3 7h18M3 12h18M3 17h18" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-              </svg>
-            </button>
+            return (
+              <Link
+                key={item.href}
+                href={itemHref(locale, item.href)}
+                aria-current={isCurrent(item.href) ? "page" : undefined}
+                className={`${navLinkClass} xl:px-1.5`}
+              >
+                {label}
+              </Link>
+            )
+          })}
+        </nav>
+        <div className="ml-auto flex items-center gap-1 lg:ml-0 lg:gap-2">
+          <div className="hidden lg:block">
+            <LanguageMenu locale={locale} />
           </div>
+          <a
+            href={wa}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${contactLabel} — WhatsApp`}
+            className="inline-flex size-11 shrink-0 items-center justify-center gap-2 rounded-full bg-leaf text-sm font-semibold whitespace-nowrap text-white hover:bg-forest motion-safe:transition-colors lg:h-10 lg:w-auto lg:px-4"
+          >
+            <WhatsAppIcon className="size-5 lg:size-4" />
+            <span className="hidden lg:inline">{contactLabel}</span>
+          </a>
+          <button
+            ref={menuButtonRef}
+            type="button"
+            className="inline-flex size-11 items-center justify-center rounded-full text-charcoal hover:bg-ivory lg:hidden"
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            aria-label={pickLocale(ui.openMenu, locale)}
+            onClick={() => setOpen(true)}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" className="size-6">
+              <path d="M3 7h18M3 12h18M3 17h18" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            </svg>
+          </button>
         </div>
       </div>
 
       {/* Mobile drawer */}
       <div
-        className={`fixed inset-0 z-[60] lg:hidden ${open ? "visible" : "invisible"}`}
+        className={`pointer-events-auto fixed inset-0 z-[60] lg:hidden ${open ? "visible" : "invisible"}`}
         aria-hidden={!open}
       >
         <button
@@ -200,12 +218,32 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             </nav>
           </div>
           <div className="space-y-4 border-t border-charcoal/10 bg-ivory px-5 py-5">
-            <div>
+            <nav aria-label={pickLocale(ui.language, locale)}>
               <p className="label">{pickLocale(ui.language, locale)}</p>
-              <div className="mt-1">
-                <LanguageSwitcher locale={locale} tone="dark" />
-              </div>
-            </div>
+              <ul className="mt-2 grid grid-cols-2 gap-x-3">
+                {LOCALES.map((code) => (
+                  <li key={code}>
+                    <Link
+                      href={swapLocalePath(pathname || `/${locale}`, code)}
+                      hrefLang={LOCALE_LANG_TAGS[code]}
+                      lang={LOCALE_LANG_TAGS[code]}
+                      tabIndex={open ? 0 : -1}
+                      aria-current={code === locale ? "true" : undefined}
+                      className={`flex min-h-11 items-center gap-2 text-sm ${
+                        code === locale ? "font-semibold text-forest" : "text-charcoal hover:text-forest"
+                      }`}
+                    >
+                      {LOCALE_NATIVE_NAMES[code]}
+                      {code === locale && (
+                        <svg viewBox="0 0 16 16" aria-hidden="true" className="size-4">
+                          <path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      )}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
             <p className="text-xs text-muted">{pickLocale(redesign.tagline, locale)}</p>
             <a
               href={wa}

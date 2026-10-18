@@ -17,8 +17,11 @@
   --text-body: 1rem;
   --text-small: 0.875rem;
   --text-label: 0.75rem;
-  --utility-h: 32px;
-  --header-h: 72px;
+  /* Floating header: 16px top inset + 64px bar + 16px breathing room. */
+  --header-bar-h: 64px;
+  --header-offset: 96px;
+  /* Catalog filter sticks under the scrolled bar (12px + 64px + 8px). */
+  --filter-sticky-top: 84px;
 }
 
 @theme {
@@ -33,6 +36,19 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Anchor jumps (#sustainability, #content, …) land below the floating header. */
+[id] {
+  scroll-margin-top: var(--header-offset);
+}
+
+/* The header is fixed and overlays full-bleed heroes (data-hero); every other page starts below it. */
+main#content {
+  padding-top: var(--header-offset);
+}
+main#content:has(> [data-hero]:first-child, > :first-child > [data-hero]:first-child) {
+  padding-top: 0;
 }
 
 body {

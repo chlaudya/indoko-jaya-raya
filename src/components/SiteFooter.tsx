@@ -1,13 +1,15 @@
 import Link from "next/link"
 import { pickLocale, type Locale } from "@/lib/i18n"
-import { categories, siteSettings, ui, visiblePhone } from "@/lib/fixtures"
+import { categories, redesign, siteSettings, ui, visiblePhone } from "@/lib/fixtures"
 import { buildWhatsAppUrl } from "@/lib/whatsapp"
 import { LanguageSwitcher } from "./LanguageSwitcher"
+import { WhatsAppIcon } from "./WaButton"
 
 type Col = { title: string; links: { href: string; label: string; external?: boolean }[] }
 
 export function SiteFooter({ locale }: { locale: Locale }) {
   const wa = buildWhatsAppUrl({ locale, templateKey: "contact" })
+  const phone = visiblePhone()
   const t = (v: Parameters<typeof pickLocale>[0]) => pickLocale(v, locale)
   const cols: Col[] = [
     {
@@ -50,11 +52,29 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         <div className="grid gap-10 border-b border-white/15 pb-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <p className="text-sm font-semibold tracking-[0.16em] uppercase">PT Indoco Jaya Raya</p>
+            <p className="mt-2 text-sm text-ivory/75">{t(redesign.tagline)}</p>
             <p className="display display-h3 mt-5 max-w-md text-white">{t(siteSettings.companyShortBlurb)}</p>
           </div>
           <div className="lg:col-span-4 lg:col-start-9">
             <p className="label text-soft-sage!">{t(ui.address)}</p>
             <p className="mt-3 text-sm leading-relaxed text-ivory/75">{t(siteSettings.address)}</p>
+            {/* Phone line (formerly in the utility bar); respects siteSettings.phonePending. */}
+            {phone ? (
+              <a
+                href={wa}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-flex min-h-10 items-center gap-2 text-sm font-medium text-ivory/85 hover:text-white hover:underline hover:underline-offset-4"
+              >
+                <WhatsAppIcon className="size-4 text-soft-sage" />
+                {phone}
+              </a>
+            ) : (
+              <p className="mt-3 inline-flex min-h-10 items-center gap-2 text-sm text-ivory/75">
+                <WhatsAppIcon className="size-4" />
+                {t(ui.numberPending)}
+              </p>
+            )}
           </div>
         </div>
 
