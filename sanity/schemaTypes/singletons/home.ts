@@ -43,7 +43,7 @@ export const home = defineType({
       name: "heroSlides",
       title: "Hero photo slider (optional)",
       description:
-        "Up to 5 photos; each holds 2s, then a 0.6s crossfade, looping behind the fixed headline (no visible controls). Leave empty to use the designer's defaults (hero-slide-1…5, client photos), in order: cashew sorters, hands holding corn, farmer against the sky, raw cashews in a hand, peanuts drying on a tarp. Set the image hotspot on faces: it becomes the crop focal point.",
+        "Up to 5 photos; each holds 2s, then a 0.6s crossfade, looping behind the fixed headline (no visible controls). Leave empty to use the designer's defaults (client photos), in order: hero-cashew-sorters, hero-corn-hands, hero-farmer-sky, hero-raw-cashews, hero-peanuts-tarp. Set the image hotspot on faces: it becomes the crop focal point.",
       type: "array",
       of: [
         defineArrayMember({

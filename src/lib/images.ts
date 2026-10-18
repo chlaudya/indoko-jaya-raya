@@ -125,23 +125,23 @@ export const IMAGES = {
   },
   // Home hero slides: client originals, cropped by the designer (2400×1350).
   heroSlide1: {
-    src: `${DIR}/hero-slide-1.webp`,
+    src: `${DIR}/hero-cashew-sorters.webp`,
     alt: { id: "Petani bercaping menyortir kacang mete", en: "Farmers in woven hats sorting cashew nuts", zh: "头戴斗笠的农民正在分拣腰果", vi: "Nông dân đội nón lá đang phân loại hạt điều", hi: "बुनी टोपी पहने किसान काजू छांटते हुए" },
   },
   heroSlide2: {
-    src: `${DIR}/hero-slide-2.webp`,
+    src: `${DIR}/hero-corn-hands.webp`,
     alt: { id: "Kedua tangan menggenggam pipilan jagung", en: "Hands holding shelled corn", zh: "双手捧着脱粒玉米", vi: "Hai bàn tay nâng những hạt ngô", hi: "हथेलियों में मक्के के दाने" },
   },
   heroSlide3: {
-    src: `${DIR}/hero-slide-3.webp`,
+    src: `${DIR}/hero-farmer-sky.webp`,
     alt: { id: "Petani bercaping dengan latar langit", en: "Farmer in a woven hat against the sky", zh: "头戴斗笠的农民，以天空为背景", vi: "Người nông dân đội nón lá trên nền trời", hi: "आसमान की पृष्ठभूमि में बुनी टोपी पहने किसान" },
   },
   heroSlide4: {
-    src: `${DIR}/hero-slide-4.webp`,
+    src: `${DIR}/hero-raw-cashews.webp`,
     alt: { id: "Kacang mete gelondong di telapak tangan", en: "Raw cashew nuts in a hand", zh: "手中的生腰果", vi: "Hạt điều thô trong lòng bàn tay", hi: "हथेली में कच्चे काजू" },
   },
   heroSlide5: {
-    src: `${DIR}/hero-slide-5.webp`,
+    src: `${DIR}/hero-peanuts-tarp.webp`,
     alt: { id: "Kacang tanah dijemur di atas terpal", en: "Peanuts drying on a tarp", zh: "摊在篷布上晾晒的花生", vi: "Đậu phộng phơi trên tấm bạt", hi: "तिरपाल पर सूखती मूंगफली" },
   },
   // Contact hero: client warehouse photo (IMG_8844).
