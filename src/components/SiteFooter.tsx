@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 import { pickLocale, type Locale } from "@/lib/i18n"
 import { products, redesign, siteSettings, ui, visiblePhone } from "@/lib/fixtures"
@@ -41,11 +42,25 @@ export function SiteFooter({ locale }: { locale: Locale }) {
     ...products.filter((p) => p.kind === "product").map((p) => ({ href: `/${locale}/products/${p.slug}`, label: t(p.name) })),
     { href: `/${locale}/products`, label: `${t(ui.viewAllCommodities)} →` },
   ]
-  const heading = "label text-soft-sage!"
+  const heading = "label text-white!"
 
   return (
-    <footer className="border-t border-white/10 bg-forest text-ivory">
-      <div className="site-wrap pt-16 pb-8 lg:pt-20">
+    <footer className="relative isolate overflow-hidden border-t border-white/10 bg-forest text-ivory">
+      {/* Decorative client background (coffee leaves): lazy, never preloaded, cropped freely on small screens.
+          Overlay .35→.8; from xl the top stop is .6 because the Kontak column sits on the top-right leaves (keeps ≥4.5:1). */}
+      <Image
+        src="/images/optimized/footer-bg.webp"
+        alt=""
+        fill
+        sizes="100vw"
+        loading="lazy"
+        className="-z-20 object-cover object-center"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgba(18,59,42,0.35),rgba(18,59,42,0.8))] xl:bg-[linear-gradient(to_bottom,rgba(18,59,42,0.6),rgba(18,59,42,0.8))]"
+      />
+      <div className="site-wrap relative pt-16 pb-8 lg:pt-20">
         <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <Link href={`/${locale}`} className="inline-flex min-h-11 items-center gap-3 text-white">

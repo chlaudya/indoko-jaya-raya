@@ -374,5 +374,16 @@
     "pass": true,
     "origin": "client original",
     "note": "Home pillar: Keberlanjutan (4:3 crop)"
+  },
+  {
+    "name": "footer-bg.webp",
+    "source": "client-supplied PNG (1024x409), optimized by the designer",
+    "kind": "background",
+    "width": 1983,
+    "height": 793,
+    "kb": 32.2,
+    "pass": true,
+    "origin": "client-supplied",
+    "note": "SiteFooter decorative background (alt=\"\", lazy, object-cover center, gradient overlay .35→.8)"
   }
 ]
