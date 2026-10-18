@@ -4,11 +4,13 @@ Status: **DRAFT**. Machine-assisted zh / vi / hi translations for every string t
 
 How it works: `pickLocale` (src/lib/i18n.ts) uses an explicit locale value (fixture or Sanity) first, then `src/lib/i18n-drafts.ts` (keyed by the Indonesian text), then Indonesian. To approve or correct a string, enter it in Sanity / on the fixture, or edit the drafts file. If the Indonesian source changes, its draft stops matching and that locale falls back to Indonesian again.
 
-Counts per locale (zh / vi / hi each): hero headline 1 · trust section 11 (why-choose heading + 3 cards × title/body, 4 stat labels) · site strings 197 · image alt text 26 · **total 235**. Not translated (names): WhatsApp, Indoco Jaya Raya, PT Indoco Jaya Raya.
+Counts per locale (zh / vi / hi each): hero headline 1 · landing page 30 (why-choose heading + 3 cards × title/body, 4 icon-strip items × title/body, 4 WhatsApp templates, 11 UI strings) · site strings 197 · image alt text 26 · **total 254**. Not translated (names): WhatsApp, Indoco Jaya Raya, PT Indoco Jaya Raya.
 
 ## Client pending
-- **Replace mock trust stats.** 10+ Tahun pengalaman, 500+ Mitra petani and 1.000+ Ton per tahun are MOCK (`isMock: true` in src/lib/fixtures.ts). They render on the live page until real numbers are supplied. Only 7 Komoditi is real.
-- Review every zh / vi / hi string below, and the id / en why-choose copy (drafted from the brief's mission; no certification claims).
+- **Real trust stats (optional).** No stats ship: the mock numbers were removed. `home.stats` stays in the CMS; the row is hidden until the client supplies confirmed numbers (1–3 re-centre).
+- **WhatsApp number (launch blocker).** Every button reads `settings.waTargets`, which still holds the placeholder 6281234567890.
+- **Phone and email.** The footer shows "Menyusul" until confirmed; no email is configured.
+- Review every zh / vi / hi string below, and the id / en why-choose, icon-strip and WhatsApp-template copy (drafted from the PM brief; no stats, certification or sustainability claims).
 
 ## Hero headline (designer drafts; emphasised phrase in bold/italic)
 
@@ -16,21 +18,42 @@ Counts per locale (zh / vi / hi each): hero headline 1 · trust section 11 (why-
 |---|---|---|---|
 | Agrobisnis lokal untuk pasar nasional dan internasional. | 立足本土的农业企业，面向**国内与国际**市场。 | Doanh nghiệp nông nghiệp địa phương cho thị trường *trong nước và quốc tế*. | **राष्ट्रीय और अंतरराष्ट्रीय** बाज़ारों के लिए स्थानीय कृषि व्यवसाय। |
 
-## Trust section (src/lib/fixtures.ts: ui.whyChooseUs, whyChoose, homeStats). All 5 locales are drafts
+## Landing page v1 (src/lib/fixtures.ts). All 5 locales are drafts
 
-| id | en | zh | vi | hi |
-|---|---|---|---|---|
-| Mengapa memilih kami | Why choose us | 为何选择我们 | Vì sao chọn chúng tôi | हमें क्यों चुनें |
-| Langsung dari petani lokal | Direct from local farmers | 直接来自本地农户 | Trực tiếp từ nông dân địa phương | सीधे स्थानीय किसानों से |
-| Kami membeli langsung dari petani lokal dengan harga yang kompetitif. | We buy directly from local farmers, at competitive prices. | 我们以有竞争力的价格直接向本地农户收购。 | Chúng tôi thu mua trực tiếp từ nông dân địa phương với giá cạnh tranh. | हम स्थानीय किसानों से सीधे, प्रतिस्पर्धी कीमतों पर ख़रीदते हैं। |
-| Kualitas di setiap tahap | Quality at every step | 每个环节都重品质 | Chất lượng ở mọi khâu | हर चरण में गुणवत्ता |
-| Kualitas dan keberlanjutan kami jaga di setiap tahap, dari penjemuran hingga pengiriman. | Quality and sustainability at every step, from drying to shipping. | 从晾晒到发货，我们在每个环节坚持品质与可持续。 | Chúng tôi giữ vững chất lượng và tính bền vững ở mọi khâu, từ phơi sấy đến giao hàng. | सुखाने से लेकर शिपिंग तक, हम हर चरण में गुणवत्ता और स्थिरता बनाए रखते हैं। |
-| Untuk pembeli nasional dan internasional | Built for national and international buyers | 服务国内与国际买家 | Dành cho người mua trong nước và quốc tế | राष्ट्रीय और अंतरराष्ट्रीय ख़रीदारों के लिए |
-| Melayani pembeli nasional dan internasional, dengan kontak cepat lewat WhatsApp. | Serving national and international buyers, with fast contact on WhatsApp. | 服务国内与国际买家，可通过 WhatsApp 快速联系。 | Phục vụ người mua trong nước và quốc tế, liên hệ nhanh qua WhatsApp. | राष्ट्रीय और अंतरराष्ट्रीय ख़रीदारों की सेवा, WhatsApp पर तुरंत संपर्क के साथ। |
-| Tahun pengalaman (MOCK) | Years of experience | 年行业经验 | Năm kinh nghiệm | वर्षों का अनुभव |
-| Mitra petani (MOCK) | Farmer partners | 合作农户 | Nông dân đối tác | किसान साझेदार |
-| Ton per tahun (MOCK) | Tonnes a year | 吨/年 | Tấn mỗi năm | टन प्रति वर्ष |
-| Komoditi | Commodities | 种农产品 | Mặt hàng nông sản | जिंसें |
+Why choose us (ui.whyChooseUs + whyChoose: title, body), icon strip (iconStrip: title, body), the 4 contextual WhatsApp templates (siteSettings.waTemplates) and new UI strings. No numbers, certification or sustainability claims.
+
+| key | id | en | zh | vi | hi |
+|---|---|---|---|---|---|
+| ui.whyChooseUs | Mengapa memilih kami | Why choose us | 为何选择我们 | Vì sao chọn chúng tôi | हमें क्यों चुनें |
+| whyChoose.sort.title | Sortir kualitas sebelum pengiriman | Quality sorting before shipment | 发货前品质分拣 | Phân loại chất lượng trước khi giao hàng | शिपमेंट से पहले गुणवत्ता छँटाई |
+| whyChoose.sort.body | Komoditi disortir sebelum dikirim agar sesuai kebutuhan pembeli. | Commodities are sorted before they ship, to match what buyers need. | 农产品在发货前经过分拣，以符合买家需求。 | Nông sản được phân loại trước khi giao để phù hợp với nhu cầu người mua. | भेजने से पहले जिंसों की छँटाई की जाती है, ताकि वे ख़रीदार की ज़रूरत के अनुरूप हों। |
+| whyChoose.farmers.title | Jaringan langsung petani lokal | A direct network of local farmers | 直连本地农户网络 | Mạng lưới nông dân địa phương trực tiếp | स्थानीय किसानों का सीधा नेटवर्क |
+| whyChoose.farmers.body | Kami membeli langsung dari petani lokal dengan harga yang kompetitif. | We buy directly from local farmers, at competitive prices. | 我们以有竞争力的价格直接向本地农户收购。 | Chúng tôi thu mua trực tiếp từ nông dân địa phương với giá cạnh tranh. | हम स्थानीय किसानों से सीधे, प्रतिस्पर्धी कीमतों पर ख़रीदते हैं। |
+| whyChoose.sun.title | Jasa penjemuran sendiri | In-house drying service | 自有晾晒服务 | Dịch vụ phơi sấy riêng | अपनी सुखाने की सेवा |
+| whyChoose.sun.body | Jasa Penjemuran kami membantu menjaga kualitas hasil panen sebelum distribusi. | Our drying service helps preserve harvest quality before distribution. | 我们的晾晒服务帮助在分销前保持收成品质。 | Dịch vụ phơi sấy của chúng tôi giúp giữ chất lượng nông sản trước khi phân phối. | हमारी सुखाने की सेवा वितरण से पहले फ़सल की गुणवत्ता बनाए रखने में मदद करती है। |
+| iconStrip.farmers.title | Petani & Pemasok | Farmers & suppliers | 农户与供应商 | Nông dân & nhà cung cấp | किसान और आपूर्तिकर्ता |
+| iconStrip.farmers.body | Bekerja sama dengan petani dan pemasok lokal. | Working with local farmers and suppliers. | 与本地农户和供应商合作。 | Hợp tác với nông dân và nhà cung cấp địa phương. | स्थानीय किसानों और आपूर्तिकर्ताओं के साथ काम। |
+| iconStrip.grain.title | Komoditi | Commodities | 农产品 | Nông sản | जिंसें |
+| iconStrip.grain.body | Kacang-kacangan, umbi, jagung, dan kopi dari Indonesia. | Nuts and legumes, tubers, corn and coffee from Indonesia. | 来自印度尼西亚的坚果与豆类、块茎、玉米和咖啡。 | Các loại hạt và đậu, củ, ngô và cà phê từ Indonesia. | इंडोनेशिया से मेवे और दालें, कंद, मक्का और कॉफ़ी। |
+| iconStrip.globe.title | Pasar | Markets | 市场 | Thị trường | बाज़ार |
+| iconStrip.globe.body | Melayani pembeli nasional dan internasional. | Serving national and international buyers. | 服务国内与国际买家。 | Phục vụ người mua trong nước và quốc tế. | राष्ट्रीय और अंतरराष्ट्रीय ख़रीदारों की सेवा। |
+| iconStrip.leaf.title | Keberlanjutan | Sustainability | 可持续发展 | Bền vững | स्थिरता |
+| iconStrip.leaf.body | Tumbuh bersama petani dan karyawan. | Growing together with farmers and employees. | 与农户和员工共同成长。 | Cùng phát triển với nông dân và người lao động. | किसानों और कर्मचारियों के साथ मिलकर आगे बढ़ना। |
+| waTemplates.homeHero | Halo Indoco Jaya Raya, saya menghubungi Anda dari halaman utama website. Saya ingin mengetahui lebih lanjut tentang komoditi Anda. | Hello Indoco Jaya Raya, I'm contacting you from your website's home page. I'd like to learn more about your commodities. | 您好，Indoco Jaya Raya，我从贵公司网站首页联系您，想进一步了解贵公司的农产品。 | Xin chào Indoco Jaya Raya, tôi liên hệ từ trang chủ website của bạn. Tôi muốn tìm hiểu thêm về các mặt hàng nông sản của bạn. | नमस्ते Indoco Jaya Raya, यह संदेश आपकी वेबसाइट के होम पेज से है। मुझे आपकी जिंसों के बारे में और जानकारी चाहिए। |
+| waTemplates.homeDrying | Halo Indoco Jaya Raya, saya menghubungi Anda dari bagian Jasa Penjemuran di halaman utama website. Saya ingin mendiskusikan kebutuhan penjemuran komoditi saya. | Hello Indoco Jaya Raya, I'm contacting you from the Drying Service section on your home page. I'd like to discuss my commodity drying needs. | 您好，Indoco Jaya Raya，我从网站首页的晾晒服务栏目联系您，想洽谈我的农产品晾晒需求。 | Xin chào Indoco Jaya Raya, tôi liên hệ từ mục Dịch vụ phơi sấy trên trang chủ website. Tôi muốn trao đổi về nhu cầu phơi sấy nông sản của mình. | नमस्ते Indoco Jaya Raya, यह संदेश आपकी वेबसाइट के होम पेज के 'सुखाने की सेवा' भाग से है। मुझे अपनी जिंस सुखाने की ज़रूरतों पर चर्चा करनी है। |
+| waTemplates.homeBanner | Halo Indoco Jaya Raya, saya menghubungi Anda dari tombol WhatsApp di bagian bawah halaman utama website. Saya ingin membicarakan kebutuhan komoditi atau pasokan saya. | Hello Indoco Jaya Raya, I'm contacting you from the WhatsApp button at the bottom of your home page. I'd like to talk about my commodity or supply needs. | 您好，Indoco Jaya Raya，我通过网站首页底部的 WhatsApp 按钮联系您，想洽谈我的农产品或供应需求。 | Xin chào Indoco Jaya Raya, tôi liên hệ qua nút WhatsApp ở cuối trang chủ website. Tôi muốn trao đổi về nhu cầu nông sản hoặc nguồn cung của mình. | नमस्ते Indoco Jaya Raya, यह संदेश आपकी वेबसाइट के होम पेज के नीचे दिए WhatsApp बटन से है। मुझे अपनी जिंस या आपूर्ति ज़रूरतों पर बात करनी है। |
+| waTemplates.productCard | Halo Indoco Jaya Raya, saya tertarik dengan {{productName}} yang saya lihat di daftar komoditi website Anda. Mohon informasi lebih lanjut. | Hello Indoco Jaya Raya, I'm interested in {{productName}}, which I saw in the commodity list on your website. Please share more details. | 您好，Indoco Jaya Raya，我在贵公司网站的农产品列表中看到{{productName}}，很感兴趣，请提供更多信息。 | Xin chào Indoco Jaya Raya, tôi quan tâm đến {{productName}} mà tôi thấy trong danh sách nông sản trên website của bạn. Vui lòng cho tôi biết thêm thông tin. | नमस्ते Indoco Jaya Raya, मैंने आपकी वेबसाइट की जिंस सूची में {{productName}} देखा और मुझे इसमें रुचि है। कृपया और जानकारी साझा करें। |
+| ui.ourServices | Layanan kami | Our services | 我们的服务 | Dịch vụ của chúng tôi | हमारी सेवाएँ |
+| ui.askViaWhatsApp | Tanya via WhatsApp | Ask on WhatsApp | 通过 WhatsApp 咨询 | Hỏi qua WhatsApp | WhatsApp पर पूछें |
+| ui.askAboutVia | Tanya tentang {product} via WhatsApp | Ask about {product} on WhatsApp | 通过 WhatsApp 咨询{product} | Hỏi về {product} qua WhatsApp | {product} के बारे में WhatsApp पर पूछें |
+| ui.navigation | Navigasi | Navigation | 导航 | Điều hướng | नेविगेशन |
+| ui.footerCommodities | Komoditi | Commodities | 农产品 | Nông sản | जिंसें |
+| ui.email | Email | Email | 电子邮件 | Email | ईमेल |
+| ui.phone | Telepon | Phone | 电话 | Điện thoại | फ़ोन |
+| ui.chatOnWhatsApp | Chat via WhatsApp | Chat on WhatsApp | 通过 WhatsApp 聊天 | Trò chuyện qua WhatsApp | WhatsApp पर चैट करें |
+| ui.bannerLabel | Mari bekerja sama | Let's work together | 携手合作 | Hãy cùng hợp tác | आइए साथ काम करें |
+| ui.bannerCta | Hubungi kami via WhatsApp | Contact us on WhatsApp | 通过 WhatsApp 联系我们 | Liên hệ qua WhatsApp | WhatsApp पर संपर्क करें |
+| ui.bannerReassure | Pesan Anda langsung masuk ke WhatsApp tim kami. | Your message goes straight to our team's WhatsApp. | 您的消息将直接发送到我们团队的 WhatsApp。 | Tin nhắn của bạn được gửi thẳng đến WhatsApp của đội ngũ chúng tôi. | आपका संदेश सीधे हमारी टीम के WhatsApp पर पहुँचता है। |
 
 ## Site strings (197, src/lib/i18n-drafts.ts)
 

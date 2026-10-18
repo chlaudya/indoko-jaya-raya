@@ -78,7 +78,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
         scrolled ? "top-3" : "top-4"
       }`}
     >
-      <div className="pointer-events-auto relative mx-auto flex h-16 max-w-[1280px] items-center gap-4 rounded-2xl bg-white pr-2 pl-4 shadow-[0_10px_30px_-12px_rgba(23,32,27,0.28),0_1px_3px_rgba(23,32,27,0.08)] sm:pl-5 lg:gap-6 lg:pr-3">
+      <div className="pointer-events-auto relative mx-auto flex h-16 max-w-[1280px] items-center gap-4 rounded-[12px] bg-white pr-2 pl-4 shadow-[0_10px_30px_-12px_rgba(23,32,27,0.28),0_1px_3px_rgba(23,32,27,0.08)] sm:pl-5 lg:gap-6 lg:pr-3">
         <Logo locale={locale} />
         <nav className="hidden h-full flex-1 items-center justify-center gap-1 lg:flex xl:gap-4" aria-label="Primary">
           {nav.map((item) => {
@@ -119,7 +119,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${contactLabel} — WhatsApp`}
-            className="inline-flex size-11 shrink-0 items-center justify-center gap-2 rounded-full bg-leaf text-sm font-semibold whitespace-nowrap text-white hover:bg-forest motion-safe:transition-colors lg:h-10 lg:w-auto lg:px-4"
+            className="inline-flex size-11 shrink-0 items-center justify-center gap-2 rounded-[8px] bg-leaf text-sm font-semibold whitespace-nowrap text-white hover:bg-forest motion-safe:transition-colors lg:h-10 lg:w-auto lg:px-4"
           >
             <WhatsAppIcon className="size-5 lg:size-4" />
             <span className="hidden lg:inline">{contactLabel}</span>
@@ -127,7 +127,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           <button
             ref={menuButtonRef}
             type="button"
-            className="inline-flex size-11 items-center justify-center rounded-full text-charcoal hover:bg-ivory lg:hidden"
+            className="inline-flex size-11 items-center justify-center rounded-[6px] text-charcoal hover:bg-ivory lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={pickLocale(ui.openMenu, locale)}
@@ -169,7 +169,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
               onClick={() => setOpen(false)}
               aria-label={pickLocale(ui.closeMenu, locale)}
               tabIndex={open ? 0 : -1}
-              className="inline-flex size-11 items-center justify-center rounded-full hover:bg-ivory"
+              className="inline-flex size-11 items-center justify-center rounded-[6px] hover:bg-ivory"
             >
               <svg viewBox="0 0 24 24" aria-hidden="true" className="size-6">
                 <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />

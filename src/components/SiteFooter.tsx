@@ -1,117 +1,131 @@
 import Link from "next/link"
 import { pickLocale, type Locale } from "@/lib/i18n"
-import { categories, redesign, siteSettings, ui, visiblePhone } from "@/lib/fixtures"
+import { products, redesign, siteSettings, ui, visiblePhone } from "@/lib/fixtures"
 import { buildWhatsAppUrl } from "@/lib/whatsapp"
 import { LanguageSwitcher } from "./LanguageSwitcher"
 import { WhatsAppIcon } from "./WaButton"
 
-type Col = { title: string; links: { href: string; label: string; external?: boolean }[] }
+const linkClass =
+  "inline-flex min-h-10 items-center text-[0.9375rem] leading-[1.9] text-[#d9e0d4] hover:text-white hover:underline hover:underline-offset-4"
 
+function Icon({ d }: { d: string }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mt-[0.3em] size-[18px] shrink-0 text-soft-sage">
+      <path d={d} />
+    </svg>
+  )
+}
+const PIN = "M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Zm0-8.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"
+const PHONE = "M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1.5 1.5 0 0 1-1.6 1.5C10.6 20 4 13.4 3.5 5.6A1.5 1.5 0 0 1 5 4Z"
+const MAIL = "M3.5 6.5h17v11h-17zM3.5 7l8.5 6.5L20.5 7"
+
+/**
+ * Footer: brand · Navigasi · Komoditi · Kontak (4 → 2 → 1 columns). Links 15px #d9e0d4 (≈10:1 on forest),
+ * line-height 1.9. Phone and email show "Menyusul" until the client confirms them (siteSettings.phonePending /
+ * siteSettings.email); WhatsApp always uses the configured destination.
+ */
 export function SiteFooter({ locale }: { locale: Locale }) {
+  const t = (v: Parameters<typeof pickLocale>[0]) => pickLocale(v, locale)
   const wa = buildWhatsAppUrl({ locale, templateKey: "contact" })
   const phone = visiblePhone()
-  const t = (v: Parameters<typeof pickLocale>[0]) => pickLocale(v, locale)
-  const cols: Col[] = [
-    {
-      title: t(ui.footerCompany),
-      links: [
-        { href: `/${locale}/about`, label: t(ui.aboutUs) },
-        { href: `/${locale}/company`, label: t(ui.companyProfile) },
-        { href: `/${locale}#sustainability`, label: t(ui.sustainability) },
-        { href: `/${locale}/services/drying`, label: t(ui.commodityServices) },
-      ],
-    },
-    {
-      title: t(ui.footerProducts),
-      links: [
-        { href: `/${locale}/products`, label: t(ui.viewAllCommodities) },
-        ...categories
-          .filter((c) => c.slug !== "layanan")
-          .map((c) => ({ href: `/${locale}/products?category=${c.slug}`, label: t(c.title) })),
-      ],
-    },
-    {
-      title: t(ui.footerCareers),
-      links: [
-        { href: `/${locale}/careers`, label: t(ui.openPositions) },
-        { href: `/${locale}/careers`, label: t(ui.growWithUs) },
-      ],
-    },
-    {
-      title: t(ui.footerContact),
-      links: [
-        { href: `/${locale}/contact`, label: t(ui.contactTeam) },
-        { href: wa, label: visiblePhone() ? `WhatsApp ${visiblePhone()}` : t(ui.whatsapp), external: true },
-      ],
-    },
+  const email = siteSettings.email.trim()
+  const nav = [
+    { href: `/${locale}/about`, label: t(ui.aboutUs) },
+    { href: `/${locale}/company`, label: t(ui.companyProfile) },
+    { href: `/${locale}/services/drying`, label: t(ui.commodityServices) },
+    { href: `/${locale}#sustainability`, label: t(ui.sustainability) },
+    { href: `/${locale}/careers`, label: t(ui.careersLabel) },
+    { href: `/${locale}/contact`, label: t(ui.footerContact) },
   ]
+  const commodities = [
+    ...products.filter((p) => p.kind === "product").map((p) => ({ href: `/${locale}/products/${p.slug}`, label: t(p.name) })),
+    { href: `/${locale}/products`, label: `${t(ui.viewAllCommodities)} →` },
+  ]
+  const heading = "label text-soft-sage!"
 
   return (
-    <footer className="bg-forest text-ivory">
-      <div className="site-wrap pt-16 pb-10 lg:pt-24">
-        <div className="grid gap-10 border-b border-white/15 pb-12 lg:grid-cols-12">
-          <div className="lg:col-span-5">
-            <p className="text-sm font-semibold tracking-[0.16em] uppercase">PT Indoco Jaya Raya</p>
-            <p className="mt-2 text-sm text-ivory/75">{t(redesign.tagline)}</p>
-            <p className="display display-h3 mt-5 max-w-md text-white">{t(siteSettings.companyShortBlurb)}</p>
+    <footer className="border-t border-white/10 bg-forest text-ivory">
+      <div className="site-wrap pt-16 pb-8 lg:pt-20">
+        <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <Link href={`/${locale}`} className="inline-flex min-h-11 items-center gap-3 text-white">
+              <span aria-hidden="true" className="grid size-10 place-items-center rounded-full bg-ivory text-sm font-semibold text-forest">
+                IJ
+              </span>
+              <span className="text-sm leading-tight font-semibold tracking-[0.16em] uppercase">
+                Indoco
+                <span className="block text-[0.6875rem] font-medium tracking-[0.2em] text-[#d9e0d4]">Jaya Raya</span>
+              </span>
+            </Link>
+            <p className="display mt-5 max-w-sm text-[1.375rem] leading-snug text-white">{t(redesign.tagline)}</p>
+            <p className="mt-3 max-w-sm text-[0.9375rem] leading-relaxed text-[#d9e0d4]">{t(siteSettings.companyShortBlurb)}</p>
           </div>
-          <div className="lg:col-span-4 lg:col-start-9">
-            <p className="label text-soft-sage!">{t(ui.address)}</p>
-            <p className="mt-3 text-sm leading-relaxed text-ivory/75">{t(siteSettings.address)}</p>
-            {/* Phone line (formerly in the utility bar); respects siteSettings.phonePending. */}
-            {phone ? (
-              <a
-                href={wa}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-3 inline-flex min-h-10 items-center gap-2 text-sm font-medium text-ivory/85 hover:text-white hover:underline hover:underline-offset-4"
-              >
-                <WhatsAppIcon className="size-4 text-soft-sage" />
-                {phone}
-              </a>
-            ) : (
-              <p className="mt-3 inline-flex min-h-10 items-center gap-2 text-sm text-ivory/75">
-                <WhatsAppIcon className="size-4" />
-                {t(ui.numberPending)}
-              </p>
-            )}
+
+          <nav aria-labelledby="footer-nav" className="lg:col-span-2 lg:col-start-6">
+            <h2 id="footer-nav" className={heading}>{t(ui.navigation)}</h2>
+            <ul className="mt-4">
+              {nav.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className={linkClass}>{link.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <nav aria-labelledby="footer-commodities" className="lg:col-span-2">
+            <h2 id="footer-commodities" className={heading}>{t(ui.footerCommodities)}</h2>
+            <ul className="mt-4">
+              {commodities.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className={linkClass}>{link.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="lg:col-span-3 lg:col-start-10">
+            <h2 className={heading}>{t(ui.footerContact)}</h2>
+            <ul className="mt-4 space-y-3 text-[0.9375rem] leading-relaxed text-[#d9e0d4]">
+              <li className="flex gap-3">
+                <Icon d={PIN} />
+                <span>
+                  <span className="sr-only">{t(ui.address)}: </span>
+                  {t(siteSettings.address)}
+                </span>
+              </li>
+              <li className="flex gap-3">
+                <Icon d={PHONE} />
+                <span>
+                  <span className="sr-only">{t(ui.phone)}: </span>
+                  {phone ?? <span>{t(ui.phone)} · {t(ui.pending)}</span>}
+                </span>
+              </li>
+              <li className="flex gap-3">
+                <Icon d={MAIL} />
+                {email ? (
+                  <a href={`mailto:${email}`} className="hover:text-white hover:underline hover:underline-offset-4">{email}</a>
+                ) : (
+                  <span>{t(ui.email)} · {t(ui.pending)}</span>
+                )}
+              </li>
+              <li>
+                <a
+                  href={wa}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-1 inline-flex min-h-11 items-center gap-2 rounded-[8px] border border-white/60 px-4 text-sm font-semibold text-white hover:bg-white hover:text-forest motion-safe:transition-colors"
+                >
+                  <WhatsAppIcon className="size-4" />
+                  {t(ui.chatOnWhatsApp)}
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
 
-        <nav aria-label="Footer" className="grid grid-cols-2 gap-x-6 gap-y-10 py-12 md:grid-cols-4">
-          {cols.map((col) => (
-            <div key={col.title}>
-              <h2 className="label text-soft-sage!">{col.title}</h2>
-              <ul className="mt-4 space-y-1">
-                {col.links.map((link) => (
-                  <li key={link.label}>
-                    {link.external ? (
-                      <a
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex min-h-10 items-center text-sm text-ivory/80 hover:text-white hover:underline hover:underline-offset-4"
-                      >
-                        {link.label}
-                      </a>
-                    ) : (
-                      <Link
-                        href={link.href}
-                        className="inline-flex min-h-10 items-center text-sm text-ivory/80 hover:text-white hover:underline hover:underline-offset-4"
-                      >
-                        {link.label}
-                      </Link>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </nav>
-
-        <div className="flex flex-col gap-4 border-t border-white/15 pt-6 md:flex-row md:items-center md:justify-between">
+        <div className="mt-14 flex flex-col gap-4 border-t border-white/15 pt-6 md:flex-row md:items-center md:justify-between">
+          <p className="text-sm text-[#d9e0d4]">© {new Date().getFullYear()} PT Indoco Jaya Raya</p>
           <LanguageSwitcher locale={locale} />
-          <p className="text-xs text-ivory/55">© {new Date().getFullYear()} PT Indoco Jaya Raya · APEL Group branding</p>
         </div>
       </div>
     </footer>

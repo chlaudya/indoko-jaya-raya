@@ -30,7 +30,7 @@ export function CardRail({
           type="button"
           onClick={() => scroll(-1)}
           aria-label={prevLabel}
-          className="inline-flex size-11 items-center justify-center rounded-full border border-forest/30 text-forest hover:bg-forest hover:text-white"
+          className="inline-flex size-11 items-center justify-center rounded-[6px] border border-forest/30 text-forest hover:bg-forest hover:text-white"
         >
           <span aria-hidden="true">←</span>
         </button>
@@ -38,7 +38,7 @@ export function CardRail({
           type="button"
           onClick={() => scroll(1)}
           aria-label={nextLabel}
-          className="inline-flex size-11 items-center justify-center rounded-full border border-forest/30 text-forest hover:bg-forest hover:text-white"
+          className="inline-flex size-11 items-center justify-center rounded-[6px] border border-forest/30 text-forest hover:bg-forest hover:text-white"
         >
           <span aria-hidden="true">→</span>
         </button>

@@ -26,7 +26,7 @@ export function NavChevron({ open }: { open: boolean }) {
 }
 
 export const chevronButtonClass =
-  "-ml-0.5 inline-flex size-8 items-center justify-center rounded-full text-charcoal hover:bg-ivory hover:text-leaf aria-expanded:text-leaf"
+  "-ml-0.5 inline-flex size-8 items-center justify-center rounded-[6px] text-charcoal hover:bg-ivory hover:text-leaf aria-expanded:text-leaf"
 
 /** Hover-intent + Escape/outside-click handling shared by the header dropdowns. */
 export function useDropdown() {
@@ -98,7 +98,7 @@ export function MegaMenu({ locale, label }: { locale: Locale; label: string }) {
       {open && (
         // pt-3 is a transparent hover bridge between the bar and the panel.
         <div id="mega-products" className="absolute inset-x-0 top-full pt-3">
-          <div className="rounded-2xl border border-charcoal/10 bg-white shadow-[0_24px_48px_-24px_rgba(23,32,27,0.35)]">
+          <div className="rounded-[12px] border border-charcoal/10 bg-white shadow-[0_24px_48px_-24px_rgba(23,32,27,0.35)]">
             <div className="grid grid-cols-12 gap-8 px-8 py-8">
               <div className="col-span-3">
                 <p className="label">{pickLocale(ui.browseByCategory, locale)}</p>
@@ -184,13 +184,13 @@ export function NavDropdown({
       </button>
       {open && (
         <div id={id} className="absolute top-full left-0 pt-3">
-          <ul className="w-64 rounded-xl border border-charcoal/10 bg-white p-1.5 shadow-[0_16px_40px_-12px_rgba(23,32,27,0.28)]">
+          <ul className="w-64 rounded-[12px] border border-charcoal/10 bg-white p-1.5 shadow-[0_16px_40px_-12px_rgba(23,32,27,0.28)]">
             {items.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="flex min-h-11 items-center rounded-lg px-3 text-sm font-medium text-charcoal hover:bg-ivory hover:text-leaf"
+                  className="flex min-h-11 items-center rounded-[6px] px-3 text-sm font-medium text-charcoal hover:bg-ivory hover:text-leaf"
                 >
                   {item.label}
                 </Link>

@@ -2,10 +2,10 @@ import Link from "next/link"
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { isLocale, pickLocale, type Locale } from "@/lib/i18n"
-import { homeStats, pages, products, redesign, ui, whyChoose } from "@/lib/fixtures"
+import { categories, homeStats, iconStrip, pages, products, redesign, ui, whyChoose } from "@/lib/fixtures"
 import type { ImageKey } from "@/lib/images"
-import { CardRail } from "@/components/CardRail"
-import { CommodityCard, RAIL_CARD_SIZES } from "@/components/CommodityCard"
+import { CommodityCard, HOME_CARD_SIZES } from "@/components/CommodityCard"
+import { CommodityTabs } from "@/components/CommodityTabs"
 import { FeatureSplit } from "@/components/FeatureSplit"
 import { HeroFullBleed } from "@/components/HeroFullBleed"
 import { InquirySection } from "@/components/InquirySection"
@@ -41,13 +41,21 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const locale = raw as Locale
   const content = pages.home
   const v2 = redesign.home
-  const railProducts = products.filter((p) => p.kind === "product" && (p.featured || p.image))
-    .sort((a, b) => Number(Boolean(b.image)) - Number(Boolean(a.image)))
+  const commodityList = products.filter((p) => p.kind === "product")
+  // Category chips from the CMS categories; a chip only appears when it has at least one commodity.
+  const commodityTabs = categories
+    .filter((c) => commodityList.some((p) => p.category === c.slug))
+    .map((c) => ({ slug: c.slug, label: pickLocale(c.title, locale) }))
+  const drying = products.find((p) => p.kind === "service")
+  const dryingFacts = [
+    !drying?.capacityPending && drying?.capacity && { label: pickLocale(ui.capacity, locale), value: pickLocale(drying.capacity, locale) },
+    drying?.location && { label: pickLocale(ui.location, locale), value: pickLocale(drying.location, locale) },
+  ].filter(Boolean) as { label: string; value: string }[]
   const [aboutBlock, dryingBlock] = v2.features
 
   return (
     <div>
-      {/* 1 · Full-height hero: crossfading photos in the bowl of a green wave; copy on the green */}
+      {/* 1 · Full-bleed photo hero (5-slide fade), forest scrim on the left, copy in cols 1–6 */}
       <HeroFullBleed
         locale={locale}
         image={v2.heroSlides[0].image}
@@ -57,13 +65,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         titleEmphasis={pickLocale(v2.heroTitleEmphasis, locale)}
         lead={pickLocale(content.heroLead, locale)}
       >
-        <WaButton locale={locale} templateKey="home" label={pickLocale(ui.partnerWithUs, locale)} variant="wa" />
+        <WaButton locale={locale} templateKey="homeHero" label={pickLocale(ui.contactUs, locale)} variant="wa" />
         <Link href={`/${locale}/products`} className={buttonClass("on-dark")}>
           {pickLocale(ui.exploreCommodities, locale)}
         </Link>
       </HeroFullBleed>
 
-      {/* 2 · Three pillars: half on the hero green, half on cream */}
+      {/* 2 · Three pillar cards below the hero (no overlap, no curve) */}
       <PillarTiles
         id="sustainability"
         straddle
@@ -79,7 +87,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         }))}
       />
 
-      {/* 3 · Purpose band (misi) — same mist surface as the cream under the cards */}
+      {/* 3 · Misi: label + statement (cols 1–4), numbered goals (cols 6–12) */}
       <PurposeBand
         continued
         label={pickLocale(ui.ourMission, locale)}
@@ -87,7 +95,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         points={v2.missionPoints.map((p) => pickLocale(p, locale))}
       />
 
-      {/* 4 · Alternating feature: about (image left) */}
+      {/* 4 · About split (photo left) */}
       {aboutBlock && (
         <FeatureSplit
           locale={locale}
@@ -100,63 +108,73 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         />
       )}
 
-      {/* 5 · Alternating feature: drying service (image right) */}
+      {/* 5 · Drying service (copy left, photo right): process from the CMS; capacity/location only when confirmed */}
       {dryingBlock && (
         <FeatureSplit
           locale={locale}
           image={featureImages.drying}
           reverse
-          eyebrow={pickLocale(dryingBlock.eyebrow, locale)}
+          eyebrow={pickLocale(ui.ourServices, locale)}
           title={pickLocale(dryingBlock.title, locale)}
           body={pickLocale(dryingBlock.body, locale)}
+          facts={dryingFacts}
+          stepsLabel={pickLocale(ui.process, locale)}
+          steps={(drying?.processSteps ?? []).map((step) => ({
+            title: pickLocale(step.title, locale),
+            body: pickLocale(step.body, locale),
+          }))}
           link={{ href: `/${locale}/${dryingBlock.href}`, label: pickLocale(dryingBlock.linkLabel, locale) }}
         >
-          <WaButton locale={locale} templateKey="drying" label={pickLocale(ui.discussRequirements, locale)} />
+          <WaButton locale={locale} templateKey="homeDrying" label={pickLocale(ui.discussRequirements, locale)} variant="wa" />
         </FeatureSplit>
       )}
 
-      {/* 6 · Why choose us + trust stats (each half hides when empty) */}
+      {/* 6 · Why choose us (3 reasons) + stats (only real, filled ones) + descriptive icon strip */}
       <TrustSection
         locale={locale}
         title={pickLocale(ui.whyChooseUs, locale)}
         statsLabel={pickLocale(ui.keyFacts, locale)}
         points={whyChoose}
         stats={homeStats}
+        strip={iconStrip}
       />
 
-      {/* 7 · Featured commodity rail */}
-      <section className="bg-white">
+      {/* 7 · Commodities: category chips + 4:3 cards with contextual WhatsApp links */}
+      <section className="bg-white" aria-labelledby="home-commodities-title">
         <div className="site-wrap section-y">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-2xl">
               <p className="label">{pickLocale(ui.featuredCommodities, locale)}</p>
-              <h2 className="display display-h2 mt-4 text-forest">{pickLocale(pages.productsIndex.heroTitle, locale)}</h2>
+              <h2 id="home-commodities-title" className="display display-h2 mt-4 text-balance text-forest">
+                {pickLocale(pages.productsIndex.heroTitle, locale)}
+              </h2>
               <p className="mt-5 text-lg text-muted">{pickLocale(pages.productsIndex.heroLead, locale)}</p>
             </div>
             <TextLink href={`/${locale}/products`}>{pickLocale(ui.viewAllCommodities, locale)}</TextLink>
           </div>
           <div className="mt-10 lg:mt-12">
-            <CardRail
-              label={pickLocale(ui.featuredCommodities, locale)}
-              prevLabel={pickLocale(ui.previous, locale)}
-              nextLabel={pickLocale(ui.next, locale)}
-            >
-              {railProducts.map((product) => (
-                <li key={product.slug}>
-                  <CommodityCard product={product} locale={locale} sizes={RAIL_CARD_SIZES} />
-                </li>
-              ))}
-            </CardRail>
+            <CommodityTabs
+              label={pickLocale(ui.browseByCategory, locale)}
+              allLabel={pickLocale(ui.allCategories, locale)}
+              tabs={commodityTabs}
+              items={commodityList.map((product) => ({
+                key: product.slug,
+                category: product.category,
+                node: <CommodityCard product={product} locale={locale} sizes={HOME_CARD_SIZES} />,
+              }))}
+            />
           </div>
         </div>
       </section>
 
-      {/* 8 · Final WA CTA band */}
+      {/* 8 · Final WhatsApp banner: full width on forest, the most prominent CTA */}
       <InquirySection
         locale={locale}
+        eyebrow={pickLocale(ui.bannerLabel, locale)}
         title={pickLocale(content.inquiryTitle, locale)}
-        templateKey="home"
-        secondary={{ href: `/${locale}/products`, label: pickLocale(ui.viewCommodities, locale) }}
+        templateKey="homeBanner"
+        label={pickLocale(ui.bannerCta, locale)}
+        reassurance={pickLocale(ui.bannerReassure, locale)}
       />
     </div>
   )

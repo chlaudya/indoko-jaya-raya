@@ -12,7 +12,7 @@ function catalogHref(locale: Locale, category?: string, q?: string) {
 
 function chipClass(active: boolean) {
   return [
-    "inline-flex min-h-10 shrink-0 items-center rounded-full border px-4 text-sm whitespace-nowrap motion-safe:transition-colors",
+    "inline-flex min-h-10 shrink-0 items-center rounded-[6px] border px-4 text-sm whitespace-nowrap motion-safe:transition-colors",
     active
       ? "border-forest bg-forest font-medium text-white"
       : "border-charcoal/15 bg-white text-charcoal hover:border-forest hover:text-forest",
@@ -65,9 +65,9 @@ export function CommodityFilter({
               type="search"
               defaultValue={q}
               placeholder={pickLocale(ui.searchCommodities, locale)}
-              className="min-h-10 w-full rounded-full border border-charcoal/15 bg-white px-4 text-sm text-charcoal placeholder:text-muted lg:w-64"
+              className="min-h-10 w-full rounded-[6px] border border-charcoal/15 bg-white px-4 text-sm text-charcoal placeholder:text-muted lg:w-64"
             />
-            <button type="submit" className="min-h-10 shrink-0 rounded-full bg-forest px-5 text-sm font-medium text-white hover:bg-leaf">
+            <button type="submit" className="min-h-10 shrink-0 rounded-[6px] bg-forest px-5 text-sm font-medium text-white hover:bg-leaf">
               {pickLocale(ui.searchAction, locale)}
             </button>
           </form>

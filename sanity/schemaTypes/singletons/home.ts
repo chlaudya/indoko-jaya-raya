@@ -13,10 +13,19 @@ export const home = defineType({
       name: "trustPoints",
       title: "Why choose us cards",
       description:
-        "Up to 3 cards above the trust stats. Title + body in all 5 locales; empty zh/vi/hi fall back to the draft translations, then Indonesian. Leave empty to use the default (draft) copy.",
+        "Up to 3 reasons (icon key: sort, farmers, sun, grain, globe, leaf). Title + body in all 5 locales; empty zh/vi/hi fall back to the draft translations, then Indonesian. Leave empty to use the default (draft) copy. No certification, sustainability or numeric claims.",
       type: "array",
       of: [{ type: "trustPoint" }],
       validation: (Rule) => Rule.max(3),
+    }),
+    defineField({
+      name: "iconStrip",
+      title: "Icon strip (under Why choose us)",
+      description:
+        "Up to 4 short descriptive items (e.g. Petani & Pemasok, Komoditi, Pasar, Keberlanjutan) with an icon key (farmers, grain, globe, leaf, sort, sun). No numbers or claims. Leave empty to use the default (draft) copy.",
+      type: "array",
+      of: [{ type: "trustPoint" }],
+      validation: (Rule) => Rule.max(4),
     }),
     defineField({
       name: "featuredProducts",
@@ -55,7 +64,7 @@ export const home = defineType({
       name: "stats",
       title: "Trust stats (optional)",
       description:
-        "Up to 4. Every stat with a value and a label shows; with 1–3 the row re-centres, with none it is hidden. Tick 'Mock' on placeholder numbers: they still show, so replace them before launch.",
+        "Client-confirmed numbers only (never placeholders). Up to 4; every stat with a value and a label shows, with 1–3 the row re-centres, with none it is hidden.",
       type: "array",
       of: [{ type: "statItem" }],
       validation: (Rule) => Rule.max(4),

@@ -147,7 +147,7 @@ export function LanguageMenu({ locale }: { locale: Locale }) {
           setOpen((v) => !v)
         }}
         onKeyDown={onTriggerKey}
-        className="inline-flex h-11 items-center gap-1.5 rounded-full px-3 text-sm font-semibold text-charcoal hover:bg-ivory aria-expanded:bg-ivory"
+        className="inline-flex h-11 items-center gap-1.5 rounded-[6px] px-3 text-sm font-semibold text-charcoal hover:bg-ivory aria-expanded:bg-ivory"
       >
         <GlobeIcon />
         <span className="sr-only">{label} </span>
@@ -157,7 +157,7 @@ export function LanguageMenu({ locale }: { locale: Locale }) {
         id={menuId}
         hidden={!open}
         aria-label={label}
-        className="absolute top-[calc(100%+12px)] right-0 z-10 w-60 rounded-xl border border-charcoal/10 bg-white p-1.5 shadow-[0_16px_40px_-12px_rgba(23,32,27,0.28)]"
+        className="absolute top-[calc(100%+12px)] right-0 z-10 w-60 rounded-[12px] border border-charcoal/10 bg-white p-1.5 shadow-[0_16px_40px_-12px_rgba(23,32,27,0.28)]"
       >
         {LOCALES.map((code, index) => {
           const active = code === locale
@@ -173,7 +173,7 @@ export function LanguageMenu({ locale }: { locale: Locale }) {
                 aria-current={active ? "true" : undefined}
                 onKeyDown={(event) => onItemKey(event, index)}
                 onClick={() => setOpen(false)}
-                className={`flex min-h-11 items-center justify-between gap-3 rounded-lg px-3 text-sm hover:bg-ivory focus-visible:bg-ivory ${
+                className={`flex min-h-11 items-center justify-between gap-3 rounded-[6px] px-3 text-sm hover:bg-ivory focus-visible:bg-ivory ${
                   active ? "font-semibold text-forest" : "text-charcoal"
                 }`}
               >

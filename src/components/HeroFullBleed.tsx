@@ -28,66 +28,49 @@ const slidePosition = (slide: HeroSlideRef) =>
     : (slide.position ?? "center");
 
 /**
- * Home frame (Cargill-style wave), designer values on a 1440×900 grid, stretched to the hero with
- * preserveAspectRatio="none" so the curve stays continuous. Solid green (no blur) fills below the
- * wave; the lime band is the same curve lifted 45px at the ends / ~12px at the dip and sits BEHIND
- * the green, so it reads wide at the edges and thin in the middle. The photo shows in the bowl.
+ * Home hero: the photo layers fill the whole hero; the overlay holds the scrim and the copy.
+ * Height --hero-h = max(600px, min(88svh, 820px)).
  */
-const WAVE_GREEN = "M0,180 C320,190 600,560 900,570 C1100,575 1300,400 1440,190 L1440,900 L0,900 Z";
-const WAVE_LIME = "M0,135 C320,145 600,548 900,558 C1100,563 1300,355 1440,145 L1440,900 L0,900 Z";
-/** Phones/tablets (<1024px): one gentle wave under the photo (viewBox 1440×160). */
-const WAVE_GREEN_M = "M0,70 C380,30 900,150 1440,64 L1440,160 L0,160 Z";
-const WAVE_LIME_M = "M0,26 C380,-14 900,138 1440,20 L1440,160 L0,160 Z";
+const TALL_PHOTO = "absolute inset-0";
+const TALL_OVERLAY = "hero-overlay absolute inset-0 flex flex-col";
 
 /**
- * <1024px: photo band = top 55svh (+ the wave cap, which overlaps it); the green starts at 55svh
- * and fills the rest of the full-height hero. ≥1024px: photo and overlay cover the whole hero.
+ * Contrast scrim in brand forest (no curve, no lime band). ≥1024px: left → right, rgba(18,59,42) .92 at 0%,
+ * .6 at 40%, clear at 65% (designer spec), so the subject on the right stays clear. Phones / tablets: the copy sits
+ * at the bottom, so the scrim runs bottom → top instead.
  */
-const TALL_PHOTO = "absolute inset-x-0 top-0 h-[calc(55svh+3.5rem)] sm:h-[calc(55svh+5rem)] lg:h-full";
-const TALL_OVERLAY =
-  "relative mt-[calc(55svh-3.5rem)] sm:mt-[calc(55svh-5rem)] flex min-h-[calc(max(100svh,600px)-55svh+3.5rem)] sm:min-h-[calc(max(100svh,600px)-55svh+5rem)] flex-col lg:absolute lg:inset-0 lg:mt-0 lg:min-h-0";
-
-/**
- * Overlay above the photos: the wave (desktop: full hero; <1024px: a cap under the photo band)
- * and the copy, which always sits on solid green. Desktop copy is left-aligned with the floating
- * header bar (max(24px, (100% − 1280px) / 2)), headline from ~48% of the hero height, max 540px.
- * 1024–1279px: the stretched wave sits higher relative to the copy, so the copy is 440px wide,
- * the headline 44px and it starts at ~56% (keeps every line on solid green).
- */
-function WaveFrame({ children }: { children: React.ReactNode }) {
+function HeroScrim() {
   return (
     <>
-      <svg
+      <div
         aria-hidden="true"
-        focusable="false"
-        viewBox="0 0 1440 900"
-        preserveAspectRatio="none"
-        className="pointer-events-none absolute inset-0 hidden size-full lg:block"
-      >
-        <path d={WAVE_LIME} fill="#a8d27a" fillOpacity="0.7" />
-        <path d={WAVE_GREEN} fill="var(--color-hero-green)" />
-      </svg>
-      <svg
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(18,59,42,0.94)_0%,rgba(18,59,42,0.9)_max(45%,400px),rgba(18,59,42,0.5)_max(66%,500px),rgba(18,59,42,0)_max(84%,600px))] lg:hidden"
+      />
+      <div
         aria-hidden="true"
-        focusable="false"
-        viewBox="0 0 1440 160"
-        preserveAspectRatio="none"
-        className="pointer-events-none relative block h-14 w-full sm:h-20 lg:hidden"
-      >
-        <path d={WAVE_LIME_M} fill="#a8d27a" fillOpacity="0.7" />
-        <path d={WAVE_GREEN_M} fill="var(--color-hero-green)" />
-      </svg>
-      <div className="relative -mt-px flex-1 bg-hero-green px-5 pt-2 pb-10 sm:px-8 lg:absolute lg:top-[var(--hero-copy-top)] lg:left-[max(24px,calc((100%-1280px)/2))] lg:mt-0 lg:w-[min(540px,calc(100%-48px))] lg:max-xl:w-[440px] lg:flex-none lg:bg-transparent lg:p-0">
-        {children}
+        className="pointer-events-none absolute inset-0 hidden bg-[linear-gradient(90deg,rgba(18,59,42,0.92)_0%,rgba(18,59,42,0.84)_40%,rgba(18,59,42,0.68)_54%,rgba(18,59,42,0.25)_66%,rgba(18,59,42,0)_78%)] lg:block"
+      />
+    </>
+  );
+}
+
+/** Copy on the 12-col grid: cols 1–6 on desktop, bottom-aligned on phones / tablets, below the floating header. */
+function HeroCopyFrame({ children }: { children: React.ReactNode }) {
+  return (
+    <>
+      <HeroScrim />
+      <div className="site-wrap relative flex flex-1 flex-col justify-end pt-[calc(var(--header-offset)+16px)] pb-10 sm:pb-14 lg:justify-center lg:pb-8">
+        <div className="grid lg:grid-cols-12">
+          <div className="lg:col-span-6">{children}</div>
+        </div>
       </div>
     </>
   );
 }
 
 /**
- * Home ("tall") hero: full-height photo (or crossfading slides) with the copy on a solid
- * green wave (Cargill-style frame). Subpages (medium/short) use the capped photo-only PhotoHero.
- * `data-hero` lets the floating header overlay it (globals.css).
+ * Home ("tall") hero: full-bleed photo (or crossfading slides) with a forest scrim and the copy on the left.
+ * Subpages (medium/short) use the capped photo-only PhotoHero. `data-hero` lets the floating header overlay it.
  */
 /** Wrap the first occurrence of `phrase` in <em>; falls back to the plain title when it isn't found. */
 function renderEmphasis(title: string, phrase?: string) {
@@ -127,7 +110,7 @@ export function HeroFullBleed({
   titleEmphasis?: string;
   lead?: string;
   children?: React.ReactNode;
-  /** tall = Home (full height, green wave frame); medium/short = capped photo-only subpage heroes. */
+  /** tall = Home (full-bleed photo, forest scrim); medium/short = capped photo-only subpage heroes. */
   height?: "tall" | keyof typeof SUB_HEIGHTS;
   as?: "h1" | "h2";
   /** Subpage heroes only: stronger copy scrim under 768px. */
@@ -154,12 +137,12 @@ export function HeroFullBleed({
     );
   }
 
-  // White on #2f7d3e is 5.1:1; tinted/translucent white would drop below 4.5:1.
+  // White text on the forest scrim; measured ≥4.5:1 on all 5 slides (see docs/design/landing-audit-v1.md).
   const copy = (
     <div className="fade-up">
       {eyebrow && <p className="label text-white!">{eyebrow}</p>}
       <Heading
-        className={`display mt-4 max-w-[560px] text-[clamp(2rem,2.6vw,2.75rem)] leading-[1.1]! text-balance ${
+        className={`display display-h1 mt-4 max-w-[13em] leading-[1.05]! text-balance ${
           // Latin scripts: italic key phrase. zh/hi (Cormorant has no glyphs): lime, same weight, upright.
           locale === "zh" || locale === "hi" ? "[&_em]:not-italic [&_em]:text-[var(--hero-accent-cjk)]" : "[&_em]:italic"
         }`}
@@ -167,12 +150,12 @@ export function HeroFullBleed({
         {renderEmphasis(title, titleEmphasis)}
       </Heading>
       {lead && (
-        <p className="mt-4 line-clamp-3 max-w-xl text-lg leading-snug text-white">
+        <p className="mt-5 line-clamp-3 max-w-[30rem] text-base leading-relaxed text-white sm:text-lg">
           {lead}
         </p>
       )}
       {children && (
-        <div className="mt-5 flex flex-wrap items-center gap-3">{children}</div>
+        <div className="mt-7 flex flex-wrap items-center gap-3">{children}</div>
       )}
     </div>
   );
@@ -180,7 +163,7 @@ export function HeroFullBleed({
   return (
     <section
       data-hero
-      className="relative isolate flex min-h-[max(100svh,600px)] flex-col overflow-hidden bg-hero-green text-white"
+      className="hero-home relative isolate flex h-[var(--hero-h)] flex-col overflow-hidden bg-forest text-white"
     >
       {isSlider && slides ? (
         <HeroSlider
@@ -199,7 +182,7 @@ export function HeroFullBleed({
             play: pickLocale(ui.playSlideshow, locale),
           }}
         >
-          <WaveFrame>{copy}</WaveFrame>
+          <HeroCopyFrame>{copy}</HeroCopyFrame>
         </HeroSlider>
       ) : (
         <div className="relative flex flex-1 flex-col">
@@ -231,7 +214,7 @@ export function HeroFullBleed({
             )}
           </div>
           <div className={TALL_OVERLAY}>
-            <WaveFrame>{copy}</WaveFrame>
+            <HeroCopyFrame>{copy}</HeroCopyFrame>
           </div>
         </div>
       )}

@@ -30,7 +30,39 @@ export const siteSettings = {
       id: "Halo Indoco Jaya Raya, saya ingin menghubungi tim Anda.",
       en: "Hello Indoco Jaya Raya, I would like to contact your team.",
     },
+    // Home, per section: each message says where it was sent from. zh / vi / hi DRAFT.
+    homeHero: {
+      id: "Halo Indoco Jaya Raya, saya menghubungi Anda dari halaman utama website. Saya ingin mengetahui lebih lanjut tentang komoditi Anda.",
+      en: "Hello Indoco Jaya Raya, I'm contacting you from your website's home page. I'd like to learn more about your commodities.",
+      zh: "您好，Indoco Jaya Raya，我从贵公司网站首页联系您，想进一步了解贵公司的农产品。",
+      vi: "Xin chào Indoco Jaya Raya, tôi liên hệ từ trang chủ website của bạn. Tôi muốn tìm hiểu thêm về các mặt hàng nông sản của bạn.",
+      hi: "नमस्ते Indoco Jaya Raya, यह संदेश आपकी वेबसाइट के होम पेज से है। मुझे आपकी जिंसों के बारे में और जानकारी चाहिए।",
+    },
+    homeDrying: {
+      id: "Halo Indoco Jaya Raya, saya menghubungi Anda dari bagian Jasa Penjemuran di halaman utama website. Saya ingin mendiskusikan kebutuhan penjemuran komoditi saya.",
+      en: "Hello Indoco Jaya Raya, I'm contacting you from the Drying Service section on your home page. I'd like to discuss my commodity drying needs.",
+      zh: "您好，Indoco Jaya Raya，我从网站首页的晾晒服务栏目联系您，想洽谈我的农产品晾晒需求。",
+      vi: "Xin chào Indoco Jaya Raya, tôi liên hệ từ mục Dịch vụ phơi sấy trên trang chủ website. Tôi muốn trao đổi về nhu cầu phơi sấy nông sản của mình.",
+      hi: "नमस्ते Indoco Jaya Raya, यह संदेश आपकी वेबसाइट के होम पेज के 'सुखाने की सेवा' भाग से है। मुझे अपनी जिंस सुखाने की ज़रूरतों पर चर्चा करनी है।",
+    },
+    homeBanner: {
+      id: "Halo Indoco Jaya Raya, saya menghubungi Anda dari tombol WhatsApp di bagian bawah halaman utama website. Saya ingin membicarakan kebutuhan komoditi atau pasokan saya.",
+      en: "Hello Indoco Jaya Raya, I'm contacting you from the WhatsApp button at the bottom of your home page. I'd like to talk about my commodity or supply needs.",
+      zh: "您好，Indoco Jaya Raya，我通过网站首页底部的 WhatsApp 按钮联系您，想洽谈我的农产品或供应需求。",
+      vi: "Xin chào Indoco Jaya Raya, tôi liên hệ qua nút WhatsApp ở cuối trang chủ website. Tôi muốn trao đổi về nhu cầu nông sản hoặc nguồn cung của mình.",
+      hi: "नमस्ते Indoco Jaya Raya, यह संदेश आपकी वेबसाइट के होम पेज के नीचे दिए WhatsApp बटन से है। मुझे अपनी जिंस या आपूर्ति ज़रूरतों पर बात करनी है।",
+    },
+    // Commodity cards (Home + Katalog): product name in the page language.
+    productCard: {
+      id: "Halo Indoco Jaya Raya, saya tertarik dengan {{productName}} yang saya lihat di daftar komoditi website Anda. Mohon informasi lebih lanjut.",
+      en: "Hello Indoco Jaya Raya, I'm interested in {{productName}}, which I saw in the commodity list on your website. Please share more details.",
+      zh: "您好，Indoco Jaya Raya，我在贵公司网站的农产品列表中看到{{productName}}，很感兴趣，请提供更多信息。",
+      vi: "Xin chào Indoco Jaya Raya, tôi quan tâm đến {{productName}} mà tôi thấy trong danh sách nông sản trên website của bạn. Vui lòng cho tôi biết thêm thông tin.",
+      hi: "नमस्ते Indoco Jaya Raya, मैंने आपकी वेबसाइट की जिंस सूची में {{productName}} देखा और मुझे इसमें रुचि है। कृपया और जानकारी साझा करें।",
+    },
   } as Record<string, LString>,
+  /** Public email: empty until the client confirms one (the footer shows "Menyusul"). Never invent an address. */
+  email: "" as string,
   companyShortBlurb: {
     id: "Agribisnis hasil bumi lokal untuk pasar nasional dan internasional.",
     en: "Local agribusiness commodities for national and international markets.",
@@ -112,6 +144,30 @@ export const ui = {
   // DRAFT zh / vi / hi
   whyChooseUs: { id: "Mengapa memilih kami", en: "Why choose us", zh: "为何选择我们", vi: "Vì sao chọn chúng tôi", hi: "हमें क्यों चुनें" },
   footerCompany: { id: "Perusahaan", en: "Company" },
+  // Landing v1 (DRAFT zh / vi / hi)
+  ourServices: { id: "Layanan kami", en: "Our services", zh: "我们的服务", vi: "Dịch vụ của chúng tôi", hi: "हमारी सेवाएँ" },
+  askViaWhatsApp: { id: "Tanya via WhatsApp", en: "Ask on WhatsApp", zh: "通过 WhatsApp 咨询", vi: "Hỏi qua WhatsApp", hi: "WhatsApp पर पूछें" },
+  askAboutVia: {
+    id: "Tanya tentang {product} via WhatsApp",
+    en: "Ask about {product} on WhatsApp",
+    zh: "通过 WhatsApp 咨询{product}",
+    vi: "Hỏi về {product} qua WhatsApp",
+    hi: "{product} के बारे में WhatsApp पर पूछें",
+  },
+  navigation: { id: "Navigasi", en: "Navigation", zh: "导航", vi: "Điều hướng", hi: "नेविगेशन" },
+  footerCommodities: { id: "Komoditi", en: "Commodities", zh: "农产品", vi: "Nông sản", hi: "जिंसें" },
+  email: { id: "Email", en: "Email", zh: "电子邮件", vi: "Email", hi: "ईमेल" },
+  phone: { id: "Telepon", en: "Phone", zh: "电话", vi: "Điện thoại", hi: "फ़ोन" },
+  chatOnWhatsApp: { id: "Chat via WhatsApp", en: "Chat on WhatsApp", zh: "通过 WhatsApp 聊天", vi: "Trò chuyện qua WhatsApp", hi: "WhatsApp पर चैट करें" },
+  bannerLabel: { id: "Mari bekerja sama", en: "Let's work together", zh: "携手合作", vi: "Hãy cùng hợp tác", hi: "आइए साथ काम करें" },
+  bannerCta: { id: "Hubungi kami via WhatsApp", en: "Contact us on WhatsApp", zh: "通过 WhatsApp 联系我们", vi: "Liên hệ qua WhatsApp", hi: "WhatsApp पर संपर्क करें" },
+  bannerReassure: {
+    id: "Pesan Anda langsung masuk ke WhatsApp tim kami.",
+    en: "Your message goes straight to our team's WhatsApp.",
+    zh: "您的消息将直接发送到我们团队的 WhatsApp。",
+    vi: "Tin nhắn của bạn được gửi thẳng đến WhatsApp của đội ngũ chúng tôi.",
+    hi: "आपका संदेश सीधे हमारी टीम के WhatsApp पर पहुँचता है।",
+  },
   footerProducts: { id: "Produk", en: "Products" },
   footerCareers: { id: "Karier", en: "Careers" },
   footerContact: { id: "Kontak", en: "Contact" },
@@ -158,6 +214,8 @@ export type Product = {
   specs: { label: LString; value: LString }[]
   servicePagePath?: string
   capacity?: LString
+  capacityPending?: boolean
+  location?: LString
   processSteps?: { title: LString; body: LString }[]
   /** Optimised photo key (CMS: product.images[0]); placeholder when absent. */
   image?: ImageKey
@@ -257,6 +315,8 @@ export const products: Product[] = [
       { label: { id: "Kapasitas", en: "Capacity" }, value: { id: "Menyesuaikan musim", en: "Seasonal / flexible" } },
     ],
     servicePagePath: "services/drying",
+    /** The capacity text below is a pending note, not data: Home hides capacity / location until confirmed. */
+    capacityPending: true,
     capacity: {
       id: "Kapasitas dan lokasi fasilitas penjemuran dikelola di CMS — detail menyusul dari klien.",
       en: "Drying capacity and facility locations are CMS-managed — details pending client.",
@@ -448,9 +508,10 @@ export type FeatureBlock = {
   href: string
   tone: Tone
 }
-/** `isMock` marks placeholder numbers that must be replaced before launch (they still render, like CMS content). */
-export type StatItem = { value: string; label: LString; isMock?: boolean }
-export type TrustItem = { title: LString; body: LString }
+/** Client-confirmed numbers only (CMS: home.stats). */
+export type StatItem = { value: string; label: LString }
+/** `icon`: key into the inline icon set (components/TrustSection.tsx). */
+export type TrustItem = { icon?: string; title: LString; body: LString }
 
 export const redesign = {
   tagline: {
@@ -595,45 +656,41 @@ export const redesign = {
 }
 
 /**
- * Trust stats (CMS default for home.stats[]). Display rule: every filled entry (value + label) shows and the row
- * re-centres; with none filled the row is hidden. Only "7 Komoditi" is real; the rest are MOCK until the client
- * confirms numbers (tracked in docs/cms/schema-freeze-v1.md → Client pending). Label zh / vi / hi are DRAFT.
+ * Trust stats (CMS: home.stats[]). Empty: no confirmed client numbers yet, and none may be invented. Display rule:
+ * every filled entry (value + label) shows and the row re-centres; with none the row is hidden.
  */
-export const homeStats: StatItem[] = [
-  // MOCK, replace before launch
-  {
-    value: "10+",
-    label: { id: "Tahun pengalaman", en: "Years of experience", zh: "年行业经验", vi: "Năm kinh nghiệm", hi: "वर्षों का अनुभव" },
-    isMock: true,
-  },
-  // MOCK, replace before launch
-  {
-    value: "500+",
-    label: { id: "Mitra petani", en: "Farmer partners", zh: "合作农户", vi: "Nông dân đối tác", hi: "किसान साझेदार" },
-    isMock: true,
-  },
-  // MOCK, replace before launch
-  {
-    value: "1.000+",
-    label: { id: "Ton per tahun", en: "Tonnes a year", zh: "吨/年", vi: "Tấn mỗi năm", hi: "टन प्रति वर्ष" },
-    isMock: true,
-  },
-  // Real: the 7 catalog commodities.
-  { value: "7", label: { id: "Komoditi", en: "Commodities", zh: "种农产品", vi: "Mặt hàng nông sản", hi: "जिंसें" } },
-]
+export const homeStats: StatItem[] = []
 
 /**
- * "Why choose us" cards (CMS default for home.trustPoints[]). Copy drafted from the brief's mission; all 5 locales
- * are DRAFT pending client review (docs/i18n-draft-strings.md). No certification claims.
+ * "Why choose us" cards (CMS default for home.trustPoints[]): the PM's 3 reasons. All 5 locales are DRAFT pending
+ * client review (docs/i18n-draft-strings.md). No certification, sustainability or numeric claims.
  */
 export const whyChoose: TrustItem[] = [
   {
+    icon: "sort",
     title: {
-      id: "Langsung dari petani lokal",
-      en: "Direct from local farmers",
-      zh: "直接来自本地农户",
-      vi: "Trực tiếp từ nông dân địa phương",
-      hi: "सीधे स्थानीय किसानों से",
+      id: "Sortir kualitas sebelum pengiriman",
+      en: "Quality sorting before shipment",
+      zh: "发货前品质分拣",
+      vi: "Phân loại chất lượng trước khi giao hàng",
+      hi: "शिपमेंट से पहले गुणवत्ता छँटाई",
+    },
+    body: {
+      id: "Komoditi disortir sebelum dikirim agar sesuai kebutuhan pembeli.",
+      en: "Commodities are sorted before they ship, to match what buyers need.",
+      zh: "农产品在发货前经过分拣，以符合买家需求。",
+      vi: "Nông sản được phân loại trước khi giao để phù hợp với nhu cầu người mua.",
+      hi: "भेजने से पहले जिंसों की छँटाई की जाती है, ताकि वे ख़रीदार की ज़रूरत के अनुरूप हों।",
+    },
+  },
+  {
+    icon: "farmers",
+    title: {
+      id: "Jaringan langsung petani lokal",
+      en: "A direct network of local farmers",
+      zh: "直连本地农户网络",
+      vi: "Mạng lưới nông dân địa phương trực tiếp",
+      hi: "स्थानीय किसानों का सीधा नेटवर्क",
     },
     body: {
       id: "Kami membeli langsung dari petani lokal dengan harga yang kompetitif.",
@@ -644,35 +701,95 @@ export const whyChoose: TrustItem[] = [
     },
   },
   {
+    icon: "sun",
     title: {
-      id: "Kualitas di setiap tahap",
-      en: "Quality at every step",
-      zh: "每个环节都重品质",
-      vi: "Chất lượng ở mọi khâu",
-      hi: "हर चरण में गुणवत्ता",
+      id: "Jasa penjemuran sendiri",
+      en: "In-house drying service",
+      zh: "自有晾晒服务",
+      vi: "Dịch vụ phơi sấy riêng",
+      hi: "अपनी सुखाने की सेवा",
     },
     body: {
-      id: "Kualitas dan keberlanjutan kami jaga di setiap tahap, dari penjemuran hingga pengiriman.",
-      en: "Quality and sustainability at every step, from drying to shipping.",
-      zh: "从晾晒到发货，我们在每个环节坚持品质与可持续。",
-      vi: "Chúng tôi giữ vững chất lượng và tính bền vững ở mọi khâu, từ phơi sấy đến giao hàng.",
-      hi: "सुखाने से लेकर शिपिंग तक, हम हर चरण में गुणवत्ता और स्थिरता बनाए रखते हैं।",
+      id: "Jasa Penjemuran kami membantu menjaga kualitas hasil panen sebelum distribusi.",
+      en: "Our drying service helps preserve harvest quality before distribution.",
+      zh: "我们的晾晒服务帮助在分销前保持收成品质。",
+      vi: "Dịch vụ phơi sấy của chúng tôi giúp giữ chất lượng nông sản trước khi phân phối.",
+      hi: "हमारी सुखाने की सेवा वितरण से पहले फ़सल की गुणवत्ता बनाए रखने में मदद करती है।",
+    },
+  },
+]
+
+/**
+ * Icon strip under "Why choose us" (CMS default for home.iconStrip[]), shown in place of numeric stats. Descriptive
+ * only, no numbers or claims. All 5 locales DRAFT.
+ */
+export const iconStrip: TrustItem[] = [
+  {
+    icon: "farmers",
+    title: {
+      id: "Petani & Pemasok",
+      en: "Farmers & suppliers",
+      zh: "农户与供应商",
+      vi: "Nông dân & nhà cung cấp",
+      hi: "किसान और आपूर्तिकर्ता",
+    },
+    body: {
+      id: "Bekerja sama dengan petani dan pemasok lokal.",
+      en: "Working with local farmers and suppliers.",
+      zh: "与本地农户和供应商合作。",
+      vi: "Hợp tác với nông dân và nhà cung cấp địa phương.",
+      hi: "स्थानीय किसानों और आपूर्तिकर्ताओं के साथ काम।",
     },
   },
   {
+    icon: "grain",
     title: {
-      id: "Untuk pembeli nasional dan internasional",
-      en: "Built for national and international buyers",
-      zh: "服务国内与国际买家",
-      vi: "Dành cho người mua trong nước và quốc tế",
-      hi: "राष्ट्रीय और अंतरराष्ट्रीय ख़रीदारों के लिए",
+      id: "Komoditi",
+      en: "Commodities",
+      zh: "农产品",
+      vi: "Nông sản",
+      hi: "जिंसें",
     },
     body: {
-      id: "Melayani pembeli nasional dan internasional, dengan kontak cepat lewat WhatsApp.",
-      en: "Serving national and international buyers, with fast contact on WhatsApp.",
-      zh: "服务国内与国际买家，可通过 WhatsApp 快速联系。",
-      vi: "Phục vụ người mua trong nước và quốc tế, liên hệ nhanh qua WhatsApp.",
-      hi: "राष्ट्रीय और अंतरराष्ट्रीय ख़रीदारों की सेवा, WhatsApp पर तुरंत संपर्क के साथ।",
+      id: "Kacang-kacangan, umbi, jagung, dan kopi dari Indonesia.",
+      en: "Nuts and legumes, tubers, corn and coffee from Indonesia.",
+      zh: "来自印度尼西亚的坚果与豆类、块茎、玉米和咖啡。",
+      vi: "Các loại hạt và đậu, củ, ngô và cà phê từ Indonesia.",
+      hi: "इंडोनेशिया से मेवे और दालें, कंद, मक्का और कॉफ़ी।",
+    },
+  },
+  {
+    icon: "globe",
+    title: {
+      id: "Pasar",
+      en: "Markets",
+      zh: "市场",
+      vi: "Thị trường",
+      hi: "बाज़ार",
+    },
+    body: {
+      id: "Melayani pembeli nasional dan internasional.",
+      en: "Serving national and international buyers.",
+      zh: "服务国内与国际买家。",
+      vi: "Phục vụ người mua trong nước và quốc tế.",
+      hi: "राष्ट्रीय और अंतरराष्ट्रीय ख़रीदारों की सेवा।",
+    },
+  },
+  {
+    icon: "leaf",
+    title: {
+      id: "Keberlanjutan",
+      en: "Sustainability",
+      zh: "可持续发展",
+      vi: "Bền vững",
+      hi: "स्थिरता",
+    },
+    body: {
+      id: "Tumbuh bersama petani dan karyawan.",
+      en: "Growing together with farmers and employees.",
+      zh: "与农户和员工共同成长。",
+      vi: "Cùng phát triển với nông dân và người lao động.",
+      hi: "किसानों और कर्मचारियों के साथ मिलकर आगे बढ़ना।",
     },
   },
 ]

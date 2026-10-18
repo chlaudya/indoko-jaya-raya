@@ -29,12 +29,17 @@ Mapped 1:1 from `docs/design/wireframes-v1.md`.
 - `settings.applyMode`: `wa` | `form` | `both`
 
 ## Client pending
-- Replace mock trust stats (`home.stats`: 3 of 4 defaults are `isMock: true`; they render until replaced)
+- **Launch blocker: WhatsApp number.** `settings.waTargets` still holds the placeholder 6281234567890; every WhatsApp button reads it
+- Supply real trust stats (optional; `home.stats`, row hidden until filled, no defaults ship)
+- Confirm public phone and email (`contactPage.email`; the phone is hidden while `phonePending`): the footer shows "Menyusul" until then
+- Full address (footer and Kontak show "Indonesia — alamat lengkap menyusul dari klien.")
+- Asam (Kupas) and Ubi Porang photos (placeholders ship)
 - Approve draft zh / vi / hi copy: see `docs/i18n-draft-strings.md`
 
 ## P0
 - `settings.waTargets` admin-configurable
-- `settings.waTemplates` per-CTA context (`{{productName}}`, `{{jobTitle}}`)
+- `settings.waTemplates` per-CTA context (`{{productName}}`, `{{jobTitle}}`); Home uses `homeHero`, `homeDrying`, `homeBanner`, `productCard`
+- `home.iconStrip` (≤4 `trustPoint`, icon key + title/body, descriptive only) under Why choose us; Home commodity tabs come from `category` documents that have at least one product
 
 ## Launch catalog seed (8)
 1. Kacang Mete · 2. Asam (Kupas) · 3. Kacang Tanah · 4. Kacang Hijau · 5. Ubi Porang · 6. Jagung (Kupas) · 7. Kopi · 8. Jasa Penjemuran Komoditi (`kind: service`, path `services/drying`)

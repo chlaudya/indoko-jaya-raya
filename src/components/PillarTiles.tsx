@@ -20,34 +20,31 @@ export function PillarTiles({
   title?: string
   items: PillarTileItem[]
   id?: string
-  /**
-   * Home, right under the hero: the hero green carries on behind the top half of the cards, then a
-   * cream (mist) curve cuts across so the cards sit half on green, half on cream (Cargill-style).
-   */
+  /** Home, right under the hero: white cards (4:3 photo, title, one line, one → link) on ivory. No curve, no overlap. */
   straddle?: boolean
 }) {
-  // Home: white cards (2:1 photo on top, then label, title and Discover on white), ~25% shorter than the
-  // 4:5 tiles, so they can straddle the green → cream curve. Text sizes match the overlaid tiles.
+  // Home: white cards, 8px radius + hairline; photo 4:3 with a 12px top radius (DESIGN.md §11); one → link.
   const whiteCards = (
     <ul className="grid gap-6 md:grid-cols-3">
       {items.map((item) => (
         <li key={item.key} className="reveal">
           <Link
             href={item.href}
-            className="group block overflow-hidden rounded-[8px] bg-white shadow-[0_18px_40px_-24px_rgba(13,30,22,0.45)]"
+            className="group flex h-full flex-col rounded-[8px] rounded-t-[12px] border border-hairline bg-white motion-safe:transition-colors motion-safe:duration-200 hover:border-hover-line"
           >
             <Photo
               image={item.image}
               locale={locale}
-              aspect="aspect-[2/1]"
+              aspect="aspect-[4/3]"
               rounded={false}
+              className="rounded-t-[12px]"
               zoom
-              sizes="(min-width: 1376px) 410px, (min-width: 768px) 31vw, 100vw"
+              sizes="(min-width: 1440px) 411px, (min-width: 768px) 31vw, 100vw"
             />
-            <div className="p-6 lg:p-7">
-              <p className="label text-leaf">{label}</p>
-              <h3 className="display display-h3 mt-2 text-[clamp(1.75rem,2.6vw,2.25rem)] text-forest">{item.title}</h3>
-              <span className="text-link mt-1 text-leaf">
+            <div className="flex flex-1 flex-col p-6 lg:p-7">
+              <h3 className="display display-h3 text-forest">{item.title}</h3>
+              <p className="mt-2 line-clamp-2 text-[0.9375rem] leading-relaxed text-muted">{item.body}</p>
+              <span className="text-link mt-auto pt-2 text-leaf">
                 <span className="group-hover:underline">{pickLocale(ui.discover, locale)}</span>
                 <span aria-hidden="true" className="arrow">→</span>
               </span>
@@ -88,24 +85,13 @@ export function PillarTiles({
 
   if (straddle) {
     return (
-      <section id={id} className="relative bg-mist lg:mt-[calc(-1*var(--pillar-pull))]">
-        {/* Heading kept for screen readers / outline; visually the cards read as the hero's continuation. */}
+      <section id={id} className="bg-ivory">
+        {/* Heading kept for screen readers / outline; visually the cards follow straight on from the hero. */}
         <div className="sr-only">
           <p>{label}</p>
           {title && <h2>{title}</h2>}
         </div>
-        <div aria-hidden="true" className="absolute inset-x-0 -top-px h-[calc(var(--pillar-split)+1px)] bg-hero-green" />
-        <svg
-          aria-hidden="true"
-          focusable="false"
-          viewBox="0 0 1440 160"
-          preserveAspectRatio="none"
-          className="absolute inset-x-0 top-[var(--pillar-split)] block h-[var(--band-curve)] w-full"
-        >
-          {/* Green bottom edge: deep on the left, cream sweeping up toward the right. */}
-          <path d="M0,0 H1440 V8 C1080,40 560,170 0,130 Z" fill="var(--color-hero-green)" />
-        </svg>
-        <div className="site-wrap relative pt-2 pb-16 lg:pb-24">{whiteCards}</div>
+        <div className="site-wrap py-16 lg:py-20">{whiteCards}</div>
       </section>
     )
   }

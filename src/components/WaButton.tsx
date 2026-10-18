@@ -1,4 +1,4 @@
-import { buildWhatsAppUrl } from "@/lib/whatsapp"
+import { buildWhatsAppUrl, type TemplateKey } from "@/lib/whatsapp"
 import type { Locale } from "@/lib/i18n"
 
 export type ButtonVariant = "primary" | "secondary" | "on-dark" | "inverse" | "wa" | "wa-secondary" | "wa-on-dark"
@@ -16,10 +16,13 @@ const variants: Record<ButtonVariant, string> = {
   "wa-on-dark": "border border-white/70 bg-transparent text-white hover:bg-white hover:text-forest",
 }
 
-export function buttonClass(variant: ButtonVariant = "primary", className = "") {
+/** Buttons: 8px radius (DESIGN.md §11; no pills). `lg` = 56px, for the single most prominent CTA (Home banner). */
+export function buttonClass(variant: ButtonVariant = "primary", className = "", size: "md" | "lg" = "md") {
   return [
-    "inline-flex min-h-12 items-center justify-center gap-2 px-6 text-sm font-semibold",
-    "rounded-full motion-safe:transition-colors motion-safe:duration-200",
+    size === "lg"
+      ? "inline-flex min-h-14 items-center justify-center gap-2.5 px-8 text-base font-semibold"
+      : "inline-flex min-h-12 items-center justify-center gap-2 px-6 text-sm font-semibold",
+    "rounded-[8px] motion-safe:transition-colors motion-safe:duration-200",
     variants[variant],
     className,
   ]
@@ -42,18 +45,23 @@ export function WaButton({
   label,
   className = "",
   variant = "wa-secondary",
+  size = "md",
+  ariaLabel,
 }: {
   locale: Locale
-  templateKey: "home" | "product" | "drying" | "career" | "contact"
+  templateKey: TemplateKey
   tokens?: Record<string, string>
   label: string
   className?: string
   variant?: ButtonVariant
+  size?: "md" | "lg"
+  /** Fuller accessible name when the visible label is short (e.g. product cards). */
+  ariaLabel?: string
 }) {
   const href = buildWhatsAppUrl({ locale, templateKey, tokens })
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className={buttonClass(variant, className)}>
-      <WhatsAppIcon />
+    <a href={href} target="_blank" rel="noopener noreferrer" aria-label={ariaLabel} className={buttonClass(variant, className, size)}>
+      <WhatsAppIcon className={size === "lg" ? "size-5" : "size-4"} />
       {label}
     </a>
   )
