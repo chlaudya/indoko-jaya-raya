@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation"
-import { isLocale, type Locale } from "@/lib/i18n"
+import { isLocale, pickLocale, type Locale } from "@/lib/i18n"
+import { ui } from "@/lib/fixtures"
 import { SiteHeader } from "@/components/SiteHeader"
 import { SiteFooter } from "@/components/SiteFooter"
 
@@ -15,8 +16,14 @@ export default async function LocaleLayout({
   const locale = raw as Locale
   return (
     <>
+      <a
+        href="#content"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-ivory focus:px-4 focus:py-3 focus:text-forest"
+      >
+        {pickLocale(ui.skipToContent, locale)}
+      </a>
       <SiteHeader locale={locale} />
-      <main className="mx-auto min-h-[70vh] max-w-6xl px-4 py-8">{children}</main>
+      <main id="content">{children}</main>
       <SiteFooter locale={locale} />
     </>
   )

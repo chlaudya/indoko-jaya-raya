@@ -1,39 +1,103 @@
 import Link from "next/link"
 import { pickLocale, type Locale } from "@/lib/i18n"
-import { nav, siteSettings } from "@/lib/fixtures"
+import { categories, siteSettings, ui, waDisplayNumber } from "@/lib/fixtures"
 import { buildWhatsAppUrl } from "@/lib/whatsapp"
+import { LanguageSwitcher } from "./LanguageSwitcher"
+import { WhatsAppIcon, buttonClass } from "./WaButton"
+
+type Col = { title: string; links: { href: string; label: string; external?: boolean }[] }
 
 export function SiteFooter({ locale }: { locale: Locale }) {
   const wa = buildWhatsAppUrl({ locale, templateKey: "contact" })
+  const t = (v: Parameters<typeof pickLocale>[0]) => pickLocale(v, locale)
+  const cols: Col[] = [
+    {
+      title: t(ui.footerCompany),
+      links: [
+        { href: `/${locale}/about`, label: t(ui.aboutUs) },
+        { href: `/${locale}/company`, label: t(ui.companyProfile) },
+        { href: `/${locale}#sustainability`, label: t(ui.sustainability) },
+        { href: `/${locale}/services/drying`, label: t(ui.commodityServices) },
+      ],
+    },
+    {
+      title: t(ui.footerProducts),
+      links: [
+        { href: `/${locale}/products`, label: t(ui.viewAllCommodities) },
+        ...categories
+          .filter((c) => c.slug !== "layanan")
+          .map((c) => ({ href: `/${locale}/products?category=${c.slug}`, label: t(c.title) })),
+      ],
+    },
+    {
+      title: t(ui.footerCareers),
+      links: [
+        { href: `/${locale}/careers`, label: t(ui.openPositions) },
+        { href: `/${locale}/careers`, label: t(ui.growWithUs) },
+      ],
+    },
+    {
+      title: t(ui.footerContact),
+      links: [
+        { href: `/${locale}/contact`, label: t(ui.contactTeam) },
+        { href: wa, label: `WhatsApp ${waDisplayNumber()}`, external: true },
+      ],
+    },
+  ]
+
   return (
-    <footer className="mt-16 border-t border-black/10 bg-black text-white">
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-3">
-        <div>
-          <p className="font-semibold">PT Indoco Jaya Raya</p>
-          <p className="mt-2 text-sm opacity-80">{pickLocale(siteSettings.companyShortBlurb, locale)}</p>
+    <footer className="bg-forest text-ivory">
+      <div className="site-wrap pt-16 pb-10 lg:pt-24">
+        <div className="grid gap-10 border-b border-white/15 pb-12 lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <p className="text-sm font-semibold tracking-[0.16em] uppercase">PT Indoco Jaya Raya</p>
+            <p className="display display-h3 mt-5 max-w-md text-white">{t(siteSettings.companyShortBlurb)}</p>
+          </div>
+          <div className="lg:col-span-4 lg:col-start-9">
+            <p className="label text-soft-sage!">{t(ui.address)}</p>
+            <p className="mt-3 text-sm leading-relaxed text-ivory/75">{t(siteSettings.address)}</p>
+            <a href={wa} target="_blank" rel="noopener noreferrer" className={`${buttonClass("wa")} mt-6`}>
+              <WhatsAppIcon />
+              {t(ui.requestInquiry)}
+            </a>
+          </div>
         </div>
-        <div className="text-sm">
-          <p className="mb-2 font-semibold">Links</p>
-          <ul className="space-y-1 opacity-90">
-            {nav.map((item) => (
-              <li key={item.href || "home"}>
-                <Link href={`/${locale}${item.href ? `/${item.href}` : ""}`}>
-                  {pickLocale(item.label, locale)}
-                </Link>
-              </li>
-            ))}
-          </ul>
+
+        <nav aria-label="Footer" className="grid grid-cols-2 gap-x-6 gap-y-10 py-12 md:grid-cols-4">
+          {cols.map((col) => (
+            <div key={col.title}>
+              <h2 className="label text-soft-sage!">{col.title}</h2>
+              <ul className="mt-4 space-y-1">
+                {col.links.map((link) => (
+                  <li key={link.label}>
+                    {link.external ? (
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex min-h-10 items-center text-sm text-ivory/80 hover:text-white hover:underline hover:underline-offset-4"
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        className="inline-flex min-h-10 items-center text-sm text-ivory/80 hover:text-white hover:underline hover:underline-offset-4"
+                      >
+                        {link.label}
+                      </Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </nav>
+
+        <div className="flex flex-col gap-4 border-t border-white/15 pt-6 md:flex-row md:items-center md:justify-between">
+          <LanguageSwitcher locale={locale} />
+          <p className="text-xs text-ivory/55">© {new Date().getFullYear()} PT Indoco Jaya Raya · APEL Group branding</p>
         </div>
-        <div className="text-sm">
-          <p className="mb-2 font-semibold">Kontak</p>
-          <p className="opacity-80">{pickLocale(siteSettings.address, locale)}</p>
-          <a href={wa} className="mt-3 inline-block rounded bg-[#25D366] px-3 py-2 font-semibold text-black">
-            WhatsApp
-          </a>
-        </div>
-      </div>
-      <div className="border-t border-white/10 py-4 text-center text-xs opacity-60">
-        © {new Date().getFullYear()} PT Indoco Jaya Raya · APEL Group branding
       </div>
     </footer>
   )

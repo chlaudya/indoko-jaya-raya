@@ -27,6 +27,11 @@ export const home = defineType({
     defineField({ name: "aboutTeaserTitle", type: "localeString" }),
     defineField({ name: "aboutTeaserBody", type: "localeText" }),
     defineField({ name: "finalCta", type: "waCta" }),
+    // --- Redesign v2 (Cargill-inspired) — all optional, additive only ---
+    defineField({ name: "heroVideo", title: "Hero video (optional, muted loop)", type: "file", options: { accept: "video/mp4,video/webm" } }),
+    defineField({ name: "pillars", title: "Pillar tiles (optional)", type: "array", of: [{ type: "pillarTile" }], validation: (Rule) => Rule.max(3) }),
+    defineField({ name: "stats", title: "Stats strip (optional — confirmed numbers only)", type: "array", of: [{ type: "statItem" }], validation: (Rule) => Rule.max(4) }),
+    defineField({ name: "featureBlocks", title: "Feature blocks (optional)", type: "array", of: [{ type: "featureBlock" }] }),
     defineField({ name: "seo", type: "seo" }),
   ],
   preview: {

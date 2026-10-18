@@ -1,4 +1,5 @@
 import type { Locale } from "./i18n"
+import type { ImageKey } from "./images"
 
 type LString = Partial<Record<Locale, string>>
 
@@ -39,14 +40,92 @@ export const siteSettings = {
 }
 
 export const nav = [
-  { href: "", label: { id: "Beranda", en: "Home" } },
-  { href: "about", label: { id: "Tentang Kami", en: "About" } },
-  { href: "company", label: { id: "Profil Perusahaan", en: "Company" } },
-  { href: "products", label: { id: "Produk", en: "Products" } },
-  { href: "services/drying", label: { id: "Jasa Penjemuran", en: "Drying Service" } },
+  { href: "about", label: { id: "Perusahaan", en: "Company" } },
+  { href: "products", label: { id: "Komoditi", en: "Commodities" } },
+  { href: "services/drying", label: { id: "Layanan", en: "Services" } },
+  { href: "#sustainability", label: { id: "Keberlanjutan", en: "Sustainability" } },
   { href: "careers", label: { id: "Karier", en: "Careers" } },
   { href: "contact", label: { id: "Kontak", en: "Contact" } },
 ]
+
+export const ui = {
+  requestInquiry: { id: "Ajukan pertanyaan", en: "Request an inquiry" },
+  exploreCommodities: { id: "Jelajahi komoditi", en: "Explore commodities" },
+  partnerWithUs: { id: "Bermitra dengan kami", en: "Partner with us" },
+  viewCommodity: { id: "Lihat komoditi", en: "View commodity" },
+  viewService: { id: "Lihat layanan", en: "View service" },
+  askAbout: { id: "Tanya tentang", en: "Ask about" },
+  discussRequirements: { id: "Diskusikan kebutuhan Anda", en: "Discuss your requirements" },
+  allCategories: { id: "Semua", en: "All" },
+  searchCommodities: { id: "Cari komoditi", en: "Search commodities" },
+  searchAction: { id: "Cari", en: "Search" },
+  noMatches: { id: "Tidak ada komoditi yang sesuai.", en: "No commodities match." },
+  specifications: { id: "Spesifikasi", en: "Specifications" },
+  overview: { id: "Ikhtisar produk", en: "Product overview" },
+  related: { id: "Komoditi lain", en: "Other commodities" },
+  applyWhatsApp: { id: "Lamar via WhatsApp", en: "Apply via WhatsApp" },
+  photographyPending: { id: "Fotografi menyusul", en: "Photography pending" },
+  menu: { id: "Menu", en: "Menu" },
+  close: { id: "Tutup", en: "Close" },
+  home: { id: "Beranda", en: "Home" },
+  companyProfile: { id: "Profil perusahaan", en: "Company profile" },
+  ourStory: { id: "Cerita kami", en: "Our story" },
+  vision: { id: "Visi", en: "Vision" },
+  mission: { id: "Misi", en: "Mission" },
+  address: { id: "Alamat", en: "Address" },
+  capacity: { id: "Kapasitas", en: "Capacity" },
+  mapPending: { id: "Peta menyusul", en: "Map pending" },
+  openPositions: { id: "Posisi terbuka", en: "Open positions" },
+  location: { id: "Lokasi", en: "Location" },
+  pendingConfirmation: { id: "Menunggu konfirmasi data.", en: "Pending confirmed data." },
+  skipToContent: { id: "Lewati ke konten", en: "Skip to content" },
+  language: { id: "Bahasa", en: "Language" },
+  ourCommodities: { id: "Komoditi kami", en: "Our commodities" },
+  whyPartner: { id: "Mengapa bermitra", en: "Why partner with Indoco" },
+  fromIndonesia: { id: "Dari Indonesia", en: "From Indonesia" },
+  commodityServices: { id: "Layanan komoditi", en: "Commodity services" },
+  careersLabel: { id: "Karier", en: "Careers" },
+  viewPositions: { id: "Lihat posisi", en: "View positions" },
+  inquiry: { id: "Pertanyaan", en: "Inquiry" },
+  cvFormPending: { id: "Form unggah CV menyusul", en: "CV form pending" },
+  contactTeam: { id: "Hubungi tim kami", en: "Talk with our team" },
+  contactUs: { id: "Hubungi kami", en: "Contact us" },
+  watchProfile: { id: "Lihat profil", en: "View profile" },
+  productsMenu: { id: "Produk", en: "Products" },
+  browseByCategory: { id: "Telusuri kategori", en: "Browse by category" },
+  featuredCommodities: { id: "Komoditi unggulan", en: "Featured commodities" },
+  viewAllCommodities: { id: "Lihat semua komoditi", en: "View all commodities" },
+  openMenu: { id: "Buka menu", en: "Open menu" },
+  closeMenu: { id: "Tutup menu", en: "Close menu" },
+  ourMission: { id: "Misi kami", en: "Our mission" },
+  keyFacts: { id: "Sekilas", en: "At a glance" },
+  footerCompany: { id: "Perusahaan", en: "Company" },
+  footerProducts: { id: "Produk", en: "Products" },
+  footerCareers: { id: "Karier", en: "Careers" },
+  footerContact: { id: "Kontak", en: "Contact" },
+  aboutUs: { id: "Tentang kami", en: "About us" },
+  whatsapp: { id: "WhatsApp", en: "WhatsApp" },
+  previous: { id: "Sebelumnya", en: "Previous" },
+  next: { id: "Berikutnya", en: "Next" },
+  identity: { id: "Identitas", en: "Identity" },
+  legal: { id: "Legalitas", en: "Legal" },
+  management: { id: "Manajemen", en: "Management" },
+  facilities: { id: "Fasilitas", en: "Facilities" },
+  certifications: { id: "Sertifikasi", en: "Certifications" },
+  gallery: { id: "Galeri", en: "Gallery" },
+  process: { id: "Proses", en: "Process" },
+  ourService: { id: "Layanan", en: "Service" },
+  growWithUs: { id: "Tumbuh bersama kami", en: "Grow with us" },
+  culture: { id: "Budaya kerja", en: "Our culture" },
+  contactDetails: { id: "Detail kontak", en: "Contact details" },
+  pending: { id: "Menyusul", en: "Pending" },
+  strengths: { id: "Keunggulan", en: "Strengths" },
+  visionMission: { id: "Visi & misi", en: "Vision & mission" },
+  discover: { id: "Selengkapnya", en: "Discover" },
+  sustainability: { id: "Keberlanjutan", en: "Sustainability" },
+  storageWarehouse: { id: "Gudang penyimpanan", en: "Storage warehouse" },
+  commodityProcessing: { id: "Pengolahan komoditi", en: "Commodity processing" },
+}
 
 export const categories = [
   { slug: "kacang-kacangan", title: { id: "Kacang-kacangan", en: "Nuts & legumes" } },
@@ -68,11 +147,15 @@ export type Product = {
   servicePagePath?: string
   capacity?: LString
   processSteps?: { title: LString; body: LString }[]
+  /** Optimised photo key (CMS: product.images[0]); placeholder when absent. */
+  image?: ImageKey
+  gallery?: ImageKey[]
 }
 
 export const products: Product[] = [
   {
     slug: "kacang-mete",
+    image: "cardCashew",
     kind: "product",
     category: "kacang-kacangan",
     featured: true,
@@ -96,6 +179,7 @@ export const products: Product[] = [
   },
   {
     slug: "kacang-tanah",
+    image: "cardPeanuts",
     kind: "product",
     category: "kacang-kacangan",
     name: { id: "Kacang Tanah", en: "Peanut" },
@@ -124,6 +208,7 @@ export const products: Product[] = [
   },
   {
     slug: "jagung-kupas",
+    image: "cardCorn",
     kind: "product",
     category: "jagung",
     name: { id: "Jagung (Kupas)", en: "Corn (Shelled)" },
@@ -143,6 +228,7 @@ export const products: Product[] = [
   },
   {
     slug: "jasa-penjemuran-komoditi",
+    image: "cardDrying",
     kind: "service",
     category: "layanan",
     featured: true,
@@ -192,26 +278,85 @@ export const jobs = [
 
 export const pages = {
   home: {
-    heroEyebrow: { id: "PT Indoco Jaya Raya", en: "PT Indoco Jaya Raya" },
-    heroTitle: {
-      id: "Agribisnis hasil bumi lokal untuk pasar dunia",
-      en: "Local agribusiness commodities for global markets",
-    },
+    heroEyebrow: { id: "Indoco Jaya Raya", en: "Indoco Jaya Raya" },
+    heroLine1: { id: "Berakar di Indonesia.", en: "Rooted in Indonesia." },
+    heroLine2: { id: "Terhubung ke dunia.", en: "Connected to the World." },
     heroLead: {
-      id: "Company profile dan e-katalog komoditi — hubungi kami via WhatsApp.",
-      en: "Company profile and commodity e-catalog — reach us on WhatsApp.",
+      id: "Komoditi pertanian Indonesia untuk pembeli dan mitra di pasar nasional dan internasional.",
+      en: "Indonesian agricultural commodities for buyers and partners in national and international markets.",
     },
-    trustPoints: [
-      { title: { id: "Kualitas", en: "Quality" }, body: { id: "Standar pasokan yang konsisten.", en: "Consistent supply standards." } },
-      { title: { id: "Jaringan petani", en: "Farmer network" }, body: { id: "Penyerapan hasil lokal kompetitif.", en: "Competitive local offtake." } },
-      { title: { id: "Siap ekspor", en: "Export ready" }, body: { id: "Mendukung ekspansi internasional.", en: "Built for international growth." } },
+    introLabel: { id: "Perusahaan", en: "The company" },
+    introStatement: {
+      id: "Hasil pertanian lokal, disiapkan untuk pasar global.",
+      en: "Local agricultural products, prepared for global markets.",
+    },
+    introBody: {
+      id: "PT Indoco Jaya Raya menyerap dan memperdagangkan hasil pertanian lokal.",
+      en: "PT Indoco Jaya Raya aggregates and trades local agricultural produce.",
+    },
+    pillars: [
+      {
+        title: { id: "Penyerapan lokal", en: "Local sourcing" },
+        body: { id: "Penyerapan hasil lokal secara kompetitif.", en: "Competitive offtake of local harvests." },
+      },
+      {
+        title: { id: "Fokus kualitas", en: "Quality focus" },
+        body: { id: "Standar pasokan yang konsisten.", en: "Consistent supply standards." },
+      },
+      {
+        title: { id: "Pasokan andal", en: "Reliable supply" },
+        body: { id: "Pasokan mengikuti ketersediaan yang terkonfirmasi.", en: "Supply follows confirmed availability." },
+      },
+      {
+        title: { id: "Jangkauan global", en: "Global reach" },
+        body: { id: "Mendukung pertumbuhan pasar internasional.", en: "Built for international market growth." },
+      },
     ],
+    chainLabel: { id: "Jalur pasok", en: "Supply path" },
+    chainTitle: {
+      id: "Dari pertanian Indonesia ke pembeli internasional.",
+      en: "From Indonesian agriculture to international buyers.",
+    },
+    chain: [
+      { title: { id: "Indonesia", en: "Indonesia" } },
+      { title: { id: "Penyerapan", en: "Sourcing" } },
+      { title: { id: "Pengolahan", en: "Processing" } },
+      { title: { id: "Kualitas", en: "Quality" } },
+      { title: { id: "Distribusi", en: "Distribution" } },
+      { title: { id: "Pasar global", en: "Global markets" } },
+    ],
+    sustainabilityLabel: { id: "Keberlanjutan", en: "Sustainability" },
+    sustainabilityTitle: {
+      id: "Pertumbuhan yang menjaga petani dan karyawan.",
+      en: "Growth that keeps farmers and employees in view.",
+    },
+    sustainabilityBody: {
+      id: "Menyerap hasil lokal secara kompetitif, mensejahterakan karyawan dan petani, serta memperkenalkan produk lokal ke pasar yang lebih luas.",
+      en: "Competitive local offtake, employee and farmer welfare, and introducing local products to wider markets.",
+    },
+    facilitiesLabel: { id: "Fasilitas", en: "Facilities" },
+    facilitiesTitle: {
+      id: "Profil dan fasilitas perusahaan.",
+      en: "Company profile and facilities.",
+    },
+    facilitiesBody: {
+      id: "Identitas hukum, lokasi, dan galeri fasilitas menunggu data yang disetujui untuk publik.",
+      en: "Legal identity, locations, and the facility gallery are waiting on publicly approved data.",
+    },
+    careersTitle: {
+      id: "Bangun masa depan pertanian Indonesia.",
+      en: "Build the future of Indonesian agriculture.",
+    },
+    inquiryTitle: {
+      id: "Bicarakan komoditi atau kebutuhan pasokan Anda.",
+      en: "Talk through a commodity or a supply requirement.",
+    },
   },
   about: {
-    heroTitle: { id: "Tentang Kami", en: "About Us" },
+    heroTitle: { id: "Cerita kami", en: "Our story" },
     heroLead: {
-      id: "Narasi perusahaan, visi, misi, dan keunggulan.",
-      en: "Company story, vision, mission, and strengths.",
+      id: "Narasi perusahaan, visi, dan misi.",
+      en: "Company story, vision, and mission.",
     },
     story: {
       id: "PT Indoco Jaya Raya bergerak dalam penyerapan dan perdagangan hasil pertanian lokal.",
@@ -227,26 +372,38 @@ export const pages = {
     },
   },
   company: {
-    heroTitle: { id: "Profil & Data Perusahaan", en: "Company Profile & Data" },
+    heroTitle: { id: "Profil perusahaan", en: "Company profile" },
     legalName: { id: "PT Indoco Jaya Raya", en: "PT Indoco Jaya Raya" },
-    tagline: { id: "Agribisnis Hasil Bumi Lokal", en: "Local Agribusiness Commodities" },
+    tagline: { id: "Agribisnis hasil bumi lokal", en: "Local agribusiness commodities" },
     note: {
-      id: "Legalitas, struktur organisasi, sertifikasi, dan galeri fasilitas dikelola di CMS (hanya data yang disetujui publik).",
-      en: "Legalitas, org structure, certifications, and facility gallery are CMS-managed (public-approved fields only).",
+      id: "Identitas hukum, struktur, lokasi, dan sertifikasi hanya ditampilkan setelah data disetujui untuk publik.",
+      en: "Legal identity, structure, locations, and certifications appear only after the data is approved for publication.",
     },
+    sections: [
+      { title: { id: "Identitas hukum", en: "Legal identity" } },
+      { title: { id: "Dokumen hukum", en: "Legal documents" } },
+      { title: { id: "Manajemen", en: "Management" } },
+      { title: { id: "Organisasi", en: "Organization" } },
+      { title: { id: "Lokasi", en: "Locations" } },
+      { title: { id: "Fasilitas", en: "Facilities" } },
+      { title: { id: "Sertifikasi", en: "Certifications" } },
+    ],
   },
   productsIndex: {
-    heroTitle: { id: "Katalog Komoditi", en: "Commodity Catalog" },
+    heroTitle: { id: "Komoditi kami", en: "Our commodities" },
     heroLead: {
-      id: "Delapan item peluncuran — termasuk jasa penjemuran sebagai layanan.",
-      en: "Eight launch items — including drying as a service.",
+      id: "Komoditi pertanian pilihan dari Indonesia untuk pembeli dan mitra di seluruh dunia.",
+      en: "Selected agricultural commodities sourced from Indonesia for buyers and partners worldwide.",
     },
   },
   careers: {
-    heroTitle: { id: "Karier", en: "Careers" },
+    heroTitle: {
+      id: "Bangun masa depan pertanian Indonesia.",
+      en: "Build the future of Indonesian agriculture.",
+    },
     heroLead: {
-      id: "Lowongan aktif. Mode lamaran (WA / form / keduanya) adalah pengaturan CMS.",
-      en: "Active openings. Apply mode (WA / form / both) is a CMS setting.",
+      id: "Posisi yang sedang dibuka.",
+      en: "Open positions.",
     },
   },
   contact: {
@@ -256,4 +413,161 @@ export const pages = {
       en: "Contact our team on WhatsApp for B2B inquiries.",
     },
   },
+}
+
+/* ------------------------------------------------------------------
+ * Redesign v2 (Cargill-inspired) content blocks.
+ * Mirrors the optional CMS fields added to `home` / `aboutPage`
+ * (heroVideo, pillars[], stats[], featureBlocks[]). Placeholder copy is
+ * derived from existing brief text only — no invented facts.
+ * ------------------------------------------------------------------ */
+
+export type Tone = "forest" | "field" | "harvest" | "dark"
+
+export type PillarTile = { key: string; title: LString; body: LString; href: string; tone: Tone }
+export type FeatureBlock = {
+  key: string
+  eyebrow: LString
+  title: LString
+  body: LString
+  linkLabel: LString
+  href: string
+  tone: Tone
+}
+export type StatItem = { value: string; label: LString }
+
+export const redesign = {
+  tagline: {
+    id: "Berakar di Indonesia. Terhubung ke dunia.",
+    en: "Rooted in Indonesia. Connected to the world.",
+  } as LString,
+  home: {
+    /** Optional hero video (CMS: home.heroVideo). Empty = poster/placeholder only. */
+    heroVideo: "" as string,
+    heroTitle: {
+      id: "Agrobisnis lokal untuk pasar nasional dan internasional.",
+      en: "Local agribusiness for national and international markets.",
+    } as LString,
+    missionPoints: [
+      {
+        id: "Menyerap hasil pertanian lokal secara kompetitif.",
+        en: "Competitive offtake of local agricultural produce.",
+      },
+      {
+        id: "Mensejahterakan karyawan dan petani.",
+        en: "Improving the welfare of employees and farmers.",
+      },
+      {
+        id: "Memperkenalkan produk lokal ke pasar dunia.",
+        en: "Introducing local products to world markets.",
+      },
+    ] as LString[],
+    pillars: [
+      {
+        key: "people",
+        title: { id: "Petani & Karyawan", en: "Farmers & Employees" },
+        body: {
+          id: "Kesejahteraan petani dan karyawan menjadi dasar pertumbuhan kami.",
+          en: "Farmer and employee welfare is the foundation of our growth.",
+        },
+        href: "about",
+        tone: "harvest",
+      },
+      {
+        key: "products",
+        title: { id: "Komoditi", en: "Commodities" },
+        body: {
+          id: "Komoditi pertanian pilihan dari Indonesia untuk pembeli B2B.",
+          en: "Selected Indonesian agricultural commodities for B2B buyers.",
+        },
+        href: "products",
+        tone: "field",
+      },
+      {
+        key: "planet",
+        title: { id: "Keberlanjutan", en: "Sustainability" },
+        body: {
+          id: "Menjaga kualitas dan keberlanjutan di setiap tahap pasokan.",
+          en: "Keeping quality and sustainability in view across the supply path.",
+        },
+        href: "company",
+        tone: "forest",
+      },
+    ] as PillarTile[],
+    features: [
+      {
+        key: "about",
+        eyebrow: { id: "Tentang Indoco", en: "About Indoco" },
+        title: {
+          id: "Hasil pertanian lokal, disiapkan untuk pasar global.",
+          en: "Local agricultural products, prepared for global markets.",
+        },
+        body: {
+          id: "PT Indoco Jaya Raya menyerap dan memperdagangkan hasil pertanian lokal untuk mitra di dalam dan luar negeri.",
+          en: "PT Indoco Jaya Raya aggregates and trades local agricultural produce for partners at home and abroad.",
+        },
+        linkLabel: { id: "Cerita kami", en: "Our story" },
+        href: "about",
+        tone: "field",
+      },
+      {
+        key: "drying",
+        eyebrow: { id: "Jasa Penjemuran", en: "Drying service" },
+        title: {
+          id: "Penjemuran komoditi untuk menjaga kualitas panen.",
+          en: "Commodity drying that preserves harvest quality.",
+        },
+        body: {
+          id: "Layanan penjemuran untuk menjaga kualitas hasil panen sebelum distribusi.",
+          en: "Drying service to preserve harvest quality before distribution.",
+        },
+        linkLabel: { id: "Lihat layanan", en: "View service" },
+        href: "services/drying",
+        tone: "harvest",
+      },
+    ] as FeatureBlock[],
+  },
+  about: {
+    pullQuote: {
+      id: "Hasil bumi Indonesia layak mendapat tempat di pasar dunia.",
+      en: "Indonesian produce deserves its place in world markets.",
+    } as LString,
+  },
+  careers: {
+    values: [
+      {
+        title: { id: "Kesejahteraan", en: "Welfare" },
+        body: { id: "Pertumbuhan perusahaan berjalan bersama kesejahteraan karyawan.", en: "Company growth goes hand in hand with employee welfare." },
+      },
+      {
+        title: { id: "Kualitas", en: "Quality" },
+        body: { id: "Setiap peran menjaga standar kualitas komoditi.", en: "Every role protects commodity quality standards." },
+      },
+      {
+        title: { id: "Pertumbuhan", en: "Growth" },
+        body: { id: "Ikut membawa produk lokal ke pasar yang lebih luas.", en: "Help bring local products to wider markets." },
+      },
+    ] as { title: LString; body: LString }[],
+  },
+}
+
+/**
+ * Stats strip (CMS: home.stats[]). Only values derivable from real site data;
+ * client numbers (capacity, export destinations) get added via CMS when confirmed.
+ */
+export function homeStats(): StatItem[] {
+  const commodityCount = products.filter((p) => p.kind === "product").length
+  const serviceCount = products.filter((p) => p.kind === "service").length
+  return [
+    { value: String(commodityCount), label: { id: "Komoditi dalam katalog", en: "Commodities in catalog" } },
+    { value: String(serviceCount), label: { id: "Layanan penjemuran", en: "Drying service" } },
+    { value: "5", label: { id: "Bahasa untuk pembeli global", en: "Languages for global buyers" } },
+  ]
+}
+
+export function waDisplayNumber(): string {
+  const raw = siteSettings.waTargets[0]?.phoneE164 || ""
+  if (!raw.startsWith("62")) return `+${raw}`
+  const rest = raw.slice(2)
+  return `+62 ${rest.slice(0, 3)}-${rest.slice(3, 7)}-${rest.slice(7)}`
 }

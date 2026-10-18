@@ -1,48 +1,63 @@
+import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { isLocale, pickLocale, type Locale } from "@/lib/i18n"
-import { categories, pages, products } from "@/lib/fixtures"
-import { ProductCard } from "@/components/ProductCard"
-import { WaButton } from "@/components/WaButton"
+import { pages, products, ui } from "@/lib/fixtures"
+import { CommodityGrid } from "@/components/CommodityCard"
+import { CommodityFilter } from "@/components/CommodityFilter"
+import { InquirySection } from "@/components/InquirySection"
+import { PageHeader } from "@/components/PageHeader"
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale: raw } = await params
+  if (!isLocale(raw)) return {}
+  return {
+    title: pickLocale(pages.productsIndex.heroTitle, raw),
+    description: pickLocale(pages.productsIndex.heroLead, raw),
+  }
+}
 
 export default async function ProductsPage({
   params,
   searchParams,
 }: {
   params: Promise<{ locale: string }>
-  searchParams: Promise<{ category?: string }>
+  searchParams: Promise<{ category?: string; q?: string }>
 }) {
   const { locale: raw } = await params
-  const { category } = await searchParams
+  const { category, q } = await searchParams
   if (!isLocale(raw)) notFound()
   const locale = raw as Locale
-  const c = pages.productsIndex
-  const filtered = category ? products.filter((p) => p.category === category) : products
+  const query = q?.trim().toLowerCase() || ""
+  const filtered = products.filter((product) => {
+    if (category && product.category !== category) return false
+    if (!query) return true
+    const name = pickLocale(product.name, locale).toLowerCase()
+    const blurb = pickLocale(product.shortBlurb, locale).toLowerCase()
+    return name.includes(query) || blurb.includes(query)
+  })
+
   return (
-    <div className="space-y-8">
-      <header>
-        <h1 className="text-4xl font-bold">{pickLocale(c.heroTitle, locale)}</h1>
-        <p className="mt-3 text-black/70">{pickLocale(c.heroLead, locale)}</p>
-      </header>
-      <div className="flex flex-wrap gap-2">
-        <a href={`/${locale}/products`} className={`rounded-full px-3 py-1 text-xs ${!category ? "bg-[#0b3d2e] text-white" : "border border-black/20"}`}>
-          All
-        </a>
-        {categories.map((cat) => (
-          <a
-            key={cat.slug}
-            href={`/${locale}/products?category=${cat.slug}`}
-            className={`rounded-full px-3 py-1 text-xs ${category === cat.slug ? "bg-[#0b3d2e] text-white" : "border border-black/20"}`}
-          >
-            {pickLocale(cat.title, locale)}
-          </a>
-        ))}
+    <div>
+      <PageHeader
+        variant="compact"
+        locale={locale}
+        image="heroPeanutTexture"
+        eyebrow={pickLocale(ui.ourCommodities, locale)}
+        title={pickLocale(pages.productsIndex.heroTitle, locale)}
+        lead={pickLocale(pages.productsIndex.heroLead, locale)}
+      />
+      <div className="bg-white pb-24 lg:pb-32">
+        {/* Chips overlap the hero bottom, then stick under the header */}
+        <CommodityFilter locale={locale} category={category} q={q} />
+        <div className="site-wrap mt-12 lg:mt-16">
+          {filtered.length === 0 ? (
+            <p className="text-muted">{pickLocale(ui.noMatches, locale)}</p>
+          ) : (
+            <CommodityGrid products={filtered} locale={locale} />
+          )}
+        </div>
       </div>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {filtered.map((p) => (
-          <ProductCard key={p.slug} product={p} locale={locale} />
-        ))}
-      </div>
-      <WaButton locale={locale} templateKey="contact" label="WhatsApp" />
+      <InquirySection locale={locale} title={pickLocale(pages.home.inquiryTitle, locale)} />
     </div>
   )
 }

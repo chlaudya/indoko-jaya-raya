@@ -1,9 +1,29 @@
-import { notFound } from "next/navigation"
+import Link from "next/link"
+import type { Metadata } from "next"
+import { notFound, redirect } from "next/navigation"
 import { isLocale, pickLocale, type Locale } from "@/lib/i18n"
-import { products } from "@/lib/fixtures"
+import { categories, products, ui } from "@/lib/fixtures"
+import { CardRail } from "@/components/CardRail"
+import { CommodityCard, RAIL_CARD_SIZES } from "@/components/CommodityCard"
+import { InquirySection } from "@/components/InquirySection"
+import { Photo } from "@/components/Photo"
+import { ProductSpecifications } from "@/components/ProductSpecifications"
 import { WaButton } from "@/components/WaButton"
-import { ProductCard } from "@/components/ProductCard"
-import { redirect } from "next/navigation"
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>
+}): Promise<Metadata> {
+  const { locale: raw, slug } = await params
+  if (!isLocale(raw)) return {}
+  const product = products.find((item) => item.slug === slug)
+  if (!product) return {}
+  return {
+    title: pickLocale(product.name, raw),
+    description: pickLocale(product.shortBlurb, raw),
+  }
+}
 
 export default async function ProductDetailPage({
   params,
@@ -13,53 +33,107 @@ export default async function ProductDetailPage({
   const { locale: raw, slug } = await params
   if (!isLocale(raw)) notFound()
   const locale = raw as Locale
-  const product = products.find((p) => p.slug === slug)
+  const product = products.find((item) => item.slug === slug)
   if (!product) notFound()
   if (product.kind === "service" && product.servicePagePath) {
     redirect(`/${locale}/${product.servicePagePath}`)
   }
-  const related = products.filter((p) => p.slug !== slug && p.kind === "product").slice(0, 3)
+
+  const category = categories.find((item) => item.slug === product.category)
+  const name = pickLocale(product.name, locale)
+  const intro = pickLocale(product.shortBlurb, locale)
+  const overview = pickLocale(product.description, locale)
+  const askLabel = `${pickLocale(ui.askAbout, locale)} ${name}`
+  const related = products.filter((item) => item.slug !== slug && item.kind === "product")
+  const gallery = product.gallery || []
+
   return (
-    <div className="space-y-10">
-      <div className="grid gap-8 md:grid-cols-2">
-        <div className="flex h-72 items-center justify-center rounded-2xl bg-[#0b3d2e]/10 text-[#0b3d2e]">
-          Gallery placeholder
-        </div>
-        <div>
-          <p className="text-xs uppercase tracking-wide text-[#0b3d2e]">{product.category}</p>
-          <h1 className="mt-2 text-4xl font-bold">{pickLocale(product.name, locale)}</h1>
-          <p className="mt-4 text-black/70">{pickLocale(product.description, locale)}</p>
-          <div className="mt-6">
-            <WaButton
-              locale={locale}
-              templateKey="product"
-              tokens={{ productName: pickLocale(product.name, locale) }}
-              label={locale === "id" ? "Tanya via WhatsApp" : "Ask on WhatsApp"}
-            />
+    <article>
+      {/* Split hero: gallery left, name/category/summary/WA right */}
+      <section className="bg-white">
+        <div className="site-wrap pt-8 pb-16 lg:pt-12 lg:pb-24">
+          <nav aria-label="Breadcrumb" className="text-sm text-muted">
+            <ol className="flex flex-wrap gap-2">
+              <li>
+                <Link href={`/${locale}`} className="hover:text-charcoal hover:underline">
+                  {pickLocale(ui.home, locale)}
+                </Link>
+              </li>
+              <li aria-hidden="true">/</li>
+              <li>
+                <Link href={`/${locale}/products`} className="hover:text-charcoal hover:underline">
+                  {pickLocale(ui.ourCommodities, locale)}
+                </Link>
+              </li>
+              <li aria-hidden="true">/</li>
+              <li className="text-charcoal" aria-current="page">
+                {name}
+              </li>
+            </ol>
+          </nav>
+          <div className="mt-8 grid items-start gap-10 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-7">
+              <Photo
+                image={product.image}
+                locale={locale}
+                aspect="aspect-[4/5] sm:aspect-[5/4] lg:aspect-[4/5]"
+                preload={Boolean(product.image)}
+                sizes="(min-width: 1376px) 740px, (min-width: 1024px) 55vw, 100vw"
+              />
+              {gallery.length > 0 && (
+                <ul className="mt-4 grid grid-cols-4 gap-4">
+                  {gallery.map((image) => (
+                    <li key={image}>
+                      <Photo image={image} locale={locale} aspect="aspect-square" sizes="(min-width: 1024px) 170px, 25vw" />
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <div className="lg:sticky lg:top-28 lg:col-span-5">
+              <p className="label">{category ? pickLocale(category.title, locale) : product.category}</p>
+              <h1 className="display display-h1 mt-4 text-forest">{name}</h1>
+              <p className="mt-6 text-lg leading-relaxed text-muted">{intro}</p>
+              <div className="mt-8">
+                <WaButton locale={locale} templateKey="product" tokens={{ productName: name }} label={askLabel} />
+              </div>
+              {overview !== intro && (
+                <div className="mt-10 border-t border-charcoal/10 pt-8">
+                  <h2 className="label">{pickLocale(ui.overview, locale)}</h2>
+                  <p className="mt-3 leading-relaxed text-charcoal">{overview}</p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-      <section>
-        <h2 className="text-xl font-semibold">{locale === "id" ? "Spesifikasi" : "Specifications"}</h2>
-        <table className="mt-3 w-full text-sm">
-          <tbody>
-            {product.specs.map((row, i) => (
-              <tr key={i} className="border-b border-black/10">
-                <th className="py-2 text-left font-medium">{pickLocale(row.label, locale)}</th>
-                <td className="py-2">{pickLocale(row.value, locale)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
       </section>
-      <section>
-        <h2 className="mb-4 text-xl font-semibold">{locale === "id" ? "Produk terkait" : "Related"}</h2>
-        <div className="grid gap-4 sm:grid-cols-3">
-          {related.map((p) => (
-            <ProductCard key={p.slug} product={p} locale={locale} />
-          ))}
+
+      <section className="bg-ivory">
+        <div className="site-wrap section-y">
+          <div className="max-w-4xl">
+            <ProductSpecifications product={product} locale={locale} title={pickLocale(ui.specifications, locale)} />
+          </div>
         </div>
       </section>
-    </div>
+
+      {related.length > 0 && (
+        <section className="bg-white">
+          <div className="site-wrap section-y">
+            <h2 className="display display-h2 text-forest">{pickLocale(ui.related, locale)}</h2>
+            <div className="mt-10">
+              <CardRail label={pickLocale(ui.related, locale)} prevLabel={pickLocale(ui.previous, locale)} nextLabel={pickLocale(ui.next, locale)}>
+                {related.map((item) => (
+                  <li key={item.slug}>
+                    <CommodityCard product={item} locale={locale} sizes={RAIL_CARD_SIZES} />
+                  </li>
+                ))}
+              </CardRail>
+            </div>
+          </div>
+        </section>
+      )}
+
+      <InquirySection locale={locale} title={askLabel} templateKey="product" tokens={{ productName: name }} label={askLabel} />
+    </article>
   )
 }

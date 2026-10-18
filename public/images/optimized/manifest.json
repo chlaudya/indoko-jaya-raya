@@ -1,0 +1,262 @@
+[
+  {
+    "name": "hero-peanut-drying-yard.webp",
+    "source": "IMG_8864.HEIC",
+    "kind": "hero",
+    "width": 1750,
+    "height": 985,
+    "quality": 45,
+    "kb": 290.2,
+    "pass": true
+  },
+  {
+    "name": "hero-warehouse-interior.webp",
+    "source": "IMG_8841.HEIC",
+    "kind": "hero",
+    "width": 2400,
+    "height": 1350,
+    "quality": 60,
+    "kb": 286,
+    "pass": true
+  },
+  {
+    "name": "hero-farmers-sorting.webp",
+    "source": "IMG_8764.HEIC",
+    "kind": "hero",
+    "width": 2400,
+    "height": 1350,
+    "quality": 80,
+    "kb": 178.4,
+    "pass": true
+  },
+  {
+    "name": "hero-peanuts-on-tarp.webp",
+    "source": "IMG_8863.HEIC",
+    "kind": "hero",
+    "width": 2160,
+    "height": 1215,
+    "quality": 45,
+    "kb": 286.3,
+    "pass": true
+  },
+  {
+    "name": "hero-peanut-texture.webp",
+    "source": "IMG_8861.HEIC",
+    "kind": "hero",
+    "width": 1575,
+    "height": 887,
+    "quality": 45,
+    "kb": 286.8,
+    "pass": true
+  },
+  {
+    "name": "section-team-loading-sacks.webp",
+    "source": "IMG_8793.HEIC",
+    "kind": "section",
+    "width": 1600,
+    "height": 1200,
+    "quality": 80,
+    "kb": 100.8,
+    "pass": true
+  },
+  {
+    "name": "section-peanut-drying-tarp.webp",
+    "source": "IMG_8862.HEIC",
+    "kind": "section",
+    "width": 1440,
+    "height": 1080,
+    "quality": 55,
+    "kb": 298.4,
+    "pass": true
+  },
+  {
+    "name": "section-truck-loading.webp",
+    "source": "IMG_8798.HEIC",
+    "kind": "section",
+    "width": 1600,
+    "height": 1200,
+    "quality": 80,
+    "kb": 75.4,
+    "pass": true
+  },
+  {
+    "name": "section-warehouse-stock.webp",
+    "source": "IMG_8843.HEIC",
+    "kind": "section",
+    "width": 1600,
+    "height": 1200,
+    "quality": 75,
+    "kb": 281,
+    "pass": true
+  },
+  {
+    "name": "section-warehouse-aisle.webp",
+    "source": "IMG_8842.HEIC",
+    "kind": "section",
+    "width": 1600,
+    "height": 1200,
+    "quality": 80,
+    "kb": 246.6,
+    "pass": true
+  },
+  {
+    "name": "section-sorting-machine.webp",
+    "source": "IMG_8814.HEIC",
+    "kind": "section",
+    "width": 1600,
+    "height": 1200,
+    "quality": 70,
+    "kb": 296.3,
+    "pass": true
+  },
+  {
+    "name": "section-farmer-drying-tarp.webp",
+    "source": "IMG_8866.HEIC",
+    "kind": "section",
+    "width": 1600,
+    "height": 1200,
+    "quality": 80,
+    "kb": 55,
+    "pass": true
+  },
+  {
+    "name": "section-cashew-sorting.webp",
+    "source": "IMG_8768.HEIC",
+    "kind": "section",
+    "width": 1600,
+    "height": 1200,
+    "quality": 80,
+    "kb": 211.4,
+    "pass": true
+  },
+  {
+    "name": "card-pillar-farmers.webp",
+    "source": "IMG_8765.HEIC",
+    "kind": "card",
+    "width": 960,
+    "height": 1200,
+    "quality": 65,
+    "kb": 96.8,
+    "pass": true
+  },
+  {
+    "name": "card-pillar-commodities.webp",
+    "source": "IMG_8809.HEIC",
+    "kind": "card",
+    "width": 960,
+    "height": 1200,
+    "quality": 80,
+    "kb": 86.5,
+    "pass": true
+  },
+  {
+    "name": "card-pillar-sustainability.webp",
+    "source": "IMG_8865.HEIC",
+    "kind": "card",
+    "width": 960,
+    "height": 1200,
+    "quality": 80,
+    "kb": 92.4,
+    "pass": true
+  },
+  {
+    "name": "card-cashew-nuts.webp",
+    "source": "IMG_8782.HEIC",
+    "kind": "card",
+    "width": 960,
+    "height": 1200,
+    "quality": 75,
+    "kb": 91.2,
+    "pass": true
+  },
+  {
+    "name": "card-peanuts.webp",
+    "source": "IMG_8867.HEIC",
+    "kind": "card",
+    "width": 960,
+    "height": 1200,
+    "quality": 80,
+    "kb": 66.7,
+    "pass": true
+  },
+  {
+    "name": "card-shelled-corn.webp",
+    "source": "IMG_8810.HEIC",
+    "kind": "card",
+    "width": 960,
+    "height": 1200,
+    "quality": 80,
+    "kb": 91.1,
+    "pass": true
+  },
+  {
+    "name": "card-drying-service.webp",
+    "source": "IMG_8866.HEIC",
+    "kind": "card",
+    "width": 960,
+    "height": 1200,
+    "quality": 80,
+    "kb": 82.3,
+    "pass": true
+  },
+  {
+    "name": "card-gallery-sack-stacks.webp",
+    "source": "IMG_8811.HEIC",
+    "kind": "card",
+    "width": 700,
+    "height": 875,
+    "quality": 55,
+    "kb": 99.8,
+    "pass": true
+  },
+  {
+    "name": "card-gallery-grain-sacks.webp",
+    "source": "IMG_8813.HEIC",
+    "kind": "card",
+    "width": 630,
+    "height": 788,
+    "quality": 50,
+    "kb": 98.1,
+    "pass": true
+  },
+  {
+    "name": "card-gallery-carrying-sack.webp",
+    "source": "IMG_8800.HEIC",
+    "kind": "card",
+    "width": 960,
+    "height": 1200,
+    "quality": 70,
+    "kb": 97.3,
+    "pass": true
+  },
+  {
+    "name": "card-gallery-unloading-truck.webp",
+    "source": "IMG_8797.HEIC",
+    "kind": "card",
+    "width": 960,
+    "height": 1200,
+    "quality": 80,
+    "kb": 49.9,
+    "pass": true
+  },
+  {
+    "name": "card-gallery-cashew-sorting.webp",
+    "source": "IMG_8781.HEIC",
+    "kind": "card",
+    "width": 567,
+    "height": 709,
+    "quality": 50,
+    "kb": 97.4,
+    "pass": true
+  },
+  {
+    "name": "card-gallery-warehouse.webp",
+    "source": "IMG_8840.HEIC",
+    "kind": "card",
+    "width": 960,
+    "height": 1200,
+    "quality": 45,
+    "kb": 96.7,
+    "pass": true
+  }
+]

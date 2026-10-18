@@ -5,6 +5,9 @@ import { waCta } from "./objects/waCta"
 import { specRow } from "./objects/specRow"
 import { trustPoint } from "./objects/trustPoint"
 import { seo } from "./objects/seo"
+import { pillarTile } from "./objects/pillarTile"
+import { statItem } from "./objects/statItem"
+import { featureBlock } from "./objects/featureBlock"
 import { category } from "./documents/category"
 import { product } from "./documents/product"
 import { job } from "./documents/job"
@@ -23,6 +26,9 @@ export const schemaTypes = [
   specRow,
   trustPoint,
   seo,
+  pillarTile,
+  statItem,
+  featureBlock,
   // documents
   category,
   product,

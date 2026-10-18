@@ -1,44 +1,94 @@
+import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { isLocale, pickLocale, type Locale } from "@/lib/i18n"
-import { products } from "@/lib/fixtures"
+import { products, siteSettings, ui } from "@/lib/fixtures"
+import { FeatureSplit } from "@/components/FeatureSplit"
+import { Gallery } from "@/components/Gallery"
+import { HeroFullBleed } from "@/components/HeroFullBleed"
+import { InquirySection } from "@/components/InquirySection"
 import { WaButton } from "@/components/WaButton"
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale: raw } = await params
+  if (!isLocale(raw)) return {}
+  const service = products.find((item) => item.slug === "jasa-penjemuran-komoditi")
+  if (!service) return {}
+  return {
+    title: pickLocale(service.name, raw),
+    description: pickLocale(service.description, raw),
+  }
+}
 
 export default async function DryingServicePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: raw } = await params
   if (!isLocale(raw)) notFound()
   const locale = raw as Locale
-  const service = products.find((p) => p.slug === "jasa-penjemuran-komoditi")
+  const service = products.find((item) => item.slug === "jasa-penjemuran-komoditi")
   if (!service) notFound()
+  const t = (v: Parameters<typeof pickLocale>[0]) => pickLocale(v, locale)
+
   return (
-    <div className="space-y-10">
-      <section className="rounded-2xl bg-[#0b3d2e] px-6 py-10 text-white">
-        <h1 className="text-4xl font-bold">{pickLocale(service.name, locale)}</h1>
-        <p className="mt-3 max-w-2xl text-white/85">{pickLocale(service.description, locale)}</p>
-        <div className="mt-6">
-          <WaButton
-            locale={locale}
-            templateKey="drying"
-            label={locale === "id" ? "Konsultasi Jasa Penjemuran" : "Consult drying service"}
-          />
+    <div>
+      <HeroFullBleed
+        locale={locale}
+        image="heroPeanutsOnTarp"
+        height="medium"
+        eyebrow={t(ui.commodityServices)}
+        title={t(service.name)}
+        lead={t(service.description)}
+      >
+        <WaButton locale={locale} templateKey="drying" label={t(ui.discussRequirements)} />
+      </HeroFullBleed>
+
+      <FeatureSplit
+        locale={locale}
+        image="sectionFarmerTarp"
+        eyebrow={t(ui.ourService)}
+        title={t(service.name)}
+        body={t(service.description)}
+      />
+      <FeatureSplit
+        locale={locale}
+        image="sectionPeanutTarp"
+        reverse
+        surface="ivory"
+        eyebrow={t(ui.capacity)}
+        title={t(service.specs.find((s) => t(s.label) === t(ui.capacity))?.value) || t(ui.capacity)}
+        body={t(service.capacity)}
+      />
+      <FeatureSplit
+        locale={locale}
+        image="sectionWarehouseAisle"
+        eyebrow={t(ui.location)}
+        title={t(siteSettings.address)}
+        body={t(ui.pendingConfirmation)}
+      />
+
+      {/* Numbered process */}
+      <section className="bg-forest text-white">
+        <div className="site-wrap section-y">
+          <p className="label text-soft-sage!">{t(ui.process)}</p>
+          <ol className="mt-10 grid gap-10 md:grid-cols-3 lg:mt-14">
+            {(service.processSteps || []).map((step, index) => (
+              <li key={index} className="reveal border-t border-white/20 pt-8">
+                <p className="display nums text-[clamp(3rem,5vw,4.5rem)] leading-none text-soft-sage">{String(index + 1).padStart(2, "0")}</p>
+                <h3 className="display display-h3 mt-6">{t(step.title)}</h3>
+                <p className="mt-3 text-white/75">{t(step.body)}</p>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
-      <section className="rounded-xl border border-black/10 bg-white p-6">
-        <h2 className="text-xl font-semibold">{locale === "id" ? "Kapasitas & lokasi" : "Capacity & location"}</h2>
-        <p className="mt-3 text-black/70">{pickLocale(service.capacity, locale)}</p>
+
+      <section className="bg-white">
+        <div className="site-wrap section-y">
+          <p className="label">{t(ui.gallery)}</p>
+          <h2 className="display display-h2 mt-4 mb-12 text-forest">{t(service.name)}</h2>
+          <Gallery locale={locale} images={["galleryCashewSorting", "cardDrying", "galleryWarehouse"]} />
+        </div>
       </section>
-      <section>
-        <h2 className="text-xl font-semibold">{locale === "id" ? "Proses" : "How it works"}</h2>
-        <ol className="mt-4 grid gap-4 md:grid-cols-3">
-          {(service.processSteps || []).map((step, i) => (
-            <li key={i} className="rounded-xl border border-black/10 bg-white p-5">
-              <p className="text-xs text-[#0b3d2e]">0{i + 1}</p>
-              <h3 className="mt-1 font-semibold">{pickLocale(step.title, locale)}</h3>
-              <p className="mt-2 text-sm text-black/70">{pickLocale(step.body, locale)}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
-      <WaButton locale={locale} templateKey="drying" label="WhatsApp" />
+
+      <InquirySection locale={locale} title={t(ui.discussRequirements)} templateKey="drying" label={t(ui.discussRequirements)} />
     </div>
   )
 }
