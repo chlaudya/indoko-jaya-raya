@@ -22,6 +22,25 @@
   --header-offset: 96px;
   /* Catalog filter sticks under the scrolled bar (12px + 64px + 8px). */
   --filter-sticky-top: 84px;
+  /* Height of the hero's green curve (scales with width; the copy overlaps its solid lower ~30%). */
+  --hero-cap: clamp(72px, 14vw, 210px);
+  --hero-cap-lg: clamp(220px, 22vw, 320px);
+  /* Height of the Misi→white curve under the pillar cards. */
+  --band-curve: clamp(56px, 9vw, 150px);
+  /* Half the height of a 4:5 pillar card (1 col: first card; 3 cols: the row) = where the forest ends. */
+  --pillar-split: calc((100vw - 40px) * 0.625);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --pillar-split: calc((100vw - 64px - 48px) / 3 * 0.625);
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --pillar-split: calc((min(100vw, 1376px) - 96px - 48px) / 3 * 0.625);
+  }
 }
 
 @theme {

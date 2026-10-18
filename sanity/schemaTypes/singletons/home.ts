@@ -1,4 +1,4 @@
-import { defineField, defineType } from "sanity"
+import { defineArrayMember, defineField, defineType } from "sanity"
 
 export const home = defineType({
   name: "home",
@@ -28,6 +28,25 @@ export const home = defineType({
     defineField({ name: "aboutTeaserBody", type: "localeText" }),
     defineField({ name: "finalCta", type: "waCta" }),
     // --- Redesign v2 (Cargill-inspired) — all optional, additive only ---
+    defineField({
+      name: "heroSlides",
+      title: "Hero photo slider (optional)",
+      description:
+        "Crossfades every 6s behind the fixed headline. Leave empty to use the defaults (farmers sorting, cashew sorting, truck loading). Peanut-drying photos are reserved for the Penjemuran page.",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "heroSlide",
+          fields: [
+            defineField({ name: "image", type: "image", options: { hotspot: true }, validation: (Rule) => Rule.required() }),
+            defineField({ name: "alt", title: "Alt text", type: "localeString", validation: (Rule) => Rule.required() }),
+          ],
+          preview: { select: { media: "image", title: "alt.id" } },
+        }),
+      ],
+      validation: (Rule) => Rule.max(5),
+    }),
     defineField({ name: "heroVideo", title: "Hero video (optional, muted loop)", type: "file", options: { accept: "video/mp4,video/webm" } }),
     defineField({ name: "pillars", title: "Pillar tiles (optional)", type: "array", of: [{ type: "pillarTile" }], validation: (Rule) => Rule.max(3) }),
     defineField({ name: "stats", title: "Stats strip (optional — confirmed numbers only)", type: "array", of: [{ type: "statItem" }], validation: (Rule) => Rule.max(4) }),

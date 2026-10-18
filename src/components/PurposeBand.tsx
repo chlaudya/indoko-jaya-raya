@@ -1,18 +1,21 @@
-/** Deep-forest purpose statement band with large-type commitments. */
+/** Deep-forest (#123b2a) purpose statement band with large-type commitments. */
 export function PurposeBand({
   label,
   title,
   points,
   id,
+  continued = false,
 }: {
   label: string
   title?: string
   points: string[]
   id?: string
+  /** Directly follows a curved hero and flows into the pillar cards: same forest surface, tighter padding. */
+  continued?: boolean
 }) {
   return (
     <section id={id} className="bg-forest text-white">
-      <div className="site-wrap section-y">
+      <div className={continued ? "site-wrap pt-6 pb-16 lg:pt-10 lg:pb-24" : "site-wrap section-y"}>
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <p className="label text-soft-sage!">{label}</p>

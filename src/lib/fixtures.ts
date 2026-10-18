@@ -101,6 +101,11 @@ export const ui = {
   viewAllCommodities: { id: "Lihat semua komoditi", en: "View all commodities" },
   allCommodities: { id: "Semua komoditi", en: "All commodities" },
   companyMenu: { id: "Menu perusahaan", en: "Company menu" },
+  heroCarousel: { id: "Foto unggulan", en: "Featured photos" },
+  slideOf: { id: "{n} dari {total}", en: "{n} of {total}" },
+  showSlide: { id: "Tampilkan foto {n} dari {total}", en: "Show photo {n} of {total}" },
+  pauseSlideshow: { id: "Jeda tayangan foto", en: "Pause slideshow" },
+  playSlideshow: { id: "Putar tayangan foto", en: "Play slideshow" },
   openMenu: { id: "Buka menu", en: "Open menu" },
   closeMenu: { id: "Tutup menu", en: "Close menu" },
   ourMission: { id: "Misi kami", en: "Our mission" },
@@ -450,6 +455,8 @@ export const redesign = {
   home: {
     /** Optional hero video (CMS: home.heroVideo). Empty = poster/placeholder only. */
     heroVideo: "" as string,
+    /** Hero photo slider, in order (CMS: home.heroSlides[]; alt text comes from images.ts meta). */
+    heroSlides: ["heroFarmersSorting", "sectionCashewSorting", "sectionTruckLoading"] as ImageKey[],
     heroTitle: {
       id: "Agrobisnis lokal untuk pasar nasional dan internasional.",
       en: "Local agribusiness for national and international markets.",

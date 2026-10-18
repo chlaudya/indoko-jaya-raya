@@ -47,11 +47,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <div>
-      {/* 1 · Full-bleed hero with a single mission line */}
+      {/* 1 · Full-height curved-frame hero: fixed copy on forest, crossfading photos */}
       <HeroFullBleed
         locale={locale}
-        image="heroFarmersSorting"
-        videoSrc={v2.heroVideo || undefined}
+        image={v2.heroSlides[0]}
+        slides={v2.heroSlides}
+        titleSize="display-h1"
         eyebrow={pickLocale(content.heroEyebrow, locale)}
         title={pickLocale(v2.heroTitle, locale)}
         lead={pickLocale(content.heroLead, locale)}
@@ -62,16 +63,18 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </Link>
       </HeroFullBleed>
 
-      {/* 2 · Purpose band (misi) */}
+      {/* 2 · Purpose band (misi) — same forest surface as the hero */}
       <PurposeBand
+        continued
         label={pickLocale(ui.ourMission, locale)}
         title={pickLocale(content.introStatement, locale)}
         points={v2.missionPoints.map((p) => pickLocale(p, locale))}
       />
 
-      {/* 3 · Three pillars: people · products · planet */}
+      {/* 3 · Three pillars straddling the forest→white curve */}
       <PillarTiles
         id="sustainability"
+        overlap
         locale={locale}
         label={pickLocale(ui.whyPartner, locale)}
         title={pickLocale(content.sustainabilityTitle, locale)}
