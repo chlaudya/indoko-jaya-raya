@@ -14,6 +14,7 @@ export function PageHeader({
   locale,
   image,
   children,
+  strongScrimMobile,
 }: {
   eyebrow?: string
   title: string
@@ -22,10 +23,11 @@ export function PageHeader({
   locale?: Locale
   image?: ImageKey
   children?: React.ReactNode
+  strongScrimMobile?: boolean
 }) {
   if (variant === "compact" && locale) {
     return (
-      <HeroFullBleed locale={locale} image={image} eyebrow={eyebrow} title={title} lead={lead} height="short" titleSize="display-h1">
+      <HeroFullBleed locale={locale} image={image} eyebrow={eyebrow} title={title} lead={lead} height="short" titleSize="display-h1" strongScrimMobile={strongScrimMobile}>
         {children}
       </HeroFullBleed>
     )

@@ -32,6 +32,18 @@ export default async function CareersPage({ params }: { params: Promise<{ locale
         lead={pickLocale(pages.careers.heroLead, locale)}
       />
 
+      {/* Job rows */}
+      <section className="bg-white">
+        <div className="site-wrap pt-16 pb-24 lg:pb-32">
+          <h2 className="display display-h2 text-forest">{pickLocale(ui.openPositions, locale)}</h2>
+          <ul className="mt-10 border-b border-charcoal/15">
+            {active.map((job) => (
+              <CareerCard key={job.slug} job={job} locale={locale} />
+            ))}
+          </ul>
+        </div>
+      </section>
+
       {/* Culture band */}
       <section className="bg-ivory">
         <div className="site-wrap section-y">
@@ -42,18 +54,6 @@ export default async function CareersPage({ params }: { params: Promise<{ locale
                 <h2 className="display display-h3 text-forest">{pickLocale(value.title, locale)}</h2>
                 <p className="mt-3 text-muted">{pickLocale(value.body, locale)}</p>
               </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* Job rows */}
-      <section className="bg-white">
-        <div className="site-wrap section-y">
-          <h2 className="display display-h2 text-forest">{pickLocale(ui.openPositions, locale)}</h2>
-          <ul className="mt-10 border-b border-charcoal/15">
-            {active.map((job) => (
-              <CareerCard key={job.slug} job={job} locale={locale} />
             ))}
           </ul>
         </div>

@@ -128,6 +128,12 @@ body {
   font-size: var(--text-h1);
 }
 
+/* Subpage hero headline: sized for the capped photo hero (≤600px tall; 30px floor fits 360px phones). */
+.display-sub {
+  font-size: clamp(1.875rem, 3.3vw, 3.25rem);
+  line-height: 1.06;
+}
+
 .display-h2 {
   font-size: var(--text-h2);
 }

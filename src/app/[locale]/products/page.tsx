@@ -42,6 +42,7 @@ export default async function ProductsPage({
         variant="compact"
         locale={locale}
         image="heroWarehouse"
+        strongScrimMobile
         eyebrow={pickLocale(ui.ourCommodities, locale)}
         title={pickLocale(pages.productsIndex.heroTitle, locale)}
         lead={pickLocale(pages.productsIndex.heroLead, locale)}

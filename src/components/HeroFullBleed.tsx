@@ -5,28 +5,24 @@ import { ui } from "@/lib/fixtures"
 import { HeroSlider } from "./HeroSlider"
 
 /**
- * Per-size frame. Mobile (<1024): the photo band has a fixed height (home ≈ top
- * 55% of the viewport), the curve sits under it and the copy follows on green.
- * The photo layer only spans band + curve on mobile (so the 16:9 crop isn't blown up
- * to the full hero height). Desktop: the photo fills the frame and the green block (curve + copy) is
- * anchored to the bottom-left; the spacer keeps the curve below the header.
+ * Home ("tall") frame. Mobile (<1024): photo band ≈ top 55% of the viewport, curve
+ * under it, copy on green. The photo layer only spans band + curve on mobile (so the
+ * 16:9 crop isn't blown up to the full hero height). Desktop: the photo fills the frame
+ * and the green block (curve + copy) is anchored to the bottom-left.
  */
-const frames = {
-  tall: {
-    section: "min-h-[max(100svh,600px)]",
-    spacer: "h-[max(calc(55svh-var(--hero-cap)),220px)] lg:h-auto lg:min-h-[140px]",
-    photo: "h-[max(55svh,calc(220px+var(--hero-cap)))]",
-  },
-  medium: {
-    section: "lg:min-h-[max(68svh,560px)]",
-    spacer: "h-[230px] sm:h-[300px] lg:h-auto lg:min-h-[140px]",
-    photo: "h-[calc(230px+var(--hero-cap))] sm:h-[calc(300px+var(--hero-cap))]",
-  },
-  short: {
-    section: "lg:min-h-[max(52svh,460px)]",
-    spacer: "h-[190px] sm:h-[240px] lg:h-auto lg:min-h-[120px]",
-    photo: "h-[calc(190px+var(--hero-cap))] sm:h-[calc(240px+var(--hero-cap))]",
-  },
+const TALL = {
+  section: "min-h-[max(100svh,600px)]",
+  spacer: "h-[max(calc(55svh-var(--hero-cap)),220px)] lg:h-auto lg:min-h-[140px]",
+  photo: "h-[max(55svh,calc(220px+var(--hero-cap)))]",
+}
+
+/**
+ * Subpage hero heights, all widths. `min-h-fit` lets the box grow instead of
+ * clipping on unusually short viewports; at normal sizes the cap holds.
+ */
+const SUB_HEIGHTS = {
+  medium: "h-[min(65svh,600px)]",
+  short: "h-[min(50svh,480px)]",
 }
 
 /**
@@ -83,6 +79,7 @@ export function HeroFullBleed({
   height = "tall",
   titleSize = "display-xl",
   as: Heading = "h1",
+  strongScrimMobile = false,
 }: {
   locale: Locale
   image?: ImageKey
@@ -93,13 +90,24 @@ export function HeroFullBleed({
   title: string
   lead?: string
   children?: React.ReactNode
-  height?: keyof typeof frames
+  /** tall = Home (full height, curved frame); medium/short = capped photo-only subpage heroes. */
+  height?: "tall" | keyof typeof SUB_HEIGHTS
   titleSize?: "display-xl" | "display-h1"
   as?: "h1" | "h2"
+  /** Subpage heroes only: stronger copy scrim under 768px. */
+  strongScrimMobile?: boolean
 }) {
-  const frame = frames[height]
+  const frame = TALL
   const meta = image ? IMAGES[image] : undefined
   const isSlider = Boolean(slides && slides.length > 1)
+
+  if (height !== "tall") {
+    return (
+      <PhotoHero locale={locale} image={image} heightClass={SUB_HEIGHTS[height]} eyebrow={eyebrow} title={title} lead={lead} as={Heading} compact={height === "short"} strongScrimMobile={strongScrimMobile}>
+        {children}
+      </PhotoHero>
+    )
+  }
 
   return (
     <section data-hero className={`relative isolate flex flex-col overflow-hidden bg-forest text-white ${frame.section}`}>
@@ -159,6 +167,72 @@ export function HeroFullBleed({
               {children && <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">{children}</div>}
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/**
+ * Subpage hero: full-bleed photo only (no curve, no green shape), capped in height.
+ * Eyebrow/headline/lead/CTA sit bottom-left in white over a dark bottom-left gradient
+ * (≥60% black under the copy, clear toward the top-right) so text stays ≥4.5:1 even
+ * over a pure-white pixel. Copy starts below the floating header bar.
+ */
+function PhotoHero({
+  locale,
+  image,
+  heightClass,
+  eyebrow,
+  title,
+  lead,
+  children,
+  compact,
+  strongScrimMobile = false,
+  as: Heading,
+}: {
+  locale: Locale
+  image?: ImageKey
+  heightClass: string
+  /** Darker local scrim under 768px for photos whose bright areas sit behind phone-width copy (Katalog). */
+  strongScrimMobile?: boolean
+  eyebrow?: string
+  title: string
+  lead?: string
+  children?: React.ReactNode
+  compact: boolean
+  as: "h1" | "h2"
+}) {
+  const meta = image ? IMAGES[image] : undefined
+  return (
+    <section data-hero className={`relative isolate flex min-h-fit flex-col overflow-hidden bg-forest text-white ${heightClass}`}>
+      <div className="absolute inset-0 -z-10">
+        {meta ? (
+          <Image src={meta.src} alt={pickLocale(meta.alt, locale)} fill preload sizes="100vw" className="object-cover" />
+        ) : (
+          <div className="ph ph-field absolute inset-0" />
+        )}
+        {/* Bottom-left scrim: bottom-up + left-right layers multiply under the copy. */}
+        {/* Bottom-up: 75% black at the bottom, 30% at mid-height, clear from 60% up (top of the photo stays light). */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.75)_0%,rgba(0,0,0,0.3)_50%,rgba(0,0,0,0)_60%)]" />
+        {/* Left layer only across the left half of the width. */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.6)_0%,rgba(0,0,0,0)_50%)]" />
+      </div>
+      <div
+        className={`site-wrap flex flex-1 flex-col justify-end pt-[calc(var(--header-offset)+8px)] ${
+          compact ? "pb-20 lg:pb-24" : "pb-10 lg:pb-14"
+        }`}
+      >
+        <div className="fade-up relative isolate max-w-2xl lg:max-w-[min(44rem,55vw)]">
+          {/* Soft local scrim behind the copy only (the gradients alone leave the headline <5:1 on bright photos). */}
+          <div
+            aria-hidden="true"
+            className={`absolute -inset-12 -z-10 rounded-[64px] bg-black/55 blur-xl ${strongScrimMobile ? "max-md:bg-black/70" : ""}`}
+          />
+          {eyebrow && <p className="label text-white!">{eyebrow}</p>}
+          <Heading className="display display-sub mt-3 text-balance lg:mt-4">{title}</Heading>
+          {lead && <p className="mt-3 max-w-xl text-base leading-relaxed text-white lg:mt-4 lg:text-lg">{lead}</p>}
+          {children && <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 lg:mt-7">{children}</div>}
         </div>
       </div>
     </section>
