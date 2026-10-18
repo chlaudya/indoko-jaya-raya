@@ -4,7 +4,7 @@ Status: **DRAFT**. Machine-assisted zh / vi / hi translations for every string t
 
 How it works: `pickLocale` (src/lib/i18n.ts) uses an explicit locale value (fixture or Sanity) first, then `src/lib/i18n-drafts.ts` (keyed by the Indonesian text), then Indonesian. To approve or correct a string, enter it in Sanity / on the fixture, or edit the drafts file. If the Indonesian source changes, its draft stops matching and that locale falls back to Indonesian again.
 
-Counts per locale (zh / vi / hi each): hero headline 1 · landing page 32 (why-choose label + heading + 3 cards × title/body, 4 icon-strip items × title/body, 5 WhatsApp templates, 11 UI strings) · site strings 196 · image alt text 26 · **total 255**. Not translated (names): WhatsApp, Indoco Jaya Raya, PT Indoco Jaya Raya.
+Counts per locale (zh / vi / hi each): hero headline 1 · landing page 31 (why-choose label + heading + 3 cards × title/body, 4 icon-strip items × title/body, 5 WhatsApp templates, 10 UI strings) · site strings 196 · image alt text 26 · **total 254**. Not translated (names): WhatsApp, Indoco Jaya Raya, PT Indoco Jaya Raya.
 
 ## Client pending
 - **Real trust stats (optional).** No stats ship: the mock numbers were removed. `home.stats` stays in the CMS; the row is hidden until the client supplies confirmed numbers (1–3 re-centre).
@@ -47,7 +47,6 @@ Why choose us (ui.whyChooseUs + whyChoose: title, body), icon strip (iconStrip: 
 | waTemplates.productPage | Halo Indoco Jaya Raya, saya tertarik dengan {{productName}} yang saya lihat di halaman produk website Anda. Mohon informasi lebih lanjut. | Hello Indoco Jaya Raya, I'm interested in {{productName}}, which I saw on the product page of your website. Please share more details. | 您好，Indoco Jaya Raya，我在贵公司网站的产品页面上看到{{productName}}，很感兴趣，请提供更多信息。 | Xin chào Indoco Jaya Raya, tôi quan tâm đến {{productName}} mà tôi thấy trên trang sản phẩm của website bạn. Vui lòng cho tôi biết thêm thông tin. | नमस्ते Indoco Jaya Raya, मैंने आपकी वेबसाइट के उत्पाद पेज पर {{productName}} देखा और मुझे इसमें रुचि है। कृपया और जानकारी साझा करें। |
 | ui.ourServices | Layanan kami | Our services | 我们的服务 | Dịch vụ của chúng tôi | हमारी सेवाएँ |
 | ui.askViaWhatsApp | Tanya via WhatsApp | Ask on WhatsApp | 通过 WhatsApp 咨询 | Hỏi qua WhatsApp | WhatsApp पर पूछें |
-| ui.askAboutVia | Tanya tentang {product} via WhatsApp | Ask about {product} on WhatsApp | 通过 WhatsApp 咨询{product} | Hỏi về {product} qua WhatsApp | {product} के बारे में WhatsApp पर पूछें |
 | ui.navigation | Navigasi | Navigation | 导航 | Điều hướng | नेविगेशन |
 | ui.footerCommodities | Komoditi | Commodities | 农产品 | Nông sản | जिंसें |
 | ui.email | Email | Email | 电子邮件 | Email | ईमेल |

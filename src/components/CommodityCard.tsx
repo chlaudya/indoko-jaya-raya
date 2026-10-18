@@ -81,7 +81,7 @@ export function CommodityCard({
             target="_blank"
             rel="noopener noreferrer"
             className="text-link text-leaf"
-            aria-label={pickLocale(ui.askAboutVia, locale).replace("{product}", name)}
+            aria-label={`${pickLocale(ui.askViaWhatsApp, locale)}: ${name}`}
           >
             <WhatsAppIcon className="size-4" />
             <span>{pickLocale(ui.askViaWhatsApp, locale)}</span>

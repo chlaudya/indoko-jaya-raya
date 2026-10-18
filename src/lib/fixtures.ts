@@ -136,13 +136,6 @@ export const ui = {
   // Landing v1 (DRAFT zh / vi / hi)
   ourServices: { id: "Layanan kami", en: "Our services", zh: "我们的服务", vi: "Dịch vụ của chúng tôi", hi: "हमारी सेवाएँ" },
   askViaWhatsApp: { id: "Tanya via WhatsApp", en: "Ask on WhatsApp", zh: "通过 WhatsApp 咨询", vi: "Hỏi qua WhatsApp", hi: "WhatsApp पर पूछें" },
-  askAboutVia: {
-    id: "Tanya tentang {product} via WhatsApp",
-    en: "Ask about {product} on WhatsApp",
-    zh: "通过 WhatsApp 咨询{product}",
-    vi: "Hỏi về {product} qua WhatsApp",
-    hi: "{product} के बारे में WhatsApp पर पूछें",
-  },
   navigation: { id: "Navigasi", en: "Navigation", zh: "导航", vi: "Điều hướng", hi: "नेविगेशन" },
   footerCommodities: { id: "Komoditi", en: "Commodities", zh: "农产品", vi: "Nông sản", hi: "जिंसें" },
   email: { id: "Email", en: "Email", zh: "电子邮件", vi: "Email", hi: "ईमेल" },

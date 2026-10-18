@@ -130,11 +130,13 @@ html[lang="hi"] .display {
   font-size: var(--text-h1);
 }
 
-/* vi Home headline is ~40% longer: scale it so it stays on 3 lines in the 6-col desktop copy column. */
-@media (min-width: 1024px) {
-  html[lang="vi"] .hero-home h1 {
-    font-size: calc(var(--text-h1) * 0.85);
-  }
+/* Home headline, longer locales: keep it on max 3 lines at every width (360–1920+). The copy column is capped at
+   ~640px, so the size is capped too. vi ≈ 31→61px, hi ≈ 36→64px (hi capped lower so its lime first line stays over the darker scrim, ≥4.5:1); id / en / zh use --text-h1 unchanged. */
+html[lang="vi"] .hero-home h1 {
+  font-size: clamp(1.9375rem, 4.25vw, 3.8rem);
+}
+html[lang="hi"] .hero-home h1 {
+  font-size: clamp(2.25rem, 4.4vw, 4rem);
 }
 
 /* Home hero photos: focal point per slide (HeroSlider sets --pos / --pos-m inline). */
