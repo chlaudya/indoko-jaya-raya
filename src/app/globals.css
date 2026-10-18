@@ -105,13 +105,14 @@ body {
   letter-spacing: -0.015em;
 }
 
-/* zh / hi headings: Noto Serif (set on <html> only for those locales, see layout.tsx). */
+/* zh / hi headings: system serif stacks (no webfont). Cormorant first so Latin text and digits keep the brand serif;
+   CJK / Devanagari glyphs fall through to the platform serif (macOS/iOS, Windows, Android/Linux). */
 html[lang^="zh"] .display {
-  font-family: var(--font-noto-serif-sc), "Noto Serif SC", "Songti SC", var(--font-cormorant), Georgia, serif;
+  font-family: var(--font-cormorant), "Songti SC", "STSong", "Noto Serif CJK SC", "Source Han Serif SC", "SimSun", serif;
   letter-spacing: 0;
 }
 html[lang="hi"] .display {
-  font-family: var(--font-noto-serif-deva), "Noto Serif Devanagari", "Kohinoor Devanagari", var(--font-cormorant), Georgia, serif;
+  font-family: var(--font-cormorant), "Noto Serif Devanagari", "Devanagari MT", "Kohinoor Devanagari", "Nirmala UI", "Mangal", serif;
   letter-spacing: 0;
 }
 

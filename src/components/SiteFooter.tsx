@@ -61,8 +61,8 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgba(18,59,42,0.35),rgba(18,59,42,0.8))] xl:bg-[linear-gradient(to_bottom,rgba(18,59,42,0.6),rgba(18,59,42,0.8))]"
       />
       <div className="site-wrap relative pt-16 pb-8 lg:pt-20">
-        <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-12">
-          <div className="lg:col-span-4">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-12">
+          <div className="col-span-2 md:col-span-1 lg:col-span-4">
             <Link href={`/${locale}`} className="inline-flex min-h-11 items-center gap-3 text-white">
               <span aria-hidden="true" className="grid size-10 place-items-center rounded-full bg-ivory text-sm font-semibold text-forest">
                 IJ
@@ -98,7 +98,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
             </ul>
           </nav>
 
-          <div className="lg:col-span-3 lg:col-start-10">
+          <div className="col-span-2 md:col-span-1 lg:col-span-3 lg:col-start-10">
             <h2 className={heading}>{t(ui.footerContact)}</h2>
             <ul className="mt-4 space-y-3 text-[0.9375rem] leading-relaxed text-[#d9e0d4]">
               <li className="flex gap-3">

@@ -30,38 +30,23 @@ export const siteSettings = {
     homeHero: {
       id: "Halo Indoco Jaya Raya, saya menghubungi Anda dari halaman utama website. Saya ingin mengetahui lebih lanjut tentang komoditi Anda.",
       en: "Hello Indoco Jaya Raya, I'm contacting you from your website's home page. I'd like to learn more about your commodities.",
-      zh: "您好，Indoco Jaya Raya，我从贵公司网站首页联系您，想进一步了解贵公司的农产品。",
-      vi: "Xin chào Indoco Jaya Raya, tôi liên hệ từ trang chủ website của bạn. Tôi muốn tìm hiểu thêm về các mặt hàng nông sản của bạn.",
-      hi: "नमस्ते Indoco Jaya Raya, यह संदेश आपकी वेबसाइट के होम पेज से है। मुझे आपकी जिंसों के बारे में और जानकारी चाहिए।",
     },
     homeDrying: {
       id: "Halo Indoco Jaya Raya, saya menghubungi Anda dari bagian Jasa Penjemuran di halaman utama website. Saya ingin mendiskusikan kebutuhan penjemuran komoditi saya.",
       en: "Hello Indoco Jaya Raya, I'm contacting you from the Drying Service section on your home page. I'd like to discuss my commodity drying needs.",
-      zh: "您好，Indoco Jaya Raya，我从网站首页的晾晒服务栏目联系您，想洽谈我的农产品晾晒需求。",
-      vi: "Xin chào Indoco Jaya Raya, tôi liên hệ từ mục Dịch vụ phơi sấy trên trang chủ website. Tôi muốn trao đổi về nhu cầu phơi sấy nông sản của mình.",
-      hi: "नमस्ते Indoco Jaya Raya, यह संदेश आपकी वेबसाइट के होम पेज के 'सुखाने की सेवा' भाग से है। मुझे अपनी जिंस सुखाने की ज़रूरतों पर चर्चा करनी है।",
     },
     homeBanner: {
       id: "Halo Indoco Jaya Raya, saya menghubungi Anda dari tombol WhatsApp di bagian bawah halaman utama website. Saya ingin membicarakan kebutuhan komoditi atau pasokan saya.",
       en: "Hello Indoco Jaya Raya, I'm contacting you from the WhatsApp button at the bottom of your home page. I'd like to talk about my commodity or supply needs.",
-      zh: "您好，Indoco Jaya Raya，我通过网站首页底部的 WhatsApp 按钮联系您，想洽谈我的农产品或供应需求。",
-      vi: "Xin chào Indoco Jaya Raya, tôi liên hệ qua nút WhatsApp ở cuối trang chủ website. Tôi muốn trao đổi về nhu cầu nông sản hoặc nguồn cung của mình.",
-      hi: "नमस्ते Indoco Jaya Raya, यह संदेश आपकी वेबसाइट के होम पेज के नीचे दिए WhatsApp बटन से है। मुझे अपनी जिंस या आपूर्ति ज़रूरतों पर बात करनी है।",
     },
     // Commodity cards (Home + Katalog): product name in the page language.
     productPage: {
       id: "Halo Indoco Jaya Raya, saya tertarik dengan {{productName}} yang saya lihat di halaman produk website Anda. Mohon informasi lebih lanjut.",
       en: "Hello Indoco Jaya Raya, I'm interested in {{productName}}, which I saw on the product page of your website. Please share more details.",
-      zh: "您好，Indoco Jaya Raya，我在贵公司网站的产品页面上看到{{productName}}，很感兴趣，请提供更多信息。",
-      vi: "Xin chào Indoco Jaya Raya, tôi quan tâm đến {{productName}} mà tôi thấy trên trang sản phẩm của website bạn. Vui lòng cho tôi biết thêm thông tin.",
-      hi: "नमस्ते Indoco Jaya Raya, मैंने आपकी वेबसाइट के उत्पाद पेज पर {{productName}} देखा और मुझे इसमें रुचि है। कृपया और जानकारी साझा करें।",
     },
     productCard: {
       id: "Halo Indoco Jaya Raya, saya tertarik dengan {{productName}} yang saya lihat di daftar komoditi website Anda. Mohon informasi lebih lanjut.",
       en: "Hello Indoco Jaya Raya, I'm interested in {{productName}}, which I saw in the commodity list on your website. Please share more details.",
-      zh: "您好，Indoco Jaya Raya，我在贵公司网站的农产品列表中看到{{productName}}，很感兴趣，请提供更多信息。",
-      vi: "Xin chào Indoco Jaya Raya, tôi quan tâm đến {{productName}} mà tôi thấy trong danh sách nông sản trên website của bạn. Vui lòng cho tôi biết thêm thông tin.",
-      hi: "नमस्ते Indoco Jaya Raya, मैंने आपकी वेबसाइट की जिंस सूची में {{productName}} देखा और मुझे इसमें रुचि है। कृपया और जानकारी साझा करें।",
     },
   } as Record<string, LString>,
   /** Public email: empty until the client confirms one (the footer shows "Menyusul"). Never invent an address. */
@@ -145,6 +130,7 @@ export const ui = {
   ourMission: { id: "Misi kami", en: "Our mission" },
   keyFacts: { id: "Sekilas", en: "At a glance" },
   // DRAFT zh / vi / hi
+  whyChooseLabel: { id: "Keunggulan kami", en: "Why work with us" },
   whyChooseUs: { id: "Mengapa memilih kami", en: "Why choose us", zh: "为何选择我们", vi: "Vì sao chọn chúng tôi", hi: "हमें क्यों चुनें" },
   footerCompany: { id: "Perusahaan", en: "Company" },
   // Landing v1 (DRAFT zh / vi / hi)

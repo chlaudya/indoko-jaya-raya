@@ -24,10 +24,11 @@ export function PillarTiles({
   straddle?: boolean
 }) {
   // Home: white cards, 8px radius + hairline; photo 4:3 with a 12px top radius (DESIGN.md §11); one → link.
+  // No scroll-reveal here: these cards sit at the first-screen fold, where a half-faded card fails text contrast.
   const whiteCards = (
     <ul className="grid gap-6 md:grid-cols-3">
       {items.map((item) => (
-        <li key={item.key} className="reveal">
+        <li key={item.key}>
           <Link
             href={item.href}
             className="group flex h-full flex-col rounded-[8px] rounded-t-[12px] border border-hairline bg-white motion-safe:transition-colors motion-safe:duration-200 hover:border-hover-line"

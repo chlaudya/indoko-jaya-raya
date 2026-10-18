@@ -31,3 +31,6 @@ build follows the PM (marked **PM**). Before screenshots: `/workspace/indoco-scr
 | Commodities (CommodityCard) | Category chips from the CMS (only with items), 6px radius, selected solid #123b2a. 4:3 images, 20px Cormorant name, one metadata line, "Lihat komoditi" + **PM** "Tanya via WhatsApp" with the product name in the page language. Hover: image 1.03 + border #a8b89c; reduced motion respected. Asam / Porang keep placeholders. |
 | WA banner (InquirySection) | Full width #123b2a, headline `--text-h2` cols 1–7, solid white 56px button, reassurance line, 96px padding, own message. Most prominent CTA on the page. |
 | Footer (SiteFooter) | Brand · Navigasi · Komoditi · Kontak; links 15px #d9e0d4, line-height 1.9; contact rows with icons; phone / email "Menyusul" until client-confirmed; © bottom bar. 4 → 2 → 1 columns. |
+
+## Post-launch
+- Move WhatsApp messages to CMS: `homeHero`, `homeDrying`, `homeBanner`, `productCard` and `productPage` are hardcoded in `src/lib/fixtures.ts` (`siteSettings.waTemplates`, id/en) with zh/vi/hi drafts in `src/lib/i18n-drafts.ts`; `settings.waTemplates` in Sanity has no fields for them yet.

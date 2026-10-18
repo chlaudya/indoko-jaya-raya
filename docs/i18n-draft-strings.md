@@ -4,7 +4,7 @@ Status: **DRAFT**. Machine-assisted zh / vi / hi translations for every string t
 
 How it works: `pickLocale` (src/lib/i18n.ts) uses an explicit locale value (fixture or Sanity) first, then `src/lib/i18n-drafts.ts` (keyed by the Indonesian text), then Indonesian. To approve or correct a string, enter it in Sanity / on the fixture, or edit the drafts file. If the Indonesian source changes, its draft stops matching and that locale falls back to Indonesian again.
 
-Counts per locale (zh / vi / hi each): hero headline 1 · landing page 31 (why-choose heading + 3 cards × title/body, 4 icon-strip items × title/body, 5 WhatsApp templates, 11 UI strings) · site strings 196 · image alt text 26 · **total 254**. Not translated (names): WhatsApp, Indoco Jaya Raya, PT Indoco Jaya Raya.
+Counts per locale (zh / vi / hi each): hero headline 1 · landing page 32 (why-choose label + heading + 3 cards × title/body, 4 icon-strip items × title/body, 5 WhatsApp templates, 11 UI strings) · site strings 196 · image alt text 26 · **total 255**. Not translated (names): WhatsApp, Indoco Jaya Raya, PT Indoco Jaya Raya.
 
 ## Client pending
 - **Real trust stats (optional).** No stats ship: the mock numbers were removed. `home.stats` stays in the CMS; the row is hidden until the client supplies confirmed numbers (1–3 re-centre).
@@ -20,10 +20,11 @@ Counts per locale (zh / vi / hi each): hero headline 1 · landing page 31 (why-c
 
 ## Landing page v1 (src/lib/fixtures.ts). All 5 locales are drafts
 
-Why choose us (ui.whyChooseUs + whyChoose: title, body), icon strip (iconStrip: title, body), the 5 contextual WhatsApp templates (siteSettings.waTemplates) and new UI strings. No numbers, certification or sustainability claims.
+Why choose us (ui.whyChooseUs + whyChoose: title, body), icon strip (iconStrip: title, body), the 5 contextual WhatsApp templates (siteSettings.waTemplates) and new UI strings. No numbers, certification or sustainability claims. The zh / vi / hi of `ui.whyChooseLabel` and of the 5 WhatsApp messages live in `src/lib/i18n-drafts.ts` (keyed by the Indonesian text); the messages stay hardcoded until they move to the CMS (post-launch).
 
 | key | id | en | zh | vi | hi |
 |---|---|---|---|---|---|
+| ui.whyChooseLabel | Keunggulan kami | Why work with us | 我们的优势 | Thế mạnh của chúng tôi | हमारी ख़ूबियाँ |
 | ui.whyChooseUs | Mengapa memilih kami | Why choose us | 为何选择我们 | Vì sao chọn chúng tôi | हमें क्यों चुनें |
 | whyChoose.sort.title | Sortir kualitas sebelum pengiriman | Quality sorting before shipment | 发货前品质分拣 | Phân loại chất lượng trước khi giao hàng | शिपमेंट से पहले गुणवत्ता छँटाई |
 | whyChoose.sort.body | Komoditi disortir sebelum dikirim agar sesuai kebutuhan pembeli. | Commodities are sorted before they ship, to match what buyers need. | 农产品在发货前经过分拣，以符合买家需求。 | Nông sản được phân loại trước khi giao để phù hợp với nhu cầu người mua. | भेजने से पहले जिंसों की छँटाई की जाती है, ताकि वे ख़रीदार की ज़रूरत के अनुरूप हों। |

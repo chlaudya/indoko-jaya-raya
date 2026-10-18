@@ -91,7 +91,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <PurposeBand
         continued
         label={pickLocale(ui.ourMission, locale)}
-        title={pickLocale(content.introStatement, locale)}
         points={v2.missionPoints.map((p) => pickLocale(p, locale))}
       />
 
@@ -132,6 +131,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* 6 · Why choose us (3 reasons) + stats (only real, filled ones) + descriptive icon strip */}
       <TrustSection
         locale={locale}
+        label={pickLocale(ui.whyChooseLabel, locale)}
         title={pickLocale(ui.whyChooseUs, locale)}
         statsLabel={pickLocale(ui.keyFacts, locale)}
         points={whyChoose}
@@ -155,6 +155,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <div className="mt-10 lg:mt-12">
             <CommodityTabs
               label={pickLocale(ui.browseByCategory, locale)}
+              listLabel={pickLocale(pages.productsIndex.heroTitle, locale)}
               allLabel={pickLocale(ui.allCategories, locale)}
               tabs={commodityTabs}
               items={commodityList.map((product) => ({

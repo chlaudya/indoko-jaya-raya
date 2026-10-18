@@ -1,4 +1,5 @@
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
+import { preload } from "react-dom";
 import { pickLocale, type Locale } from "@/lib/i18n";
 import { IMAGES, type ImageKey } from "@/lib/images";
 import { ui } from "@/lib/fixtures";
@@ -159,6 +160,13 @@ export function HeroFullBleed({
       )}
     </div>
   );
+
+  // LCP: slide 1 is preloaded at high fetch priority. Same src / srcset / sizes as HeroSlider's first <Image>, so React
+  // dedupes it with next/image's own (low-priority) preload and the browser reuses this response for the <img>.
+  if (isSlider && slides?.[0]) {
+    const first = getImageProps({ src: IMAGES[slides[0].image].src, alt: "", fill: true, sizes: "100vw" }).props;
+    preload(first.src, { as: "image", fetchPriority: "high", imageSrcSet: first.srcSet, imageSizes: first.sizes });
+  }
 
   return (
     <section

@@ -1,40 +1,27 @@
 import type { Metadata } from "next"
-import { Cormorant_Garamond, Inter, Noto_Serif_Devanagari, Noto_Serif_SC } from "next/font/google"
+import { Cormorant_Garamond, Inter } from "next/font/google"
 import { headers } from "next/headers"
 import { isLocale } from "@/lib/i18n"
 import "./globals.css"
 
+// `subsets` = what is PRELOADED. Only latin is preloaded (keeps bandwidth for the LCP hero photo); latin-ext and
+// vietnamese faces stay in the CSS via unicode-range and download only on pages that use those glyphs (e.g. /vi).
 const inter = Inter({
-  subsets: ["latin", "latin-ext", "vietnamese"],
+  subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
 })
 
 const cormorant = Cormorant_Garamond({
-  subsets: ["latin", "latin-ext", "vietnamese"],
+  subsets: ["latin"],
   weight: ["500", "600"],
   style: ["normal", "italic"],
   variable: "--font-cormorant",
   display: "swap",
 })
 
-// zh / hi headings (Cormorant has no CJK or Devanagari glyphs). Not preloaded, and the variable is only set on
-// <html> for that locale, so other locales never fetch these files; Google's unicode-range slices keep zh downloads to
-// the glyphs actually used.
-const notoSerifSC = Noto_Serif_SC({
-  weight: ["500", "600"],
-  variable: "--font-noto-serif-sc",
-  display: "swap",
-  preload: false,
-})
-
-const notoSerifDeva = Noto_Serif_Devanagari({
-  subsets: ["devanagari"],
-  weight: ["500", "600"],
-  variable: "--font-noto-serif-deva",
-  display: "swap",
-  preload: false,
-})
+// zh / hi headings use system serif stacks (globals.css): no CJK / Devanagari webfont download, and any character
+// the CMS adds later still renders (no subsetting).
 
 const htmlLang: Record<string, string> = {
   id: "id",
@@ -60,7 +47,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html
       lang={lang}
-      className={`${inter.variable} ${cormorant.variable} ${raw === "zh" ? notoSerifSC.variable : ""} ${raw === "hi" ? notoSerifDeva.variable : ""}`}
+      className={`${inter.variable} ${cormorant.variable}`}
     >
       <body>{children}</body>
     </html>

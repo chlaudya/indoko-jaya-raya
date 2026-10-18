@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { CardRail } from "./CardRail"
 
 /**
  * Home commodity filter: chips (toggle buttons, 6px radius, selected solid forest) over server-rendered cards.
@@ -8,11 +9,14 @@ import { useState } from "react"
  */
 export function CommodityTabs({
   label,
+  listLabel,
   allLabel,
   tabs,
   items,
 }: {
   label: string
+  /** Accessible name of the card list (the section heading). */
+  listLabel: string
   allLabel: string
   tabs: { slug: string; label: string }[]
   items: { key: string; category: string; node: React.ReactNode }[]
@@ -43,11 +47,14 @@ export function CommodityTabs({
           {tabs.map((tab) => chip(tab.slug, tab.label))}
         </div>
       )}
-      <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {visible.map((item) => (
-          <li key={item.key}>{item.node}</li>
-        ))}
-      </ul>
+      {/* Phones: swipe rail (scroll-snap); md+: the 2/3/4-column grid. */}
+      <div className="mt-8">
+        <CardRail label={listLabel} gridFrom="md">
+          {visible.map((item) => (
+            <li key={item.key}>{item.node}</li>
+          ))}
+        </CardRail>
+      </div>
     </div>
   )
 }
