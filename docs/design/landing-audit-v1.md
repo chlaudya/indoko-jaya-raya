@@ -32,5 +32,9 @@ build follows the PM (marked **PM**). Before screenshots: `/workspace/indoco-scr
 | WA banner (InquirySection) | Full width #123b2a, headline `--text-h2` cols 1–7, solid white 56px button, reassurance line, 96px padding, own message. Most prominent CTA on the page. |
 | Footer (SiteFooter) | Brand · Navigasi · Komoditi · Kontak; links 15px #d9e0d4, line-height 1.9; contact rows with icons; phone / email "Menyusul" until client-confirmed; © bottom bar. 4 → 2 → 1 columns. |
 
+## Pre-launch speed (target: mobile LCP ≤ 2.5s on every locale)
+- Current (8ec67d4, Lighthouse mobile median): `/id` ~3.5s, `/zh` ~3.5s, `/hi` ~3.5s, `/vi` ~4.6s (accepted for now, PM 18 Oct).
+- `/vi`: LCP is the hero photo, delayed by ~175KB of vi/latin-ext font files (Cormorant upright + italic, Inter; Inter latin-ext alone ~84KB ≈ 0.55s). Preloading them does not move LCP (tested: 4.5–4.6s; FCP 2.4s → 0.9s only). Fix in the speed pass by cutting font bytes, e.g. a self-hosted smaller Inter build or system sans for body text on `/vi`.
+
 ## Post-launch
 - Move WhatsApp messages to CMS: `homeHero`, `homeDrying`, `homeBanner`, `productCard` and `productPage` are hardcoded in `src/lib/fixtures.ts` (`siteSettings.waTemplates`, id/en) with zh/vi/hi drafts in `src/lib/i18n-drafts.ts`; `settings.waTemplates` in Sanity has no fields for them yet.
