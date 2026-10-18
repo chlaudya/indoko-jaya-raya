@@ -95,7 +95,7 @@ export default async function ProductDetailPage({
               <h1 className="display display-h1 mt-4 text-forest">{name}</h1>
               <p className="mt-6 text-lg leading-relaxed text-muted">{intro}</p>
               <div className="mt-8">
-                <WaButton locale={locale} templateKey="product" tokens={{ productName: name }} label={askLabel} />
+                <WaButton locale={locale} templateKey="productPage" tokens={{ productName: name }} label={askLabel} />
               </div>
               {overview !== intro && (
                 <div className="mt-10 border-t border-charcoal/10 pt-8">
@@ -133,7 +133,7 @@ export default async function ProductDetailPage({
         </section>
       )}
 
-      <InquirySection locale={locale} title={askLabel} templateKey="product" tokens={{ productName: name }} label={askLabel} />
+      <InquirySection locale={locale} title={askLabel} templateKey="productPage" tokens={{ productName: name }} label={askLabel} />
     </article>
   )
 }

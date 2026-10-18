@@ -58,7 +58,7 @@ export const settings = defineType({
       type: "object",
       fields: [
         { name: "home", type: "localeText" },
-        { name: "product", type: "localeText", description: "Use {{productName}}" },
+        { name: "productPage", title: "Product page", type: "localeText", description: "Product detail page CTAs. Use {{productName}}" },
         { name: "drying", type: "localeText" },
         { name: "career", type: "localeText", description: "Use {{jobTitle}}" },
         { name: "contact", type: "localeText" },

@@ -14,10 +14,6 @@ export const siteSettings = {
       id: "Halo Indoco Jaya Raya, saya ingin mengetahui lebih lanjut tentang perusahaan Anda.",
       en: "Hello Indoco Jaya Raya, I would like to learn more about your company.",
     },
-    product: {
-      id: "Halo, saya tertarik dengan produk {{productName}}. Mohon informasinya.",
-      en: "Hello, I am interested in {{productName}}. Please share details.",
-    },
     drying: {
       id: "Halo, saya ingin konsultasi Jasa Penjemuran Komoditi.",
       en: "Hello, I would like to consult about commodity drying services.",
@@ -53,6 +49,13 @@ export const siteSettings = {
       hi: "नमस्ते Indoco Jaya Raya, यह संदेश आपकी वेबसाइट के होम पेज के नीचे दिए WhatsApp बटन से है। मुझे अपनी जिंस या आपूर्ति ज़रूरतों पर बात करनी है।",
     },
     // Commodity cards (Home + Katalog): product name in the page language.
+    productPage: {
+      id: "Halo Indoco Jaya Raya, saya tertarik dengan {{productName}} yang saya lihat di halaman produk website Anda. Mohon informasi lebih lanjut.",
+      en: "Hello Indoco Jaya Raya, I'm interested in {{productName}}, which I saw on the product page of your website. Please share more details.",
+      zh: "您好，Indoco Jaya Raya，我在贵公司网站的产品页面上看到{{productName}}，很感兴趣，请提供更多信息。",
+      vi: "Xin chào Indoco Jaya Raya, tôi quan tâm đến {{productName}} mà tôi thấy trên trang sản phẩm của website bạn. Vui lòng cho tôi biết thêm thông tin.",
+      hi: "नमस्ते Indoco Jaya Raya, मैंने आपकी वेबसाइट के उत्पाद पेज पर {{productName}} देखा और मुझे इसमें रुचि है। कृपया और जानकारी साझा करें।",
+    },
     productCard: {
       id: "Halo Indoco Jaya Raya, saya tertarik dengan {{productName}} yang saya lihat di daftar komoditi website Anda. Mohon informasi lebih lanjut.",
       en: "Hello Indoco Jaya Raya, I'm interested in {{productName}}, which I saw in the commodity list on your website. Please share more details.",

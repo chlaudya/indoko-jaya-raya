@@ -4,7 +4,7 @@ Status: **DRAFT**. Machine-assisted zh / vi / hi translations for every string t
 
 How it works: `pickLocale` (src/lib/i18n.ts) uses an explicit locale value (fixture or Sanity) first, then `src/lib/i18n-drafts.ts` (keyed by the Indonesian text), then Indonesian. To approve or correct a string, enter it in Sanity / on the fixture, or edit the drafts file. If the Indonesian source changes, its draft stops matching and that locale falls back to Indonesian again.
 
-Counts per locale (zh / vi / hi each): hero headline 1 · landing page 30 (why-choose heading + 3 cards × title/body, 4 icon-strip items × title/body, 4 WhatsApp templates, 11 UI strings) · site strings 197 · image alt text 26 · **total 254**. Not translated (names): WhatsApp, Indoco Jaya Raya, PT Indoco Jaya Raya.
+Counts per locale (zh / vi / hi each): hero headline 1 · landing page 31 (why-choose heading + 3 cards × title/body, 4 icon-strip items × title/body, 5 WhatsApp templates, 11 UI strings) · site strings 196 · image alt text 26 · **total 254**. Not translated (names): WhatsApp, Indoco Jaya Raya, PT Indoco Jaya Raya.
 
 ## Client pending
 - **Real trust stats (optional).** No stats ship: the mock numbers were removed. `home.stats` stays in the CMS; the row is hidden until the client supplies confirmed numbers (1–3 re-centre).
@@ -20,7 +20,7 @@ Counts per locale (zh / vi / hi each): hero headline 1 · landing page 30 (why-c
 
 ## Landing page v1 (src/lib/fixtures.ts). All 5 locales are drafts
 
-Why choose us (ui.whyChooseUs + whyChoose: title, body), icon strip (iconStrip: title, body), the 4 contextual WhatsApp templates (siteSettings.waTemplates) and new UI strings. No numbers, certification or sustainability claims.
+Why choose us (ui.whyChooseUs + whyChoose: title, body), icon strip (iconStrip: title, body), the 5 contextual WhatsApp templates (siteSettings.waTemplates) and new UI strings. No numbers, certification or sustainability claims.
 
 | key | id | en | zh | vi | hi |
 |---|---|---|---|---|---|
@@ -43,6 +43,7 @@ Why choose us (ui.whyChooseUs + whyChoose: title, body), icon strip (iconStrip: 
 | waTemplates.homeDrying | Halo Indoco Jaya Raya, saya menghubungi Anda dari bagian Jasa Penjemuran di halaman utama website. Saya ingin mendiskusikan kebutuhan penjemuran komoditi saya. | Hello Indoco Jaya Raya, I'm contacting you from the Drying Service section on your home page. I'd like to discuss my commodity drying needs. | 您好，Indoco Jaya Raya，我从网站首页的晾晒服务栏目联系您，想洽谈我的农产品晾晒需求。 | Xin chào Indoco Jaya Raya, tôi liên hệ từ mục Dịch vụ phơi sấy trên trang chủ website. Tôi muốn trao đổi về nhu cầu phơi sấy nông sản của mình. | नमस्ते Indoco Jaya Raya, यह संदेश आपकी वेबसाइट के होम पेज के 'सुखाने की सेवा' भाग से है। मुझे अपनी जिंस सुखाने की ज़रूरतों पर चर्चा करनी है। |
 | waTemplates.homeBanner | Halo Indoco Jaya Raya, saya menghubungi Anda dari tombol WhatsApp di bagian bawah halaman utama website. Saya ingin membicarakan kebutuhan komoditi atau pasokan saya. | Hello Indoco Jaya Raya, I'm contacting you from the WhatsApp button at the bottom of your home page. I'd like to talk about my commodity or supply needs. | 您好，Indoco Jaya Raya，我通过网站首页底部的 WhatsApp 按钮联系您，想洽谈我的农产品或供应需求。 | Xin chào Indoco Jaya Raya, tôi liên hệ qua nút WhatsApp ở cuối trang chủ website. Tôi muốn trao đổi về nhu cầu nông sản hoặc nguồn cung của mình. | नमस्ते Indoco Jaya Raya, यह संदेश आपकी वेबसाइट के होम पेज के नीचे दिए WhatsApp बटन से है। मुझे अपनी जिंस या आपूर्ति ज़रूरतों पर बात करनी है। |
 | waTemplates.productCard | Halo Indoco Jaya Raya, saya tertarik dengan {{productName}} yang saya lihat di daftar komoditi website Anda. Mohon informasi lebih lanjut. | Hello Indoco Jaya Raya, I'm interested in {{productName}}, which I saw in the commodity list on your website. Please share more details. | 您好，Indoco Jaya Raya，我在贵公司网站的农产品列表中看到{{productName}}，很感兴趣，请提供更多信息。 | Xin chào Indoco Jaya Raya, tôi quan tâm đến {{productName}} mà tôi thấy trong danh sách nông sản trên website của bạn. Vui lòng cho tôi biết thêm thông tin. | नमस्ते Indoco Jaya Raya, मैंने आपकी वेबसाइट की जिंस सूची में {{productName}} देखा और मुझे इसमें रुचि है। कृपया और जानकारी साझा करें। |
+| waTemplates.productPage | Halo Indoco Jaya Raya, saya tertarik dengan {{productName}} yang saya lihat di halaman produk website Anda. Mohon informasi lebih lanjut. | Hello Indoco Jaya Raya, I'm interested in {{productName}}, which I saw on the product page of your website. Please share more details. | 您好，Indoco Jaya Raya，我在贵公司网站的产品页面上看到{{productName}}，很感兴趣，请提供更多信息。 | Xin chào Indoco Jaya Raya, tôi quan tâm đến {{productName}} mà tôi thấy trên trang sản phẩm của website bạn. Vui lòng cho tôi biết thêm thông tin. | नमस्ते Indoco Jaya Raya, मैंने आपकी वेबसाइट के उत्पाद पेज पर {{productName}} देखा और मुझे इसमें रुचि है। कृपया और जानकारी साझा करें। |
 | ui.ourServices | Layanan kami | Our services | 我们的服务 | Dịch vụ của chúng tôi | हमारी सेवाएँ |
 | ui.askViaWhatsApp | Tanya via WhatsApp | Ask on WhatsApp | 通过 WhatsApp 咨询 | Hỏi qua WhatsApp | WhatsApp पर पूछें |
 | ui.askAboutVia | Tanya tentang {product} via WhatsApp | Ask about {product} on WhatsApp | 通过 WhatsApp 咨询{product} | Hỏi về {product} qua WhatsApp | {product} के बारे में WhatsApp पर पूछें |
@@ -55,12 +56,11 @@ Why choose us (ui.whyChooseUs + whyChoose: title, body), icon strip (iconStrip: 
 | ui.bannerCta | Hubungi kami via WhatsApp | Contact us on WhatsApp | 通过 WhatsApp 联系我们 | Liên hệ qua WhatsApp | WhatsApp पर संपर्क करें |
 | ui.bannerReassure | Pesan Anda langsung masuk ke WhatsApp tim kami. | Your message goes straight to our team's WhatsApp. | 您的消息将直接发送到我们团队的 WhatsApp。 | Tin nhắn của bạn được gửi thẳng đến WhatsApp của đội ngũ chúng tôi. | आपका संदेश सीधे हमारी टीम के WhatsApp पर पहुँचता है। |
 
-## Site strings (197, src/lib/i18n-drafts.ts)
+## Site strings (196, src/lib/i18n-drafts.ts)
 
 | id | zh | vi | hi |
 |---|---|---|---|
 | Halo Indoco Jaya Raya, saya ingin mengetahui lebih lanjut tentang perusahaan Anda. | 您好，Indoco Jaya Raya，我想进一步了解贵公司。 | Xin chào Indoco Jaya Raya, tôi muốn tìm hiểu thêm về công ty của bạn. | नमस्ते Indoco Jaya Raya, मुझे आपकी कंपनी के बारे में और जानकारी चाहिए। |
-| Halo, saya tertarik dengan produk {{productName}}. Mohon informasinya. | 您好，我对 {{productName}} 感兴趣，请提供相关信息。 | Xin chào, tôi quan tâm đến sản phẩm {{productName}}. Vui lòng cho tôi biết thêm thông tin. | नमस्ते, मुझे {{productName}} में रुचि है। कृपया जानकारी साझा करें। |
 | Halo, saya ingin konsultasi Jasa Penjemuran Komoditi. | 您好，我想咨询农产品晾晒服务。 | Xin chào, tôi muốn được tư vấn về dịch vụ phơi sấy nông sản. | नमस्ते, मुझे जिंस सुखाने की सेवा के बारे में परामर्श चाहिए। |
 | Halo, saya ingin melamar posisi {{jobTitle}}. | 您好，我想应聘 {{jobTitle}} 职位。 | Xin chào, tôi muốn ứng tuyển vị trí {{jobTitle}}. | नमस्ते, मुझे {{jobTitle}} पद के लिए आवेदन करना है। |
 | Halo Indoco Jaya Raya, saya ingin menghubungi tim Anda. | 您好，Indoco Jaya Raya，我想联系贵团队。 | Xin chào Indoco Jaya Raya, tôi muốn liên hệ với đội ngũ của bạn. | नमस्ते Indoco Jaya Raya, मुझे आपकी टीम से संपर्क करना है। |

@@ -14,11 +14,11 @@ export const waCta = defineType({
       name: "templateKey",
       title: "Message template key",
       type: "string",
-      description: "Maps to settings.waTemplates (home | product | drying | career | contact | custom)",
+      description: "Maps to settings.waTemplates (home | productPage | drying | career | contact | custom)",
       options: {
         list: [
           { title: "Home", value: "home" },
-          { title: "Product inquiry", value: "product" },
+          { title: "Product page inquiry", value: "productPage" },
           { title: "Drying service", value: "drying" },
           { title: "Career apply", value: "career" },
           { title: "Contact", value: "contact" },

@@ -2,7 +2,7 @@ import type { Locale } from "./i18n"
 import { pickLocale } from "./i18n"
 import { siteSettings } from "./fixtures"
 
-/** Any key of siteSettings.waTemplates (home, product, drying, career, contact, homeHero, homeDrying, homeBanner, productCard…). */
+/** Any key of siteSettings.waTemplates (home, drying, career, contact, homeHero, homeDrying, homeBanner, productCard, productPage…). */
 export type TemplateKey = string
 
 /** The prefilled text for a template (exported so audits can list the decoded messages). */
