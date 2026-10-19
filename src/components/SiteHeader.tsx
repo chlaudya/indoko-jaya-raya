@@ -9,6 +9,7 @@ import { buildWhatsAppUrl } from "@/lib/whatsapp"
 import { LanguageMenu, swapLocalePath } from "./LanguageSwitcher"
 import { MegaMenu, NavDropdown, navLinkClass } from "./MegaMenu"
 import { WhatsAppIcon, buttonClass } from "./WaButton"
+import { BrandMark } from "./BrandMark"
 
 function itemHref(locale: Locale, href: string) {
   if (href.startsWith("#")) return `/${locale}${href}`
@@ -17,14 +18,8 @@ function itemHref(locale: Locale, href: string) {
 
 function Logo({ locale }: { locale: Locale }) {
   return (
-    <Link href={`/${locale}`} className="flex min-h-11 shrink-0 items-center gap-2.5 rounded-lg text-forest">
-      <span aria-hidden="true" className="grid size-9 place-items-center rounded-full bg-forest text-sm font-semibold text-ivory">
-        IJ
-      </span>
-      <span className="leading-none">
-        <span className="block text-[0.95rem] font-semibold tracking-[0.14em] uppercase">Indoco</span>
-        <span className="mt-1 block text-[0.65rem] font-medium tracking-[0.22em] text-muted uppercase">Jaya Raya</span>
-      </span>
+    <Link href={`/${locale}`} className="flex min-h-11 shrink-0 items-center rounded-lg">
+      <BrandMark variant="header" />
     </Link>
   )
 }

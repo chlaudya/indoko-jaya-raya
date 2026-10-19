@@ -1,5 +1,111 @@
 [
   {
+    "name": "../brand/apel-logo.svg",
+    "source": "client logo (APEL Group), prepared by the designer",
+    "kind": "brand",
+    "viewBox": "9 12 470 353",
+    "kb": 22.7,
+    "pass": true,
+    "origin": "client-supplied",
+    "note": "SiteHeader mark via BrandMark (56px desktop / 48px mobile), alt=\"PT Indoco Jaya Raya\""
+  },
+  {
+    "name": "../brand/apel-logo-knockout.svg",
+    "source": "client logo (APEL Group), prepared by the designer",
+    "kind": "brand",
+    "viewBox": "9 12 470 353",
+    "kb": 13.0,
+    "pass": true,
+    "origin": "client-supplied",
+    "note": "SiteFooter mark via BrandMark (72px), apple knocked out to the footer background"
+  },
+  {
+    "name": "../brand/apel-logo.png",
+    "source": "client logo (APEL Group), prepared by the designer",
+    "kind": "brand",
+    "width": 480,
+    "height": 361,
+    "kb": 23.5,
+    "pass": true,
+    "origin": "client-supplied",
+    "note": "PNG fallback/source of apel-logo.svg"
+  },
+  {
+    "name": "../brand/apel-logo-knockout.png",
+    "source": "client logo (APEL Group), prepared by the designer",
+    "kind": "brand",
+    "width": 480,
+    "height": 361,
+    "kb": 20.5,
+    "pass": true,
+    "origin": "client-supplied",
+    "note": "PNG fallback/source of apel-logo-knockout.svg"
+  },
+  {
+    "name": "../brand/apel-icon-512.png",
+    "source": "client logo (APEL Group), prepared by the designer",
+    "kind": "brand",
+    "width": 512,
+    "height": 512,
+    "kb": 23.8,
+    "pass": true,
+    "origin": "client-supplied",
+    "note": "512 icon (metadata icons) and source of src/app/opengraph-image.png / twitter-image.png"
+  },
+  {
+    "name": "../brand/icon-192.png",
+    "source": "client logo (APEL Group), prepared by the designer",
+    "kind": "brand",
+    "width": 192,
+    "height": 192,
+    "kb": 8.2,
+    "pass": true,
+    "origin": "client-supplied",
+    "note": "192 icon (metadata icons)"
+  },
+  {
+    "name": "../brand/favicon-32.png",
+    "source": "client logo (APEL Group), prepared by the designer",
+    "kind": "brand",
+    "width": 32,
+    "height": 32,
+    "kb": 1.2,
+    "pass": true,
+    "origin": "client-supplied",
+    "note": "32 icon (metadata icons)"
+  },
+  {
+    "name": "../brand/apple-touch-icon.png",
+    "source": "client logo (APEL Group), prepared by the designer",
+    "kind": "brand",
+    "width": 180,
+    "height": 180,
+    "kb": 6.9,
+    "pass": true,
+    "origin": "client-supplied",
+    "note": "apple-touch-icon 180 (metadata icons.apple)"
+  },
+  {
+    "name": "../brand/favicon.ico",
+    "source": "client logo (APEL Group), prepared by the designer",
+    "kind": "brand",
+    "kb": 4.7,
+    "pass": true,
+    "origin": "client-supplied",
+    "note": "16/32/48 ICO, also copied to src/app/favicon.ico"
+  },
+  {
+    "name": "../../../src/app/opengraph-image.png",
+    "source": "rendered from brand/apel-icon-512.png, centred on #123b2a",
+    "kind": "social",
+    "width": 1200,
+    "height": 630,
+    "kb": 20.7,
+    "pass": true,
+    "origin": "client-supplied",
+    "note": "OG + twitter-image (identical), logo only, no text"
+  },
+  {
     "name": "hero-peanut-drying-yard.webp",
     "source": "IMG_8864.HEIC",
     "kind": "hero",

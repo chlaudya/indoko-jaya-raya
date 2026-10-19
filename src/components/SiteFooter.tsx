@@ -5,6 +5,7 @@ import { products, redesign, siteSettings, ui, visiblePhone } from "@/lib/fixtur
 import { buildWhatsAppUrl } from "@/lib/whatsapp"
 import { LanguageSwitcher } from "./LanguageSwitcher"
 import { WhatsAppIcon } from "./WaButton"
+import { BrandMark } from "./BrandMark"
 
 const linkClass =
   "inline-flex min-h-10 items-center text-[0.9375rem] leading-[1.9] text-[#d9e0d4] hover:text-white hover:underline hover:underline-offset-4"
@@ -63,14 +64,8 @@ export function SiteFooter({ locale }: { locale: Locale }) {
       <div className="site-wrap relative pt-16 pb-8 lg:pt-20">
         <div className="grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-12">
           <div className="col-span-2 md:col-span-1 lg:col-span-4">
-            <Link href={`/${locale}`} className="inline-flex min-h-11 items-center gap-3 text-white">
-              <span aria-hidden="true" className="grid size-10 place-items-center rounded-full bg-ivory text-sm font-semibold text-forest">
-                IJ
-              </span>
-              <span className="text-sm leading-tight font-semibold tracking-[0.16em] uppercase">
-                Indoco
-                <span className="block text-[0.6875rem] font-medium tracking-[0.2em] text-[#d9e0d4]">Jaya Raya</span>
-              </span>
+            <Link href={`/${locale}`} className="inline-flex min-h-11 items-center">
+              <BrandMark variant="footer" />
             </Link>
             <p className="display mt-5 max-w-sm text-[1.375rem] leading-snug text-white">{t(redesign.tagline)}</p>
             <p className="mt-3 max-w-sm text-[0.9375rem] leading-relaxed text-[#d9e0d4]">{t(siteSettings.companyShortBlurb)}</p>
