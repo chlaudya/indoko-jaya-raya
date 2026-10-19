@@ -13,7 +13,7 @@ export const home = defineType({
       name: "trustPoints",
       title: "Why choose us cards",
       description:
-        "Up to 3 reasons (icon key: sort, farmers, sun, grain, globe, leaf). Title + body in all 5 locales; empty zh/vi/hi fall back to the draft translations, then Indonesian. Leave empty to use the default (draft) copy. No certification, sustainability or numeric claims.",
+        "Up to 3 reasons (icon key: sort, price, fleet, farmers, sun, grain, globe, leaf). Title + body in all 5 locales; empty zh/vi/hi fall back to the draft translations, then Indonesian. Leave empty to use the default (draft) copy. No certification, sustainability or numeric claims.",
       type: "array",
       of: [{ type: "trustPoint" }],
       validation: (Rule) => Rule.max(3),
@@ -22,7 +22,7 @@ export const home = defineType({
       name: "iconStrip",
       title: "Icon strip (under Why choose us)",
       description:
-        "Up to 4 short descriptive items (e.g. Petani & Pemasok, Komoditi, Pasar, Keberlanjutan) with an icon key (farmers, grain, globe, leaf, sort, sun). No numbers or claims. Leave empty to use the default (draft) copy.",
+        "Up to 4 short descriptive items (e.g. Petani & Pemasok, Komoditi, Pasar, Keberlanjutan) with an icon key (person, flower, globe, leaf, farmers, grain, sort, sun). No numbers or claims. Leave empty to use the default (draft) copy.",
       type: "array",
       of: [{ type: "trustPoint" }],
       validation: (Rule) => Rule.max(4),
@@ -43,7 +43,7 @@ export const home = defineType({
       name: "heroSlides",
       title: "Hero photo slider (optional)",
       description:
-        "Up to 5 photos; each holds 2s, then a 0.6s crossfade, looping behind the fixed headline (no visible controls). Leave empty to use the designer's defaults (client photos), in order: hero-cashew-sorters, hero-corn-hands, hero-farmer-sky, hero-raw-cashews, hero-peanuts-tarp. Set the image hotspot on faces: it becomes the crop focal point.",
+        "Up to 5 photos; each holds 2s, then a 0.6s crossfade, looping behind the fixed headline (no visible controls). Leave empty to use the defaults, in order: farmer sorting, corn, farmer against the sky, cashew, peanuts on a tarp. Set the image hotspot on faces: it becomes the crop focal point.",
       type: "array",
       of: [
         defineArrayMember({

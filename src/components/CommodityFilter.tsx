@@ -1,13 +1,17 @@
+"use client"
+
+import { useRouter } from "next/navigation"
+import { useEffect, type FormEvent } from "react"
 import Link from "next/link"
 import { pickLocale, type Locale } from "@/lib/i18n"
 import { categories, ui } from "@/lib/fixtures"
 
-function catalogHref(locale: Locale, category?: string, q?: string) {
+function catalogHref(base: string, category?: string, q?: string, hash?: string) {
   const params = new URLSearchParams()
   if (category) params.set("category", category)
   if (q) params.set("q", q)
   const query = params.toString()
-  return `/${locale}/products${query ? `?${query}` : ""}`
+  return `${base}${query ? `?${query}` : ""}${hash ? `#${hash}` : ""}`
 }
 
 function chipClass(active: boolean) {
@@ -27,17 +31,44 @@ export function CommodityFilter({
   locale,
   category,
   q,
+  basePath,
+  hash,
+  embedded = false,
 }: {
   locale: Locale
   category?: string
   q?: string
+  /** Page the chips and search submit to. Defaults to the catalog. */
+  basePath?: string
+  /** Hash kept on chip links so an embedded filter returns to its section. */
+  hash?: string
+  /** In-flow bar. The catalog uses the sticky bar that overlaps the hero. */
+  embedded?: boolean
 }) {
-  return (
-    <div className="sticky top-[var(--filter-sticky-top)] z-30">
-      <div className="site-wrap">
-        <div className="-mt-12 flex flex-col gap-4 rounded-[8px] border border-charcoal/10 bg-white p-4 lg:-mt-14 lg:flex-row lg:items-center lg:justify-between lg:p-5">
+  const router = useRouter()
+  const base = basePath ?? `/${locale}/products`
+  const href = (nextCategory?: string) => catalogHref(base, nextCategory, q, hash)
+
+  // A native GET submit strips the hash, so the home page reloads at the top.
+  useEffect(() => {
+    if (!hash || window.location.hash !== `#${hash}`) return
+    document.getElementById(hash)?.scrollIntoView()
+  }, [hash, q, category])
+
+  function onSearch(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    const data = new FormData(event.currentTarget)
+    const nextQ = String(data.get("q") ?? "").trim()
+    const nextCategory = String(data.get("category") ?? "") || undefined
+    const url = catalogHref(base, nextCategory, nextQ || undefined, hash)
+    router.push(url, { scroll: false })
+    if (hash) document.getElementById(hash)?.scrollIntoView()
+  }
+
+  const bar = (
+    <div className="flex flex-col gap-4 rounded-[8px] border border-charcoal/10 bg-white p-4 lg:flex-row lg:items-center lg:justify-between lg:p-5">
           <nav aria-label={pickLocale(ui.ourCommodities, locale)} className="no-scrollbar -mx-1 flex gap-2 overflow-x-auto px-1">
-            <Link href={catalogHref(locale, undefined, q)} aria-current={!category ? "true" : undefined} className={chipClass(!category)}>
+            <Link href={href()} aria-current={!category ? "true" : undefined} className={chipClass(!category)}>
               {pickLocale(ui.allCategories, locale)}
             </Link>
             {categories.map((item) => {
@@ -45,7 +76,7 @@ export function CommodityFilter({
               return (
                 <Link
                   key={item.slug}
-                  href={catalogHref(locale, item.slug, q)}
+                  href={href(item.slug)}
                   aria-current={active ? "true" : undefined}
                   className={chipClass(active)}
                 >
@@ -54,7 +85,7 @@ export function CommodityFilter({
               )
             })}
           </nav>
-          <form action={`/${locale}/products`} method="get" role="search" className="flex shrink-0 items-center gap-2">
+          <form action={base} method="get" role="search" onSubmit={onSearch} className="flex shrink-0 items-center gap-2">
             {category && <input type="hidden" name="category" value={category} />}
             <label className="sr-only" htmlFor="commodity-search">
               {pickLocale(ui.searchCommodities, locale)}
@@ -71,7 +102,13 @@ export function CommodityFilter({
               {pickLocale(ui.searchAction, locale)}
             </button>
           </form>
-        </div>
+    </div>
+  )
+  if (embedded) return bar
+  return (
+    <div className="sticky top-[var(--filter-sticky-top)] z-30">
+      <div className="site-wrap">
+        <div className="-mt-12 lg:-mt-14">{bar}</div>
       </div>
     </div>
   )

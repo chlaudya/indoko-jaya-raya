@@ -3,6 +3,7 @@ import { preload } from "react-dom";
 import { pickLocale, type Locale } from "@/lib/i18n";
 import { IMAGES, type ImageKey } from "@/lib/images";
 import { ui } from "@/lib/fixtures";
+import { HeroCollage } from "./HeroCollage";
 import { HeroSlider } from "./HeroSlider";
 
 /**
@@ -30,29 +31,14 @@ const slidePosition = (slide: HeroSlideRef) =>
 
 /**
  * Home hero: the photo layers fill the whole hero; the overlay holds the scrim and the copy.
- * Height --hero-h = max(600px, min(88svh, 820px)).
+ * Height --hero-h = 100svh.
  */
 const TALL_PHOTO = "absolute inset-0";
 const TALL_OVERLAY = "hero-overlay absolute inset-0 flex flex-col";
 
-/**
- * Contrast scrim in brand forest (no curve, no lime band). ≥1024px: left → right, rgba(18,59,42) .92 at 0%,
- * .6 at 40%, clear at 65% (designer spec), so the subject on the right stays clear. Phones / tablets: the copy sits
- * at the bottom, so the scrim runs bottom → top instead.
- */
+/** Even darkening over the whole slide so white copy reads on any photo. */
 function HeroScrim() {
-  return (
-    <>
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(18,59,42,0.94)_0%,rgba(18,59,42,0.9)_max(45%,400px),rgba(18,59,42,0.5)_max(66%,500px),rgba(18,59,42,0)_max(84%,600px))] lg:hidden"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 hidden bg-[linear-gradient(90deg,rgba(18,59,42,0.92)_0%,rgba(18,59,42,0.84)_40%,rgba(18,59,42,0.68)_54%,rgba(18,59,42,0.25)_66%,rgba(18,59,42,0)_78%)] lg:block"
-      />
-    </>
-  );
+  return <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-black/45" />;
 }
 
 /** Copy on the 12-col grid: cols 1–6 on desktop, bottom-aligned on phones / tablets, below the floating header. */
@@ -89,7 +75,9 @@ function renderEmphasis(title: string, phrase?: string) {
 export function HeroFullBleed({
   locale,
   image,
+  imagePosition,
   slides,
+  collage = false,
   videoSrc,
   eyebrow,
   title,
@@ -102,8 +90,12 @@ export function HeroFullBleed({
 }: {
   locale: Locale;
   image?: ImageKey;
+  /** Subpage heroes: CSS object-position for the short wide crop. */
+  imagePosition?: string;
   /** 2+ slides turn the photo into an auto slider (Home only). */
   slides?: HeroSlideRef[];
+  /** Home: five-photo green wave instead of the crossfading slides. */
+  collage?: boolean;
   videoSrc?: string;
   eyebrow?: string;
   title: string;
@@ -125,6 +117,7 @@ export function HeroFullBleed({
       <PhotoHero
         locale={locale}
         image={image}
+        imagePosition={imagePosition}
         heightClass={SUB_HEIGHTS[height]}
         eyebrow={eyebrow}
         title={title}
@@ -173,7 +166,14 @@ export function HeroFullBleed({
       data-hero
       className="hero-home relative isolate flex h-[var(--hero-h)] flex-col overflow-hidden bg-forest text-white"
     >
-      {isSlider && slides ? (
+      {collage ? (
+        <div className="relative flex flex-1 flex-col">
+          <HeroCollage locale={locale} />
+          <div className={TALL_OVERLAY}>
+            <HeroCopyFrame>{copy}</HeroCopyFrame>
+          </div>
+        </div>
+      ) : isSlider && slides ? (
         <HeroSlider
           slides={slides.map((slide) => ({
             src: IMAGES[slide.image].src,
@@ -239,6 +239,7 @@ export function HeroFullBleed({
 function PhotoHero({
   locale,
   image,
+  imagePosition,
   heightClass,
   eyebrow,
   title,
@@ -250,6 +251,8 @@ function PhotoHero({
 }: {
   locale: Locale;
   image?: ImageKey;
+  /** CSS object-position for the short wide crop. */
+  imagePosition?: string;
   heightClass: string;
   /** Darker local scrim under 768px for photos whose bright areas sit behind phone-width copy (Katalog). */
   strongScrimMobile?: boolean;
@@ -275,6 +278,7 @@ function PhotoHero({
             preload
             sizes="100vw"
             className="object-cover"
+            style={imagePosition ? { objectPosition: imagePosition } : undefined}
           />
         ) : (
           <div className="ph ph-field absolute inset-0" />

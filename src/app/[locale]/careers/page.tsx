@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { isLocale, pickLocale, type Locale } from "@/lib/i18n"
-import { jobs, pages, redesign, ui } from "@/lib/fixtures"
+import { pages, redesign, ui } from "@/lib/fixtures"
+import { getActiveJobs } from "@/lib/jobs"
 import { CareerCard } from "@/components/CareerCard"
 import { HeroFullBleed } from "@/components/HeroFullBleed"
 import { InquirySection } from "@/components/InquirySection"
@@ -19,13 +20,14 @@ export default async function CareersPage({ params }: { params: Promise<{ locale
   const { locale: raw } = await params
   if (!isLocale(raw)) notFound()
   const locale = raw as Locale
-  const active = jobs.filter((job) => job.status === "active")
+  const active = await getActiveJobs()
 
   return (
     <div>
       <HeroFullBleed
         locale={locale}
-        image="sectionTruckLoading"
+        image="heroFarmersSorting"
+        imagePosition="center 42%"
         height="medium"
         eyebrow={pickLocale(ui.growWithUs, locale)}
         title={pickLocale(pages.careers.heroTitle, locale)}
@@ -36,11 +38,15 @@ export default async function CareersPage({ params }: { params: Promise<{ locale
       <section className="bg-white">
         <div className="site-wrap pt-16 pb-24 lg:pb-32">
           <h2 className="display display-h2 text-forest">{pickLocale(ui.openPositions, locale)}</h2>
-          <ul className="mt-10 border-b border-charcoal/15">
-            {active.map((job) => (
-              <CareerCard key={job.slug} job={job} locale={locale} />
-            ))}
-          </ul>
+          {active.length === 0 ? (
+            <p className="mt-10 text-muted">{pickLocale(ui.noOpenPositions, locale)}</p>
+          ) : (
+            <ul className="mt-10 border-b border-charcoal/15">
+              {active.map((job) => (
+                <CareerCard key={job.slug} job={job} locale={locale} />
+              ))}
+            </ul>
+          )}
         </div>
       </section>
 

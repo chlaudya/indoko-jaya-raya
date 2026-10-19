@@ -62,6 +62,16 @@ export const IMAGES = {
     src: `${DIR}/section-cashew-sorting.webp`,
     alt: { id: "Tangan bersarung menyortir kacang mete", en: "Gloved hands sorting cashew nuts" },
   },
+  heroCashewSorters: {
+    src: `${DIR}/hero-cashew-sorters.webp`,
+    alt: {
+      id: "Pekerja bercaping menyortir kacang mete di area penjemuran",
+      en: "Workers in woven hats sorting cashews in the drying yard",
+      zh: "头戴斗笠的工人在晾晒场分拣腰果",
+      vi: "Công nhân đội nón lá phân loại hạt điều tại sân phơi",
+      hi: "बुनी टोपी पहने कर्मचारी सुखाने के यार्ड में काजू छांटते हुए",
+    },
+  },
   cardPillarFarmers: {
     src: `${DIR}/card-pillar-farmers.webp`,
     alt: { id: "Petani dan pekerja menyortir hasil panen", en: "Farmers and workers sorting the harvest" },
@@ -123,25 +133,46 @@ export const IMAGES = {
     src: `${DIR}/card-gallery-warehouse.webp`,
     alt: { id: "Gudang penyimpanan komoditi", en: "Commodity storage warehouse" },
   },
-  // Home hero slides: client originals, cropped by the designer (2400×1350).
+  // Home hero slides, one full-bleed frame each (2400×1350). Two people, three commodities.
   heroSlide1: {
-    src: `${DIR}/hero-cashew-sorters.webp`,
+    src: `${DIR}/hero-slide-farmer-sorting.webp`,
     alt: { id: "Petani bercaping menyortir kacang mete", en: "Farmers in woven hats sorting cashew nuts", zh: "头戴斗笠的农民正在分拣腰果", vi: "Nông dân đội nón lá đang phân loại hạt điều", hi: "बुनी टोपी पहने किसान काजू छांटते हुए" },
   },
   heroSlide2: {
-    src: `${DIR}/hero-corn-hands.webp`,
+    src: `${DIR}/hero-slide-corn-hands.webp`,
     alt: { id: "Kedua tangan menggenggam pipilan jagung", en: "Hands holding shelled corn", zh: "双手捧着脱粒玉米", vi: "Hai bàn tay nâng những hạt ngô", hi: "हथेलियों में मक्के के दाने" },
   },
   heroSlide3: {
-    src: `${DIR}/hero-farmer-sky.webp`,
+    src: `${DIR}/hero-slide-farmer-sky.webp`,
     alt: { id: "Petani bercaping dengan latar langit", en: "Farmer in a woven hat against the sky", zh: "头戴斗笠的农民，以天空为背景", vi: "Người nông dân đội nón lá trên nền trời", hi: "आसमान की पृष्ठभूमि में बुनी टोपी पहने किसान" },
   },
   heroSlide4: {
-    src: `${DIR}/hero-raw-cashews.webp`,
+    src: `${DIR}/hero-slide-cashew-palm.webp`,
     alt: { id: "Kacang mete gelondong di telapak tangan", en: "Raw cashew nuts in a hand", zh: "手中的生腰果", vi: "Hạt điều thô trong lòng bàn tay", hi: "हथेली में कच्चे काजू" },
   },
   heroSlide5: {
-    src: `${DIR}/hero-peanuts-tarp.webp`,
+    src: `${DIR}/hero-slide-peanuts-tarp.webp`,
+    alt: { id: "Kacang tanah dijemur di atas terpal", en: "Peanuts drying on a tarp", zh: "摊在篷布上晾晒的花生", vi: "Đậu phộng phơi trên tấm bạt", hi: "तिरपाल पर सूखती मूंगफली" },
+  },
+  // Home hero collage: five client frames (2 people, 3 commodities), cropped to the preview.
+  collageFarmerSorting: {
+    src: `${DIR}/collage-farmer-sorting.webp`,
+    alt: { id: "Petani bercaping menyortir hasil panen", en: "Farmer in a woven hat sorting the harvest", zh: "头戴斗笠的农民正在分拣收成", vi: "Nông dân đội nón lá đang phân loại vụ thu hoạch", hi: "बुनी टोपी पहने किसान फसल छांटते हुए" },
+  },
+  collageCornHands: {
+    src: `${DIR}/collage-corn-hands.webp`,
+    alt: { id: "Kedua tangan menggenggam pipilan jagung", en: "Hands holding shelled corn", zh: "双手捧着脱粒玉米", vi: "Hai bàn tay nâng những hạt ngô", hi: "हथेलियों में मक्के के दाने" },
+  },
+  collageFarmerSky: {
+    src: `${DIR}/collage-farmer-sky.webp`,
+    alt: { id: "Petani bercaping dengan latar langit", en: "Farmer in a woven hat against the sky", zh: "头戴斗笠的农民，以天空为背景", vi: "Người nông dân đội nón lá trên nền trời", hi: "आसमान की पृष्ठभूमि में बुनी टोपी पहने किसान" },
+  },
+  collageCashewHand: {
+    src: `${DIR}/collage-cashew-hand.webp`,
+    alt: { id: "Kacang mete gelondong di telapak tangan", en: "Raw cashew nuts in a hand", zh: "手中的生腰果", vi: "Hạt điều thô trong lòng bàn tay", hi: "हथेली में कच्चे काजू" },
+  },
+  collagePeanutsTarp: {
+    src: `${DIR}/collage-peanuts-tarp.webp`,
     alt: { id: "Kacang tanah dijemur di atas terpal", en: "Peanuts drying on a tarp", zh: "摊在篷布上晾晒的花生", vi: "Đậu phộng phơi trên tấm bạt", hi: "तिरपाल पर सूखती मूंगफली" },
   },
   // Contact hero: client warehouse photo (IMG_8844).
@@ -157,6 +188,47 @@ export const IMAGES = {
   cardKopi: {
     src: `${DIR}/card-kopi.webp`,
     alt: { id: "Biji kopi mentah (kopi hijau)", en: "Raw green coffee beans", zh: "未烘焙的生咖啡豆", vi: "Hạt cà phê nhân xanh chưa rang", hi: "बिना भुनी हरी कॉफ़ी बीन्स" },
+  },
+  // Stock placeholders (Pexels / Wikimedia) until the client sends product photos. See manifest.json.
+  cardTamarindBowl: {
+    src: `${DIR}/card-tamarind-bowl.webp`,
+    alt: { id: "Asam dalam mangkuk kayu, sebagian terkelupas", en: "Tamarind pods in a wooden bowl, some peeled", zh: "木碗中的罗望子，部分已剥开", vi: "Me trong bát gỗ, một phần đã bóc vỏ", hi: "लकड़ी के कटोरे में इमली, कुछ छिली हुई" },
+  },
+  cardTamarindTree: {
+    src: `${DIR}/card-tamarind-tree.webp`,
+    alt: { id: "Buah asam yang masih tergantung di pohon", en: "A tamarind pod hanging on the tree", zh: "挂在树上的罗望子荚", vi: "Quả me còn treo trên cây", hi: "पेड़ पर लटकी इमली की फली" },
+  },
+  cardTamarindHand: {
+    src: `${DIR}/card-tamarind-hand.webp`,
+    alt: { id: "Tangan memegang buah asam muda", en: "A hand holding a young tamarind pod", zh: "手持未成熟的罗望子荚", vi: "Bàn tay cầm quả me non", hi: "हाथ में कच्ची इमली की फली" },
+  },
+  cardMungSpoon: {
+    src: `${DIR}/card-mung-spoon.webp`,
+    alt: { id: "Kacang hijau di mangkuk kaca dengan sendok kayu", en: "Mung beans in a glass bowl with a wooden spoon", zh: "玻璃碗中的绿豆和木勺", vi: "Đậu xanh trong bát thủy tinh với thìa gỗ", hi: "काँच के कटोरे में मूंग और लकड़ी का चम्मच" },
+  },
+  cardMungSpoons: {
+    src: `${DIR}/card-mung-spoons.webp`,
+    alt: { id: "Kacang hijau di atas sendok kayu", en: "Mung beans on wooden spoons", zh: "木勺上的绿豆", vi: "Đậu xanh trên những chiếc thìa gỗ", hi: "लकड़ी के चम्मचों पर मूंग" },
+  },
+  cardCoffeeCherries: {
+    src: `${DIR}/card-coffee-cherries.webp`,
+    alt: { id: "Buah kopi merah dan hijau di ranting", en: "Red and green coffee cherries on a branch", zh: "枝上的红绿咖啡果", vi: "Quả cà phê đỏ và xanh trên cành", hi: "डाल पर लाल और हरे कॉफ़ी चेरी" },
+  },
+  cardCoffeeBerries: {
+    src: `${DIR}/card-coffee-berries.webp`,
+    alt: { id: "Buah kopi hijau di pohon", en: "Green coffee berries on the plant", zh: "植株上的绿色咖啡果", vi: "Quả cà phê xanh trên cây", hi: "पौधे पर हरी कॉफ़ी बेरी" },
+  },
+  cardPorangPlant: {
+    src: `${DIR}/card-porang-plant.webp`,
+    alt: { id: "Tanaman porang (Amorphophallus muelleri)", en: "Porang plant (Amorphophallus muelleri)", zh: "魔芋植株（Amorphophallus muelleri）", vi: "Cây khoai nưa (Amorphophallus muelleri)", hi: "पोरंग पौधा (Amorphophallus muelleri)" },
+  },
+  cardPorangStem: {
+    src: `${DIR}/card-porang-stem.webp`,
+    alt: { id: "Batang porang berpola hijau muda", en: "Mottled green stem of a porang plant", zh: "带浅绿色斑纹的魔芋茎", vi: "Thân cây khoai nưa vân xanh nhạt", hi: "हल्के हरे धब्बों वाला पोरंग तना" },
+  },
+  cardPorangBase: {
+    src: `${DIR}/card-porang-base.webp`,
+    alt: { id: "Pangkal batang porang di atas tanah", en: "Base of a porang stem at the soil", zh: "贴地的魔芋茎基部", vi: "Gốc thân cây khoai nưa trên mặt đất", hi: "मिट्टी पर पोरंग तने का आधार" },
   },
 } satisfies Record<string, { src: string; alt: LString }>
 

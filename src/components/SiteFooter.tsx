@@ -123,7 +123,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                   href={wa}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-1 inline-flex min-h-11 items-center gap-2 rounded-[8px] border border-white/60 px-4 text-sm font-semibold text-white hover:bg-white hover:text-forest motion-safe:transition-colors"
+                  className="mt-1 inline-flex min-h-11 items-center gap-2 rounded-[8px] bg-white px-4 text-sm font-semibold text-forest hover:bg-ivory motion-safe:transition-colors"
                 >
                   <WhatsAppIcon className="size-4" />
                   {t(ui.chatOnWhatsApp)}

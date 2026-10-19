@@ -7,6 +7,7 @@ import { CardRail } from "@/components/CardRail"
 import { CommodityCard, RAIL_CARD_SIZES } from "@/components/CommodityCard"
 import { InquirySection } from "@/components/InquirySection"
 import { Photo } from "@/components/Photo"
+import { ProductGallery } from "@/components/ProductGallery"
 import { ProductSpecifications } from "@/components/ProductSpecifications"
 import { WaButton } from "@/components/WaButton"
 
@@ -45,7 +46,7 @@ export default async function ProductDetailPage({
   const overview = pickLocale(product.description, locale)
   const askLabel = `${pickLocale(ui.askAbout, locale)} ${name}`
   const related = products.filter((item) => item.slug !== slug && item.kind === "product")
-  const gallery = product.gallery || []
+  const gallery = [product.image, ...(product.gallery ?? [])].filter((key) => key !== undefined)
 
   return (
     <article>
@@ -73,21 +74,18 @@ export default async function ProductDetailPage({
           </nav>
           <div className="mt-8 grid items-start gap-10 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-7">
-              <Photo
-                image={product.image}
-                locale={locale}
-                aspect="aspect-[4/5] sm:aspect-[5/4] lg:aspect-[4/5]"
-                preload={Boolean(product.image)}
-                sizes="(min-width: 1376px) 740px, (min-width: 1024px) 55vw, 100vw"
-              />
-              {gallery.length > 0 && (
-                <ul className="mt-4 grid grid-cols-4 gap-4">
-                  {gallery.map((image) => (
-                    <li key={image}>
-                      <Photo image={image} locale={locale} aspect="aspect-square" sizes="(min-width: 1024px) 170px, 25vw" />
-                    </li>
-                  ))}
-                </ul>
+              {gallery.length > 0 ? (
+                <ProductGallery
+                  images={gallery}
+                  locale={locale}
+                  labels={{
+                    previous: pickLocale(ui.previous, locale),
+                    next: pickLocale(ui.next, locale),
+                    slide: pickLocale(ui.slideOf, locale),
+                  }}
+                />
+              ) : (
+                <Photo image={product.image} locale={locale} aspect="aspect-[4/3]" sizes="(min-width: 1376px) 740px, (min-width: 1024px) 55vw, 100vw" />
               )}
             </div>
             <div className="lg:sticky lg:top-28 lg:col-span-5">

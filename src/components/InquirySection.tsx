@@ -5,9 +5,8 @@ import { TextLink } from "./TextLink"
 import { WaButton, type ButtonVariant } from "./WaButton"
 
 /**
- * Full-width final CTA band on forest (#123b2a) that opens WhatsApp with page/section context. Headline at
- * --text-h2 in cols 1–7; solid white 56px button (the most prominent CTA on the page) with a short
- * reassurance line under it; 96px vertical padding on desktop.
+ * Closing inquiry band on ivory, separated from the section above by a forest rule. Solid forest 56px
+ * WhatsApp button (the most prominent CTA on the page) sits under the headline, with a short reassurance line beside it.
  */
 export function InquirySection({
   locale,
@@ -18,7 +17,7 @@ export function InquirySection({
   label,
   eyebrow,
   reassurance,
-  variant = "inverse",
+  variant = "primary",
   secondary,
 }: {
   locale: Locale
@@ -33,29 +32,27 @@ export function InquirySection({
   secondary?: { href: string; label: string }
 }) {
   return (
-    <section className="bg-forest text-white">
-      <div className="site-wrap grid gap-10 py-16 md:py-20 lg:grid-cols-12 lg:items-center lg:gap-x-6 lg:py-24">
-        <div className="lg:col-span-7">
-          <p className="label text-soft-sage!">{eyebrow || pickLocale(ui.inquiry, locale)}</p>
-          <h2 className="display display-h2 mt-4 text-balance">{title}</h2>
-          {body && <p className="mt-5 max-w-2xl text-lg text-white/85">{body}</p>}
-        </div>
-        <div className="lg:col-span-4 lg:col-start-9">
-          <WaButton
-            locale={locale}
-            templateKey={templateKey}
-            tokens={tokens}
-            label={label || pickLocale(ui.requestInquiry, locale)}
-            variant={variant}
-            size="lg"
-            className="w-full sm:w-auto lg:w-full"
-          />
-          {reassurance && <p className="mt-3 text-sm text-white/85">{reassurance}</p>}
+    <section className="bg-ivory text-charcoal">
+      <div className="site-wrap py-16 md:py-20 lg:py-28">
+        <div className="border-t-2 border-forest pt-10 lg:pt-14">
+          <p className="label">{eyebrow || pickLocale(ui.inquiry, locale)}</p>
+          <h2 className="display display-h2 mt-4 max-w-[16em] text-balance text-forest">{title}</h2>
+          {body && <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">{body}</p>}
+          <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6">
+            <WaButton
+              locale={locale}
+              templateKey={templateKey}
+              tokens={tokens}
+              label={label || pickLocale(ui.requestInquiry, locale)}
+              variant={variant}
+              size="lg"
+              className="whitespace-nowrap"
+            />
+            {reassurance && <p className="max-w-xs text-sm leading-relaxed text-muted">{reassurance}</p>}
+          </div>
           {secondary && (
             <div className="mt-4">
-              <TextLink href={secondary.href} tone="light">
-                {secondary.label}
-              </TextLink>
+              <TextLink href={secondary.href}>{secondary.label}</TextLink>
             </div>
           )}
         </div>

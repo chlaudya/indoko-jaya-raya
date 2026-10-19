@@ -24,8 +24,8 @@
   --filter-sticky-top: 84px;
   /* zh/hi headline key phrase only (never body text): lime, upright; on the forest hero scrim (≥32px headline). */
   --hero-accent-cjk: #c8e6a0;
-  /* Home hero: full-bleed photo, min(88svh, 820px), 600px floor for short landscape screens. */
-  --hero-h: max(600px, min(88svh, 820px));
+  /* Home hero: full viewport height. svh so the mobile browser chrome doesn't clip the copy. */
+  --hero-h: 100svh;
 }
 
 @theme {
@@ -57,7 +57,10 @@ html {
 main#content {
   padding-top: var(--header-offset);
 }
-main#content:has(> [data-hero]:first-child, > :first-child > [data-hero]:first-child) {
+main#content:has(
+    > [data-hero]:first-child,
+    > :first-child > [data-hero]:first-child
+  ) {
   padding-top: 0;
 }
 
@@ -65,17 +68,9 @@ body {
   background: #ffffff;
   color: var(--color-charcoal);
   font-family:
-    var(--font-inter),
-    "Noto Sans SC",
-    "PingFang SC",
-    "Hiragino Sans GB",
-    "Microsoft YaHei",
-    "Noto Sans Devanagari",
-    "Kohinoor Devanagari",
-    "Nirmala UI",
-    ui-sans-serif,
-    system-ui,
-    sans-serif;
+    var(--font-inter), "Noto Sans SC", "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "Noto Sans Devanagari", "Kohinoor Devanagari",
+    "Nirmala UI", ui-sans-serif, system-ui, sans-serif;
   font-size: var(--text-body);
   line-height: 1.6;
 }
@@ -92,14 +87,8 @@ body {
 
 .display {
   font-family:
-    var(--font-cormorant),
-    "Cormorant Garamond",
-    "Noto Serif SC",
-    "Songti SC",
-    "Noto Serif Devanagari",
-    "Kohinoor Devanagari",
-    Georgia,
-    serif;
+    var(--font-cormorant), "Cormorant Garamond", "Noto Serif SC", "Songti SC",
+    "Noto Serif Devanagari", "Kohinoor Devanagari", Georgia, serif;
   font-weight: 500;
   line-height: 1.04;
   letter-spacing: -0.015em;
@@ -108,11 +97,15 @@ body {
 /* zh / hi headings: system serif stacks (no webfont). Cormorant first so Latin text and digits keep the brand serif;
    CJK / Devanagari glyphs fall through to the platform serif (macOS/iOS, Windows, Android/Linux). */
 html[lang^="zh"] .display {
-  font-family: var(--font-cormorant), "Songti SC", "STSong", "Noto Serif CJK SC", "Source Han Serif SC", "SimSun", serif;
+  font-family:
+    var(--font-cormorant), "Songti SC", "STSong", "Noto Serif CJK SC",
+    "Source Han Serif SC", "SimSun", serif;
   letter-spacing: 0;
 }
 html[lang="hi"] .display {
-  font-family: var(--font-cormorant), "Noto Serif Devanagari", "Devanagari MT", "Kohinoor Devanagari", "Nirmala UI", "Mangal", serif;
+  font-family:
+    var(--font-cormorant), "Noto Serif Devanagari", "Devanagari MT",
+    "Kohinoor Devanagari", "Nirmala UI", "Mangal", serif;
   letter-spacing: 0;
 }
 
@@ -245,26 +238,58 @@ html[lang="hi"] .hero-home h1 {
   position: relative;
   isolation: isolate;
   background:
-    radial-gradient(120% 80% at 85% 10%, rgba(168, 184, 156, 0.35), transparent 60%),
-    repeating-linear-gradient(-28deg, rgba(255, 255, 255, 0.05) 0 2px, transparent 2px 22px),
+    radial-gradient(
+      120% 80% at 85% 10%,
+      rgba(168, 184, 156, 0.35),
+      transparent 60%
+    ),
+    repeating-linear-gradient(
+      -28deg,
+      rgba(255, 255, 255, 0.05) 0 2px,
+      transparent 2px 22px
+    ),
     linear-gradient(160deg, #2a6a48 0%, #1f5a3d 45%, #123b2a 100%);
 }
 .ph-field {
   background:
-    radial-gradient(90% 60% at 20% 0%, rgba(245, 243, 234, 0.28), transparent 60%),
-    repeating-linear-gradient(8deg, rgba(18, 59, 42, 0.35) 0 3px, transparent 3px 26px),
+    radial-gradient(
+      90% 60% at 20% 0%,
+      rgba(245, 243, 234, 0.28),
+      transparent 60%
+    ),
+    repeating-linear-gradient(
+      8deg,
+      rgba(18, 59, 42, 0.35) 0 3px,
+      transparent 3px 26px
+    ),
     linear-gradient(180deg, #8ea47c 0%, #6f8f62 38%, #2f5e3f 70%, #123b2a 100%);
 }
 .ph-harvest {
   background:
-    radial-gradient(100% 70% at 80% 100%, rgba(18, 59, 42, 0.55), transparent 60%),
-    repeating-radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.06) 0 2px, transparent 2px 14px),
+    radial-gradient(
+      100% 70% at 80% 100%,
+      rgba(18, 59, 42, 0.55),
+      transparent 60%
+    ),
+    repeating-radial-gradient(
+      circle at 30% 40%,
+      rgba(255, 255, 255, 0.06) 0 2px,
+      transparent 2px 14px
+    ),
     linear-gradient(140deg, #b9a77a 0%, #8c8a5c 40%, #4d6a45 100%);
 }
 .ph-dark {
   background:
-    radial-gradient(110% 80% at 70% 20%, rgba(111, 143, 98, 0.35), transparent 60%),
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 48px),
+    radial-gradient(
+      110% 80% at 70% 20%,
+      rgba(111, 143, 98, 0.35),
+      transparent 60%
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.035) 0 1px,
+      transparent 1px 48px
+    ),
     linear-gradient(180deg, #17201b 0%, #123b2a 100%);
 }
 

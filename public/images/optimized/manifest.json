@@ -491,5 +491,115 @@
     "pass": true,
     "origin": "client-supplied",
     "note": "SiteFooter decorative background (alt=\"\", lazy, object-cover center, gradient overlay .35→.8)"
+  },
+  {
+    "name": "collage-farmer-sorting.webp",
+    "source": "IMG_8764.HEIC",
+    "kind": "collage",
+    "width": 960,
+    "height": 600,
+    "note": "Home hero collage. top=0.5 flip=1 z=0.95"
+  },
+  {
+    "name": "collage-corn-hands.webp",
+    "source": "IMG_8808.HEIC",
+    "kind": "collage",
+    "width": 960,
+    "height": 600,
+    "note": "Home hero collage. top=0.5 flip=0 z=0.9"
+  },
+  {
+    "name": "collage-farmer-sky.webp",
+    "source": "IMG_8865.HEIC",
+    "kind": "collage",
+    "width": 960,
+    "height": 600,
+    "note": "Home hero collage. top=0.5 flip=0 z=1"
+  },
+  {
+    "name": "collage-cashew-hand.webp",
+    "source": "IMG_8782.HEIC",
+    "kind": "collage",
+    "width": 960,
+    "height": 600,
+    "note": "Home hero collage. top=0.85 flip=0 z=0.8"
+  },
+  {
+    "name": "collage-peanuts-tarp.webp",
+    "source": "IMG_8864.HEIC",
+    "kind": "collage",
+    "width": 960,
+    "height": 600,
+    "note": "Home hero collage. top=0.45 flip=0 z=0.9"
+  },
+  {
+    "name": "card-tamarind-bowl.webp",
+    "source": "https://www.pexels.com/photo/18495829/",
+    "photographer": "Aditya Bhatia",
+    "license": "Pexels",
+    "status": "stock-placeholder: replace with client photo"
+  },
+  {
+    "name": "card-tamarind-tree.webp",
+    "source": "https://www.pexels.com/photo/15095868/",
+    "photographer": "Noah Ksb",
+    "license": "Pexels",
+    "status": "stock-placeholder: replace with client photo"
+  },
+  {
+    "name": "card-tamarind-hand.webp",
+    "source": "https://www.pexels.com/photo/2348740/",
+    "photographer": "The Raj",
+    "license": "Pexels",
+    "status": "stock-placeholder: replace with client photo"
+  },
+  {
+    "name": "card-mung-spoon.webp",
+    "source": "https://www.pexels.com/photo/7420815/",
+    "photographer": "Vie Studio",
+    "license": "Pexels",
+    "status": "stock-placeholder: replace with client photo"
+  },
+  {
+    "name": "card-mung-spoons.webp",
+    "source": "https://www.pexels.com/photo/7420816/",
+    "photographer": "Vie Studio",
+    "license": "Pexels",
+    "status": "stock-placeholder: replace with client photo"
+  },
+  {
+    "name": "card-coffee-cherries.webp",
+    "source": "https://www.pexels.com/photo/7125459/",
+    "photographer": "Michael Burrows",
+    "license": "Pexels",
+    "status": "stock-placeholder: replace with client photo"
+  },
+  {
+    "name": "card-coffee-berries.webp",
+    "source": "https://www.pexels.com/photo/36036909/",
+    "photographer": "Dev",
+    "license": "Pexels",
+    "status": "stock-placeholder: replace with client photo"
+  },
+  {
+    "name": "card-porang-plant.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Amorphophallus_muelleri_01.jpg",
+    "license": "CC BY-SA 3.0",
+    "author": "Rillke",
+    "status": "botanical reference: replace with client corm photo"
+  },
+  {
+    "name": "card-porang-stem.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Amorphophallus_muelleri_02.jpg",
+    "license": "CC BY-SA 3.0",
+    "author": "Rillke",
+    "status": "botanical reference: replace with client corm photo"
+  },
+  {
+    "name": "card-porang-base.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Amorphophallus_muelleri_03.jpg",
+    "license": "CC BY-SA 3.0",
+    "author": "Rillke",
+    "status": "botanical reference: replace with client corm photo"
   }
 ]

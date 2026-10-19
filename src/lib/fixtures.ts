@@ -65,7 +65,6 @@ export const nav = [
   { href: "about", label: { id: "Perusahaan", en: "Company" } },
   { href: "products", label: { id: "Komoditi", en: "Commodities" } },
   { href: "services/drying", label: { id: "Layanan", en: "Services" } },
-  { href: "#sustainability", label: { id: "Keberlanjutan", en: "Sustainability" } },
   { href: "careers", label: { id: "Karier", en: "Careers" } },
   { href: "contact", label: { id: "Kontak", en: "Contact" } },
 ]
@@ -98,6 +97,9 @@ export const ui = {
   capacity: { id: "Kapasitas", en: "Capacity" },
   mapPending: { id: "Peta menyusul", en: "Map pending" },
   openPositions: { id: "Posisi terbuka", en: "Open positions" },
+  noOpenPositions: { id: "Tidak ada posisi terbuka saat ini.", en: "No open positions right now." },
+  roleDescription: { id: "Deskripsi posisi", en: "The role" },
+  qualifications: { id: "Kualifikasi", en: "Qualifications" },
   location: { id: "Lokasi", en: "Location" },
   pendingConfirmation: { id: "Menunggu konfirmasi data.", en: "Pending confirmed data." },
   skipToContent: { id: "Lewati ke konten", en: "Skip to content" },
@@ -208,6 +210,7 @@ export const products: Product[] = [
   {
     slug: "kacang-mete",
     image: "cardCashew",
+    gallery: ["sectionCashewSorting", "heroCashewSorters"],
     kind: "product",
     category: "kacang-kacangan",
     featured: true,
@@ -221,6 +224,8 @@ export const products: Product[] = [
   },
   {
     slug: "asam-kupas",
+    image: "cardTamarindBowl",
+    gallery: ["cardTamarindTree", "cardTamarindHand"],
     kind: "product",
     category: "kacang-kacangan",
     featured: true,
@@ -232,6 +237,7 @@ export const products: Product[] = [
   {
     slug: "kacang-tanah",
     image: "cardPeanuts",
+    gallery: ["heroPeanutTexture", "sectionPeanutTarp"],
     kind: "product",
     category: "kacang-kacangan",
     name: { id: "Kacang Tanah", en: "Peanut" },
@@ -242,6 +248,7 @@ export const products: Product[] = [
   {
     slug: "kacang-hijau",
     image: "cardKacangHijau",
+    gallery: ["cardMungSpoon", "cardMungSpoons"],
     kind: "product",
     category: "kacang-kacangan",
     name: { id: "Kacang Hijau", en: "Mung Bean" },
@@ -251,6 +258,8 @@ export const products: Product[] = [
   },
   {
     slug: "ubi-porang",
+    image: "cardPorangPlant",
+    gallery: ["cardPorangStem", "cardPorangBase"],
     kind: "product",
     category: "umbi",
     featured: true,
@@ -262,6 +271,7 @@ export const products: Product[] = [
   {
     slug: "jagung-kupas",
     image: "cardCorn",
+    gallery: ["cardPillarCommodities", "heroSlide2"],
     kind: "product",
     category: "jagung",
     name: { id: "Jagung (Kupas)", en: "Corn (Shelled)" },
@@ -272,6 +282,7 @@ export const products: Product[] = [
   {
     slug: "kopi",
     image: "cardKopi",
+    gallery: ["cardCoffeeCherries", "cardCoffeeBerries"],
     kind: "product",
     category: "kopi",
     featured: true,
@@ -505,7 +516,7 @@ export const redesign = {
     heroVideo: "" as string,
     /**
      * Hero photo slider, in order (CMS: home.heroSlides[]; alt text comes from images.ts meta).
-     * All 5: designer's crops of client photos (people + the commodities we trade). Center on all.
+     * Five full-bleed slides: two people (IMG_8764, IMG_8865) and three commodities (corn 8808, cashew 8782, peanuts 8864).
      * `positionMobile` (optional) frames the top photo band under 1024px; a CMS image hotspot overrides both.
      */
     heroSlides: [
@@ -666,37 +677,37 @@ export const whyChoose: TrustItem[] = [
     },
   },
   {
-    icon: "farmers",
+    icon: "price",
     title: {
-      id: "Jaringan langsung petani lokal",
-      en: "A direct network of local farmers",
-      zh: "直连本地农户网络",
-      vi: "Mạng lưới nông dân địa phương trực tiếp",
-      hi: "स्थानीय किसानों का सीधा नेटवर्क",
+      id: "Harga yang lebih kompetitif",
+      en: "More competitive pricing",
+      zh: "更具竞争力的价格",
+      vi: "Mức giá cạnh tranh hơn",
+      hi: "अधिक प्रतिस्पर्धी मूल्य",
     },
     body: {
-      id: "Kami membeli langsung dari petani lokal dengan harga yang kompetitif.",
-      en: "We buy directly from local farmers, at competitive prices.",
-      zh: "我们以有竞争力的价格直接向本地农户收购。",
-      vi: "Chúng tôi thu mua trực tiếp từ nông dân địa phương với giá cạnh tranh.",
-      hi: "हम स्थानीय किसानों से सीधे, प्रतिस्पर्धी कीमतों पर ख़रीदते हैं।",
+      id: "Komoditi ditawarkan dengan harga yang lebih kompetitif bagi pembeli.",
+      en: "Commodities are offered at more competitive prices for buyers.",
+      zh: "农产品以更具竞争力的价格提供给买家。",
+      vi: "Nông sản được chào với mức giá cạnh tranh hơn cho người mua.",
+      hi: "जिंसें ख़रीदारों को अधिक प्रतिस्पर्धी कीमत पर दी जाती हैं।",
     },
   },
   {
-    icon: "sun",
+    icon: "fleet",
     title: {
-      id: "Jasa penjemuran sendiri",
-      en: "In-house drying service",
-      zh: "自有晾晒服务",
-      vi: "Dịch vụ phơi sấy riêng",
-      hi: "अपनी सुखाने की सेवा",
+      id: "Armada yang besar dan kompeten",
+      en: "A large, capable fleet",
+      zh: "规模充足、团队专业的车队",
+      vi: "Đội xe lớn và có năng lực",
+      hi: "बड़ा और सक्षम बेड़ा",
     },
     body: {
-      id: "Jasa Penjemuran kami membantu menjaga kualitas hasil panen sebelum distribusi.",
-      en: "Our drying service helps preserve harvest quality before distribution.",
-      zh: "我们的晾晒服务帮助在分销前保持收成品质。",
-      vi: "Dịch vụ phơi sấy của chúng tôi giúp giữ chất lượng nông sản trước khi phân phối.",
-      hi: "हमारी सुखाने की सेवा वितरण से पहले फ़सल की गुणवत्ता बनाए रखने में मदद करती है।",
+      id: "Komoditi dikirim oleh armada kami sendiri, dengan tim yang kompeten.",
+      en: "Commodities ship on our own fleet, handled by a competent team.",
+      zh: "农产品由我们自有车队运送，交由专业团队处理。",
+      vi: "Nông sản được vận chuyển bằng đội xe của chúng tôi, do đội ngũ có năng lực đảm nhận.",
+      hi: "जिंसें हमारे अपने बेड़े से भेजी जाती हैं, सक्षम टीम के हाथों।",
     },
   },
 ]
@@ -707,7 +718,7 @@ export const whyChoose: TrustItem[] = [
  */
 export const iconStrip: TrustItem[] = [
   {
-    icon: "farmers",
+    icon: "person",
     title: {
       id: "Petani & Pemasok",
       en: "Farmers & suppliers",
@@ -724,7 +735,7 @@ export const iconStrip: TrustItem[] = [
     },
   },
   {
-    icon: "grain",
+    icon: "flower",
     title: {
       id: "Komoditi",
       en: "Commodities",
