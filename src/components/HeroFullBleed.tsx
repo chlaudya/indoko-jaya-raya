@@ -36,9 +36,22 @@ const slidePosition = (slide: HeroSlideRef) =>
 const TALL_PHOTO = "absolute inset-0";
 const TALL_OVERLAY = "hero-overlay absolute inset-0 flex flex-col";
 
-/** Even darkening over the whole slide so white copy reads on any photo. */
+/**
+ * Home hero scrim (slider, collage and single photo all use it), designer spec:
+ * 1. even bg-black/45 over the whole photo;
+ * 2. a second layer behind the copy only: from 1024px left-to-right (copy in cols 1-6), below 1024px bottom-up
+ *    (copy bottom-aligned). Stacked, the copy area sits under ~63% black.
+ */
 function HeroScrim() {
-  return <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-black/45" />;
+  return (
+    <>
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-black/45" />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.32)_0%,rgba(0,0,0,0.32)_55%,rgba(0,0,0,0)_80%)] lg:bg-[linear-gradient(to_right,rgba(0,0,0,0.32)_0%,rgba(0,0,0,0.32)_45%,rgba(0,0,0,0)_70%)]"
+      />
+    </>
+  );
 }
 
 /** Copy on the 12-col grid: cols 1–6 on desktop, bottom-aligned on phones / tablets, below the floating header. */
