@@ -3,16 +3,20 @@ import type { Locale } from "@/lib/i18n"
 
 export type ButtonVariant = "primary" | "secondary" | "on-dark" | "inverse" | "wa" | "wa-secondary" | "wa-on-dark"
 
+// Lime-forward (DESIGN.md "Lime-forward update"): primary and WhatsApp buttons are logo lime with forest text and
+// icon (9.3:1), hover / active lime-tint (9.1:1), forest focus ring. The 1px forest border keeps the shape visible on
+// ivory, white and the lime-wash band, where lime alone is about 1.1-1.3:1; on forest the fill stands out (9.3:1).
+const lime = "btn-lime border border-forest bg-lime text-forest hover:bg-lime-tint active:bg-lime-tint"
+
 const variants: Record<ButtonVariant, string> = {
-  primary: "bg-forest text-white hover:bg-leaf",
+  primary: lime,
   secondary: "border border-forest bg-transparent text-forest hover:bg-forest hover:text-white",
   "on-dark": "border border-white/60 bg-transparent text-white hover:bg-white hover:text-forest",
   inverse: "bg-white text-forest hover:bg-ivory",
-  // Primary WA CTA (header + hero only): solid leaf green, white text (~8:1 contrast).
-  wa: "bg-leaf text-white hover:bg-forest",
-  // Secondary WA CTA everywhere else: leaf outline, same icon + prefill.
-  "wa-secondary": "border border-leaf bg-transparent text-leaf hover:bg-leaf hover:text-white",
-  // Secondary WA CTA on dark/green bands.
+  // WhatsApp CTAs (header, hero, cards, bands): lime.
+  wa: lime,
+  "wa-secondary": lime,
+  // Secondary (white outline) WhatsApp CTA on dark bands: unchanged ("secondary (white) buttons don't change").
   "wa-on-dark": "border border-white/70 bg-transparent text-white hover:bg-white hover:text-forest",
 }
 

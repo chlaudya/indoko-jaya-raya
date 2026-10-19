@@ -270,6 +270,24 @@ Never:
 
 ---
 
+## Lime-forward update (approved by Chlaudya, Oct 19, 2026)
+
+This extends the Brand Accent rules above. Forest, ivory and the serif type stay the base, and lime moves into buttons and one light band. Ship it as its own commit so it's easy to revert.
+
+Buttons (all primary and WhatsApp buttons, `bg-leaf` today):
+- Fill `--color-lime` `#7afa52` with forest `#123b2a` text and icons (9.3:1). Hover uses `--color-lime-tint` `#c8e6a0` (9.1:1).
+- Focus ring on lime buttons: 2px forest. Never white text on lime.
+- Secondary (white) buttons don't change.
+
+Why Choose Us band (Home `TrustSection`, ivory today):
+- Background `--color-lime-wash: #e6f5d0`.
+- Body text `#2f4a3a`; labels, numerals and icons `#1f5a3d`; hairlines `#9fc77a`.
+- Focus ring forest, and links in body text are underlined.
+
+Dark sections (hero, forest bands, footer): labels, footer headings, hero accent words and hover underlines are lime tint, and the focus ring is lime, as in Brand Accent.
+
+Unchanged: every other ivory or white section, the nav links, and forest or charcoal text. Lime text or lines on ivory or white are never used (about 1.3:1).
+
 # 5. COLOR RULES
 
 Use green intentionally.

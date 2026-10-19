@@ -40,10 +40,13 @@
   --color-hairline: #e3e1d6;
   --color-hover-line: #a8b89c;
   --color-numeral: #6f8f62;
-  /* Brand accent from the client logo (DESIGN.md "Brand Accent"): DARK sections only, never on ivory/white.
-     lime-tint = hero accent words, labels / footer headings / hover underlines on dark; lime = focus ring on dark. */
+  /* Brand accent from the client logo (DESIGN.md "Brand Accent" + "Lime-forward update").
+     lime = primary / WhatsApp buttons (forest text 9.3:1) and the focus ring on dark;
+     lime-tint = button hover (forest text 9.1:1), hero accent words, labels / footer headings / hover underlines on dark;
+     lime-wash = the Why Choose Us band. */
   --color-lime: #7afa52;
   --color-lime-tint: #c8e6a0;
+  --color-lime-wash: #e6f5d0;
 }
 
 html {
@@ -87,10 +90,13 @@ body {
   outline-offset: 3px;
 }
 
-.display {
-  font-family:
-    var(--font-cormorant), "Cormorant Garamond", "Noto Serif SC", "Songti SC",
-    "Noto Serif Devanagari", "Kohinoor Devanagari", Georgia, serif;
+/* Lime buttons: forest ring (DESIGN.md "Lime-forward update"). Declared before the dark-section rule so that on
+   forest backgrounds, where a forest ring would vanish, the lime ring below wins. */
+.btn-lime:focus-visible {
+  outline: 2px solid var(--color-forest);
+  outline-offset: 2px;
+}
+
 /* Dark sections (hero, forest bands, footer): logo-lime ring, 2px with a 2px offset. Light sections keep sage. */
 [data-hero] :focus-visible,
 .surface-dark :focus-visible,
@@ -98,6 +104,30 @@ footer :focus-visible {
   outline: 2px solid var(--color-lime);
   outline-offset: 2px;
 }
+
+/* Why Choose Us band (lime-forward): lime-wash fill with the designer's values inside it: body #2f4a3a,
+   labels / numerals / icons #1f5a3d, hairlines #9fc77a. */
+.surface-lime {
+  background-color: var(--color-lime-wash);
+  --color-muted: #2f4a3a;
+  --color-sage: #1f5a3d;
+  --color-numeral: #1f5a3d;
+  --color-leaf: #1f5a3d;
+  --color-hairline: #9fc77a;
+}
+.surface-lime a:not([class*="bg-"]) {
+  text-decoration-line: underline;
+  text-underline-offset: 4px;
+}
+.surface-lime :focus-visible {
+  outline: 2px solid var(--color-forest);
+  outline-offset: 2px;
+}
+
+.display {
+  font-family:
+    var(--font-cormorant), "Cormorant Garamond", "Noto Serif SC", "Songti SC",
+    "Noto Serif Devanagari", "Kohinoor Devanagari", Georgia, serif;
   font-weight: 500;
   line-height: 1.04;
   letter-spacing: -0.015em;

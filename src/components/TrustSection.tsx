@@ -131,7 +131,7 @@ export function TrustSection({
   if (cards.length === 0 && !hasStats && stripItems.length === 0) return null;
   return (
     <section aria-labelledby="why-choose-title">
-      <div className="bg-ivory">
+      <div className="surface-lime">
         <div className="site-wrap section-y">
           {label && <p className="label">{label}</p>}
           <h2

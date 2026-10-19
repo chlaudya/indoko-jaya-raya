@@ -98,7 +98,7 @@ export function CommodityFilter({
               placeholder={pickLocale(ui.searchCommodities, locale)}
               className="min-h-10 w-full rounded-[6px] border border-charcoal/15 bg-white px-4 text-sm text-charcoal placeholder:text-muted lg:w-64"
             />
-            <button type="submit" className="min-h-10 shrink-0 rounded-[6px] bg-forest px-5 text-sm font-medium text-white hover:bg-leaf">
+            <button type="submit" className="min-h-10 shrink-0 rounded-[6px] btn-lime border border-forest bg-lime px-5 text-sm font-medium text-forest hover:bg-lime-tint active:bg-lime-tint">
               {pickLocale(ui.searchAction, locale)}
             </button>
           </form>
