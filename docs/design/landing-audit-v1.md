@@ -35,6 +35,7 @@ build follows the PM (marked **PM**). Before screenshots: `/workspace/indoco-scr
 ## Pre-launch speed (target: mobile LCP ≤ 2.5s on every locale)
 - Current (8ec67d4, Lighthouse mobile median): `/id` ~3.5s, `/zh` ~3.5s, `/hi` ~3.5s, `/vi` ~4.6s (accepted for now, PM 18 Oct).
 - `/vi`: LCP is the hero photo, delayed by ~175KB of vi/latin-ext font files (Cormorant upright + italic, Inter; Inter latin-ext alone ~84KB ≈ 0.55s). Preloading them does not move LCP (tested: 4.5–4.6s; FCP 2.4s → 0.9s only). Fix in the speed pass by cutting font bytes, e.g. a self-hosted smaller Inter build or system sans for body text on `/vi`.
+- Image budget: 300KB per image as delivered by `/_next/image` (AVIF), not the source file. Measured on ee1484f at 390@3x, 768@2x, 1440@2x and 1920@1x: everything is under (max 192KB, hero-peanut-texture). Accepted exceptions, WebP-only browsers (older Safari) only: `hero-slide-peanuts-tarp-v3` at 1920w 313,738 bytes and at 2048w 348,546 bytes; `section-peanut-drying-tarp` at 1920w/2048w 322,006 bytes. PM accepted these on 19 Oct rather than lowering quality for everyone.
 
 ## Post-launch
 - Move WhatsApp messages to CMS: `homeHero`, `homeDrying`, `homeBanner`, `productCard` and `productPage` are hardcoded in `src/lib/fixtures.ts` (`siteSettings.waTemplates`, id/en) with zh/vi/hi drafts in `src/lib/i18n-drafts.ts`; `settings.waTemplates` in Sanity has no fields for them yet.
