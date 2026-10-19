@@ -189,6 +189,7 @@ export const categories = [
   { slug: "umbi", title: { id: "Umbi", en: "Tubers" } },
   { slug: "jagung", title: { id: "Jagung", en: "Corn" } },
   { slug: "kopi", title: { id: "Kopi", en: "Coffee" } },
+  { slug: "rempah", title: { id: "Rempah", en: "Spices" } },
   { slug: "layanan", title: { id: "Layanan", en: "Services" } },
 ]
 
@@ -295,6 +296,21 @@ export const products: Product[] = [
     shortBlurb: { id: "Kopi lokal untuk pasar global.", en: "Local coffee for global markets." },
     description: { id: "Kopi hasil bumi lokal.", en: "Local coffee commodities." },
     specs: [{ label: { id: "Jenis", en: "Type" }, value: { id: "Sesuai ketersediaan", en: "Subject to availability" } }],
+  },
+  {
+    slug: "cengkeh",
+    image: "cardCengkeh",
+    gallery: ["cardCengkehBuds"],
+    kind: "product",
+    category: "rempah",
+    featured: true,
+    name: { id: "Cengkeh", en: "Clove" },
+    shortBlurb: { id: "Cengkeh kering untuk pasar domestik dan ekspor.", en: "Dried cloves for domestic and export markets." },
+    description: { id: "Komoditi cengkeh dari Indonesia untuk mitra B2B.", en: "Indonesian clove commodity for B2B partners." },
+    specs: [
+      { label: { id: "Bentuk", en: "Form" }, value: { id: "Kering", en: "Dried" } },
+      { label: { id: "Asal", en: "Origin" }, value: { id: "Indonesia", en: "Indonesia" } },
+    ],
   },
   {
     slug: "jasa-penjemuran-komoditi",
@@ -737,11 +753,11 @@ export const iconStrip: TrustItem[] = [
       hi: "जिंसें",
     },
     body: {
-      id: "Kacang-kacangan, umbi, jagung, dan kopi dari Indonesia.",
-      en: "Nuts and legumes, tubers, corn and coffee from Indonesia.",
-      zh: "来自印度尼西亚的坚果与豆类、块茎、玉米和咖啡。",
-      vi: "Các loại hạt và đậu, củ, ngô và cà phê từ Indonesia.",
-      hi: "इंडोनेशिया से मेवे और दालें, कंद, मक्का और कॉफ़ी।",
+      id: "Kacang-kacangan, umbi, jagung, kopi, dan cengkeh dari Indonesia.",
+      en: "Nuts and legumes, tubers, corn, coffee and cloves from Indonesia.",
+      zh: "来自印度尼西亚的坚果与豆类、块茎、玉米、咖啡和丁香。",
+      vi: "Các loại hạt và đậu, củ, ngô, cà phê và đinh hương từ Indonesia.",
+      hi: "इंडोनेशिया से मेवे और दालें, कंद, मक्का, कॉफ़ी और लौंग।",
     },
   },
   {

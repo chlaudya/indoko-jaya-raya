@@ -3,7 +3,6 @@ import Link from "next/link"
 import { pickLocale, type Locale } from "@/lib/i18n"
 import { products, redesign, siteSettings, ui, visiblePhone } from "@/lib/fixtures"
 import { buildWhatsAppUrl } from "@/lib/whatsapp"
-import { LanguageSwitcher } from "./LanguageSwitcher"
 import { WhatsAppIcon } from "./WaButton"
 import { BrandMark } from "./BrandMark"
 
@@ -133,9 +132,8 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-4 border-t border-white/15 pt-6 md:flex-row md:items-center md:justify-between">
+        <div className="mt-14 border-t border-white/15 pt-6">
           <p className="text-sm text-[#d9e0d4]">© {new Date().getFullYear()} PT Indoco Jaya Raya</p>
-          <LanguageSwitcher locale={locale} />
         </div>
       </div>
     </footer>

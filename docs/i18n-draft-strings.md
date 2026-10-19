@@ -35,7 +35,7 @@ Why choose us (ui.whyChooseUs + whyChoose: title, body), icon strip (iconStrip: 
 | iconStrip.farmers.title | Petani & Pemasok | Farmers & suppliers | 农户与供应商 | Nông dân & nhà cung cấp | किसान और आपूर्तिकर्ता |
 | iconStrip.farmers.body | Bekerja sama dengan petani dan pemasok lokal. | Working with local farmers and suppliers. | 与本地农户和供应商合作。 | Hợp tác với nông dân và nhà cung cấp địa phương. | स्थानीय किसानों और आपूर्तिकर्ताओं के साथ काम। |
 | iconStrip.grain.title | Komoditi | Commodities | 农产品 | Nông sản | जिंसें |
-| iconStrip.grain.body | Kacang-kacangan, umbi, jagung, dan kopi dari Indonesia. | Nuts and legumes, tubers, corn and coffee from Indonesia. | 来自印度尼西亚的坚果与豆类、块茎、玉米和咖啡。 | Các loại hạt và đậu, củ, ngô và cà phê từ Indonesia. | इंडोनेशिया से मेवे और दालें, कंद, मक्का और कॉफ़ी। |
+| iconStrip.grain.body | Kacang-kacangan, umbi, jagung, kopi, dan cengkeh dari Indonesia. | Nuts and legumes, tubers, corn, coffee and cloves from Indonesia. | 来自印度尼西亚的坚果与豆类、块茎、玉米、咖啡和丁香。 | Các loại hạt và đậu, củ, ngô, cà phê và đinh hương từ Indonesia. | इंडोनेशिया से मेवे और दालें, कंद, मक्का, कॉफ़ी और लौंग। |
 | iconStrip.globe.title | Pasar | Markets | 市场 | Thị trường | बाज़ार |
 | iconStrip.globe.body | Melayani pembeli nasional dan internasional. | Serving national and international buyers. | 服务国内与国际买家。 | Phục vụ người mua trong nước và quốc tế. | राष्ट्रीय और अंतरराष्ट्रीय ख़रीदारों की सेवा। |
 | iconStrip.leaf.title | Keberlanjutan | Sustainability | 可持续发展 | Bền vững | स्थिरता |

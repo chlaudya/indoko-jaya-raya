@@ -18,7 +18,7 @@ function chipClass(active: boolean) {
   return [
     "inline-flex min-h-10 shrink-0 items-center rounded-[6px] border px-4 text-sm whitespace-nowrap motion-safe:transition-colors",
     active
-      ? "border-forest bg-forest font-medium text-white"
+      ? "btn-lime border-transparent bg-lime font-medium text-forest hover:bg-lime-tint active:bg-lime-tint"
       : "border-charcoal/15 bg-white text-charcoal hover:border-forest hover:text-forest",
   ].join(" ")
 }
@@ -98,7 +98,7 @@ export function CommodityFilter({
               placeholder={pickLocale(ui.searchCommodities, locale)}
               className="min-h-10 w-full rounded-[6px] border border-charcoal/15 bg-white px-4 text-sm text-charcoal placeholder:text-muted lg:w-64"
             />
-            <button type="submit" className="min-h-10 shrink-0 rounded-[6px] btn-lime border border-forest bg-lime px-5 text-sm font-medium text-forest hover:bg-lime-tint active:bg-lime-tint">
+            <button type="submit" className="min-h-10 shrink-0 rounded-[6px] btn-lime bg-lime px-5 text-sm font-medium text-forest hover:bg-lime-tint active:bg-lime-tint">
               {pickLocale(ui.searchAction, locale)}
             </button>
           </form>

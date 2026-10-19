@@ -226,6 +226,15 @@ export const IMAGES = {
     src: `${DIR}/card-porang-stem.webp`,
     alt: { id: "Batang porang berpola hijau muda", en: "Mottled green stem of a porang plant", zh: "带浅绿色斑纹的魔芋茎", vi: "Thân cây khoai nưa vân xanh nhạt", hi: "हल्के हरे धब्बों वाला पोरंग तना" },
   },
+  // Stock placeholders (Wikimedia) until the client sends clove photos. See manifest.json.
+  cardCengkeh: {
+    src: `${DIR}/card-cengkeh.webp`,
+    alt: { id: "Cengkeh kering", en: "Dried cloves", zh: "干丁香", vi: "Đinh hương khô", hi: "सूखी लौंग" },
+  },
+  cardCengkehBuds: {
+    src: `${DIR}/card-cengkeh-buds.webp`,
+    alt: { id: "Cengkeh kering dalam mangkuk kayu", en: "Dried cloves in a wooden bowl", zh: "木碗中的干丁香", vi: "Đinh hương khô trong bát gỗ", hi: "लकड़ी के कटोरे में सूखी लौंग" },
+  },
   cardPorangBase: {
     src: `${DIR}/card-porang-base.webp`,
     alt: { id: "Pangkal batang porang di atas tanah", en: "Base of a porang stem at the soil", zh: "贴地的魔芋茎基部", vi: "Gốc thân cây khoai nưa trên mặt đất", hi: "मिट्टी पर पोरंग तने का आधार" },

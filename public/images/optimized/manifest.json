@@ -596,6 +596,30 @@
     "status": "botanical reference: replace with client corm photo"
   },
   {
+    "name": "card-cengkeh.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Cloves.JPG",
+    "kind": "card",
+    "width": 960,
+    "height": 1200,
+    "quality": 72,
+    "kb": 94.6,
+    "license": "Public domain",
+    "author": "Jorge Barrios",
+    "status": "stock-placeholder: replace with client photo"
+  },
+  {
+    "name": "card-cengkeh-buds.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Cengkeh_Clove.jpg",
+    "kind": "card",
+    "width": 960,
+    "height": 1200,
+    "quality": 72,
+    "kb": 58.6,
+    "license": "CC BY-SA 4.0",
+    "author": "Herusutimbul",
+    "status": "stock-placeholder: replace with client photo"
+  },
+  {
     "name": "card-porang-base.webp",
     "source": "https://commons.wikimedia.org/wiki/File:Amorphophallus_muelleri_03.jpg",
     "license": "CC BY-SA 3.0",
