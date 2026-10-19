@@ -679,11 +679,11 @@ export const whyChoose: TrustItem[] = [
       hi: "सीधे स्रोत से दाम",
     },
     body: {
-      id: "Kami bermitra langsung dengan petani lokal dan mengambil hasil panen dari sumbernya, tanpa rantai perantara. Hasilnya, Anda mendapat harga tangan pertama yang bersaing, dengan penawaran yang disesuaikan dengan volume dan spesifikasi pesanan Anda.",
-      en: "We partner directly with local farmers and take the harvest from the source, with no chain of middlemen. The result: competitive first-hand prices for you, with offers tailored to the volume and specifications of your order.",
-      zh: "我们直接与本地农户合作，从源头采收农产品，没有中间商环节。因此，您可获得具有竞争力的源头价格，报价将根据您订单的数量和规格量身制定。",
-      vi: "Chúng tôi hợp tác trực tiếp với nông dân địa phương và thu mua nông sản tận gốc, không qua chuỗi trung gian. Nhờ vậy, bạn nhận được giá tận gốc cạnh tranh, với báo giá điều chỉnh theo khối lượng và quy cách đơn hàng của bạn.",
-      hi: "हम सीधे स्थानीय किसानों के साथ साझेदारी करते हैं और फ़सल सीधे स्रोत से लेते हैं, बिचौलियों की किसी शृंखला के बिना। इससे आपको प्रतिस्पर्धी, सीधे स्रोत वाले दाम मिलते हैं, और प्रस्ताव आपके ऑर्डर की मात्रा और विनिर्देशों के अनुसार तय किया जाता है।",
+      id: "Kami bermitra langsung dengan petani lokal dan mengambil hasil panen dari sumbernya, tanpa rantai perantara.",
+      en: "We partner directly with local farmers and take the harvest from the source, with no chain of middlemen.",
+      zh: "我们直接与本地农户合作，从源头采收农产品，没有中间商环节。",
+      vi: "Chúng tôi hợp tác trực tiếp với nông dân địa phương và thu mua nông sản tận gốc, không qua chuỗi trung gian.",
+      hi: "हम सीधे स्थानीय किसानों के साथ साझेदारी करते हैं और फ़सल सीधे स्रोत से लेते हैं, बिचौलियों की किसी शृंखला के बिना।",
     },
   },
   {
@@ -696,11 +696,11 @@ export const whyChoose: TrustItem[] = [
       hi: "बड़ा बेड़ा, डिलीवरी के लिए तैयार",
     },
     body: {
-      id: "Didukung banyak armada milik sendiri dan tim pengiriman yang berpengalaman, kami mengatur setiap pengiriman dari gudang hingga ke tujuan Anda. Pesanan tiba dengan aman dan sesuai jadwal yang disepakati, baik untuk kebutuhan rutin maupun volume besar.",
-      en: "Backed by a large fleet of our own and an experienced delivery team, we arrange every shipment from our warehouse to your destination. Orders arrive safely and on the agreed schedule, for regular needs and large volumes alike.",
-      zh: "依托自有的众多车辆和经验丰富的配送团队，我们安排从仓库到目的地的每一次运输。无论是日常需求还是大批量订单，货物都能安全并按约定时间送达。",
-      vi: "Với đội xe riêng đông đảo và đội ngũ giao hàng giàu kinh nghiệm, chúng tôi sắp xếp mọi chuyến hàng từ kho đến nơi nhận của bạn. Đơn hàng đến nơi an toàn và đúng lịch đã thống nhất, cho cả nhu cầu thường xuyên lẫn khối lượng lớn.",
-      hi: "अपने स्वयं के बड़े बेड़े और अनुभवी डिलीवरी टीम के सहयोग से, हम गोदाम से आपके गंतव्य तक हर शिपमेंट की व्यवस्था करते हैं। ऑर्डर सुरक्षित और तय समय पर पहुँचते हैं, चाहे नियमित ज़रूरत हो या बड़ी मात्रा।",
+      id: "Didukung banyak armada milik sendiri dan tim pengiriman yang berpengalaman, kami mengatur setiap pengiriman dari gudang hingga ke tujuan Anda.",
+      en: "Backed by a large fleet of our own and an experienced delivery team, we arrange every shipment from our warehouse to your destination.",
+      zh: "依托自有的众多车辆和经验丰富的配送团队，我们安排从仓库到目的地的每一次运输。",
+      vi: "Với đội xe riêng đông đảo và đội ngũ giao hàng giàu kinh nghiệm, chúng tôi sắp xếp mọi chuyến hàng từ kho đến nơi nhận của bạn.",
+      hi: "अपने स्वयं के बड़े बेड़े और अनुभवी डिलीवरी टीम के सहयोग से, हम गोदाम से आपके गंतव्य तक हर शिपमेंट की व्यवस्था करते हैं।",
     },
   },
 ]
