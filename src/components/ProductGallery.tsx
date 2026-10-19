@@ -4,6 +4,7 @@ import Image from "next/image"
 import { useState } from "react"
 import { pickLocale, type Locale } from "@/lib/i18n"
 import { IMAGE_CREDITS } from "@/lib/image-credits"
+import { deliveryQuality } from "@/lib/image-quality"
 import { IMAGES, type ImageKey } from "@/lib/images"
 
 /**
@@ -53,6 +54,7 @@ export function ProductGallery({
                 alt={pickLocale(meta.alt, locale)}
                 fill
                 sizes="(min-width: 1376px) 740px, (min-width: 1024px) 55vw, 100vw"
+                quality={deliveryQuality(key)}
                 preload={i === 0}
                 loading={i === 0 ? undefined : "lazy"}
                 className="object-cover"

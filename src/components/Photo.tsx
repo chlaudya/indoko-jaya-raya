@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { pickLocale, type Locale } from "@/lib/i18n"
 import { IMAGES, type ImageKey } from "@/lib/images"
+import { deliveryQuality } from "@/lib/image-quality"
 import { ui } from "@/lib/fixtures"
 
 /**
@@ -52,6 +53,7 @@ export function Photo({
         alt={pickLocale(meta.alt, locale)}
         fill
         sizes={sizes}
+        quality={deliveryQuality(image)}
         preload={preload}
         loading={preload ? undefined : "lazy"}
         className={`object-cover ${zoomClass}`}

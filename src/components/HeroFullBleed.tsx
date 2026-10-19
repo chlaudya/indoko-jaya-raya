@@ -4,6 +4,7 @@ import { pickLocale, type Locale } from "@/lib/i18n";
 import { IMAGES, type ImageKey } from "@/lib/images";
 import { ui } from "@/lib/fixtures";
 import { HeroCollage } from "./HeroCollage";
+import { HERO_SLIDE_QUALITY } from "@/lib/image-quality";
 import { HeroSlider } from "./HeroSlider";
 
 /**
@@ -167,10 +168,10 @@ export function HeroFullBleed({
     </div>
   );
 
-  // LCP: slide 1 is preloaded at high fetch priority. Same src / srcset / sizes as HeroSlider's first <Image>, so React
+  // LCP: slide 1 is preloaded at high fetch priority. Same src / srcset / sizes / quality as HeroSlider's first <Image>, so React
   // dedupes it with next/image's own (low-priority) preload and the browser reuses this response for the <img>.
   if (isSlider && slides?.[0]) {
-    const first = getImageProps({ src: IMAGES[slides[0].image].src, alt: "", fill: true, sizes: "100vw" }).props;
+    const first = getImageProps({ src: IMAGES[slides[0].image].src, alt: "", fill: true, sizes: "100vw", quality: HERO_SLIDE_QUALITY }).props;
     preload(first.src, { as: "image", fetchPriority: "high", imageSrcSet: first.srcSet, imageSizes: first.sizes });
   }
 

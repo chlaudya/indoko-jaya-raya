@@ -3,7 +3,9 @@ import type { NextConfig } from "next"
 const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
-    qualities: [75],
+    // 75 = default; 70 = hero slides and the two heaviest section photos (src/lib/image-quality.ts), so the
+    // delivered AVIF/WebP stays under the 300 KB budget.
+    qualities: [70, 75],
     // 1440 fits common desktop viewports; 420/480/820 match the ~410px card slots at 1x/2x.
     deviceSizes: [640, 750, 828, 1080, 1200, 1440, 1920, 2048],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384, 420, 480, 820],

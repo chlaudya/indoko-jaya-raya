@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { HERO_SLIDE_QUALITY } from "@/lib/image-quality"
 import {
   useCallback,
   useEffect,
@@ -192,6 +193,7 @@ export function HeroSlider({
                 alt={slide.alt}
                 fill
                 sizes="100vw"
+                quality={HERO_SLIDE_QUALITY}
                 preload={i === 0}
                 loading={i === 0 ? undefined : "eager"}
                 onLoad={() => markLoaded(i)}
