@@ -18,9 +18,10 @@ export const siteSettings = {
       id: "Halo, saya ingin konsultasi Jasa Penjemuran Komoditi.",
       en: "Hello, I would like to consult about commodity drying services.",
     },
-    career: {
-      id: "Halo, saya ingin melamar posisi {{jobTitle}}.",
-      en: "Hello, I would like to apply for {{jobTitle}}.",
+    // Careers apply CTA (list + detail): position and location in the page language. zh / vi / hi DRAFT.
+    careerApply: {
+      id: "Halo Indoco Jaya Raya, saya ingin melamar posisi {{position}} ({{location}}). Mohon informasi lebih lanjut.",
+      en: "Hello Indoco Jaya Raya, I would like to apply for the {{position}} position ({{location}}). Please send me more information.",
     },
     contact: {
       id: "Halo Indoco Jaya Raya, saya ingin menghubungi tim Anda.",
@@ -98,6 +99,10 @@ export const ui = {
   mapPending: { id: "Peta menyusul", en: "Map pending" },
   openPositions: { id: "Posisi terbuka", en: "Open positions" },
   noOpenPositions: { id: "Tidak ada posisi terbuka saat ini.", en: "No open positions right now." },
+  careersEmptyHint: { id: "Hubungi kami via WhatsApp untuk informasi karier.", en: "Contact us on WhatsApp for career information." },
+  // Image credit captions (e.g. Wikimedia photos in the product gallery).
+  photoCredit: { id: "Foto", en: "Photo" },
+  photoCropped: { id: "dipotong", en: "cropped" },
   roleDescription: { id: "Deskripsi posisi", en: "The role" },
   qualifications: { id: "Kualifikasi", en: "Qualifications" },
   location: { id: "Lokasi", en: "Location" },
@@ -328,18 +333,6 @@ export const products: Product[] = [
         body: { id: "Komoditi siap distribusi.", en: "Commodity ready for distribution." },
       },
     ],
-  },
-]
-
-export const jobs = [
-  {
-    slug: "staff-operasional-gudang",
-    title: { id: "Staff Operasional Gudang", en: "Warehouse Operations Staff" },
-    location: { id: "Lokasi menyusul", en: "Location TBD" },
-    shortBlurb: { id: "Mendukung operasional gudang dan penanganan komoditi.", en: "Support warehouse ops and commodity handling." },
-    description: { id: "Deskripsi lengkap dikelola via CMS.", en: "Full description managed via CMS." },
-    qualifications: { id: "Kualifikasi dikelola via CMS.", en: "Qualifications managed via CMS." },
-    status: "active" as const,
   },
 ]
 

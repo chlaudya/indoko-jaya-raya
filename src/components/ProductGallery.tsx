@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { useState } from "react"
 import { pickLocale, type Locale } from "@/lib/i18n"
+import { IMAGE_CREDITS } from "@/lib/image-credits"
 import { IMAGES, type ImageKey } from "@/lib/images"
 
 /**
@@ -16,11 +17,12 @@ export function ProductGallery({
 }: {
   images: ImageKey[]
   locale: Locale
-  labels: { previous: string; next: string; slide: string }
+  labels: { previous: string; next: string; slide: string; photo?: string; cropped?: string }
 }) {
   const [index, setIndex] = useState(0)
   const total = images.length
   const go = (next: number) => setIndex((next + total) % total)
+  const credit = IMAGE_CREDITS[images[index]]
 
   return (
     <div
@@ -59,6 +61,25 @@ export function ProductGallery({
           )
         })}
       </div>
+
+      {/* Third-party photo: author, licence and source for the photo on screen. */}
+      {credit && (
+        <p className="mt-3 text-xs leading-relaxed text-muted">
+          {labels.photo || "Foto"}:{" "}
+          <a href={credit.authorUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-charcoal">
+            {credit.author}
+          </a>
+          ,{" "}
+          <a href={credit.licenseUrl} target="_blank" rel="noopener noreferrer license" className="underline underline-offset-2 hover:text-charcoal">
+            {credit.license}
+          </a>
+          , via{" "}
+          <a href={credit.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-charcoal">
+            Wikimedia Commons
+          </a>
+          {credit.modified && labels.cropped ? ` (${labels.cropped})` : ""}
+        </p>
+      )}
 
       {total > 1 && (
         <div className="mt-4 flex items-center justify-between gap-4">

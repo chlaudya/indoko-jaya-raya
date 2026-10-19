@@ -60,7 +60,7 @@ export const settings = defineType({
         { name: "home", type: "localeText" },
         { name: "productPage", title: "Product page", type: "localeText", description: "Product detail page CTAs. Use {{productName}}" },
         { name: "drying", type: "localeText" },
-        { name: "career", type: "localeText", description: "Use {{jobTitle}}" },
+        { name: "careerApply", title: "Career apply", type: "localeText", description: "Careers list + detail. Use {{position}} and {{location}}" },
         { name: "contact", type: "localeText" },
       ],
     }),

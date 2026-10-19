@@ -82,6 +82,8 @@ export default async function ProductDetailPage({
                     previous: pickLocale(ui.previous, locale),
                     next: pickLocale(ui.next, locale),
                     slide: pickLocale(ui.slideOf, locale),
+                    photo: pickLocale(ui.photoCredit, locale),
+                    cropped: pickLocale(ui.photoCropped, locale),
                   }}
                 />
               ) : (

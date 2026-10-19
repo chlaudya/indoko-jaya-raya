@@ -6,6 +6,7 @@ import { getActiveJobs } from "@/lib/jobs"
 import { CareerCard } from "@/components/CareerCard"
 import { HeroFullBleed } from "@/components/HeroFullBleed"
 import { InquirySection } from "@/components/InquirySection"
+import { WaButton } from "@/components/WaButton"
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale: raw } = await params
@@ -39,7 +40,14 @@ export default async function CareersPage({ params }: { params: Promise<{ locale
         <div className="site-wrap pt-16 pb-24 lg:pb-32">
           <h2 className="display display-h2 text-forest">{pickLocale(ui.openPositions, locale)}</h2>
           {active.length === 0 ? (
-            <p className="mt-10 text-muted">{pickLocale(ui.noOpenPositions, locale)}</p>
+            // Empty state: no active job in Sanity (no placeholder jobs). General WhatsApp contact instead.
+            <div className="mt-10 max-w-xl border-t border-charcoal/15 pt-10">
+              <p className="text-lg text-charcoal">{pickLocale(ui.noOpenPositions, locale)}</p>
+              <p className="mt-2 text-muted">{pickLocale(ui.careersEmptyHint, locale)}</p>
+              <div className="mt-6">
+                <WaButton locale={locale} templateKey="contact" label={pickLocale(ui.chatOnWhatsApp, locale)} variant="wa" />
+              </div>
+            </div>
           ) : (
             <ul className="mt-10 border-b border-charcoal/15">
               {active.map((job) => (

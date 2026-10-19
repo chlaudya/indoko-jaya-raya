@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { LocalizedCopy } from "@/components/RichText"
-import { WaButton } from "@/components/WaButton"
+import { CareerApply } from "@/components/CareerApply"
 import { isLocale, pickLocale, type Locale } from "@/lib/i18n"
 import { ui } from "@/lib/fixtures"
 import { getJob, hasCopy } from "@/lib/jobs"
@@ -61,18 +61,18 @@ export default async function JobPage({
 
         <div className="mt-10 grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
-            <p className="label">{pickLocale(ui.location, locale)}</p>
-            <p className="mt-2 text-charcoal">{location}</p>
+            {location && (
+              <>
+                <p className="label">{pickLocale(ui.location, locale)}</p>
+                <p className="mt-2 text-charcoal">{location}</p>
+              </>
+            )}
             <h1 className="display display-h1 mt-6 text-forest">{title}</h1>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">{pickLocale(job.shortBlurb, locale)}</p>
+            {pickLocale(job.shortBlurb, locale) && (
+              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">{pickLocale(job.shortBlurb, locale)}</p>
+            )}
             <div className="mt-8">
-              <WaButton
-                locale={locale}
-                templateKey="career"
-                tokens={{ jobTitle: title }}
-                label={pickLocale(ui.applyWhatsApp, locale)}
-                variant="wa"
-              />
+              <CareerApply locale={locale} position={title} location={location} />
             </div>
 
             {hasCopy(job.description, locale) && (

@@ -2,7 +2,7 @@ import type { Locale } from "./i18n"
 import { pickLocale } from "./i18n"
 import { siteSettings } from "./fixtures"
 
-/** Any key of siteSettings.waTemplates (home, drying, career, contact, homeHero, homeDrying, homeBanner, productCard, productPage…). */
+/** Any key of siteSettings.waTemplates (home, drying, careerApply, contact, homeHero, homeDrying, homeBanner, productCard, productPage…). */
 export type TemplateKey = string
 
 /** The prefilled text for a template (exported so audits can list the decoded messages). */
@@ -10,7 +10,9 @@ export function buildWhatsAppMessage(opts: { locale: Locale; templateKey: Templa
   const raw =
     pickLocale(siteSettings.waTemplates[opts.templateKey], opts.locale) ||
     pickLocale(siteSettings.waTemplates.contact, opts.locale)
-  return Object.entries(opts.tokens || {}).reduce((msg, [key, value]) => msg.replaceAll(`{{${key}}}`, value), raw)
+  const filled = Object.entries(opts.tokens || {}).reduce((msg, [key, value]) => msg.replaceAll(`{{${key}}}`, value.trim()), raw)
+  // A blank optional token (e.g. a job without a location) must not leave "()" behind.
+  return filled.replace(/\s*[(（]\s*[)）]/g, "")
 }
 
 /** Every WhatsApp link reads the destination from siteSettings.waTargets (CMS: settings.waTargets). */

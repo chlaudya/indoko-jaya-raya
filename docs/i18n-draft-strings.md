@@ -56,13 +56,12 @@ Why choose us (ui.whyChooseUs + whyChoose: title, body), icon strip (iconStrip: 
 | ui.bannerCta | Hubungi kami via WhatsApp | Contact us on WhatsApp | 通过 WhatsApp 联系我们 | Liên hệ qua WhatsApp | WhatsApp पर संपर्क करें |
 | ui.bannerReassure | Pesan Anda langsung masuk ke WhatsApp tim kami. | Your message goes straight to our team's WhatsApp. | 您的消息将直接发送到我们团队的 WhatsApp。 | Tin nhắn của bạn được gửi thẳng đến WhatsApp của đội ngũ chúng tôi. | आपका संदेश सीधे हमारी टीम के WhatsApp पर पहुँचता है। |
 
-## Site strings (196, src/lib/i18n-drafts.ts)
+## Site strings (194, src/lib/i18n-drafts.ts)
 
 | id | zh | vi | hi |
 |---|---|---|---|
 | Halo Indoco Jaya Raya, saya ingin mengetahui lebih lanjut tentang perusahaan Anda. | 您好，Indoco Jaya Raya，我想进一步了解贵公司。 | Xin chào Indoco Jaya Raya, tôi muốn tìm hiểu thêm về công ty của bạn. | नमस्ते Indoco Jaya Raya, मुझे आपकी कंपनी के बारे में और जानकारी चाहिए। |
 | Halo, saya ingin konsultasi Jasa Penjemuran Komoditi. | 您好，我想咨询农产品晾晒服务。 | Xin chào, tôi muốn được tư vấn về dịch vụ phơi sấy nông sản. | नमस्ते, मुझे जिंस सुखाने की सेवा के बारे में परामर्श चाहिए। |
-| Halo, saya ingin melamar posisi {{jobTitle}}. | 您好，我想应聘 {{jobTitle}} 职位。 | Xin chào, tôi muốn ứng tuyển vị trí {{jobTitle}}. | नमस्ते, मुझे {{jobTitle}} पद के लिए आवेदन करना है। |
 | Halo Indoco Jaya Raya, saya ingin menghubungi tim Anda. | 您好，Indoco Jaya Raya，我想联系贵团队。 | Xin chào Indoco Jaya Raya, tôi muốn liên hệ với đội ngũ của bạn. | नमस्ते Indoco Jaya Raya, मुझे आपकी टीम से संपर्क करना है। |
 | Agribisnis hasil bumi lokal untuk pasar nasional dan internasional. | 本土农产品农业企业，服务国内与国际市场。 | Doanh nghiệp nông sản địa phương cho thị trường trong nước và quốc tế. | राष्ट्रीय और अंतरराष्ट्रीय बाज़ारों के लिए स्थानीय कृषि उपज व्यवसाय। |
 | Indonesia — alamat lengkap menyusul dari klien. | 印度尼西亚——完整地址待客户确认。 | Indonesia — địa chỉ đầy đủ đang chờ khách hàng xác nhận. | इंडोनेशिया — पूरा पता ग्राहक की पुष्टि के बाद। |
@@ -87,6 +86,10 @@ Why choose us (ui.whyChooseUs + whyChoose: title, body), icon strip (iconStrip: 
 | Ikhtisar produk | 产品概览 | Tổng quan sản phẩm | उत्पाद अवलोकन |
 | Komoditi lain | 其他农产品 | Nông sản khác | अन्य जिंसें |
 | Lamar via WhatsApp | 通过 WhatsApp 应聘 | Ứng tuyển qua WhatsApp | WhatsApp से आवेदन करें |
+| Halo Indoco Jaya Raya, saya ingin melamar posisi {{position}} ({{location}}). Mohon informasi lebih lanjut. | 您好，Indoco Jaya Raya，我想应聘 {{position}} 职位（{{location}}）。请提供更多信息。 | Xin chào Indoco Jaya Raya, tôi muốn ứng tuyển vị trí {{position}} ({{location}}). Vui lòng cho tôi thêm thông tin. | नमस्ते Indoco Jaya Raya, मैं {{position}} ({{location}}) पद के लिए आवेदन करना चाहता/चाहती हूँ। कृपया अधिक जानकारी दें। |
+| Hubungi kami via WhatsApp untuk informasi karier. | 如需了解招聘信息，请通过 WhatsApp 联系我们。 | Liên hệ với chúng tôi qua WhatsApp để biết thông tin tuyển dụng. | करियर की जानकारी के लिए WhatsApp पर हमसे संपर्क करें। |
+| Foto | 图片 | Ảnh | फ़ोटो |
+| dipotong | 已裁剪 | đã cắt | क्रॉप किया गया |
 | Fotografi menyusul | 照片待补 | Hình ảnh sẽ cập nhật | फ़ोटो जल्द |
 | Menu | 菜单 | Menu | मेनू |
 | Tutup | 关闭 | Đóng | बंद करें |
@@ -195,11 +198,6 @@ Why choose us (ui.whyChooseUs + whyChoose: title, body), icon strip (iconStrip: 
 | Pengeringan sesuai standar kualitas. | 按质量标准干燥。 | Sấy khô theo tiêu chuẩn chất lượng. | गुणवत्ता मानकों के अनुसार सुखाना। |
 | Serah terima | 交付 | Bàn giao | सुपुर्दगी |
 | Komoditi siap distribusi. | 农产品可供分销。 | Nông sản sẵn sàng phân phối. | जिंस वितरण के लिए तैयार। |
-| Staff Operasional Gudang | 仓库运营专员 | Nhân viên vận hành kho | गोदाम संचालन कर्मचारी |
-| Lokasi menyusul | 地点待定 | Địa điểm sẽ cập nhật | स्थान जल्द |
-| Mendukung operasional gudang dan penanganan komoditi. | 支持仓库运营与农产品处理。 | Hỗ trợ vận hành kho và xử lý nông sản. | गोदाम संचालन और जिंस प्रबंधन में सहयोग। |
-| Deskripsi lengkap dikelola via CMS. | 完整描述通过 CMS 管理。 | Mô tả đầy đủ được quản lý qua CMS. | पूरा विवरण CMS में प्रबंधित। |
-| Kualifikasi dikelola via CMS. | 任职要求通过 CMS 管理。 | Yêu cầu được quản lý qua CMS. | योग्यताएँ CMS में प्रबंधित। |
 | Berakar di Indonesia. | 扎根印度尼西亚。 | Bắt rễ tại Indonesia. | इंडोनेशिया में जड़ें। |
 | Terhubung ke dunia. | 连接世界。 | Kết nối với thế giới. | दुनिया से जुड़ाव। |
 | Komoditi pertanian Indonesia untuk pembeli dan mitra di pasar nasional dan internasional. | 为国内与国际市场的买家和合作伙伴提供印度尼西亚农产品。 | Nông sản Indonesia cho người mua và đối tác tại thị trường trong nước và quốc tế. | राष्ट्रीय और अंतरराष्ट्रीय बाज़ारों के ख़रीदारों और साझेदारों के लिए इंडोनेशियाई कृषि जिंसें। |

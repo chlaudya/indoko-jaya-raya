@@ -1,5 +1,4 @@
 import { defineQuery } from "next-sanity"
-import { jobs as fixtureJobs } from "./fixtures"
 import type { Locale } from "./i18n"
 import { getSanityClient } from "./sanity"
 
@@ -92,10 +91,13 @@ async function fetchQuery<T>(query: string, params: Record<string, string> = {})
   }
 }
 
-/** Active jobs from Sanity. Fixtures only when the project is not configured or the request fails. */
+/**
+ * Active jobs from Sanity only. No fixture or placeholder jobs: when Sanity is not configured, the request fails or
+ * nothing is active, the list is empty and /careers shows its empty state.
+ */
 export async function getActiveJobs(): Promise<Job[]> {
   const rows = await fetchQuery<Parameters<typeof mapJob>[0][]>(JOBS_QUERY)
-  if (!rows) return fixtureJobs
+  if (!rows) return []
   return rows.map(mapJob).filter((job): job is Job => job !== null)
 }
 
@@ -108,7 +110,6 @@ export function hasCopy(value: LocaleCopy | undefined, locale: Locale): boolean 
 
 export async function getJob(slug: string): Promise<Job | null> {
   const row = await fetchQuery<Parameters<typeof mapJob>[0] | null>(JOB_QUERY, { slug })
-  if (row === undefined) return fixtureJobs.find((job) => job.slug === slug) ?? null
   if (!row) return null
   return mapJob(row)
 }
