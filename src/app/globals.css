@@ -22,8 +22,6 @@
   --header-offset: 96px;
   /* Catalog filter sticks under the scrolled bar (12px + 64px + 8px). */
   --filter-sticky-top: 84px;
-  /* zh/hi headline key phrase only (never body text): lime, upright; on the forest hero scrim (≥32px headline). */
-  --hero-accent-cjk: #c8e6a0;
   /* Home hero: full viewport height. svh so the mobile browser chrome doesn't clip the copy. */
   --hero-h: 100svh;
 }
@@ -42,6 +40,10 @@
   --color-hairline: #e3e1d6;
   --color-hover-line: #a8b89c;
   --color-numeral: #6f8f62;
+  /* Brand accent from the client logo (DESIGN.md "Brand Accent"): DARK sections only, never on ivory/white.
+     lime-tint = hero accent words, labels / footer headings / hover underlines on dark; lime = focus ring on dark. */
+  --color-lime: #7afa52;
+  --color-lime-tint: #c8e6a0;
 }
 
 html {
@@ -89,6 +91,13 @@ body {
   font-family:
     var(--font-cormorant), "Cormorant Garamond", "Noto Serif SC", "Songti SC",
     "Noto Serif Devanagari", "Kohinoor Devanagari", Georgia, serif;
+/* Dark sections (hero, forest bands, footer): logo-lime ring, 2px with a 2px offset. Light sections keep sage. */
+[data-hero] :focus-visible,
+.surface-dark :focus-visible,
+footer :focus-visible {
+  outline: 2px solid var(--color-lime);
+  outline-offset: 2px;
+}
   font-weight: 500;
   line-height: 1.04;
   letter-spacing: -0.015em;

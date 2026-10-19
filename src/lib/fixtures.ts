@@ -535,8 +535,8 @@ export const redesign = {
       hi: "राष्ट्रीय और अंतरराष्ट्रीय बाज़ारों के लिए स्थानीय कृषि व्यवसाय।",
     } as LString,
     /**
-     * Phrase inside heroTitle that is emphasised: italic in Latin scripts (id/en/vi), accent colour with no italic in
-     * zh/hi (--hero-accent-cjk). Must match heroTitle exactly per locale.
+     * Phrase inside heroTitle that is emphasised: lime-tint (--color-lime-tint) in every locale, italic in Latin
+     * scripts (id/en/vi), upright in zh/hi. Must match heroTitle exactly per locale.
      */
     heroTitleEmphasis: {
       id: "nasional dan internasional.",

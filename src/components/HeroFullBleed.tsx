@@ -137,8 +137,8 @@ export function HeroFullBleed({
       {eyebrow && <p className="label text-white!">{eyebrow}</p>}
       <Heading
         className={`display display-h1 mt-4 max-w-[13em] leading-[1.05]! text-balance ${
-          // Latin scripts: italic key phrase. zh/hi (Cormorant has no glyphs): lime, same weight, upright.
-          locale === "zh" || locale === "hi" ? "[&_em]:not-italic [&_em]:text-[var(--hero-accent-cjk)]" : "[&_em]:italic"
+          // Key phrase in lime-tint in every locale; italic in Latin scripts, upright in zh/hi (system serif).
+          `[&_em]:text-lime-tint ${locale === "zh" || locale === "hi" ? "[&_em]:not-italic" : "[&_em]:italic"}`
         }`}
       >
         {renderEmphasis(title, titleEmphasis)}

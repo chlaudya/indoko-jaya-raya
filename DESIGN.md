@@ -159,8 +159,10 @@ Use for:
 ## Natural
 
 ```css
---color-sage: #6f8f62;
+--color-sage: #557048;
 ```
+
+(Darkened from #6f8f62 so small labels pass 4.5:1 on ivory. #6f8f62 survives only as `--color-numeral` for large numerals, 32px and up.)
 
 Use sparingly for:
 
@@ -171,7 +173,8 @@ Use sparingly for:
 ## Soft Sage
 
 ```css
---color-soft-sage: #a8b89c;
+--color-soft-sage: #c3cfb8;
+--color-hover-line: #a8b89c;
 ```
 
 Use sparingly.
@@ -211,14 +214,59 @@ Never use pure black for normal body text.
 ## Muted
 
 ```css
---color-muted: #66736b;
+--color-muted: #5a665f;
 ```
+
+(Darkened from #66736b for 4.5:1 on ivory.)
 
 Use for:
 
 - secondary text
 - metadata
 - descriptions
+
+## Brand Accent: APEL Group logo lime
+
+The logo (APEL Group mark, `public/images/brand/apel-logo.svg`) is lime and black. Bring it into the site as a small accent family, not as a main color. Forest, ivory and sage stay the base.
+
+```css
+--color-lime: #7afa52;       /* logo lime */
+--color-lime-tint: #c8e6a0;  /* soft lime, the bridge between logo and forest */
+```
+
+Contrast (measured):
+
+| Pair | Ratio | Allowed |
+|---|---|---|
+| lime-tint on forest #123b2a | 9.1:1 | text, icons, markers |
+| lime-tint on green #1f5a3d | 5.9:1 | text, icons, markers |
+| lime on forest #123b2a | 9.3:1 | icons, focus ring, dots, 2px lines |
+| forest text on lime-tint fill | 9.1:1 | small badges |
+| lime or lime-tint on ivory or white | 1.2–1.3:1 | never (fails text and 3:1 UI) |
+
+Use lime-tint, **on dark sections only** (hero, WhatsApp banner, footer):
+
+- hero headline accent words in all 5 languages (replaces the white italic accent; extends `--hero-accent-cjk`)
+- eyebrow labels on dark (e.g. "MARI BEKERJA SAMA")
+- footer column headings
+- link hover underline on dark
+
+Use logo lime (`--color-lime`), **on dark only and very small**:
+
+- the logo itself
+- keyboard focus ring on dark sections (2px, 2px offset)
+- tiny details: an active slide dot, a 2px rule, an icon stroke
+
+On light sections (ivory, white, mist):
+
+- active tabs, hover underlines, focus rings and labels stay forest or sage
+- lime-tint may appear only as a fill behind forest text (e.g. a small "Baru" badge), never as text, a line or a marker
+
+Never:
+
+- lime text or lines on light backgrounds
+- large lime fills, lime buttons, lime section backgrounds
+- recoloring the logo
 
 ---
 
@@ -233,13 +281,13 @@ Light backgrounds       40%
 Forest green            30%
 Photography             15%
 Secondary greens        10%
-Accent details           5%
+Accent details           5%   (lime accents count here, and only on dark)
 ```
 
 Do NOT:
 
 - introduce random greens
-- use bright neon green
+- use bright neon green (exception: `--color-lime`, the logo color, under the Brand Accent rules above)
 - use excessive gradients
 - use green overlays on every image
 - use multiple unrelated accent colors

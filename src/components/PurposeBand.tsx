@@ -44,7 +44,7 @@ export function PurposeBand({
   }
 
   return (
-    <section id={id} className="bg-forest text-white">
+    <section id={id} className="surface-dark bg-forest text-white">
       <div className="site-wrap section-y">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">

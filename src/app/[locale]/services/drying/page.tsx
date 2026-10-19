@@ -65,7 +65,7 @@ export default async function DryingServicePage({ params }: { params: Promise<{ 
       />
 
       {/* Numbered process */}
-      <section className="bg-forest text-white">
+      <section className="surface-dark bg-forest text-white">
         <div className="site-wrap section-y">
           <p className="label text-soft-sage!">{t(ui.process)}</p>
           <ol className="mt-10 grid gap-10 md:grid-cols-3 lg:mt-14">
