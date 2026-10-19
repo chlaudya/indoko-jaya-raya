@@ -92,10 +92,20 @@ async function fetchQuery<T>(query: string, params: Record<string, string> = {})
 }
 
 /**
+ * QA sample jobs (src/lib/sample-jobs.ts): `CAREERS_SAMPLE_JOBS=1 npm run dev`. Never in a production build:
+ * NODE_ENV is "production" for `next build` / `next start`, so this is false there even if the variable is set.
+ * When on, Sanity is not queried for jobs at all.
+ */
+function sampleJobsEnabled(): boolean {
+  return process.env.NODE_ENV !== "production" && process.env.CAREERS_SAMPLE_JOBS === "1"
+}
+
+/**
  * Active jobs from Sanity only. No fixture or placeholder jobs: when Sanity is not configured, the request fails or
  * nothing is active, the list is empty and /careers shows its empty state.
  */
 export async function getActiveJobs(): Promise<Job[]> {
+  if (sampleJobsEnabled()) return (await import("./sample-jobs")).SAMPLE_JOBS
   const rows = await fetchQuery<Parameters<typeof mapJob>[0][]>(JOBS_QUERY)
   if (!rows) return []
   return rows.map(mapJob).filter((job): job is Job => job !== null)
@@ -109,6 +119,7 @@ export function hasCopy(value: LocaleCopy | undefined, locale: Locale): boolean 
 }
 
 export async function getJob(slug: string): Promise<Job | null> {
+  if (sampleJobsEnabled()) return (await import("./sample-jobs")).SAMPLE_JOBS.find((job) => job.slug === slug) ?? null
   const row = await fetchQuery<Parameters<typeof mapJob>[0] | null>(JOB_QUERY, { slug })
   if (!row) return null
   return mapJob(row)
