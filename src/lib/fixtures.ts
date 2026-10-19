@@ -230,8 +230,7 @@ export const products: Product[] = [
   },
   {
     slug: "asam-kupas",
-    // No photo until the client sends a peeled-tamarind shot: the whole-pod stock photos (card-tamarind-*.webp)
-    // showed the wrong product, so the card and detail page use the default placeholder.
+    image: "cardTamarindBowl",
     kind: "product",
     category: "kacang-kacangan",
     featured: true,
