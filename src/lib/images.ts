@@ -151,7 +151,7 @@ export const IMAGES = {
     alt: { id: "Kacang mete gelondong di telapak tangan", en: "Raw cashew nuts in a hand", zh: "手中的生腰果", vi: "Hạt điều thô trong lòng bàn tay", hi: "हथेली में कच्चे काजू" },
   },
   heroSlide5: {
-    src: `${DIR}/hero-slide-peanuts-tarp.webp`,
+    src: `${DIR}/hero-slide-peanuts-tarp-v2.webp`,
     alt: { id: "Kacang tanah dijemur di atas terpal", en: "Peanuts drying on a tarp", zh: "摊在篷布上晾晒的花生", vi: "Đậu phộng phơi trên tấm bạt", hi: "तिरपाल पर सूखती मूंगफली" },
   },
   // Home hero collage: five client frames (2 people, 3 commodities), cropped to the preview.
