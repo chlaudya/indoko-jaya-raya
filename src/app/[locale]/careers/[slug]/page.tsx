@@ -37,7 +37,7 @@ export default async function JobPage({
   const location = pickLocale(job.location, locale)
 
   return (
-    <article className="bg-white">
+    <article className="band-lime">
       <div className="site-wrap pt-10 pb-20 lg:pt-14 lg:pb-28">
         <nav aria-label="Breadcrumb" className="text-sm text-muted">
           <ol className="flex flex-wrap gap-2">

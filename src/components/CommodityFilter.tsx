@@ -67,7 +67,7 @@ export function CommodityFilter({
 
   const bar = (
     <div className="flex flex-col gap-4 rounded-[8px] border border-charcoal/10 bg-white p-4 lg:flex-row lg:items-center lg:justify-between lg:p-5">
-          <nav aria-label={pickLocale(ui.ourCommodities, locale)} className="no-scrollbar -mx-1 flex gap-2 overflow-x-auto px-1">
+          <nav aria-label={pickLocale(ui.ourCommodities, locale)} className="flex flex-wrap gap-2">
             <Link href={href()} aria-current={!category ? "true" : undefined} className={chipClass(!category)}>
               {pickLocale(ui.allCategories, locale)}
             </Link>

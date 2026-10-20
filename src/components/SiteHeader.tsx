@@ -12,6 +12,7 @@ import { WhatsAppIcon, buttonClass } from "./WaButton"
 import { BrandMark } from "./BrandMark"
 
 function itemHref(locale: Locale, href: string) {
+  if (!href) return `/${locale}`
   if (href.startsWith("#")) return `/${locale}${href}`
   return `/${locale}/${href}`
 }
@@ -73,7 +74,10 @@ export function SiteHeader({ locale }: { locale: Locale }) {
         scrolled ? "top-3" : "top-4"
       }`}
     >
-      <div className="pointer-events-auto relative mx-auto flex h-16 max-w-[1280px] items-center gap-4 rounded-[12px] bg-white pr-2 pl-4 shadow-[0_10px_30px_-12px_rgba(23,32,27,0.28),0_1px_3px_rgba(23,32,27,0.08)] sm:pl-5 lg:gap-6 lg:pr-3">
+      <div
+        data-scrolled={scrolled ? "" : undefined}
+        className="header-bar pointer-events-auto relative mx-auto flex h-16 max-w-[1280px] items-center gap-4 rounded-[12px] border border-white/70 bg-white/70 pr-2 pl-4 shadow-[0_10px_30px_-12px_rgba(23,32,27,0.28)] backdrop-blur-md motion-safe:transition-colors motion-safe:duration-200 sm:pl-5 lg:gap-6 lg:pr-3 data-[scrolled]:bg-white/88"
+      >
         <Logo locale={locale} />
         <nav className="hidden h-full flex-1 items-center justify-center gap-1 lg:flex xl:gap-4" aria-label="Primary">
           {nav.map((item) => {
@@ -174,11 +178,6 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           <div className="flex-1 overflow-y-auto px-5 py-4">
             <nav aria-label="Primary mobile">
               <ul>
-                <li>
-                  <Link href={`/${locale}`} tabIndex={open ? 0 : -1} className="flex min-h-12 items-center border-b border-charcoal/10 text-lg text-charcoal">
-                    {pickLocale(ui.home, locale)}
-                  </Link>
-                </li>
                 {nav.map((item) => (
                   <li key={item.href} className="border-b border-charcoal/10">
                     <Link

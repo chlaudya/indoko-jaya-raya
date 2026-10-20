@@ -219,8 +219,8 @@ export const IMAGES = {
     alt: { id: "Buah kopi hijau di pohon", en: "Green coffee berries on the plant", zh: "植株上的绿色咖啡果", vi: "Quả cà phê xanh trên cây", hi: "पौधे पर हरी कॉफ़ी बेरी" },
   },
   cardPorangPlant: {
-    src: `${DIR}/card-porang-plant.webp`,
-    alt: { id: "Tanaman porang (Amorphophallus muelleri)", en: "Porang plant (Amorphophallus muelleri)", zh: "魔芋植株（Amorphophallus muelleri）", vi: "Cây khoai nưa (Amorphophallus muelleri)", hi: "पोरंग पौधा (Amorphophallus muelleri)" },
+    src: `${DIR}/card-porang-corm.webp`,
+    alt: { id: "Ubi porang", en: "Porang tuber", zh: "魔芋块茎", vi: "Củ khoai nưa", hi: "पोरंग कंद" },
   },
   cardPorangStem: {
     src: `${DIR}/card-porang-stem.webp`,

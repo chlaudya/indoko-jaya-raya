@@ -38,7 +38,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       />
 
       {/* Long-form story in a narrow editorial column with pull-quote */}
-      <section className="bg-white">
+      <section className="band-lime">
         <div className="site-wrap section-y">
           <div className="mx-auto max-w-[68ch]">
             <h2 className="label">{pickLocale(ui.ourStory, locale)}</h2>
@@ -81,7 +81,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       ))}
 
       {/* Link band → company profile */}
-      <section className="border-y border-charcoal/10 bg-white">
+      <section className="border-y border-hairline bg-ivory">
         <div className="site-wrap flex flex-col gap-6 py-12 md:flex-row md:items-center md:justify-between lg:py-16">
           <div>
             <p className="label">{pickLocale(ui.companyProfile, locale)}</p>

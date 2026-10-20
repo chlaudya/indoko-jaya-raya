@@ -43,6 +43,7 @@ export default async function DryingServicePage({ params }: { params: Promise<{ 
       <FeatureSplit
         locale={locale}
         image="sectionFarmerTarp"
+        surface="lime"
         eyebrow={t(ui.ourService)}
         title={t(service.name)}
         body={t(service.description)}
@@ -80,7 +81,7 @@ export default async function DryingServicePage({ params }: { params: Promise<{ 
         </div>
       </section>
 
-      <section className="bg-white">
+      <section className="bg-ivory">
         <div className="site-wrap section-y">
           <p className="label">{t(ui.gallery)}</p>
           <h2 className="display display-h2 mt-4 mb-12 text-forest">{t(service.name)}</h2>

@@ -63,6 +63,7 @@ export const siteSettings = {
 }
 
 export const nav = [
+  { href: "", label: { id: "Beranda", en: "Home" } },
   { href: "about", label: { id: "Perusahaan", en: "Company" } },
   { href: "products", label: { id: "Komoditi", en: "Commodities" } },
   { href: "services/drying", label: { id: "Layanan", en: "Services" } },
@@ -264,7 +265,6 @@ export const products: Product[] = [
   {
     slug: "ubi-porang",
     image: "cardPorangPlant",
-    gallery: ["cardPorangStem", "cardPorangBase"],
     kind: "product",
     category: "umbi",
     featured: true,
@@ -670,11 +670,11 @@ export const whyChoose: TrustItem[] = [
   {
     icon: "sort",
     title: {
-      id: "Sortir kualitas sebelum pengiriman",
-      en: "Quality sorting before shipment",
+      id: "Sortir sebelum kirim",
+      en: "Sorted before shipping",
       zh: "发货前品质分拣",
-      vi: "Phân loại chất lượng trước khi giao hàng",
-      hi: "शिपमेंट से पहले गुणवत्ता छँटाई",
+      vi: "Phân loại trước khi giao",
+      hi: "भेजने से पहले छँटाई",
     },
     body: {
       id: "Komoditi disortir sebelum dikirim agar sesuai kebutuhan pembeli. Dengan begitu, kualitas yang Anda terima tetap konsisten dari satu pengiriman ke pengiriman berikutnya.",

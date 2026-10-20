@@ -51,7 +51,7 @@ export default async function ProductDetailPage({
   return (
     <article>
       {/* Split hero: gallery left, name/category/summary/WA right */}
-      <section className="bg-white">
+      <section className="band-lime">
         <div className="site-wrap pt-8 pb-16 lg:pt-12 lg:pb-24">
           <nav aria-label="Breadcrumb" className="text-sm text-muted">
             <ol className="flex flex-wrap gap-2">

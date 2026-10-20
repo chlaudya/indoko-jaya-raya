@@ -33,8 +33,9 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
         title={pickLocale(pages.contact.heroTitle, locale)}
         lead={pickLocale(pages.contact.heroLead, locale)}
       />
-      <div className="grid bg-white lg:min-h-[560px] lg:grid-cols-2">
+      <div className="grid lg:min-h-[560px] lg:grid-cols-2">
         {/* Left: address, contacts, WA */}
+        <div className="band-lime">
         <div className="site-wrap flex flex-col justify-center py-16 lg:mr-0 lg:max-w-[688px] lg:py-24">
           <h2 className="label">{pickLocale(ui.contactDetails, locale)}</h2>
           <dl className="mt-6 grid gap-8 border-t border-charcoal/10 pt-8 sm:grid-cols-2">
@@ -55,6 +56,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
           <div className="mt-10">
             <WaButton locale={locale} templateKey="contact" label={pickLocale(ui.requestInquiry, locale)} />
           </div>
+        </div>
         </div>
         {/* Right: map slot. Address still pending from the client, so no embed yet (no photo here by design). */}
         <div className="ph ph-dark relative min-h-[360px] lg:min-h-full">

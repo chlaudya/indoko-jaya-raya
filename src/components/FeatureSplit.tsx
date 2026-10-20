@@ -30,7 +30,7 @@ export function FeatureSplit({
   body?: string
   link?: { href: string; label: string }
   reverse?: boolean
-  surface?: "white" | "ivory"
+  surface?: "white" | "ivory" | "lime"
   children?: React.ReactNode
   headingLevel?: "h2" | "h3"
   facts?: { label: string; value: string }[]
@@ -39,7 +39,7 @@ export function FeatureSplit({
 }) {
   const Heading = headingLevel
   return (
-    <section className={surface === "ivory" ? "bg-ivory" : "bg-white"}>
+    <section className={surface === "lime" ? "band-lime" : surface === "ivory" ? "bg-ivory" : "bg-white"}>
       <div className="site-wrap section-y grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
         <Photo
           image={image}

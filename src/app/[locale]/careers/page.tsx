@@ -36,7 +36,7 @@ export default async function CareersPage({ params }: { params: Promise<{ locale
       />
 
       {/* Job rows */}
-      <section className="bg-white">
+      <section className="band-lime">
         <div className="site-wrap pt-16 pb-24 lg:pb-32">
           <h2 className="display display-h2 text-forest">{pickLocale(ui.openPositions, locale)}</h2>
           {active.length === 0 ? (

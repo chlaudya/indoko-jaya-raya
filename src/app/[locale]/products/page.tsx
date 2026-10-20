@@ -47,7 +47,7 @@ export default async function ProductsPage({
         title={pickLocale(pages.productsIndex.heroTitle, locale)}
         lead={pickLocale(pages.productsIndex.heroLead, locale)}
       />
-      <div className="bg-white pb-24 lg:pb-32">
+      <div className="band-lime pb-24 lg:pb-32">
         {/* Chips overlap the hero bottom, then stick under the header */}
         <CommodityFilter locale={locale} category={category} q={q} />
         <div className="site-wrap mt-12 lg:mt-16">

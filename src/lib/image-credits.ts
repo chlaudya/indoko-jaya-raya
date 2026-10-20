@@ -21,7 +21,6 @@ const RILLKE = {
 } as const
 
 export const IMAGE_CREDITS: Partial<Record<ImageKey, ImageCredit>> = {
-  cardPorangPlant: { ...RILLKE, sourceUrl: "https://commons.wikimedia.org/wiki/File:Amorphophallus_muelleri_01.jpg" },
   cardPorangStem: { ...RILLKE, sourceUrl: "https://commons.wikimedia.org/wiki/File:Amorphophallus_muelleri_02.jpg" },
   cardPorangBase: { ...RILLKE, sourceUrl: "https://commons.wikimedia.org/wiki/File:Amorphophallus_muelleri_03.jpg" },
 }

@@ -582,11 +582,16 @@
     "status": "stock-placeholder: replace with client photo"
   },
   {
-    "name": "card-porang-plant.webp",
-    "source": "https://commons.wikimedia.org/wiki/File:Amorphophallus_muelleri_01.jpg",
+    "name": "card-porang-corm.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Amorphophallus_konjac_knolle.jpg",
+    "kind": "card",
+    "width": 1200,
+    "height": 900,
+    "quality": 68,
+    "kb": 105,
     "license": "CC BY-SA 3.0",
-    "author": "Rillke",
-    "status": "botanical reference: replace with client corm photo"
+    "author": "Sebastian Stabinger",
+    "status": "stock-placeholder: replace with client corm photo"
   },
   {
     "name": "card-porang-stem.webp",

@@ -70,7 +70,7 @@ main#content:has(
 }
 
 body {
-  background: #ffffff;
+  background: var(--color-ivory);
   color: var(--color-charcoal);
   font-family:
     var(--font-inter), "Noto Sans SC", "PingFang SC", "Hiragino Sans GB",
@@ -107,6 +107,11 @@ footer :focus-visible {
 
 /* Why Choose Us band (lime-forward): lime-wash fill with the designer's values inside it: body #2f4a3a,
    labels / numerals / icons #1f5a3d, hairlines #9fc77a. */
+/* Homepage wash as a page ground. Unlike .surface-lime, this does not restyle links or type. */
+.band-lime {
+  background-color: var(--color-lime-wash);
+}
+
 .surface-lime {
   background-color: var(--color-lime-wash);
   --color-muted: #2f4a3a;

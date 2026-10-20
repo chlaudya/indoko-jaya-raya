@@ -40,7 +40,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ locale
       />
 
       {/* Identity + legal definition list in a white card */}
-      <section className="bg-ivory">
+      <section className="band-lime">
         <div className="site-wrap section-y grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <p className="label">{t(ui.identity)}</p>
@@ -127,7 +127,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ locale
       </section>
 
       {/* Gallery masonry */}
-      <section className="bg-white">
+      <section className="bg-ivory">
         <div className="site-wrap section-y">
           <p className="label">{t(ui.gallery)}</p>
           <h2 className="display display-h2 mt-4 mb-12 text-forest">{t(ui.facilities)}</h2>
