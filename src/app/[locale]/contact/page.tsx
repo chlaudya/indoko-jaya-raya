@@ -3,7 +3,7 @@ import { pageMeta } from "@/lib/seo-copy"
 import { withLocaleAlternates } from "@/lib/seo"
 import { notFound } from "next/navigation"
 import { isLocale, pickLocale, type Locale } from "@/lib/i18n"
-import { pages, siteSettings, ui, visiblePhone } from "@/lib/fixtures"
+import { pages, ui, confirmedAddress, visiblePhone } from "@/lib/fixtures"
 import { buildWhatsAppUrl } from "@/lib/whatsapp"
 import { WaButton } from "@/components/WaButton"
 import { PageHeader } from "@/components/PageHeader"
@@ -20,9 +20,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
   const locale = raw as Locale
   const wa = buildWhatsAppUrl({ locale, templateKey: "contact" })
   const phone = visiblePhone()
-  const rawAddress = pickLocale(siteSettings.address, locale)
-  const address =
-    rawAddress && !/menyusul|pending client/i.test(rawAddress) ? rawAddress : null
+  const address = confirmedAddress(locale)
 
   return (
     <div>

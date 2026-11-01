@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { pickLocale, type Locale } from "@/lib/i18n"
-import { products, redesign, siteSettings, ui, visiblePhone } from "@/lib/fixtures"
+import { products, redesign, siteSettings, ui, confirmedAddress, visiblePhone } from "@/lib/fixtures"
 import { buildWhatsAppUrl } from "@/lib/whatsapp"
 import { WhatsAppIcon } from "./WaButton"
 import { BrandMark } from "./BrandMark"
@@ -30,10 +30,8 @@ export function SiteFooter({ locale }: { locale: Locale }) {
   const wa = buildWhatsAppUrl({ locale, templateKey: "contact" })
   const phone = visiblePhone()
   const email = siteSettings.email.trim()
-  // Hide address while it still carries the "menyusul" pending note.
-  const rawAddress = t(siteSettings.address)
-  const addressLine =
-    rawAddress && !/menyusul|pending client/i.test(rawAddress) ? rawAddress : null
+  // Hide until siteSettings.addressPending is cleared (locale-independent).
+  const addressLine = confirmedAddress(locale)
   const nav = [
     { href: `/${locale}/about`, label: t(ui.aboutUs) },
     { href: `/${locale}/company`, label: t(ui.companyProfile) },

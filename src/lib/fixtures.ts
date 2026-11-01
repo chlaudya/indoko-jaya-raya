@@ -1,4 +1,4 @@
-import type { Locale } from "./i18n"
+import { pickLocale, type Locale } from "./i18n"
 import type { ImageKey } from "./images"
 
 type LString = Partial<Record<Locale, string>>
@@ -56,6 +56,11 @@ export const siteSettings = {
     id: "Agribisnis hasil bumi lokal untuk pasar nasional dan internasional.",
     en: "Local agribusiness commodities for national and international markets.",
   },
+  /**
+   * True until the client confirms a public street address. Hide address in every locale
+   * based on this flag (never on translated "menyusul" / "pending" text).
+   */
+  addressPending: true as boolean,
   address: {
     id: "Indonesia — alamat lengkap menyusul dari klien.",
     en: "Indonesia — full address pending client confirmation.",
@@ -843,6 +848,14 @@ export const iconStrip: TrustItem[] = [
 export function visiblePhone(): string | null {
   return siteSettings.phonePending ? null : waDisplayNumber()
 }
+
+/** Confirmed public address, or null while `addressPending` / empty. Gate on the flag, not translated text. */
+export function confirmedAddress(locale: Locale): string | null {
+  if (siteSettings.addressPending) return null
+  const value = pickLocale(siteSettings.address, locale).trim()
+  return value || null
+}
+
 
 export function waDisplayNumber(): string {
   const raw = siteSettings.waTargets[0]?.phoneE164 || ""
