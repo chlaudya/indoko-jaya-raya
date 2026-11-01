@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { pageMeta } from "@/lib/seo-copy"
 import { notFound } from "next/navigation"
 import { isLocale, pickLocale, type Locale } from "@/lib/i18n"
 import { pages, redesign, ui } from "@/lib/fixtures"
@@ -11,10 +12,7 @@ import { WaButton } from "@/components/WaButton"
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale: raw } = await params
   if (!isLocale(raw)) return {}
-  return {
-    title: pickLocale(pages.careers.heroTitle, raw),
-    description: pickLocale(pages.careers.heroLead, raw),
-  }
+  return pageMeta("careers", raw)
 }
 
 export default async function CareersPage({ params }: { params: Promise<{ locale: string }> }) {

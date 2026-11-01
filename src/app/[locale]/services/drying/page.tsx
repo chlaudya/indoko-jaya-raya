@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { pageMeta } from "@/lib/seo-copy"
 import { notFound } from "next/navigation"
 import { isLocale, pickLocale, type Locale } from "@/lib/i18n"
 import { products, ui } from "@/lib/fixtures"
@@ -11,12 +12,7 @@ import { WaButton } from "@/components/WaButton"
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale: raw } = await params
   if (!isLocale(raw)) return {}
-  const service = products.find((item) => item.slug === "jasa-penjemuran-komoditi")
-  if (!service) return {}
-  return {
-    title: pickLocale(service.name, raw),
-    description: pickLocale(service.description, raw),
-  }
+  return pageMeta("drying", raw)
 }
 
 export default async function DryingServicePage({ params }: { params: Promise<{ locale: string }> }) {

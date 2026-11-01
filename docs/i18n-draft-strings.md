@@ -285,3 +285,9 @@ Why choose us (ui.whyChooseUs + whyChoose: title, body), icon strip (iconStrip: 
 | Bongkar muat karung dari truk | 从卡车上装卸麻袋 | Bốc dỡ bao từ xe tải | ट्रक से बोरियों की लदाई-उतराई |
 | Pekerja menyortir kacang mete di area penjemuran | 工人在晾晒场分拣腰果 | Công nhân phân loại hạt điều tại sân phơi | सुखाने के मैदान में काजू छाँटते कर्मचारी |
 | Gudang penyimpanan komoditi | 农产品仓储仓库 | Kho lưu trữ nông sản | जिंस भंडारण गोदाम |
+
+## Revision brief v1 — meta titles & descriptions (DRAFT zh / vi / hi)
+
+Source: `src/lib/seo-copy.ts` (`pageTitles`, `pageDescriptions`, `productDescriptions`). Indonesian and English meta were written carefully from facts already on the site (140–160 character descriptions). **zh / vi / hi titles and descriptions are machine-assisted drafts pending native review** — do not treat as approved. Product metas use current catalogue names; rename follow-ups (Jagung Pipil, Asam Jawa) update copy in a later commit if needed.
+
+Also draft: header CTA label "Minta Penawaran" localizations and any new commodity display names introduced in catalogue cleanup (logged with those commits).
