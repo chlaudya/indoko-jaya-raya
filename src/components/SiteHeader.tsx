@@ -33,7 +33,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
   const closeRef = useRef<HTMLButtonElement>(null)
   const menuButtonRef = useRef<HTMLButtonElement>(null)
   const wa = buildWhatsAppUrl({ locale, templateKey: "contact" })
-  const contactLabel = pickLocale(ui.contactUs, locale)
+  const ctaLabel = pickLocale(ui.requestQuote, locale)
 
   // Close the drawer on navigation (render-phase reset, no effect needed).
   if (pathname !== lastPath) {
@@ -117,11 +117,11 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             href={wa}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`${contactLabel} — WhatsApp`}
+            aria-label={`${ctaLabel} — WhatsApp`}
             className="inline-flex size-11 shrink-0 items-center justify-center gap-2 rounded-[8px] btn-lime bg-lime text-sm font-semibold whitespace-nowrap text-forest hover:bg-lime-tint active:bg-lime-tint motion-safe:transition-colors lg:h-10 lg:w-auto lg:px-4"
           >
             <WhatsAppIcon className="size-5 lg:size-4" />
-            <span className="hidden lg:inline">{contactLabel}</span>
+            <span className="hidden lg:inline">{ctaLabel}</span>
           </a>
           <button
             ref={menuButtonRef}
@@ -247,7 +247,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
               className={`${buttonClass("wa-secondary")} w-full`}
             >
               <WhatsAppIcon />
-              {pickLocale(ui.requestInquiry, locale)}
+              {pickLocale(ui.requestQuote, locale)}
             </a>
           </div>
         </div>

@@ -99,7 +99,11 @@ export default async function HomePage({
           key: p.key,
           title: pickLocale(p.title, locale),
           body: pickLocale(p.body, locale),
-          href: `/${locale}/${p.href}`,
+          href: p.href.startsWith("#")
+            ? `/${locale}${p.href}`
+            : p.href.startsWith("/")
+              ? p.href
+              : `/${locale}/${p.href}`,
           image: pillarImages[p.key],
         }))}
       />

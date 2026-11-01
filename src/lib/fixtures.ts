@@ -73,6 +73,7 @@ export const nav = [
 
 export const ui = {
   requestInquiry: { id: "Ajukan pertanyaan", en: "Request an inquiry" },
+  requestQuote: { id: "Minta Penawaran", en: "Request a Quote", zh: "索取报价", vi: "Yêu cầu báo giá", hi: "कोट अनुरोध करें" },
   exploreCommodities: { id: "Jelajahi komoditi", en: "Explore commodities" },
   partnerWithUs: { id: "Bermitra dengan kami", en: "Partner with us" },
   viewCommodity: { id: "Lihat komoditi", en: "View commodity" },
@@ -636,7 +637,7 @@ export const redesign = {
           id: "Menjaga kualitas dan keberlanjutan di setiap tahap pasokan.",
           en: "Keeping quality and sustainability in view across the supply path.",
         },
-        href: "company",
+        href: "#sustainability",
         tone: "forest",
       },
     ] as PillarTile[],
