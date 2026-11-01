@@ -13,6 +13,7 @@ import { ui } from "@/lib/fixtures"
 import { SiteHeader } from "@/components/SiteHeader"
 import { SiteFooter } from "@/components/SiteFooter"
 import { NotFoundView } from "@/components/NotFoundView"
+import { notFoundDocumentTitle } from "@/lib/not-found-copy"
 import "./globals.css"
 
 const inter = Inter({
@@ -29,10 +30,13 @@ const cormorant = Cormorant_Garamond({
   display: "swap",
 })
 
-export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl()),
-  title: "404",
-  // Do not set `robots` here — Next already injects a single `noindex` on HTTP 404.
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await resolveLocale()
+  return {
+    metadataBase: new URL(siteUrl()),
+    title: { absolute: notFoundDocumentTitle(locale) },
+    // Do not set `robots` here — Next already injects a single `noindex` on HTTP 404.
+  }
 }
 
 /**

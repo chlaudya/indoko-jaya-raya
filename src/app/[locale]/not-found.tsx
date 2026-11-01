@@ -1,11 +1,13 @@
 import type { Metadata } from "next"
 import { NotFoundView } from "@/components/NotFoundView"
 import { getRequestLocale } from "@/lib/request-locale"
+import { notFoundDocumentTitle } from "@/lib/not-found-copy"
 
-// Intentionally omit `robots` here: Next already emits a single `noindex` for
-// HTTP 404 responses. Re-declaring it produced duplicate robots meta tags.
-export const metadata: Metadata = {
-  title: "404",
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = getRequestLocale()
+  return {
+    title: { absolute: notFoundDocumentTitle(locale) },
+  }
 }
 
 export default function LocaleNotFound() {

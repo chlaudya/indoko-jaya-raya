@@ -4,9 +4,20 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { LocalizedCopy } from "@/components/RichText"
 import { CareerApply } from "@/components/CareerApply"
-import { isLocale, pickLocale, type Locale } from "@/lib/i18n"
+import { isLocale, pickLocale, LOCALES, type Locale } from "@/lib/i18n"
 import { ui } from "@/lib/fixtures"
-import { getJob, hasCopy } from "@/lib/jobs"
+import { getActiveJobs, getJob, hasCopy } from "@/lib/jobs"
+
+/** Unknown career slugs must not call notFound() on a matched segment (SSR __next_error__ shell).
+ * With dynamicParams=false, misses are unmatched → global-not-found SSR. Sample jobs only load in
+ * `CAREERS_SAMPLE_JOBS=1` dev; production GSP uses Sanity (empty list → no static paths, still builds).
+ */
+export const dynamicParams = false
+
+export async function generateStaticParams() {
+  const jobs = await getActiveJobs()
+  return LOCALES.flatMap((locale) => jobs.map((job) => ({ locale, slug: job.slug })))
+}
 
 export async function generateMetadata({
   params,

@@ -18,6 +18,7 @@ export const I18N_DRAFTS: Drafts = {
   "Jagung Pipil": { zh: "玉米粒", vi: "Ngô tách hạt", hi: "छिला मक्का" },
   "Minta Penawaran": { zh: "索取报价", vi: "Yêu cầu báo giá", hi: "कोट अनुरोध करें" },
   "Penawaran": { zh: "报价", vi: "Báo giá", hi: "कोट" },
+  "Halaman tidak ditemukan": { zh: "页面未找到", vi: "Không tìm thấy trang", hi: "पृष्ठ नहीं मिला" },
   // --- UI, pages, products, careers (src/lib/fixtures.ts) ---
   "Halo Indoco Jaya Raya, saya ingin mengetahui lebih lanjut tentang perusahaan Anda.": { zh: "您好，Indoco Jaya Raya，我想进一步了解贵公司。", vi: "Xin chào Indoco Jaya Raya, tôi muốn tìm hiểu thêm về công ty của bạn.", hi: "नमस्ते Indoco Jaya Raya, मुझे आपकी कंपनी के बारे में और जानकारी चाहिए।" },
   "Halo, saya ingin konsultasi Jasa Penjemuran Komoditi.": { zh: "您好，我想咨询农产品晾晒服务。", vi: "Xin chào, tôi muốn được tư vấn về dịch vụ phơi sấy nông sản.", hi: "नमस्ते, मुझे जिंस सुखाने की सेवा के बारे में परामर्श चाहिए।" },

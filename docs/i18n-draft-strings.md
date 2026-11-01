@@ -56,6 +56,14 @@ Why choose us (ui.whyChooseUs + whyChoose: title, body), icon strip (iconStrip: 
 | ui.bannerCta | Hubungi kami via WhatsApp | Contact us on WhatsApp | 通过 WhatsApp 联系我们 | Liên hệ qua WhatsApp | WhatsApp पर संपर्क करें |
 | ui.bannerReassure | Pesan Anda langsung masuk ke WhatsApp tim kami. | Your message goes straight to our team's WhatsApp. | 您的消息将直接发送到我们团队的 WhatsApp。 | Tin nhắn của bạn được gửi thẳng đến WhatsApp của đội ngũ chúng tôi. | आपका संदेश सीधे हमारी टीम के WhatsApp पर पहुँचता है। |
 
+## 404 document title (src/lib/not-found-copy.ts)
+
+| id | en | zh | vi | hi |
+|---|---|---|---|---|
+| Halaman tidak ditemukan | Page not found | 页面未找到 | Không tìm thấy trang | पृष्ठ नहीं मिला |
+
+Document title format: `{title} | Indoco Jaya Raya`.
+
 ## Site strings (195, src/lib/i18n-drafts.ts)
 
 | id | zh | vi | hi |

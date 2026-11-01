@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Cormorant_Garamond, Inter } from "next/font/google"
 import { NotFoundView } from "@/components/NotFoundView"
 import { DEFAULT_LOCALE } from "@/lib/i18n"
+import { notFoundDocumentTitle } from "@/lib/not-found-copy"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -18,7 +19,7 @@ const cormorant = Cormorant_Garamond({
 })
 
 export const metadata: Metadata = {
-  title: "404",
+  title: { absolute: notFoundDocumentTitle(DEFAULT_LOCALE) },
 }
 
 /** Root fallback when no locale segment is present (must include <html>). */
