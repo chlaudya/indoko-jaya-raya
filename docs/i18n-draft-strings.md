@@ -291,3 +291,14 @@ Why choose us (ui.whyChooseUs + whyChoose: title, body), icon strip (iconStrip: 
 Source: `src/lib/seo-copy.ts` (`pageTitles`, `pageDescriptions`, `productDescriptions`). Indonesian and English meta were written carefully from facts already on the site (140–160 character descriptions). **zh / vi / hi titles and descriptions are machine-assisted drafts pending native review** — do not treat as approved. Product metas use current catalogue names; rename follow-ups (Jagung Pipil, Asam Jawa) update copy in a later commit if needed.
 
 Also draft: header CTA label "Minta Penawaran" localizations and any new commodity display names introduced in catalogue cleanup (logged with those commits).
+
+
+### Catalog renames (revision/brief-v1)
+
+| key | id | en | zh | vi | hi |
+|---|---|---|---|---|---|
+| jagung-kupas name | Jagung Pipil | Shelled Corn | 玉米粒 | Ngô tách hạt | छिला मक्का |
+| asam-kupas name | Asam Jawa | Tamarind | 罗望子 | Me | इमली |
+| rempah category | Rempah & Buah Kering | Spices & Dried Fruit | 香料与干果 | Gia vị & trái cây khô | मसाले और सूखे फल |
+
+Slugs unchanged (`jagung-kupas`, `asam-kupas`). Jasa Penjemuran removed from commodity grids/filters; `/services/drying` kept under Layanan.

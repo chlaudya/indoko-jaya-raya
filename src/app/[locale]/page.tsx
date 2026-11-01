@@ -47,6 +47,7 @@ export default async function HomePage({
   const v2 = redesign.home
   const query = q?.trim().toLowerCase() || ""
   const commodityList = products.filter((product) => {
+    if (product.kind === "service") return false
     if (category && product.category !== category) return false
     if (!query) return true
     const name = pickLocale(product.name, locale).toLowerCase()

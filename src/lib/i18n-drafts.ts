@@ -11,6 +11,11 @@ export type DraftLocale = "zh" | "vi" | "hi"
 type Drafts = Readonly<Record<string, Readonly<Record<DraftLocale, string>>>>
 
 export const I18N_DRAFTS: Drafts = {
+  "Asam jawa siap olah.": { zh: "可加工的罗望子。", vi: "Me sẵn sàng chế biến.", hi: "प्रसंस्करण हेतु तैयार इमली।" },
+  "Jagung pipil siap distribusi.": { zh: "可立即配送的玉米粒。", vi: "Ngô tách hạt sẵn sàng phân phối.", hi: "वितरण हेतु तैयार छिला मक्का।" },
+  "Rempah & Buah Kering": { zh: "香料与干果", vi: "Gia vị & trái cây khô", hi: "मसाले और सूखे फल" },
+  "Asam Jawa": { zh: "罗望子", vi: "Me", hi: "इमली" },
+  "Jagung Pipil": { zh: "玉米粒", vi: "Ngô tách hạt", hi: "छिला मक्का" },
   "Minta Penawaran": { zh: "索取报价", vi: "Yêu cầu báo giá", hi: "कोट अनुरोध करें" },
   // --- UI, pages, products, careers (src/lib/fixtures.ts) ---
   "Halo Indoco Jaya Raya, saya ingin mengetahui lebih lanjut tentang perusahaan Anda.": { zh: "您好，Indoco Jaya Raya，我想进一步了解贵公司。", vi: "Xin chào Indoco Jaya Raya, tôi muốn tìm hiểu thêm về công ty của bạn.", hi: "नमस्ते Indoco Jaya Raya, मुझे आपकी कंपनी के बारे में और जानकारी चाहिए।" },

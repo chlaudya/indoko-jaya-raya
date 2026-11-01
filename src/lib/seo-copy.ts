@@ -123,8 +123,8 @@ export const productDescriptions: Record<string, LString> = {
     hi: "PT Indoco Jaya Raya से काजू—निर्यात-ग्रेड इंडोनेशियाई मेवे व दालें. बिक्री टीम विनिर्देश और पैकेजिंग की जानकारी WhatsApp पर देगी। बिक्री टीम"
   },
   "asam-kupas": {
-    id: "Asam (Kupas) dari PT Indoco Jaya Raya—komoditi kacang-kacangan Indonesia. Asam kupas siap olah. Detail spesifikasi dan ketersediaan ditanyakan ke tim penjualan.",
-    en: "Tamarind (Peeled) from PT Indoco Jaya Raya—Indonesian nuts and legumes commodity. Peeled tamarind ready for processing. Ask our sales team for current.",
+    id: "Asam Jawa dari PT Indoco Jaya Raya—komoditi rempah Indonesia. Asam jawa siap olah. Detail spesifikasi dan ketersediaan ditanyakan ke tim penjualan.",
+    en: "Tamarind from PT Indoco Jaya Raya—Indonesian spices and dried fruit commodity. Tamarind ready for processing. Ask our sales team for current.",
     zh: "PT Indoco Jaya Raya 去壳罗望子——可直接加工的印尼农产品。欢迎 WhatsApp 了解规格与供货。 目录另有花生、绿豆、魔芋等品类；下单前请确认规格与包装。目录另有花生、绿豆、魔芋等品类；下单前请确认规格与包装。目录另有花生、绿豆、魔芋等品类；下单前请确认规格",
     vi: "Me (bóc vỏ) từ PT Indoco Jaya Raya—nông sản Indonesia sẵn sàng chế biến. Chúng tôi hỗ trợ báo giá B2B và trao đổi quy cách qua WhatsApp. Chú",
     hi: "PT Indoco Jaya Raya से छिली इमली—प्रसंस्करण हेतु तैयार इंडोनेशियाई जिंस. बिक्री टीम विनिर्देश और पैकेजिंग की जानकारी WhatsApp पर देगी। बिक्र"
@@ -151,8 +151,8 @@ export const productDescriptions: Record<string, LString> = {
     hi: "PT Indoco Jaya Raya से पोरंग कंद—औद्योगिक उपयोग हेतु इंडोनेशियाई जिंस. बिक्री टीम विनिर्देश और पैकेजिंग की जानकारी WhatsApp पर देगी। बिक्री "
   },
   "jagung-kupas": {
-    id: "Jagung (Kupas) dari PT Indoco Jaya Raya—komoditi jagung Indonesia. Jagung kupas siap distribusi. Detail spesifikasi dan ketersediaan ditanyakan ke tim.",
-    en: "Corn (Shelled) from PT Indoco Jaya Raya—Indonesian corn commodity. Shelled corn ready for distribution. Ask our sales team for current specifications and.",
+    id: "Jagung Pipil dari PT Indoco Jaya Raya—komoditi jagung Indonesia. Jagung pipil siap distribusi. Detail spesifikasi dan ketersediaan ditanyakan ke tim.",
+    en: "Shelled Corn from PT Indoco Jaya Raya—Indonesian corn commodity. Shelled corn ready for distribution. Ask our sales team for current specifications and.",
     zh: "PT Indoco Jaya Raya 去皮玉米——可立即配送的印尼玉米大宗商品。欢迎 WhatsApp 了解规格与供货。 目录另有花生、绿豆、魔芋等品类；下单前请确认规格与包装。目录另有花生、绿豆、魔芋等品类；下单前请确认规格与包装。目录另有花生、绿豆、魔芋等品类；下单前请确认",
     vi: "Ngô (tách hạt) từ PT Indoco Jaya Raya—nông sản ngô Indonesia sẵn sàng phân phối. Chúng tôi hỗ trợ báo giá B2B và trao đổi quy cách qua WhatsApp.",
     hi: "PT Indoco Jaya Raya से छिला मक्का—वितरण हेतु तैयार इंडोनेशियाई मक्का. बिक्री टीम विनिर्देश और पैकेजिंग की जानकारी WhatsApp पर देगी। बिक्री ट"
