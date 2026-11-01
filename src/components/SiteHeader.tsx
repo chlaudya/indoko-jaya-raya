@@ -118,10 +118,12 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${ctaLabel} — WhatsApp`}
-            className="inline-flex size-11 shrink-0 items-center justify-center gap-2 rounded-[8px] btn-lime bg-lime text-sm font-semibold whitespace-nowrap text-forest hover:bg-lime-tint active:bg-lime-tint motion-safe:transition-colors lg:h-10 lg:w-auto lg:px-4"
+            data-header-cta=""
+            className="inline-flex min-h-11 shrink-0 items-center justify-center gap-1.5 rounded-[8px] border border-forest btn-lime bg-lime px-3 text-sm font-semibold whitespace-nowrap text-forest hover:bg-lime-tint active:bg-lime-tint motion-safe:transition-colors lg:h-10 lg:min-h-0 lg:gap-2 lg:border-0 lg:px-4"
           >
-            <WhatsAppIcon className="size-5 lg:size-4" />
-            <span className="hidden lg:inline">{ctaLabel}</span>
+            <WhatsAppIcon className="size-4" />
+            {/* Visible text on mobile + desktop (mobile was icon-only). ui.requestQuoteShort kept for narrow fallbacks. */}
+            <span>{ctaLabel}</span>
           </a>
           <button
             ref={menuButtonRef}

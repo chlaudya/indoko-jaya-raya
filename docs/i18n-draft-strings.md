@@ -56,7 +56,7 @@ Why choose us (ui.whyChooseUs + whyChoose: title, body), icon strip (iconStrip: 
 | ui.bannerCta | Hubungi kami via WhatsApp | Contact us on WhatsApp | 通过 WhatsApp 联系我们 | Liên hệ qua WhatsApp | WhatsApp पर संपर्क करें |
 | ui.bannerReassure | Pesan Anda langsung masuk ke WhatsApp tim kami. | Your message goes straight to our team's WhatsApp. | 您的消息将直接发送到我们团队的 WhatsApp。 | Tin nhắn của bạn được gửi thẳng đến WhatsApp của đội ngũ chúng tôi. | आपका संदेश सीधे हमारी टीम के WhatsApp पर पहुँचता है। |
 
-## Site strings (194, src/lib/i18n-drafts.ts)
+## Site strings (195, src/lib/i18n-drafts.ts)
 
 | id | zh | vi | hi |
 |---|---|---|---|
@@ -72,6 +72,7 @@ Why choose us (ui.whyChooseUs + whyChoose: title, body), icon strip (iconStrip: 
 | Karier | 招聘 | Tuyển dụng | करियर |
 | Kontak | 联系我们 | Liên hệ | संपर्क |
 | Ajukan pertanyaan | 提交询价 | Gửi yêu cầu | पूछताछ भेजें |
+| Penawaran | 报价 | Báo giá | कोट |
 | Jelajahi komoditi | 浏览农产品 | Khám phá nông sản | जिंसें देखें |
 | Bermitra dengan kami | 与我们合作 | Hợp tác với chúng tôi | हमारे साथ साझेदारी करें |
 | Lihat komoditi | 查看农产品 | Xem nông sản | जिंसें देखें |

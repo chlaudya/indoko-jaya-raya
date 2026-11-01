@@ -74,6 +74,8 @@ export const nav = [
 export const ui = {
   requestInquiry: { id: "Ajukan pertanyaan", en: "Request an inquiry" },
   requestQuote: { id: "Minta Penawaran", en: "Request a Quote", zh: "索取报价", vi: "Yêu cầu báo giá", hi: "कोट अनुरोध करें" },
+  /** Narrow-header CTA (<~360–375px) when the full requestQuote label would wrap or squeeze touch targets. */
+  requestQuoteShort: { id: "Penawaran", en: "Get a Quote", zh: "报价", vi: "Báo giá", hi: "कोट" },
   exploreCommodities: { id: "Jelajahi komoditi", en: "Explore commodities" },
   partnerWithUs: { id: "Bermitra dengan kami", en: "Partner with us" },
   viewCommodity: { id: "Lihat komoditi", en: "View commodity" },
