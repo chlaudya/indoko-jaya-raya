@@ -162,7 +162,7 @@ export const productDescriptions: Record<string, LString> = {
     en: "Coffee from PT Indoco Jaya Raya—Indonesian coffee commodity. Local coffee for global markets. Ask our sales team for current specifications and packaging.",
     zh: "PT Indoco Jaya Raya 咖啡——面向全球市场的印尼本地咖啡大宗商品。欢迎 WhatsApp 了解品种规格与供货。 目录另有花生、绿豆、魔芋等品类；下单前请确认规格与包装。目录另有花生、绿豆、魔芋等品类；下单前请确认规格与包装。目录另有花生、绿豆、魔芋等品类；下单前",
     vi: "Cà phê từ PT Indoco Jaya Raya—nông sản cà phê địa phương Indonesia cho thị trường toàn cầu. Chúng tôi hỗ trợ báo giá B2B và trao đổi quy cách qua WhatsApp.",
-    hi: "PT Indoco Jaya Raya से कॉफ़ी—वैश्विक बाज़ारों हेतु स्थानीय इंडोनेशियाई कॉफ़ी. बिक्री टीम विनिर्देश और पैकेजिंग की जानकारी WhatsApp पर देगी। "
+    hi: "PT Indoco Jaya Raya से कॉफ़ी—वैश्विक बाज़ारों हेतु स्थानीय इंडोनेशियाई कॉफ़ी. बिक्री टीम विनिर्देश और पैकेजिंग की जानकारी WhatsApp पर देगी। कृपया संपर्क करें।"
   },
   cengkeh: {
     id: "Cengkeh dari PT Indoco Jaya Raya—komoditi rempah Indonesia. Cengkeh kering untuk pasar domestik dan ekspor. Detail spesifikasi dan ketersediaan ditanyakan ke.",

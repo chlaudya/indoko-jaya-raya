@@ -134,14 +134,16 @@ export function HeroSlider({
     };
   }, []);
 
-  // After idle, allow progressive mounting of upcoming slides only (never all at once).
-  // LCP stays slide 1; phones must not request slides 2–5 on initial load.
+  // Prime the next slide shortly before the crossfade — not on idle — so the initial
+  // network at 390px requests slide 1 alone. LCP stays slide 1.
   useEffect(() => {
-    if (!rotates) return;
-    return whenIdle(() => setMountRest(true));
-  }, [rotates]);
+    if (!rotates || !playing) return;
+    // Load next ~400ms before the fade starts (HOLD_MS), after slide 1 has had time as LCP.
+    const delay = Math.max(400, HOLD_MS - 400);
+    const timer = setTimeout(() => setMountRest(true), delay);
+    return () => clearTimeout(timer);
+  }, [rotates, playing, index]);
 
-  // When the current slide is active and rest may mount, ensure only the next index is queued.
   const nextIndex = total > 1 ? (index + 1) % total : 0;
 
   const markLoaded = useCallback((i: number) => {

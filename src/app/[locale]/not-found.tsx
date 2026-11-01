@@ -1,8 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { headers } from "next/headers"
+import { cookies, headers } from "next/headers"
 import { DEFAULT_LOCALE, isLocale, pickLocale, type Locale } from "@/lib/i18n"
-import { buttonClass } from "@/components/WaButton"
 
 const copy = {
   title: {
@@ -35,22 +34,30 @@ export const metadata: Metadata = {
 
 async function resolveLocale(): Promise<Locale> {
   const headerList = await headers()
-  const fromHeader = headerList.get("x-locale") || ""
-  const pathname = headerList.get("x-pathname") || ""
-  const fromPath = pathname.split("/").filter(Boolean)[0] || ""
-  const raw = fromHeader || fromPath || DEFAULT_LOCALE
-  return isLocale(raw) ? raw : DEFAULT_LOCALE
+  const jar = await cookies()
+  const candidates = [
+    headerList.get("x-locale"),
+    headerList.get("x-pathname")?.split("/").filter(Boolean)[0],
+    jar.get("indoco-locale")?.value,
+  ]
+  for (const raw of candidates) {
+    if (raw && isLocale(raw)) return raw
+  }
+  return DEFAULT_LOCALE
 }
 
 export default async function LocaleNotFound() {
   const locale = await resolveLocale()
   return (
-    <div className="band-lime">
+    <div className="band-lime" data-locale={locale}>
       <div className="site-wrap flex min-h-[60vh] flex-col items-start justify-center py-24">
         <p className="label">404</p>
         <h1 className="display display-h1 mt-4 text-forest">{pickLocale(copy.title, locale)}</h1>
         <p className="mt-5 max-w-xl text-lg text-muted">{pickLocale(copy.body, locale)}</p>
-        <Link href={`/${locale}`} className={`${buttonClass("primary")} mt-10`}>
+        <Link
+          href={`/${locale}`}
+          className="mt-10 inline-flex min-h-12 items-center rounded-[8px] btn-lime bg-lime px-6 text-sm font-semibold text-forest hover:bg-lime-tint"
+        >
           {pickLocale(copy.home, locale)}
         </Link>
       </div>

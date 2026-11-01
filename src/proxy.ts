@@ -20,7 +20,9 @@ export function proxy(request: NextRequest) {
   const requestHeaders = new Headers(request.headers)
   requestHeaders.set("x-locale", locale)
   requestHeaders.set("x-pathname", pathname)
-  return NextResponse.next({ request: { headers: requestHeaders } })
+  const response = NextResponse.next({ request: { headers: requestHeaders } })
+  response.cookies.set("indoco-locale", locale, { path: "/", sameSite: "lax" })
+  return response
 }
 
 export const config = {
