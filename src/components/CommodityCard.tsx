@@ -92,12 +92,27 @@ export function CommodityCard({
   )
 }
 
-export function CommodityGrid({ products, locale }: { products: Product[]; locale: Locale }) {
+export function CommodityGrid({
+  products,
+  locale,
+  sizes = GRID_CARD_SIZES,
+  columns = "catalog",
+}: {
+  products: Product[]
+  locale: Locale
+  sizes?: string
+  /** Home uses a denser 4-col layout at large breakpoints. */
+  columns?: "catalog" | "home"
+}) {
+  const grid =
+    columns === "home"
+      ? "grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+      : "grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
   return (
-    <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <ul className={grid}>
       {products.map((product) => (
         <li key={product.slug} className="reveal">
-          <CommodityCard product={product} locale={locale} />
+          <CommodityCard product={product} locale={locale} sizes={sizes} />
         </li>
       ))}
     </ul>

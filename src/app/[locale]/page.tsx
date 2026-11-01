@@ -5,7 +5,7 @@ import { notFound } from "next/navigation"
 import { isLocale, pickLocale, type Locale } from "@/lib/i18n"
 import { homeStats, iconStrip, pages, products, redesign, ui, whyChoose } from "@/lib/fixtures"
 import type { ImageKey } from "@/lib/images"
-import { CommodityGrid } from "@/components/CommodityCard"
+import { CommodityGrid, HOME_CARD_SIZES } from "@/components/CommodityCard"
 import { CommodityFilter } from "@/components/CommodityFilter"
 import { FeatureSplit } from "@/components/FeatureSplit"
 import { HeroFullBleed } from "@/components/HeroFullBleed"
@@ -177,7 +177,7 @@ export default async function HomePage({
               {commodityList.length === 0 ? (
                 <p className="text-muted">{pickLocale(ui.noMatches, locale)}</p>
               ) : (
-                <CommodityGrid products={commodityList} locale={locale} />
+                <CommodityGrid products={commodityList} locale={locale} sizes={HOME_CARD_SIZES} columns="home" />
               )}
             </div>
           </div>
