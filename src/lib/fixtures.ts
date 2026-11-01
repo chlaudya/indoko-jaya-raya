@@ -194,15 +194,55 @@ export const categories = [
   { slug: "layanan", title: { id: "Layanan", en: "Services" } },
 ]
 
+/** Spec row: label + value (+ optional unit). Ranges live in `value` (e.g. "8–10") or as min/max. */
+export type SpecRow = {
+  label: LString
+  value?: LString
+  unit?: LString
+  min?: number
+  max?: number
+}
+
+export type AvailabilityStatus =
+  | "available"
+  | "limited"
+  | "seasonal"
+  | "made_to_order"
+  | "unavailable"
+
 export type Product = {
   slug: string
   kind: "product" | "service"
   category: string
   featured?: boolean
   name: LString
+  /** International trade name (localized). Empty until confirmed — never invent. */
+  internationalTradeName?: LString
   shortBlurb: LString
   description: LString
-  specs: { label: LString; value: LString }[]
+  /** HS code — public UI must check hsVerified before rendering. */
+  hsCode?: string
+  hsVerified?: boolean
+  productForm?: LString
+  specs: SpecRow[]
+  packagingType?: LString
+  bagWeight?: { value?: string; unit?: string; min?: number; max?: number }
+  containerLoad20?: string
+  containerLoad40?: string
+  moq?: LString
+  incoterms?: string[]
+  portOfLoading?: LString
+  leadTime?: LString
+  paymentTerms?: LString
+  /** Calendar months 1–12. */
+  harvestMonths?: number[]
+  supplyMonths?: number[]
+  availableDocuments?: string[]
+  /** Public URL or path to a PDF once the client supplies one. */
+  specSheetUrl?: string
+  availabilityStatus?: AvailabilityStatus
+  /** Per-locale publish flags; when set, false hides the product for that locale. */
+  publishLocales?: Partial<Record<Locale, boolean>>
   servicePagePath?: string
   capacity?: LString
   capacityPending?: boolean
@@ -210,6 +250,7 @@ export type Product = {
   processSteps?: { title: LString; body: LString }[]
   /** Optimised photo key (CMS: product.images[0]); placeholder when absent. */
   image?: ImageKey
+  /** Gallery keys; alt text lives on IMAGES[key].alt (Sanity: per-image localeString alt). */
   gallery?: ImageKey[]
 }
 
