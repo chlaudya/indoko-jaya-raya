@@ -20,6 +20,10 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
   if (!isLocale(raw)) notFound()
   const locale = raw as Locale
   const wa = buildWhatsAppUrl({ locale, templateKey: "contact" })
+  const phone = visiblePhone()
+  const rawAddress = pickLocale(siteSettings.address, locale)
+  const address =
+    rawAddress && !/menyusul|pending client/i.test(rawAddress) ? rawAddress : null
 
   return (
     <div>
@@ -34,22 +38,23 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
         lead={pickLocale(pages.contact.heroLead, locale)}
       />
       <div className="grid lg:min-h-[560px] lg:grid-cols-2">
-        {/* Left: address, contacts, WA */}
+        {/* Left: address (when confirmed), WhatsApp, CTA */}
         <div className="band-lime">
         <div className="site-wrap flex flex-col justify-center py-16 lg:mr-0 lg:max-w-[688px] lg:py-24">
           <h2 className="label">{pickLocale(ui.contactDetails, locale)}</h2>
           <dl className="mt-6 grid gap-8 border-t border-charcoal/10 pt-8 sm:grid-cols-2">
-            <div>
-              <dt className="label">{pickLocale(ui.address, locale)}</dt>
-              <dd className="mt-2 text-charcoal">{pickLocale(siteSettings.address, locale)}</dd>
-            </div>
+            {address ? (
+              <div>
+                <dt className="label">{pickLocale(ui.address, locale)}</dt>
+                <dd className="mt-2 text-charcoal">{address}</dd>
+              </div>
+            ) : null}
             <div>
               <dt className="label">{pickLocale(ui.whatsapp, locale)}</dt>
               <dd className="mt-2">
                 <a href={wa} target="_blank" rel="noopener noreferrer" className="text-charcoal underline-offset-4 hover:text-forest hover:underline">
-                  {visiblePhone() ?? pickLocale(ui.whatsapp, locale)}
+                  {phone ?? pickLocale(ui.whatsapp, locale)}
                 </a>
-                {!visiblePhone() && <span className="mt-1 block text-sm text-muted">{pickLocale(ui.numberPending, locale)}</span>}
               </dd>
             </div>
           </dl>
@@ -58,12 +63,8 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
           </div>
         </div>
         </div>
-        {/* Right: map slot. Address still pending from the client, so no embed yet (no photo here by design). */}
-        <div className="ph ph-dark relative min-h-[360px] lg:min-h-full">
-          <div className="absolute inset-0 flex items-end p-6 lg:p-10">
-            <p className="text-xs font-medium tracking-[0.14em] text-white/80 uppercase">{pickLocale(ui.mapPending, locale)}</p>
-          </div>
-        </div>
+        {/* Right: map only once a confirmed address exists; otherwise a quiet tonal panel (no "Peta menyusul"). */}
+        <div className="ph ph-dark relative min-h-[360px] lg:min-h-full" aria-hidden="true" />
       </div>
     </div>
   )

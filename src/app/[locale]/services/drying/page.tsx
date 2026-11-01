@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { isLocale, pickLocale, type Locale } from "@/lib/i18n"
-import { products, siteSettings, ui } from "@/lib/fixtures"
+import { products, ui } from "@/lib/fixtures"
 import { FeatureSplit } from "@/components/FeatureSplit"
 import { Gallery } from "@/components/Gallery"
 import { HeroFullBleed } from "@/components/HeroFullBleed"
@@ -48,22 +48,17 @@ export default async function DryingServicePage({ params }: { params: Promise<{ 
         title={t(service.name)}
         body={t(service.description)}
       />
-      <FeatureSplit
-        locale={locale}
-        image="sectionPeanutTarp"
-        reverse
-        surface="ivory"
-        eyebrow={t(ui.capacity)}
-        title={t(service.specs.find((s) => t(s.label) === t(ui.capacity))?.value) || t(ui.capacity)}
-        body={t(service.capacity)}
-      />
-      <FeatureSplit
-        locale={locale}
-        image="sectionWarehouseAisle"
-        eyebrow={t(ui.location)}
-        title={t(siteSettings.address)}
-        body={t(ui.pendingConfirmation)}
-      />
+      {!service.capacityPending && service.capacity ? (
+        <FeatureSplit
+          locale={locale}
+          image="sectionPeanutTarp"
+          reverse
+          surface="ivory"
+          eyebrow={t(ui.capacity)}
+          title={t(service.specs.find((s) => t(s.label) === t(ui.capacity))?.value) || t(ui.capacity)}
+          body={t(service.capacity)}
+        />
+      ) : null}
 
       {/* Numbered process */}
       <section className="surface-dark bg-forest text-white">

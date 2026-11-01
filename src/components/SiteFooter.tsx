@@ -22,14 +22,18 @@ const MAIL = "M3.5 6.5h17v11h-17zM3.5 7l8.5 6.5L20.5 7"
 
 /**
  * Footer: brand · Navigasi · Komoditi · Kontak (4 → 2 → 1 columns). Links 15px #d9e0d4 (≈10:1 on forest),
- * line-height 1.9. Phone and email show "Menyusul" until the client confirms them (siteSettings.phonePending /
- * siteSettings.email); WhatsApp always uses the configured destination.
+ * line-height 1.9. Address, phone and email rows render only when confirmed (siteSettings.phonePending /
+ * siteSettings.email / non-pending address). WhatsApp always uses the configured destination.
  */
 export function SiteFooter({ locale }: { locale: Locale }) {
   const t = (v: Parameters<typeof pickLocale>[0]) => pickLocale(v, locale)
   const wa = buildWhatsAppUrl({ locale, templateKey: "contact" })
   const phone = visiblePhone()
   const email = siteSettings.email.trim()
+  // Hide address while it still carries the "menyusul" pending note.
+  const rawAddress = t(siteSettings.address)
+  const addressLine =
+    rawAddress && !/menyusul|pending client/i.test(rawAddress) ? rawAddress : null
   const nav = [
     { href: `/${locale}/about`, label: t(ui.aboutUs) },
     { href: `/${locale}/company`, label: t(ui.companyProfile) },
@@ -95,28 +99,30 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           <div className="col-span-2 md:col-span-1 lg:col-span-3 lg:col-start-10">
             <h2 className={heading}>{t(ui.footerContact)}</h2>
             <ul className="mt-4 space-y-3 text-[0.9375rem] leading-relaxed text-[#d9e0d4]">
-              <li className="flex gap-3">
-                <Icon d={PIN} />
-                <span>
-                  <span className="sr-only">{t(ui.address)}: </span>
-                  {t(siteSettings.address)}
-                </span>
-              </li>
-              <li className="flex gap-3">
-                <Icon d={PHONE} />
-                <span>
-                  <span className="sr-only">{t(ui.phone)}: </span>
-                  {phone ?? <span>{t(ui.phone)} · {t(ui.pending)}</span>}
-                </span>
-              </li>
-              <li className="flex gap-3">
-                <Icon d={MAIL} />
-                {email ? (
+              {addressLine ? (
+                <li className="flex gap-3">
+                  <Icon d={PIN} />
+                  <span>
+                    <span className="sr-only">{t(ui.address)}: </span>
+                    {addressLine}
+                  </span>
+                </li>
+              ) : null}
+              {phone ? (
+                <li className="flex gap-3">
+                  <Icon d={PHONE} />
+                  <span>
+                    <span className="sr-only">{t(ui.phone)}: </span>
+                    {phone}
+                  </span>
+                </li>
+              ) : null}
+              {email ? (
+                <li className="flex gap-3">
+                  <Icon d={MAIL} />
                   <a href={`mailto:${email}`} className="hover:text-white hover:underline hover:decoration-lime-tint hover:underline-offset-4">{email}</a>
-                ) : (
-                  <span>{t(ui.email)} · {t(ui.pending)}</span>
-                )}
-              </li>
+                </li>
+              ) : null}
               <li>
                 <a
                   href={wa}
