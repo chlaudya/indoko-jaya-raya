@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import { productMeta } from "@/lib/seo-copy"
 import { withLocaleAlternates } from "@/lib/seo"
 import { notFound, redirect } from "next/navigation"
-import { isLocale, pickLocale, type Locale } from "@/lib/i18n"
+import { isLocale, pickLocale, LOCALES, type Locale } from "@/lib/i18n"
 import { categories, products, ui } from "@/lib/fixtures"
 import { CardRail } from "@/components/CardRail"
 import { CommodityCard, RAIL_CARD_SIZES } from "@/components/CommodityCard"
@@ -12,6 +12,18 @@ import { Photo } from "@/components/Photo"
 import { ProductGallery } from "@/components/ProductGallery"
 import { ProductSpecifications } from "@/components/ProductSpecifications"
 import { WaButton } from "@/components/WaButton"
+
+/** Unknown slugs must NOT call notFound() on a matched segment — Next SSR would emit the
+ * empty `__next_error__` shell (no lang, blank without JS). With `dynamicParams=false`,
+ * unknown slugs are unmatched routes and SSR `[locale]/not-found` inside the locale layout.
+ */
+export const dynamicParams = false
+
+export function generateStaticParams() {
+  return LOCALES.flatMap((locale) =>
+    products.map((product) => ({ locale, slug: product.slug }))
+  )
+}
 
 export async function generateMetadata({
   params,

@@ -1,6 +1,9 @@
 import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
+  experimental: {
+    globalNotFound: true,
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     // 75 = default; 70 = hero slides and the two heaviest section photos (src/lib/image-quality.ts), so the

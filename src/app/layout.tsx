@@ -1,36 +1,6 @@
 import type { Metadata } from "next"
 import { siteUrl } from "@/lib/seo"
-import { Cormorant_Garamond, Inter } from "next/font/google"
-import { headers } from "next/headers"
-import { isLocale } from "@/lib/i18n"
 import "./globals.css"
-
-// `subsets` = what is PRELOADED. Only latin is preloaded (keeps bandwidth for the LCP hero photo); latin-ext and
-// vietnamese faces stay in the CSS via unicode-range and download only on pages that use those glyphs (e.g. /vi).
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-})
-
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["500", "600"],
-  style: ["normal", "italic"],
-  variable: "--font-cormorant",
-  display: "swap",
-})
-
-// zh / hi headings use system serif stacks (globals.css): no CJK / Devanagari webfont download, and any character
-// the CMS adds later still renders (no subsetting).
-
-const htmlLang: Record<string, string> = {
-  id: "id",
-  en: "en",
-  zh: "zh-Hans",
-  vi: "vi",
-  hi: "hi",
-}
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
@@ -39,8 +9,6 @@ export const metadata: Metadata = {
     template: "%s · PT Indoco Jaya Raya",
   },
   description: "Indonesian agricultural commodities for buyers and partners worldwide.",
-  // Client logo (designer files in public/images/brand). /favicon.ico comes from src/app/favicon.ico and the
-  // social image from src/app/opengraph-image.png / twitter-image.png (App Router file conventions).
   icons: {
     icon: [
       { url: "/images/brand/favicon-32.png", sizes: "32x32", type: "image/png" },
@@ -51,20 +19,15 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const headerList = await headers()
-  const fromHeader = headerList.get("x-locale") || ""
-  const pathname = headerList.get("x-pathname") || ""
-  const fromPath = pathname.split("/").filter(Boolean)[0] || ""
-  const raw = fromHeader || fromPath || "id"
-  const lang = isLocale(raw) ? htmlLang[raw] : "id"
-
-  return (
-    <html
-      lang={lang}
-      className={`${inter.variable} ${cormorant.variable}`}
-    >
-      <body>{children}</body>
-    </html>
-  )
+/**
+ * Root layout stays free of `headers()` / `cookies()`. Awaiting those here made every
+ * `notFound()` render fall into Next's `__next_error__` HTML shell (no lang, blank without JS).
+ * `<html lang>` lives on the `[locale]` layout from `params` instead.
+ *
+ * Unmatched URLs (unknown path / unknown product slug with `dynamicParams=false`) are handled by
+ * `app/global-not-found.tsx`, which owns its own `<html lang>` + chrome — Next's `notFound()` from a
+ * matched dynamic segment cannot SSR the locale layout (framework bug → `__next_error__` shell).
+ */
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return children
 }

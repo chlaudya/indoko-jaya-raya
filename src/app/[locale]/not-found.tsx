@@ -1,66 +1,13 @@
 import type { Metadata } from "next"
-import Link from "next/link"
-import { cookies, headers } from "next/headers"
-import { DEFAULT_LOCALE, isLocale, pickLocale, type Locale } from "@/lib/i18n"
+import { NotFoundView } from "@/components/NotFoundView"
+import { getRequestLocale } from "@/lib/request-locale"
 
-const copy = {
-  title: {
-    id: "Halaman tidak ditemukan",
-    en: "Page not found",
-    zh: "页面未找到",
-    vi: "Không tìm thấy trang",
-    hi: "पृष्ठ नहीं मिला",
-  },
-  body: {
-    id: "Maaf, halaman yang Anda cari tidak tersedia. Kembali ke beranda untuk menjelajahi komoditi kami.",
-    en: "Sorry, the page you are looking for is not available. Return home to explore our commodities.",
-    zh: "抱歉，您访问的页面不存在。请返回首页浏览我们的农产品。",
-    vi: "Rất tiếc, trang bạn tìm không tồn tại. Quay về trang chủ để xem nông sản của chúng tôi.",
-    hi: "क्षमा करें, आपके द्वारा खोजा गया पृष्ठ उपलब्ध नहीं है। हमारी जिंसें देखने के लिए होम पर लौटें।",
-  },
-  home: {
-    id: "Kembali ke beranda",
-    en: "Back to home",
-    zh: "返回首页",
-    vi: "Về trang chủ",
-    hi: "होम पर वापस जाएँ",
-  },
-}
-
+// Intentionally omit `robots` here: Next already emits a single `noindex` for
+// HTTP 404 responses. Re-declaring it produced duplicate robots meta tags.
 export const metadata: Metadata = {
   title: "404",
-  robots: { index: false, follow: true },
 }
 
-async function resolveLocale(): Promise<Locale> {
-  const headerList = await headers()
-  const jar = await cookies()
-  const candidates = [
-    headerList.get("x-locale"),
-    headerList.get("x-pathname")?.split("/").filter(Boolean)[0],
-    jar.get("indoco-locale")?.value,
-  ]
-  for (const raw of candidates) {
-    if (raw && isLocale(raw)) return raw
-  }
-  return DEFAULT_LOCALE
-}
-
-export default async function LocaleNotFound() {
-  const locale = await resolveLocale()
-  return (
-    <div className="band-lime" data-locale={locale}>
-      <div className="site-wrap flex min-h-[60vh] flex-col items-start justify-center py-24">
-        <p className="label">404</p>
-        <h1 className="display display-h1 mt-4 text-forest">{pickLocale(copy.title, locale)}</h1>
-        <p className="mt-5 max-w-xl text-lg text-muted">{pickLocale(copy.body, locale)}</p>
-        <Link
-          href={`/${locale}`}
-          className="mt-10 inline-flex min-h-12 items-center rounded-[8px] btn-lime bg-lime px-6 text-sm font-semibold text-forest hover:bg-lime-tint"
-        >
-          {pickLocale(copy.home, locale)}
-        </Link>
-      </div>
-    </div>
-  )
+export default function LocaleNotFound() {
+  return <NotFoundView locale={getRequestLocale()} />
 }
