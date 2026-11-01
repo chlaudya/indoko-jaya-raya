@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { withLocaleAlternates } from "@/lib/seo"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { LocalizedCopy } from "@/components/RichText"
@@ -16,10 +17,10 @@ export async function generateMetadata({
   if (!isLocale(raw)) return {}
   const job = await getJob(slug)
   if (!job) return {}
-  return {
+  return withLocaleAlternates(raw, `careers/${slug}`, {
     title: pickLocale(job.title, raw),
     description: pickLocale(job.shortBlurb, raw),
-  }
+  })
 }
 
 export default async function JobPage({

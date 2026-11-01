@@ -1,6 +1,7 @@
 import Link from "next/link"
 import type { Metadata } from "next"
 import { productMeta } from "@/lib/seo-copy"
+import { withLocaleAlternates } from "@/lib/seo"
 import { notFound, redirect } from "next/navigation"
 import { isLocale, pickLocale, type Locale } from "@/lib/i18n"
 import { categories, products, ui } from "@/lib/fixtures"
@@ -21,7 +22,7 @@ export async function generateMetadata({
   if (!isLocale(raw)) return {}
   const product = products.find((item) => item.slug === slug)
   if (!product) return {}
-  return productMeta(product, raw)
+  return withLocaleAlternates(raw, `products/${product.slug}`, productMeta(product, raw))
 }
 
 export default async function ProductDetailPage({

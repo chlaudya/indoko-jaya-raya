@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { pageMeta } from "@/lib/seo-copy"
+import { withLocaleAlternates } from "@/lib/seo"
 import { notFound } from "next/navigation"
 import { isLocale, pickLocale, type Locale } from "@/lib/i18n"
 import { products, ui } from "@/lib/fixtures"
@@ -12,7 +13,7 @@ import { WaButton } from "@/components/WaButton"
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale: raw } = await params
   if (!isLocale(raw)) return {}
-  return pageMeta("drying", raw)
+  return withLocaleAlternates(raw, "services/drying", pageMeta("drying", raw))
 }
 
 export default async function DryingServicePage({ params }: { params: Promise<{ locale: string }> }) {

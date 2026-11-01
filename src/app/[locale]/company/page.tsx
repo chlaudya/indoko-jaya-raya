@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { pageMeta } from "@/lib/seo-copy"
+import { withLocaleAlternates } from "@/lib/seo"
 import { notFound } from "next/navigation"
 import { isLocale, pickLocale, type Locale } from "@/lib/i18n"
 import { pages, ui } from "@/lib/fixtures"
@@ -10,7 +11,7 @@ import { PageHeader } from "@/components/PageHeader"
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale: raw } = await params
   if (!isLocale(raw)) return {}
-  return { ...pageMeta("company", raw), robots: { index: false, follow: true } }
+  return withLocaleAlternates(raw, "company", { ...pageMeta("company", raw), robots: { index: false, follow: true } })
 }
 
 /**

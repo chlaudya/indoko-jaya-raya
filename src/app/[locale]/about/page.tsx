@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { pageMeta } from "@/lib/seo-copy"
+import { withLocaleAlternates } from "@/lib/seo"
 import { notFound } from "next/navigation"
 import { isLocale, pickLocale, type Locale } from "@/lib/i18n"
 import { pages, redesign, ui } from "@/lib/fixtures"
@@ -15,7 +16,7 @@ const strengthImages: ImageKey[] = ["sectionCashewSorting", "sectionSortingMachi
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale: raw } = await params
   if (!isLocale(raw)) return {}
-  return pageMeta("about", raw)
+  return withLocaleAlternates(raw, "about", pageMeta("about", raw))
 }
 
 export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {

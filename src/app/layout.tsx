@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { siteUrl } from "@/lib/seo"
 import { Cormorant_Garamond, Inter } from "next/font/google"
 import { headers } from "next/headers"
 import { isLocale } from "@/lib/i18n"
@@ -32,6 +33,7 @@ const htmlLang: Record<string, string> = {
 }
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl()),
   title: {
     default: "PT Indoco Jaya Raya",
     template: "%s · PT Indoco Jaya Raya",
@@ -51,7 +53,10 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const headerList = await headers()
-  const raw = headerList.get("x-locale") || "id"
+  const fromHeader = headerList.get("x-locale") || ""
+  const pathname = headerList.get("x-pathname") || ""
+  const fromPath = pathname.split("/").filter(Boolean)[0] || ""
+  const raw = fromHeader || fromPath || "id"
   const lang = isLocale(raw) ? htmlLang[raw] : "id"
 
   return (

@@ -1,6 +1,7 @@
 import Link from "next/link"
 import type { Metadata } from "next"
 import { pageMeta } from "@/lib/seo-copy"
+import { withLocaleAlternates } from "@/lib/seo"
 import { notFound } from "next/navigation"
 import { isLocale, pickLocale, type Locale } from "@/lib/i18n"
 import { homeStats, iconStrip, pages, products, redesign, ui, whyChoose } from "@/lib/fixtures"
@@ -29,7 +30,7 @@ const featureImages: Record<string, ImageKey> = {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale: raw } = await params
   if (!isLocale(raw)) return {}
-  return pageMeta("home", raw)
+  return withLocaleAlternates(raw, "", pageMeta("home", raw))
 }
 
 export default async function HomePage({

@@ -19,6 +19,7 @@ export function proxy(request: NextRequest) {
   }
   const requestHeaders = new Headers(request.headers)
   requestHeaders.set("x-locale", locale)
+  requestHeaders.set("x-pathname", pathname)
   return NextResponse.next({ request: { headers: requestHeaders } })
 }
 
