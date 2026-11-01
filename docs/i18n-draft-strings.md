@@ -302,3 +302,11 @@ Also draft: header CTA label "Minta Penawaran" localizations and any new commodi
 | rempah category | Rempah & Buah Kering | Spices & Dried Fruit | 香料与干果 | Gia vị & trái cây khô | मसाले और सूखे फल |
 
 Slugs unchanged (`jagung-kupas`, `asam-kupas`). Jasa Penjemuran removed from commodity grids/filters; `/services/drying` kept under Layanan.
+
+
+### Localized 404 (revision/brief-v1)
+
+| key | id | en | zh | vi | hi |
+|---|---|---|---|---|---|
+| 404.title | Halaman tidak ditemukan | Page not found | 页面未找到 | Không tìm thấy trang | पृष्ठ नहीं मिला |
+| 404.home | Kembali ke beranda | Back to home | 返回首页 | Về trang chủ | होम पर वापस जाएँ |
