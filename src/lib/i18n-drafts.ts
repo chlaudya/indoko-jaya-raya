@@ -114,7 +114,7 @@ export const I18N_DRAFTS: Drafts = {
   "Gudang penyimpanan": { zh: "仓储仓库", vi: "Kho lưu trữ", hi: "भंडारण गोदाम" },
   "Pengolahan komoditi": { zh: "农产品加工", vi: "Chế biến nông sản", hi: "जिंस प्रसंस्करण" },
   "Kacang-kacangan": { zh: "坚果与豆类", vi: "Các loại hạt & đậu", hi: "मेवे और दालें" },
-  "Umbi": { zh: "块茎类", vi: "Củ", hi: "कंद" },
+  "Ubi": { zh: "块茎类", vi: "Củ", hi: "कंद" },
   "Jagung": { zh: "玉米", vi: "Ngô", hi: "मक्का" },
   "Kopi": { zh: "咖啡", vi: "Cà phê", hi: "कॉफ़ी" },
   "Rempah": { zh: "香料", vi: "Gia vị", hi: "मसाले" },

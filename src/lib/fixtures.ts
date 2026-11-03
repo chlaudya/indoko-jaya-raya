@@ -195,7 +195,7 @@ export const ui = {
 
 export const categories = [
   { slug: "kacang-kacangan", title: { id: "Kacang-kacangan", en: "Nuts & legumes" } },
-  { slug: "umbi", title: { id: "Umbi", en: "Tubers" } },
+  { slug: "umbi", title: { id: "Ubi", en: "Tubers" } },
   { slug: "jagung", title: { id: "Jagung", en: "Corn" } },
   { slug: "kopi", title: { id: "Kopi", en: "Coffee" } },
   { slug: "rempah", title: { id: "Rempah & Buah Kering", en: "Spices & Dried Fruit" } },
@@ -801,7 +801,7 @@ export const iconStrip: TrustItem[] = [
       hi: "जिंसें",
     },
     body: {
-      id: "Kacang-kacangan, umbi, jagung, kopi, dan cengkeh dari Indonesia.",
+      id: "Kacang-kacangan, ubi, jagung, kopi, dan cengkeh dari Indonesia.",
       en: "Nuts and legumes, tubers, corn, coffee and cloves from Indonesia.",
       zh: "来自印度尼西亚的坚果与豆类、块茎、玉米、咖啡和丁香。",
       vi: "Các loại hạt và đậu, củ, ngô, cà phê và đinh hương từ Indonesia.",

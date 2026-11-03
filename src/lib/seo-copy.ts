@@ -144,7 +144,7 @@ export const productDescriptions: Record<string, LString> = {
     hi: "PT Indoko Jaya Raya से मूंग—गुणवत्ता वाली इंडोनेशियाई दालें. बिक्री टीम विनिर्देश और पैकेजिंग की जानकारी WhatsApp पर देगी। बिक्री टीम विनिर्"
   },
   "ubi-porang": {
-    id: "Ubi Porang dari PT Indoko Jaya Raya—komoditi umbi Indonesia. Ubi porang untuk industri. Detail spesifikasi dan ketersediaan ditanyakan ke tim penjualan.",
+    id: "Ubi Porang dari PT Indoko Jaya Raya—komoditi ubi Indonesia. Ubi porang untuk industri. Detail spesifikasi dan ketersediaan ditanyakan ke tim penjualan.",
     en: "Porang Tuber from PT Indoko Jaya Raya—Indonesian tubers commodity. Porang for industrial use. Ask our sales team for current specifications and packaging.",
     zh: "PT Indoko Jaya Raya 魔芋——供工业用途的印尼块茎类大宗商品。欢迎 WhatsApp 了解规格与供货。 目录另有花生、绿豆、魔芋等品类；下单前请确认规格与包装。目录另有花生、绿豆、魔芋等品类；下单前请确认规格与包装。目录另有花生、绿豆、魔芋等品类；下单前请确认规",
     vi: "Củ porang từ PT Indoko Jaya Raya—nông sản củ Indonesia dùng cho công nghiệp. Chúng tôi hỗ trợ báo giá B2B và trao đổi quy cách qua WhatsApp.",
