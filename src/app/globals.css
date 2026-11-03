@@ -320,13 +320,13 @@ html[lang="hi"] .hero-home h1 {
       rgba(255, 255, 255, 0.06) 0 2px,
       transparent 2px 14px
     ),
-    linear-gradient(140deg, #b9a77a 0%, #8c8a5c 40%, #4d6a45 100%);
+    linear-gradient(140deg, #b9a77a 0%, #8c8a5c 40%, #3d8443 100%);
 }
 .ph-dark {
   background:
     radial-gradient(
       110% 80% at 70% 20%,
-      rgba(111, 143, 98, 0.35),
+      rgba(61, 132, 67, 0.28),
       transparent 60%
     ),
     repeating-linear-gradient(
