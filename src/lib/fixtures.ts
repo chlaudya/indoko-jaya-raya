@@ -209,6 +209,8 @@ export type SpecRow = {
   unit?: LString
   min?: number
   max?: number
+  /** Optional lab/standards method; render only when present. Keep empty until confirmed. */
+  testMethod?: LString
 }
 
 export type AvailabilityStatus =

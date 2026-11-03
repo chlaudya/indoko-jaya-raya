@@ -36,6 +36,12 @@ export const specRow = defineType({
       type: "number",
       description: "Optional numeric upper bound.",
     }),
+    defineField({
+      name: "testMethod",
+      title: "Test method (optional)",
+      type: "localeString",
+      description: "Lab / standards method for this row (e.g. AOAC). Shown only when set — leave empty until confirmed.",
+    }),
   ],
   preview: {
     select: { title: "label.id", value: "value.id", unit: "unit.id", min: "min", max: "max" },
