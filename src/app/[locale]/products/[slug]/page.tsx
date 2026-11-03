@@ -64,7 +64,7 @@ export default async function ProductDetailPage({
       {/* Split hero: gallery left, name/category/summary/WA right */}
       <section className="band-lime">
         <div className="site-wrap pt-8 pb-16 lg:pt-12 lg:pb-24">
-          <nav aria-label="Breadcrumb" className="text-sm text-muted">
+          <nav aria-label="Breadcrumb" className="text-sm text-leaf">
             <ol className="flex flex-wrap gap-2">
               <li>
                 <Link href={`/${locale}`} className="hover:text-charcoal hover:underline">
@@ -104,7 +104,7 @@ export default async function ProductDetailPage({
             <div className="lg:sticky lg:top-28 lg:col-span-5">
               <p className="label">{category ? pickLocale(category.title, locale) : product.category}</p>
               <h1 className="display display-h1 mt-4 text-forest">{name}</h1>
-              <p className="mt-6 text-lg leading-relaxed text-muted">{intro}</p>
+              <p className="mt-6 text-lg leading-relaxed text-charcoal">{intro}</p>
               <div className="mt-8">
                 <WaButton locale={locale} templateKey="productPage" tokens={{ productName: name }} label={askLabel} />
               </div>

@@ -292,28 +292,30 @@ Unchanged: every other ivory or white section, the nav links, and forest or char
 
 Source: the PT Indoko Jaya Raya / APEL business card. **Designer FINAL values** (Nov 4, 2026):
 
-- Lime `#97f44b` — buttons, Why Choose Us band, accents on dark; text on lime is **always** `#17201b` (never `#0a0d09`)
+- Lime `#97f44b` — buttons, Why Choose Us (`.surface-lime`), accents on dark; text on lime is **always** `#17201b` (never grey / never `#0a0d09`)
+- Lime wash `#f4f9ef` — pale page-header / section bands (`.band-lime`); body `#17201b`, labels/breadcrumb/subtitle `#2e6b38`
 - Hover `#66c344`
 - Dark panels **and** footer `#17201b` (one dark token: `--color-forest` = `--color-charcoal`; `#0a0d09` dropped)
-- Green text on white `#2e6b38` (6.4:1) — links, small labels (`--color-leaf`)
+- Green text on white / pale wash `#2e6b38` (6.4:1) — links, small labels (`--color-leaf`)
 - `#3d8443` — stripes and headings ≥24px only (`--color-green`)
-- Page base white; alternate sections `#f4f9ef` (`--color-mist`)
+- Page base white; alternate sections `#f4f9ef` (`--color-mist`, same ground as lime-wash)
 
 The deep forest `#123b2a`, near-black `#0a0d09`, and pale washes `#e6f5d0` / `#c8e6a0` are retired. **Change token values in `globals.css` only** — keep token names so components stay stable.
 
 | Token | Role | Value |
 |---|---|---|
-| `--color-lime` / `--color-lime-wash` | Button fill, Why band, focus ring on dark | `#97f44b` |
+| `--color-lime` | Button fill, Why Choose Us band, focus ring on dark | `#97f44b` |
+| `--color-lime-wash` | Pale page-header / section bands (`.band-lime`) | `#f4f9ef` |
 | `--color-lime-tint` | Button hover; accents on dark | `#66c344` |
-| `--color-forest` / `--color-charcoal` | Dark panels, footer, button text/border on lime, body on white | `#17201b` |
-| `--color-leaf` | Links + small labels on white | `#2e6b38` |
+| `--color-forest` / `--color-charcoal` | Dark panels, footer, button text/border on lime, body on white/wash | `#17201b` |
+| `--color-leaf` | Links + small labels / breadcrumbs on white or wash | `#2e6b38` |
 | `--color-green` | Stripes + headings ≥24px | `#3d8443` |
 | `--color-mist` | Alternate section ground | `#f4f9ef` |
 | `--color-ivory` | Page base | `#ffffff` |
 
 Rules:
-- Never white text on `#97f44b` or `#66c344` (fails WCAG). Charcoal `#17201b` text only on green.
-- Green text on white/light: `--color-leaf` `#2e6b38` for links and small labels; `#3d8443` only for stripes / headings ≥24px.
+- Never white or grey text on `#97f44b` or `#66c344` (fails WCAG). Charcoal `#17201b` text only on solid lime.
+- Green text on white/pale wash: `--color-leaf` `#2e6b38` for links and small labels; `#3d8443` only for stripes / headings ≥24px.
 - Focus: `--color-forest` ring on lime buttons; `--color-lime` ring on dark sections.
 - Hero photo scrim stays black; accent words use `--color-lime` / `--color-lime-tint`.
 - Link underlines stay.
@@ -322,8 +324,10 @@ Contrast (measured):
 
 | Pair | Ratio | Notes |
 |---|---|---|
-| `#17201b` on `#97f44b` | ~12.6:1 | Button / Why Choose Us text |
+| `#17201b` on `#97f44b` | 12.2:1 | Button / Why Choose Us text |
 | `#17201b` on `#66c344` | ~7.7:1 | Button hover text |
+| `#17201b` on `#f4f9ef` | 15.6:1 | Page-header body / titles on lime-wash |
+| `#2e6b38` on `#f4f9ef` | 6.0:1 | Labels / breadcrumbs / subtitle on lime-wash |
 | `#ffffff` on `#17201b` | ~16.1:1 | Dark panel / footer body |
 | `#97f44b` on `#17201b` | ~12.6:1 | Accents / icons on dark |
 | `#66c344` on `#17201b` | ~7.7:1 | Footer headings on dark |

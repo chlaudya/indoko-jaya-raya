@@ -41,12 +41,13 @@
   --color-hairline: #e3e1d6;
   --color-hover-line: #a8b89c;
   --color-numeral: #6f8f62;
-  /* Designer final business-card palette: lime #97f44b (buttons/Why/accents on dark) + text #17201b;
-     lime-tint #66c344 hover; forest=charcoal=#17201b (one dark token for panels/footer; #0a0d09 dropped);
-     leaf #2e6b38 links/small labels; green #3d8443 stripes + headings ≥24px; mist #f4f9ef alternate sections. */
+  /* Designer final business-card palette: lime #97f44b (buttons / Why Choose Us / accents on dark) + text #17201b;
+     lime-tint #66c344 hover; lime-wash #f4f9ef (pale page-header bands via .band-lime);
+     forest=charcoal=#17201b; leaf #2e6b38 links/small labels; green #3d8443 stripes + headings ≥24px;
+     mist #f4f9ef alternate sections (same ground as lime-wash). */
   --color-lime: #97f44b;
   --color-lime-tint: #66c344;
-  --color-lime-wash: #97f44b;
+  --color-lime-wash: #f4f9ef;
 }
 
 html {
@@ -105,14 +106,15 @@ footer :focus-visible {
   outline-offset: 2px;
 }
 
-/* Why Choose Us / bold card-green band: charcoal #17201b text on --color-lime-wash (#97f44b). */
-/* Homepage wash as a page ground. Unlike .surface-lime, this does not restyle links or type. */
+/* Pale page-header / section ground (--color-lime-wash #f4f9ef). Does not restyle type:
+   headings/body use charcoal #17201b; labels/breadcrumbs use leaf #2e6b38. */
 .band-lime {
   background-color: var(--color-lime-wash);
 }
 
+/* Why Choose Us: solid card lime. All text tokens forced to charcoal — never grey on lime. */
 .surface-lime {
-  background-color: var(--color-lime-wash);
+  background-color: var(--color-lime);
   --color-charcoal: #17201b;
   --color-muted: #17201b;
   --color-sage: #17201b;
