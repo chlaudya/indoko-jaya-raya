@@ -3,9 +3,9 @@ import type { Locale } from "@/lib/i18n"
 
 export type ButtonVariant = "primary" | "secondary" | "on-dark" | "inverse" | "wa" | "wa-secondary" | "wa-on-dark"
 
-// Lime-forward (DESIGN.md "Lime-forward update"): primary and WhatsApp buttons are logo lime with forest text and
-// icon (9.3:1), hover / active lime-tint (9.1:1), forest focus ring. No stroke — the fill is the shape.
-const lime = "btn-lime bg-lime text-forest hover:bg-lime-tint active:bg-lime-tint"
+// Business-card palette: primary / WhatsApp buttons are card green with near-black (forest) text and 1px border,
+// hover mid-green (lime-tint), black focus ring via .btn-lime.
+const lime = "btn-lime border border-forest bg-lime text-forest hover:bg-lime-tint active:bg-lime-tint"
 
 const variants: Record<ButtonVariant, string> = {
   primary: lime,

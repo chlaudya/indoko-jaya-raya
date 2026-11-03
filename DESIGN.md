@@ -288,27 +288,41 @@ Dark sections (hero, forest bands, footer): labels, footer headings, hero accent
 
 Unchanged: every other ivory or white section, the nav links, and forest or charcoal text. Lime text or lines on ivory or white are never used (about 1.3:1).
 
-## Card-green palette (requested by Chlaudya, Nov 4, 2026) — replaces forest + lime-forward
+## Business-card palette (requested by Chlaudya, Nov 4, 2026) — supersedes Lime-forward
 
-Source: the PT Indoko Jaya Raya / APEL business card. Sampled greens: bright `#96f048`, mid `#6cc642`, card green `#42964e`, plus black and white. The deep forest `#123b2a` and the pale lime wash `#e6f5d0` are retired.
+Source: the PT Indoko Jaya Raya / APEL business card (bright lime gradient, black bands, white on dark, black on green). PM samples: lime `#97F44B` → `#66C344`, mid/dark `#3D8443`, near-black `#0A0D09`, white. Photo also showed `#44974e` (use only where contrast allows) and charcoal `#242625`.
 
-Token mapping (change values in `globals.css` `@theme`/`:root`, keep token names so components don't change):
-| Token | Old | New | Use |
+The deep forest `#123b2a` and pale washes `#e6f5d0` / `#c8e6a0` are retired. **Change token values in `globals.css` only** — keep token names so components stay stable if final card values are swapped later.
+
+| Token | Old | New | Role |
 |---|---|---|---|
-| `--color-lime` (buttons, primary CTA) | `#7afa52` | `#96f048` | fill; text `#17201b` (11.8:1). Hover `#6cc642` (text 7.8:1). 1px `#17201b` border stays |
-| `--color-forest` (dark sections, footer, hero curve, headings) | `#123b2a` | `#275e30` | deepened card green so white text passes (7.69:1) and bright-green accents pass (5.44:1). Never `#42964e` behind body text (white is only 3.68:1) |
-| `--color-leaf` / `--color-green` | `#1f5a3d` | `#2e6b38` | links, labels, icons on white |
-| `--color-card-green` (new) | — | `#42964e` | decorative bands, dividers, the card's diagonal stripes, large text ≥24px only with white |
-| `--color-lime-tint` (accents on dark) | `#c8e6a0` | `#96f048` | accent words, labels and footer headings on `#275e30` (5.44:1) |
-| `--color-lime-wash` (Why Choose Us band) | `#e6f5d0` | `#96f048` | solid card-bright band like the card; text `#17201b`, labels/numerals `#17201b`, hairlines `#17201b/20` |
-| `--color-ivory` (page base) | `#f5f3ea` | `#ffffff` | card is white; use `#f4f9ef` for alternate sections |
+| `--color-lime` | `#7afa52` | `#97f44b` | Button fill, Why Choose Us / bold green bands, focus ring on dark |
+| `--color-lime-tint` | `#c8e6a0` | `#66c344` | Button hover; accents (labels, hero words, footer headings) on near-black |
+| `--color-lime-wash` | `#e6f5d0` | `#97f44b` | Why Choose Us band — bold card green (not pale tint) |
+| `--color-forest` | `#123b2a` | `#0a0d09` | Dark panels, footer, hero chrome, button border/text, focus ring on green |
+| `--color-leaf` / `--color-green` | `#1f5a3d` | `#3d8443` | Links / labels / icons on white (4.59:1) |
+| `--color-charcoal` | `#17201b` | `#242625` | Body text on white |
+| `--color-ivory` | `#f5f3ea` | `#ffffff` | Page base (card white) |
+| `#44974e` (optional accent) | — | use sparingly | Decorative only; white text is ~3.6:1 (large UI only) |
 
 Rules:
-- Never white text on `#96f048` or `#6cc642` (1.4 and 2.1:1). Dark text only.
-- Never green text on green. Green text only on white, at `#2e6b38`.
-- Focus ring: `#17201b` on light and bright green, `#96f048` on `#275e30`.
-- Hero photo scrim stays black; accent words become `#96f048`.
-- Optional card motif: one thin diagonal `#42964e` + black stripe at section corners (footer top, hero curve). Decorative, `aria-hidden`.
+- Never white text on `#97f44b` or `#66c344` (fails WCAG). Black/near-black text only on green.
+- Green text only on white/light, at `--color-leaf` `#3d8443` (≥4.5:1).
+- Focus: `--color-forest` ring on lime buttons; `--color-lime` ring on near-black sections.
+- Hero photo scrim stays dark; accent words use `--color-lime` / `--color-lime-tint` (≥4.5:1 large text on scrim).
+- Link underlines stay.
+
+Contrast (measured):
+
+| Pair | Ratio | Notes |
+|---|---|---|
+| `#0a0d09` on `#97f44b` | 14.3:1 | Button / Why Choose Us text |
+| `#0a0d09` on `#66c344` | 8.8:1 | Button hover text |
+| `#ffffff` on `#0a0d09` | 19.6:1 | Dark panel / footer body |
+| `#97f44b` on `#0a0d09` | 14.3:1 | Accents / icons on dark |
+| `#66c344` on `#0a0d09` | 8.8:1 | Footer headings on dark |
+| `#3d8443` on `#ffffff` | 4.59:1 | Links / labels on white |
+| `#97f44b` on ~`#0a0a0a` scrim | ~14.5:1 | Hero accent words (large text) |
 
 # 5. COLOR RULES
 
