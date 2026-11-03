@@ -10,9 +10,11 @@ function formatValueOnly(row: SpecRow, locale: Locale): string {
   return ""
 }
 
-/** Commodity-sheet style spec table; only rows with real data are shown. Unit / test method columns are optional. */
+/** Commodity-sheet style spec table. Only client-confirmed rows with real data are shown;
+ *  if none remain, the whole section is omitted (no empty heading / placeholder). */
 export function ProductSpecifications({ product, locale, title }: { product: Product; locale: Locale; title: string }) {
   const rows = product.specs
+    .filter((row) => row.confirmed === true)
     .map((row) => ({
       label: pickLocale(row.label, locale),
       value: formatValueOnly(row, locale),

@@ -42,6 +42,20 @@ export const specRow = defineType({
       type: "localeString",
       description: "Lab / standards method for this row (e.g. AOAC). Shown only when set — leave empty until confirmed.",
     }),
+    defineField({
+      name: "confirmed",
+      title: "Client-confirmed",
+      type: "boolean",
+      initialValue: false,
+      description:
+        "Off by default. Turn on only when the client supplied this row — unsourced fixture/placeholder specs stay hidden.",
+    }),
+    defineField({
+      name: "source",
+      title: "Source (optional)",
+      type: "string",
+      description: "Editor-only provenance (e.g. client email / call date). Not shown on the site.",
+    }),
   ],
   preview: {
     select: { title: "label.id", value: "value.id", unit: "unit.id", min: "min", max: "max" },

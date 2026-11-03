@@ -202,7 +202,9 @@ export const categories = [
   { slug: "layanan", title: { id: "Layanan", en: "Services" } },
 ]
 
-/** Spec row: label + value (+ optional unit). Ranges live in `value` (e.g. "8–10") or as min/max. */
+/** Spec row: label + value (+ optional unit). Ranges live in `value` (e.g. "8–10") or as min/max.
+ *  Unsourced fixture rows stay in data for reference but are hidden until `confirmed` is true
+ *  (client-supplied). Default / omitted = hidden. */
 export type SpecRow = {
   label: LString
   value?: LString
@@ -211,6 +213,10 @@ export type SpecRow = {
   max?: number
   /** Optional lab/standards method; render only when present. Keep empty until confirmed. */
   testMethod?: LString
+  /** Client-confirmed only. Omitted/false → row is hidden from the product page. */
+  confirmed?: boolean
+  /** Optional provenance note for editors (e.g. "client email 2026-11-01"); not rendered. */
+  source?: string
 }
 
 export type AvailabilityStatus =
