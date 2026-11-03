@@ -57,20 +57,22 @@ export default async function CareersPage({ params }: { params: Promise<{ locale
         </div>
       </section>
 
-      {/* Culture band */}
-      <section className="bg-ivory">
-        <div className="site-wrap section-y">
-          <p className="label">{pickLocale(ui.culture, locale)}</p>
-          <ul className="mt-10 grid gap-10 md:grid-cols-3">
-            {redesign.careers.values.map((value, index) => (
-              <li key={index} className="reveal border-t border-forest/20 pt-6">
-                <h2 className="display display-h3 text-forest">{pickLocale(value.title, locale)}</h2>
-                <p className="mt-3 text-muted">{pickLocale(value.body, locale)}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+      {/* Culture band — skip empty padded shell if CMS clears values */}
+      {redesign.careers.values.length > 0 ? (
+        <section className="bg-ivory">
+          <div className="site-wrap section-y">
+            <p className="label">{pickLocale(ui.culture, locale)}</p>
+            <ul className="mt-10 grid gap-10 md:grid-cols-3">
+              {redesign.careers.values.map((value, index) => (
+                <li key={index} className="reveal border-t border-forest/20 pt-6">
+                  <h2 className="display display-h3 text-forest">{pickLocale(value.title, locale)}</h2>
+                  <p className="mt-3 text-muted">{pickLocale(value.body, locale)}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      ) : null}
 
       <InquirySection locale={locale} title={pickLocale(ui.contactTeam, locale)} />
     </div>

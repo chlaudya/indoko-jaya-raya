@@ -119,13 +119,7 @@ export default async function ProductDetailPage({
         </div>
       </section>
 
-      <section className="bg-ivory">
-        <div className="site-wrap section-y">
-          <div className="max-w-4xl">
-            <ProductSpecifications product={product} locale={locale} title={pickLocale(ui.specifications, locale)} />
-          </div>
-        </div>
-      </section>
+      <ProductSpecifications product={product} locale={locale} title={pickLocale(ui.specifications, locale)} />
 
       {related.length > 0 && (
         <section className="bg-white">
