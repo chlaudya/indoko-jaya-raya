@@ -290,39 +290,46 @@ Unchanged: every other ivory or white section, the nav links, and forest or char
 
 ## Business-card palette (requested by Chlaudya, Nov 4, 2026) — supersedes Lime-forward
 
-Source: the PT Indoko Jaya Raya / APEL business card (bright lime gradient, black bands, white on dark, black on green). PM samples: lime `#97F44B` → `#66C344`, mid/dark `#3D8443`, near-black `#0A0D09`, white. Photo also showed `#44974e` (use only where contrast allows) and charcoal `#242625`.
+Source: the PT Indoko Jaya Raya / APEL business card. **Designer FINAL values** (Nov 4, 2026):
 
-The deep forest `#123b2a` and pale washes `#e6f5d0` / `#c8e6a0` are retired. **Change token values in `globals.css` only** — keep token names so components stay stable if final card values are swapped later.
+- Lime `#97f44b` — buttons, Why Choose Us band, accents on dark; text on lime is **always** `#17201b` (never `#0a0d09`)
+- Hover `#66c344`
+- Dark panels **and** footer `#17201b` (one dark token: `--color-forest` = `--color-charcoal`; `#0a0d09` dropped)
+- Green text on white `#2e6b38` (6.4:1) — links, small labels (`--color-leaf`)
+- `#3d8443` — stripes and headings ≥24px only (`--color-green`)
+- Page base white; alternate sections `#f4f9ef` (`--color-mist`)
 
-| Token | Old | New | Role |
-|---|---|---|---|
-| `--color-lime` | `#7afa52` | `#97f44b` | Button fill, Why Choose Us / bold green bands, focus ring on dark |
-| `--color-lime-tint` | `#c8e6a0` | `#66c344` | Button hover; accents (labels, hero words, footer headings) on near-black |
-| `--color-lime-wash` | `#e6f5d0` | `#97f44b` | Why Choose Us band — bold card green (not pale tint) |
-| `--color-forest` | `#123b2a` | `#0a0d09` | Dark panels, footer, hero chrome, button border/text, focus ring on green |
-| `--color-leaf` / `--color-green` | `#1f5a3d` | `#3d8443` | Links / labels / icons on white (4.59:1) |
-| `--color-charcoal` | `#17201b` | `#242625` | Body text on white |
-| `--color-ivory` | `#f5f3ea` | `#ffffff` | Page base (card white) |
-| `#44974e` (optional accent) | — | use sparingly | Decorative only; white text is ~3.6:1 (large UI only) |
+The deep forest `#123b2a`, near-black `#0a0d09`, and pale washes `#e6f5d0` / `#c8e6a0` are retired. **Change token values in `globals.css` only** — keep token names so components stay stable.
+
+| Token | Role | Value |
+|---|---|---|
+| `--color-lime` / `--color-lime-wash` | Button fill, Why band, focus ring on dark | `#97f44b` |
+| `--color-lime-tint` | Button hover; accents on dark | `#66c344` |
+| `--color-forest` / `--color-charcoal` | Dark panels, footer, button text/border on lime, body on white | `#17201b` |
+| `--color-leaf` | Links + small labels on white | `#2e6b38` |
+| `--color-green` | Stripes + headings ≥24px | `#3d8443` |
+| `--color-mist` | Alternate section ground | `#f4f9ef` |
+| `--color-ivory` | Page base | `#ffffff` |
 
 Rules:
-- Never white text on `#97f44b` or `#66c344` (fails WCAG). Black/near-black text only on green.
-- Green text only on white/light, at `--color-leaf` `#3d8443` (≥4.5:1).
-- Focus: `--color-forest` ring on lime buttons; `--color-lime` ring on near-black sections.
-- Hero photo scrim stays dark; accent words use `--color-lime` / `--color-lime-tint` (≥4.5:1 large text on scrim).
+- Never white text on `#97f44b` or `#66c344` (fails WCAG). Charcoal `#17201b` text only on green.
+- Green text on white/light: `--color-leaf` `#2e6b38` for links and small labels; `#3d8443` only for stripes / headings ≥24px.
+- Focus: `--color-forest` ring on lime buttons; `--color-lime` ring on dark sections.
+- Hero photo scrim stays black; accent words use `--color-lime` / `--color-lime-tint`.
 - Link underlines stay.
 
 Contrast (measured):
 
 | Pair | Ratio | Notes |
 |---|---|---|
-| `#0a0d09` on `#97f44b` | 14.3:1 | Button / Why Choose Us text |
-| `#0a0d09` on `#66c344` | 8.8:1 | Button hover text |
-| `#ffffff` on `#0a0d09` | 19.6:1 | Dark panel / footer body |
-| `#97f44b` on `#0a0d09` | 14.3:1 | Accents / icons on dark |
-| `#66c344` on `#0a0d09` | 8.8:1 | Footer headings on dark |
-| `#3d8443` on `#ffffff` | 4.59:1 | Links / labels on white |
-| `#97f44b` on ~`#0a0a0a` scrim | ~14.5:1 | Hero accent words (large text) |
+| `#17201b` on `#97f44b` | ~12.6:1 | Button / Why Choose Us text |
+| `#17201b` on `#66c344` | ~7.7:1 | Button hover text |
+| `#ffffff` on `#17201b` | ~16.1:1 | Dark panel / footer body |
+| `#97f44b` on `#17201b` | ~12.6:1 | Accents / icons on dark |
+| `#66c344` on `#17201b` | ~7.7:1 | Footer headings on dark |
+| `#2e6b38` on `#ffffff` | 6.4:1 | Links / small labels on white |
+| `#3d8443` on `#ffffff` | 4.59:1 | Stripes / headings ≥24px on white |
+| `#97f44b` on black scrim | ~14.5:1 | Hero accent words (large text) |
 
 # 5. COLOR RULES
 

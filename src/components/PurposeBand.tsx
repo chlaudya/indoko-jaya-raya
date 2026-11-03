@@ -1,5 +1,5 @@
 /**
- * Purpose statement band with large-type commitments. Default: deep forest (#0a0d09).
+ * Purpose statement band with large-type commitments. Default: charcoal dark (#17201b).
  * `continued` (Home "Misi"): white surface; label + statement in cols 1–4, the numbered goals in cols 6–12
  * (Cormorant 48px numerals in #6f8f62, large text ≥3:1; goals at --text-h3; #e3e1d6 hairlines).
  */

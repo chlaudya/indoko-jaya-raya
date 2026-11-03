@@ -21,7 +21,7 @@ const PHONE = "M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1.5 1.5 0
 const MAIL = "M3.5 6.5h17v11h-17zM3.5 7l8.5 6.5L20.5 7"
 
 /**
- * Footer: brand · Navigasi · Komoditi · Kontak (4 → 2 → 1 columns). Links 15px #d9e0d4 (≈10:1 on near-black),
+ * Footer: brand · Navigasi · Komoditi · Kontak (4 → 2 → 1 columns). Links 15px #d9e0d4 (≈10:1 on charcoal),
  * line-height 1.9. Address, phone and email rows render only when confirmed (siteSettings.phonePending /
  * siteSettings.email / non-pending address). WhatsApp always uses the configured destination.
  */
@@ -49,7 +49,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
   return (
     <footer className="relative isolate overflow-hidden border-t border-white/10 bg-forest text-ivory">
       {/* Decorative client background (coffee leaves): lazy, never preloaded, cropped freely on small screens.
-          Near-black overlay (#0a0d09) so the leaf photo is only a subtle dark texture with no forest-green cast. */}
+          Charcoal overlay (#17201b) so the leaf photo is only a subtle dark texture with no forest-green cast. */}
       {/* Leaf photo kept only as a subtle dark texture: grayscale + low brightness so no green cast. */}
       <Image
         src="/images/optimized/footer-bg.webp"
@@ -61,7 +61,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgba(10,13,9,0.72),rgba(10,13,9,0.94))] xl:bg-[linear-gradient(to_bottom,rgba(10,13,9,0.82),rgba(10,13,9,0.96))]"
+        className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgba(23,32,27,0.72),rgba(23,32,27,0.94))] xl:bg-[linear-gradient(to_bottom,rgba(23,32,27,0.82),rgba(23,32,27,0.96))]"
       />
       <div className="site-wrap relative pt-16 pb-8 lg:pt-20">
         <div className="grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-12">

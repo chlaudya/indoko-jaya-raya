@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --color-forest: #0a0d09;
+  --color-forest: #17201b;
   --color-green: #3d8443;
   --color-sage: #557048;
   --color-soft-sage: #c3cfb8;
   --color-ivory: #ffffff;
   --color-white: #ffffff;
-  --color-charcoal: #242625;
+  --color-charcoal: #17201b;
   --color-muted: #5a665f;
   --text-display: clamp(3rem, 7vw, 7rem);
   --text-h1: clamp(2.5rem, 5vw, 5rem);
@@ -27,22 +27,23 @@
 }
 
 @theme {
-  --color-forest: #0a0d09;
-  --color-leaf: #3d8443;
+  --color-forest: #17201b;
+  --color-leaf: #2e6b38;
+  --color-green: #3d8443;
   --color-sage: #557048;
   --color-soft-sage: #c3cfb8;
   --color-ivory: #ffffff;
-  --color-charcoal: #242625;
+  --color-charcoal: #17201b;
   --color-muted: #5a665f;
   /* Light sage-mist surface (Home Misi + pillars). */
-  --color-mist: #eef2ea;
+  --color-mist: #f4f9ef;
   /* Hairlines and card borders; hover border; mission numerals (large text only, ≥3:1). */
   --color-hairline: #e3e1d6;
   --color-hover-line: #a8b89c;
   --color-numeral: #6f8f62;
-  /* Business-card palette (DESIGN.md "Business-card palette"): lime = card green #97f44b (buttons + Why Choose Us);
-     lime-tint = mid green #66c344 (button hover + accents on dark); forest = near-black #0a0d09 (dark panels/footer);
-     leaf/green = #3d8443 (links/labels on white). */
+  /* Designer final business-card palette: lime #97f44b (buttons/Why/accents on dark) + text #17201b;
+     lime-tint #66c344 hover; forest=charcoal=#17201b (one dark token for panels/footer; #0a0d09 dropped);
+     leaf #2e6b38 links/small labels; green #3d8443 stripes + headings ≥24px; mist #f4f9ef alternate sections. */
   --color-lime: #97f44b;
   --color-lime-tint: #66c344;
   --color-lime-wash: #97f44b;
@@ -104,7 +105,7 @@ footer :focus-visible {
   outline-offset: 2px;
 }
 
-/* Why Choose Us / bold card-green band: near-black text on --color-lime-wash (#97f44b). */
+/* Why Choose Us / bold card-green band: charcoal #17201b text on --color-lime-wash (#97f44b). */
 /* Homepage wash as a page ground. Unlike .surface-lime, this does not restyle links or type. */
 .band-lime {
   background-color: var(--color-lime-wash);
@@ -112,13 +113,13 @@ footer :focus-visible {
 
 .surface-lime {
   background-color: var(--color-lime-wash);
-  --color-charcoal: #0a0d09;
-  --color-muted: #0a0d09;
-  --color-sage: #0a0d09;
-  --color-numeral: #0a0d09;
-  --color-leaf: #0a0d09;
-  --color-forest: #0a0d09;
-  --color-hairline: rgb(10 13 9 / 0.22);
+  --color-charcoal: #17201b;
+  --color-muted: #17201b;
+  --color-sage: #17201b;
+  --color-numeral: #17201b;
+  --color-leaf: #17201b;
+  --color-forest: #17201b;
+  --color-hairline: rgb(23 32 27 / 0.22);
 }
 .surface-lime a:not([class*="bg-"]) {
   text-decoration-line: underline;
@@ -215,7 +216,7 @@ html[lang="hi"] .hero-home h1 {
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-sage);
+  color: var(--color-leaf);
 }
 
 /* Cargill-style secondary text link: arrow + underline on hover */
@@ -292,7 +293,7 @@ html[lang="hi"] .hero-home h1 {
       rgba(255, 255, 255, 0.05) 0 2px,
       transparent 2px 22px
     ),
-    linear-gradient(160deg, #3d8443 0%, #242625 55%, #0a0d09 100%);
+    linear-gradient(160deg, #3d8443 0%, #17201b 55%, #17201b 100%);
 }
 .ph-field {
   background:
@@ -303,16 +304,16 @@ html[lang="hi"] .hero-home h1 {
     ),
     repeating-linear-gradient(
       8deg,
-      rgba(10, 13, 9, 0.35) 0 3px,
+      rgba(23, 32, 27, 0.35) 0 3px,
       transparent 3px 26px
     ),
-    linear-gradient(180deg, #66c344 0%, #3d8443 40%, #242625 75%, #0a0d09 100%);
+    linear-gradient(180deg, #66c344 0%, #3d8443 40%, #17201b 75%, #17201b 100%);
 }
 .ph-harvest {
   background:
     radial-gradient(
       100% 70% at 80% 100%,
-      rgba(10, 13, 9, 0.55),
+      rgba(23, 32, 27, 0.55),
       transparent 60%
     ),
     repeating-radial-gradient(
@@ -334,7 +335,7 @@ html[lang="hi"] .hero-home h1 {
       rgba(255, 255, 255, 0.035) 0 1px,
       transparent 1px 48px
     ),
-    linear-gradient(180deg, #242625 0%, #0a0d09 100%);
+    linear-gradient(180deg, #17201b 0%, #17201b 100%);
 }
 
 .no-scrollbar {

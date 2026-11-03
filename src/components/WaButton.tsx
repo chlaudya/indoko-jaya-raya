@@ -3,8 +3,8 @@ import type { Locale } from "@/lib/i18n"
 
 export type ButtonVariant = "primary" | "secondary" | "on-dark" | "inverse" | "wa" | "wa-secondary" | "wa-on-dark"
 
-// Business-card palette: primary / WhatsApp buttons are card green with near-black (forest) text and 1px border,
-// hover mid-green (lime-tint), black focus ring via .btn-lime.
+// Designer final palette: primary / WhatsApp buttons card lime #97f44b with charcoal #17201b (forest) text and 1px border,
+// hover #66c344 (lime-tint), charcoal focus ring via .btn-lime.
 const lime = "btn-lime border border-forest bg-lime text-forest hover:bg-lime-tint active:bg-lime-tint"
 
 const variants: Record<ButtonVariant, string> = {
