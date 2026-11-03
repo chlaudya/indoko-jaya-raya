@@ -1,4 +1,4 @@
-# Indoco Jaya Raya — Wireframes v1 (page shells)
+# Indoko Jaya Raya — Wireframes v1 (page shells)
 
 **Brand:** APEL Group green–black · B2B agribusiness · desktop-first, fully responsive  
 **Locales:** ID (default) · EN · ZH · VI · HI — switcher in header on every page  
@@ -179,7 +179,7 @@ ID default may omit prefix or use `/id/...` — Fullstack choice; keep locale in
 
 - WA click tracking  
 - Guessing client copy in 5 languages (structure + ID placeholders only)  
-- Final photography / official Indoco logo (use APEL Group interim)
+- Final photography / official Indoko logo (use APEL Group interim)
 
 ---
 

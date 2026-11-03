@@ -45,7 +45,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             <p className="mt-6 text-lg leading-relaxed text-muted">{pickLocale(pages.home.sustainabilityBody, locale)}</p>
             <blockquote className="my-12 border-l-2 border-sage pl-6 lg:-ml-16 lg:pl-14">
               <p className="display display-h2 text-balance text-forest">“{pickLocale(redesign.about.pullQuote, locale)}”</p>
-              <footer className="label mt-4">PT Indoco Jaya Raya</footer>
+              <footer className="label mt-4">PT Indoko Jaya Raya</footer>
             </blockquote>
           </div>
         </div>

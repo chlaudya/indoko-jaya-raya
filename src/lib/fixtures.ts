@@ -11,8 +11,8 @@ export const siteSettings = {
   phonePending: true as boolean,
   waTemplates: {
     home: {
-      id: "Halo Indoco Jaya Raya, saya ingin mengetahui lebih lanjut tentang perusahaan Anda.",
-      en: "Hello Indoco Jaya Raya, I would like to learn more about your company.",
+      id: "Halo Indoko Jaya Raya, saya ingin mengetahui lebih lanjut tentang perusahaan Anda.",
+      en: "Hello Indoko Jaya Raya, I would like to learn more about your company.",
     },
     drying: {
       id: "Halo, saya ingin konsultasi Jasa Penjemuran Komoditi.",
@@ -20,34 +20,34 @@ export const siteSettings = {
     },
     // Careers apply CTA (list + detail): position and location in the page language. zh / vi / hi DRAFT.
     careerApply: {
-      id: "Halo Indoco Jaya Raya, saya ingin melamar posisi {{position}} ({{location}}). Mohon informasi lebih lanjut.",
-      en: "Hello Indoco Jaya Raya, I would like to apply for the {{position}} position ({{location}}). Please send me more information.",
+      id: "Halo Indoko Jaya Raya, saya ingin melamar posisi {{position}} ({{location}}). Mohon informasi lebih lanjut.",
+      en: "Hello Indoko Jaya Raya, I would like to apply for the {{position}} position ({{location}}). Please send me more information.",
     },
     contact: {
-      id: "Halo Indoco Jaya Raya, saya ingin menghubungi tim Anda.",
-      en: "Hello Indoco Jaya Raya, I would like to contact your team.",
+      id: "Halo Indoko Jaya Raya, saya ingin menghubungi tim Anda.",
+      en: "Hello Indoko Jaya Raya, I would like to contact your team.",
     },
     // Home, per section: each message says where it was sent from. zh / vi / hi DRAFT.
     homeHero: {
-      id: "Halo Indoco Jaya Raya, saya menghubungi Anda dari halaman utama website. Saya ingin mengetahui lebih lanjut tentang komoditi Anda.",
-      en: "Hello Indoco Jaya Raya, I'm contacting you from your website's home page. I'd like to learn more about your commodities.",
+      id: "Halo Indoko Jaya Raya, saya menghubungi Anda dari halaman utama website. Saya ingin mengetahui lebih lanjut tentang komoditi Anda.",
+      en: "Hello Indoko Jaya Raya, I'm contacting you from your website's home page. I'd like to learn more about your commodities.",
     },
     homeDrying: {
-      id: "Halo Indoco Jaya Raya, saya menghubungi Anda dari bagian Jasa Penjemuran di halaman utama website. Saya ingin mendiskusikan kebutuhan penjemuran komoditi saya.",
-      en: "Hello Indoco Jaya Raya, I'm contacting you from the Drying Service section on your home page. I'd like to discuss my commodity drying needs.",
+      id: "Halo Indoko Jaya Raya, saya menghubungi Anda dari bagian Jasa Penjemuran di halaman utama website. Saya ingin mendiskusikan kebutuhan penjemuran komoditi saya.",
+      en: "Hello Indoko Jaya Raya, I'm contacting you from the Drying Service section on your home page. I'd like to discuss my commodity drying needs.",
     },
     homeBanner: {
-      id: "Halo Indoco Jaya Raya, saya menghubungi Anda dari tombol WhatsApp di bagian bawah halaman utama website. Saya ingin membicarakan kebutuhan komoditi atau pasokan saya.",
-      en: "Hello Indoco Jaya Raya, I'm contacting you from the WhatsApp button at the bottom of your home page. I'd like to talk about my commodity or supply needs.",
+      id: "Halo Indoko Jaya Raya, saya menghubungi Anda dari tombol WhatsApp di bagian bawah halaman utama website. Saya ingin membicarakan kebutuhan komoditi atau pasokan saya.",
+      en: "Hello Indoko Jaya Raya, I'm contacting you from the WhatsApp button at the bottom of your home page. I'd like to talk about my commodity or supply needs.",
     },
     // Commodity cards (Home + Katalog): product name in the page language.
     productPage: {
-      id: "Halo Indoco Jaya Raya, saya tertarik dengan {{productName}} yang saya lihat di halaman produk website Anda. Mohon informasi lebih lanjut.",
-      en: "Hello Indoco Jaya Raya, I'm interested in {{productName}}, which I saw on the product page of your website. Please share more details.",
+      id: "Halo Indoko Jaya Raya, saya tertarik dengan {{productName}} yang saya lihat di halaman produk website Anda. Mohon informasi lebih lanjut.",
+      en: "Hello Indoko Jaya Raya, I'm interested in {{productName}}, which I saw on the product page of your website. Please share more details.",
     },
     productCard: {
-      id: "Halo Indoco Jaya Raya, saya tertarik dengan {{productName}} yang saya lihat di daftar komoditi website Anda. Mohon informasi lebih lanjut.",
-      en: "Hello Indoco Jaya Raya, I'm interested in {{productName}}, which I saw in the commodity list on your website. Please share more details.",
+      id: "Halo Indoko Jaya Raya, saya tertarik dengan {{productName}} yang saya lihat di daftar komoditi website Anda. Mohon informasi lebih lanjut.",
+      en: "Hello Indoko Jaya Raya, I'm interested in {{productName}}, which I saw in the commodity list on your website. Please share more details.",
     },
   } as Record<string, LString>,
   /** Public email: empty until the client confirms one (the footer shows "Menyusul"). Never invent an address. */
@@ -119,7 +119,7 @@ export const ui = {
   skipToContent: { id: "Lewati ke konten", en: "Skip to content" },
   language: { id: "Bahasa", en: "Language" },
   ourCommodities: { id: "Komoditi kami", en: "Our commodities" },
-  whyPartner: { id: "Mengapa bermitra", en: "Why partner with Indoco" },
+  whyPartner: { id: "Mengapa bermitra", en: "Why partner with Indoko" },
   fromIndonesia: { id: "Dari Indonesia", en: "From Indonesia" },
   commodityServices: { id: "Layanan komoditi", en: "Commodity services" },
   careersLabel: { id: "Karier", en: "Careers" },
@@ -402,7 +402,7 @@ export const products: Product[] = [
 
 export const pages = {
   home: {
-    heroEyebrow: { id: "Indoco Jaya Raya", en: "Indoco Jaya Raya" },
+    heroEyebrow: { id: "Indoko Jaya Raya", en: "Indoko Jaya Raya" },
     heroLine1: { id: "Berakar di Indonesia.", en: "Rooted in Indonesia." },
     heroLine2: { id: "Terhubung ke dunia.", en: "Connected to the World." },
     heroLead: {
@@ -415,8 +415,8 @@ export const pages = {
       en: "Local agricultural products, prepared for global markets.",
     },
     introBody: {
-      id: "PT Indoco Jaya Raya menyerap dan memperdagangkan hasil pertanian lokal.",
-      en: "PT Indoco Jaya Raya aggregates and trades local agricultural produce.",
+      id: "PT Indoko Jaya Raya menyerap dan memperdagangkan hasil pertanian lokal.",
+      en: "PT Indoko Jaya Raya aggregates and trades local agricultural produce.",
     },
     pillars: [
       {
@@ -483,8 +483,8 @@ export const pages = {
       en: "Company story, vision, and mission.",
     },
     story: {
-      id: "PT Indoco Jaya Raya bergerak dalam penyerapan dan perdagangan hasil pertanian lokal.",
-      en: "PT Indoco Jaya Raya aggregates and trades local agricultural produce.",
+      id: "PT Indoko Jaya Raya bergerak dalam penyerapan dan perdagangan hasil pertanian lokal.",
+      en: "PT Indoko Jaya Raya aggregates and trades local agricultural produce.",
     },
     vision: {
       id: "Menjadi agrobisnis lokal yang menguasai pasar nasional dan internasional dengan menjaga kualitas dan keberlanjutan.",
@@ -497,7 +497,7 @@ export const pages = {
   },
   company: {
     heroTitle: { id: "Profil perusahaan", en: "Company profile" },
-    legalName: { id: "PT Indoco Jaya Raya", en: "PT Indoco Jaya Raya" },
+    legalName: { id: "PT Indoko Jaya Raya", en: "PT Indoko Jaya Raya" },
     tagline: { id: "Agribisnis hasil bumi lokal", en: "Local agribusiness commodities" },
     note: {
       id: "Identitas hukum, struktur, lokasi, dan sertifikasi hanya ditampilkan setelah data disetujui untuk publik.",
@@ -651,14 +651,14 @@ export const redesign = {
     features: [
       {
         key: "about",
-        eyebrow: { id: "Tentang Indoco", en: "About Indoco" },
+        eyebrow: { id: "Tentang Indoko", en: "About Indoko" },
         title: {
           id: "Hasil pertanian lokal, disiapkan untuk pasar global.",
           en: "Local agricultural products, prepared for global markets.",
         },
         body: {
-          id: "PT Indoco Jaya Raya menyerap dan memperdagangkan hasil pertanian lokal untuk mitra di dalam dan luar negeri.",
-          en: "PT Indoco Jaya Raya aggregates and trades local agricultural produce for partners at home and abroad.",
+          id: "PT Indoko Jaya Raya menyerap dan memperdagangkan hasil pertanian lokal untuk mitra di dalam dan luar negeri.",
+          en: "PT Indoko Jaya Raya aggregates and trades local agricultural produce for partners at home and abroad.",
         },
         linkLabel: { id: "Cerita kami", en: "Our story" },
         href: "about",

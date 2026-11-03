@@ -137,7 +137,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         </div>
 
         <div className="mt-14 border-t border-white/15 pt-6">
-          <p className="text-sm text-[#d9e0d4]">© {new Date().getFullYear()} PT Indoco Jaya Raya</p>
+          <p className="text-sm text-[#d9e0d4]">© {new Date().getFullYear()} PT Indoko Jaya Raya</p>
         </div>
       </div>
     </footer>

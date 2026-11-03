@@ -5,8 +5,8 @@ import "./globals.css"
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
   title: {
-    default: "PT Indoco Jaya Raya",
-    template: "%s · PT Indoco Jaya Raya",
+    default: "PT Indoko Jaya Raya",
+    template: "%s · PT Indoko Jaya Raya",
   },
   description: "Indonesian agricultural commodities for buyers and partners worldwide.",
   icons: {

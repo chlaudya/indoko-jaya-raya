@@ -13,7 +13,7 @@ const MARKS = {
   footer: { src: "/images/brand/apel-logo-knockout.svg", width: 96, height: 72, className: "h-[72px] w-auto" },
 } as const
 
-export const BRAND_NAME = "PT Indoco Jaya Raya"
+export const BRAND_NAME = "PT Indoko Jaya Raya"
 
 export function BrandMark({ variant }: { variant: keyof typeof MARKS }) {
   const mark = MARKS[variant]

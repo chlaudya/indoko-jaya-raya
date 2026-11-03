@@ -1,10 +1,10 @@
 # DESIGN.md
 
-# INDOCO JAYA RAYA — DESIGN SYSTEM
+# INDOKO JAYA RAYA — DESIGN SYSTEM
 
 > **Rooted in Indonesia. Connected to the World.**
 
-This file is the visual and UX source of truth for the Indoco Jaya Raya website.
+This file is the visual and UX source of truth for the Indoko Jaya Raya website.
 
 Before creating or modifying any UI, read and follow this file.
 
@@ -288,6 +288,28 @@ Dark sections (hero, forest bands, footer): labels, footer headings, hero accent
 
 Unchanged: every other ivory or white section, the nav links, and forest or charcoal text. Lime text or lines on ivory or white are never used (about 1.3:1).
 
+## Card-green palette (requested by Chlaudya, Nov 4, 2026) — replaces forest + lime-forward
+
+Source: the PT Indoko Jaya Raya / APEL business card. Sampled greens: bright `#96f048`, mid `#6cc642`, card green `#42964e`, plus black and white. The deep forest `#123b2a` and the pale lime wash `#e6f5d0` are retired.
+
+Token mapping (change values in `globals.css` `@theme`/`:root`, keep token names so components don't change):
+| Token | Old | New | Use |
+|---|---|---|---|
+| `--color-lime` (buttons, primary CTA) | `#7afa52` | `#96f048` | fill; text `#17201b` (11.8:1). Hover `#6cc642` (text 7.8:1). 1px `#17201b` border stays |
+| `--color-forest` (dark sections, footer, hero curve, headings) | `#123b2a` | `#275e30` | deepened card green so white text passes (7.69:1) and bright-green accents pass (5.44:1). Never `#42964e` behind body text (white is only 3.68:1) |
+| `--color-leaf` / `--color-green` | `#1f5a3d` | `#2e6b38` | links, labels, icons on white |
+| `--color-card-green` (new) | — | `#42964e` | decorative bands, dividers, the card's diagonal stripes, large text ≥24px only with white |
+| `--color-lime-tint` (accents on dark) | `#c8e6a0` | `#96f048` | accent words, labels and footer headings on `#275e30` (5.44:1) |
+| `--color-lime-wash` (Why Choose Us band) | `#e6f5d0` | `#96f048` | solid card-bright band like the card; text `#17201b`, labels/numerals `#17201b`, hairlines `#17201b/20` |
+| `--color-ivory` (page base) | `#f5f3ea` | `#ffffff` | card is white; use `#f4f9ef` for alternate sections |
+
+Rules:
+- Never white text on `#96f048` or `#6cc642` (1.4 and 2.1:1). Dark text only.
+- Never green text on green. Green text only on white, at `#2e6b38`.
+- Focus ring: `#17201b` on light and bright green, `#96f048` on `#275e30`.
+- Hero photo scrim stays black; accent words become `#96f048`.
+- Optional card motif: one thin diagonal `#42964e` + black stripe at section corners (footer top, hero curve). Decorative, `aria-hidden`.
+
 # 5. COLOR RULES
 
 Use green intentionally.
@@ -412,7 +434,7 @@ Prefer:
 
 Over:
 
-> Welcome to PT Indoco Jaya Raya Official Company Website.
+> Welcome to PT Indoko Jaya Raya Official Company Website.
 
 Prefer:
 
@@ -586,7 +608,7 @@ Recommended order:
 01 Hero
 02 Company Introduction
 03 Commodity Showcase
-04 Why Partner With Indoco
+04 Why Partner With Indoko
 05 Indonesia → Global Markets
 06 Commodity Drying Service
 07 Sustainability / Community
@@ -605,7 +627,7 @@ The hero must communicate the company immediately.
 Recommended:
 
 ```text
-INDOCO JAYA RAYA
+INDOKO JAYA RAYA
 
 Rooted in Indonesia.
 Connected to the World.
@@ -853,7 +875,7 @@ unless ecommerce functionality is explicitly added later.
 
 ---
 
-# 24. WHY PARTNER WITH INDOCO
+# 24. WHY PARTNER WITH INDOKO
 
 Use four concise pillars:
 
@@ -1456,7 +1478,7 @@ Would an international buyer consider the interface professional and trustworthy
 
 ### Product
 
-Can users quickly understand what Indoco supplies?
+Can users quickly understand what Indoko supplies?
 
 ### Conversion
 

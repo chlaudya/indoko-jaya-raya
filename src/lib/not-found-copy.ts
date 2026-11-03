@@ -25,7 +25,7 @@ export const notFoundCopy = {
   },
 } as const
 
-/** Document title: "Halaman tidak ditemukan | Indoco Jaya Raya" (absolute; bypasses root template). */
+/** Document title: "Halaman tidak ditemukan | Indoko Jaya Raya" (absolute; bypasses root template). */
 export function notFoundDocumentTitle(locale: Locale): string {
-  return `${pickLocale(notFoundCopy.title, locale)} | Indoco Jaya Raya`
+  return `${pickLocale(notFoundCopy.title, locale)} | Indoko Jaya Raya`
 }
