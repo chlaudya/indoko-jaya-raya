@@ -89,6 +89,24 @@ export const product = defineType({
       description: "Rows with label / value / optional unit. Empty rows are hidden on the site.",
     }),
     defineField({
+      name: "referenceSpecTables",
+      title: "Acuan Umum reference tables",
+      type: "array",
+      description: "General industry reference ranges (Brief v2). Rendered with a disclaimer only while no confirmed spec rows exist.",
+      of: [
+        {
+          type: "object",
+          name: "referenceSpecTable",
+          fields: [
+            defineField({ name: "basis", type: "string", initialValue: "acuanUmum", readOnly: true }),
+            defineField({ name: "heading", title: "Heading (e.g. Kernel / In-shell)", type: "localeString" }),
+            defineField({ name: "rows", title: "Rows", type: "array", of: [{ type: "specRow" }] }),
+          ],
+          preview: { select: { title: "heading.id" }, prepare: ({ title }) => ({ title: title || "Acuan Umum" }) },
+        },
+      ],
+    }),
+    defineField({
       name: "packagingType",
       title: "Packaging type",
       type: "localeString",

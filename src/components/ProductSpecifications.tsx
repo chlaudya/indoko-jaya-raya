@@ -1,7 +1,7 @@
 import { pickLocale, type Locale } from "@/lib/i18n"
-import type { Product, SpecRow } from "@/lib/fixtures"
+import { ui, type Product, type SpecRow } from "@/lib/fixtures"
 
-function formatValueOnly(row: SpecRow, locale: Locale): string {
+function formatValueOnly(row: Pick<SpecRow, "value" | "min" | "max">, locale: Locale): string {
   const explicit = row.value ? pickLocale(row.value, locale) : ""
   if (explicit) return explicit
   if (typeof row.min === "number" && typeof row.max === "number") return `${row.min}–${row.max}`
@@ -10,61 +10,82 @@ function formatValueOnly(row: SpecRow, locale: Locale): string {
   return ""
 }
 
-/** True when at least one client-confirmed spec row has a displayable value. */
-export function hasConfirmedSpecs(product: Product, locale: Locale): boolean {
-  return product.specs.some((row) => {
-    if (row.confirmed !== true) return false
-    const label = pickLocale(row.label, locale).trim()
-    const value = formatValueOnly(row, locale).trim()
-    return Boolean(label && value)
-  })
+type Row = { label: string; value: string; unit: string; testMethod: string }
+type Table = { heading: string; rows: Row[] }
+
+function toRow(row: Pick<SpecRow, "label" | "value" | "unit" | "min" | "max" | "testMethod">, locale: Locale): Row {
+  return {
+    label: pickLocale(row.label, locale).trim(),
+    value: formatValueOnly(row, locale).trim(),
+    unit: row.unit ? pickLocale(row.unit, locale).trim() : "",
+    testMethod: row.testMethod ? pickLocale(row.testMethod, locale).trim() : "",
+  }
 }
 
-/** Commodity-sheet style spec table. Only client-confirmed rows with real data are shown.
- *  If none remain, returns null — including no outer section / section-y padding. */
+/**
+ * Spec section. Client-confirmed rows win; otherwise Brief v2 "Acuan Umum" reference tables render with a
+ * disclaimer. Neither → null (no section, no padding).
+ */
 export function ProductSpecifications({ product, locale, title }: { product: Product; locale: Locale; title: string }) {
-  const rows = product.specs
+  const confirmed = product.specs
     .filter((row) => row.confirmed === true)
-    .map((row) => ({
-      label: pickLocale(row.label, locale),
-      value: formatValueOnly(row, locale),
-      unit: row.unit ? pickLocale(row.unit, locale) : "",
-      testMethod: row.testMethod ? pickLocale(row.testMethod, locale).trim() : "",
-    }))
+    .map((row) => toRow(row, locale))
     .filter((row) => row.label && row.value)
 
-  if (rows.length === 0) return null
-  const hasUnitCol = rows.some((row) => row.unit)
-  const hasMethodCol = rows.some((row) => row.testMethod)
+  const isReference = confirmed.length === 0
+  const tables: Table[] = isReference
+    ? (product.referenceSpecTables ?? [])
+        .map((table) => ({
+          heading: table.heading ? pickLocale(table.heading, locale) : "",
+          rows: table.rows.map((row) => toRow(row, locale)).filter((row) => row.label && row.value),
+        }))
+        .filter((table) => table.rows.length > 0)
+    : [{ heading: "", rows: confirmed }]
 
-  const cols = [
-    "sm:grid-cols-[14rem_1fr]",
-    hasUnitCol && !hasMethodCol && "sm:grid-cols-[14rem_1fr_6rem]",
-    !hasUnitCol && hasMethodCol && "sm:grid-cols-[14rem_1fr_10rem]",
-    hasUnitCol && hasMethodCol && "sm:grid-cols-[14rem_1fr_6rem_10rem]",
-  ]
-    .filter(Boolean)
-    .pop()
+  if (tables.length === 0) return null
+  const valueHead = isReference ? pickLocale(ui.specReference, locale) : title
+  const note = isReference ? pickLocale(ui.acuanUmumNote, locale) : ""
 
   return (
-    <section className="bg-ivory">
+    <section className="bg-ivory" aria-labelledby="product-specs-title">
       <div className="site-wrap section-y">
         <div className="max-w-4xl">
-          <h2 className="display display-h2 text-forest">{title}</h2>
-          <dl className="mt-8 border-t border-charcoal/15">
-            {rows.map((row, index) => (
-              <div key={index} className={`grid gap-1 border-b border-charcoal/10 py-5 sm:gap-8 ${cols}`}>
-                <dt className="label text-muted!">{row.label}</dt>
-                <dd className="text-lg text-charcoal">
-                  {hasUnitCol ? row.value : row.unit ? `${row.value} ${row.unit}` : row.value}
-                </dd>
-                {hasUnitCol ? <dd className="text-sm text-muted sm:text-right">{row.unit}</dd> : null}
-                {hasMethodCol ? (
-                  <dd className="text-sm text-muted sm:text-right">{row.testMethod || "—"}</dd>
-                ) : null}
+          <h2 id="product-specs-title" className="display display-h2 text-forest">{title}</h2>
+          {note && (
+            <p className="mt-5 max-w-3xl border-l-2 border-green pl-4 text-[0.9375rem] leading-relaxed text-charcoal">{note}</p>
+          )}
+          {tables.map((table, ti) => {
+            const hasUnit = table.rows.some((row) => row.unit)
+            const hasMethod = table.rows.some((row) => row.testMethod)
+            const caption = table.heading || title
+            return (
+              <div key={ti} className={ti === 0 ? "mt-8" : "mt-12"}>
+                <table className="w-full border-collapse text-left">
+                  <caption className={table.heading ? "label mb-3 text-left" : "sr-only"}>{caption}</caption>
+                  <thead className="max-sm:sr-only">
+                    <tr className="border-y border-charcoal/15">
+                      <th scope="col" className="label py-3 pr-6 font-semibold sm:w-[16rem]">{pickLocale(ui.specParameter, locale)}</th>
+                      <th scope="col" className="label py-3 pr-6 font-semibold">{valueHead}</th>
+                      {hasUnit && <th scope="col" className="label py-3 pr-6 font-semibold">Unit</th>}
+                      {hasMethod && <th scope="col" className="label py-3 font-semibold">Metode uji</th>}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {table.rows.map((row, ri) => (
+                      <tr key={ri} className="border-b border-charcoal/10 max-sm:block max-sm:py-4 max-sm:first:border-t">
+                        <th scope="row" className="py-4 pr-6 align-top text-[0.9375rem] font-semibold text-charcoal max-sm:block max-sm:py-0">
+                          {row.label}
+                        </th>
+                        <td className="py-4 pr-6 align-top leading-relaxed text-charcoal max-sm:block max-sm:pt-1 max-sm:pb-0">{row.value}</td>
+                        {hasUnit && <td className="py-4 pr-6 align-top text-charcoal max-sm:block max-sm:pt-1 max-sm:pb-0">{row.unit}</td>}
+                        {hasMethod && <td className="py-4 align-top text-charcoal max-sm:block max-sm:pt-1 max-sm:pb-0">{row.testMethod}</td>}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-            ))}
-          </dl>
+            )
+          })}
         </div>
       </div>
     </section>

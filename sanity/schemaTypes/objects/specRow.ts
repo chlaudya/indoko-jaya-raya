@@ -51,6 +51,13 @@ export const specRow = defineType({
         "Off by default. Turn on only when the client supplied this row — unsourced fixture/placeholder specs stay hidden.",
     }),
     defineField({
+      name: "basis",
+      title: "Basis",
+      type: "string",
+      options: { list: [{ title: "Acuan Umum (general reference)", value: "acuanUmum" }, { title: "Confirmed (Indoko)", value: "confirmed" }] },
+      description: "acuanUmum = general industry reference range (shown with a disclaimer); confirmed = Indoko's own.",
+    }),
+    defineField({
       name: "source",
       title: "Source (optional)",
       type: "string",

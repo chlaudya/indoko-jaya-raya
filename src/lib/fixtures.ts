@@ -1,5 +1,6 @@
 import { pickLocale, type Locale } from "./i18n"
 import type { ImageKey } from "./images"
+import { acuanUmumBySlug, type ReferenceSpecTable } from "./acuan-umum"
 
 type LString = Partial<Record<Locale, string>>
 
@@ -92,6 +93,16 @@ export const ui = {
   searchAction: { id: "Cari", en: "Search" },
   noMatches: { id: "Tidak ada komoditi yang sesuai.", en: "No commodities match." },
   specifications: { id: "Spesifikasi", en: "Specifications" },
+  /** zh / vi / hi are drafts. */
+  acuanUmumNote: {
+    id: "Acuan Umum: rentang referensi umum industri, bukan spesifikasi Indoko yang terverifikasi. Hubungi kami untuk spesifikasi per lot.",
+    en: "General reference: typical industry ranges, not verified Indoko specifications. Contact us for per-lot specifications.",
+    zh: "通用参考：行业常见范围，并非经核实的 Indoko 规格。如需每批次规格，请联系我们。",
+    vi: "Tham chiếu chung: các khoảng giá trị phổ biến trong ngành, không phải thông số đã được Indoko xác minh. Liên hệ chúng tôi để nhận thông số theo từng lô.",
+    hi: "सामान्य संदर्भ: उद्योग में प्रचलित सामान्य सीमाएँ, Indoko के सत्यापित विनिर्देश नहीं। प्रति लॉट विनिर्देश के लिए हमसे संपर्क करें।",
+  },
+  specParameter: { id: "Parameter", en: "Parameter", zh: "参数", vi: "Thông số", hi: "पैरामीटर" },
+  specReference: { id: "Acuan umum", en: "General reference", zh: "通用参考", vi: "Tham chiếu chung", hi: "सामान्य संदर्भ" },
   overview: { id: "Ikhtisar produk", en: "Product overview" },
   related: { id: "Komoditi lain", en: "Other commodities" },
   applyWhatsApp: { id: "Lamar via WhatsApp", en: "Apply via WhatsApp" },
@@ -256,6 +267,8 @@ export type Product = {
   availableDocuments?: string[]
   /** Public URL or path to a PDF once the client supplies one. */
   specSheetUrl?: string
+  /** Brief v2 "Acuan Umum" general reference tables (basis "acuanUmum"). Shown only while no confirmed specs exist. */
+  referenceSpecTables?: ReferenceSpecTable[]
   availabilityStatus?: AvailabilityStatus
   /** Per-locale publish flags; when set, false hides the product for that locale. */
   publishLocales?: Partial<Record<Locale, boolean>>
@@ -407,6 +420,11 @@ export const products: Product[] = [
     ],
   },
 ]
+
+// Brief v2 Acuan Umum tables (local CMS fallback; Sanity field: product.referenceSpecTables).
+for (const product of products) {
+  if (!product.referenceSpecTables && acuanUmumBySlug[product.slug]) product.referenceSpecTables = acuanUmumBySlug[product.slug]
+}
 
 export const pages = {
   home: {
