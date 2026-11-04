@@ -93,16 +93,23 @@ export const ui = {
   searchAction: { id: "Cari", en: "Search" },
   noMatches: { id: "Tidak ada komoditi yang sesuai.", en: "No commodities match." },
   specifications: { id: "Spesifikasi", en: "Specifications" },
-  /** zh / vi / hi are drafts. */
-  acuanUmumNote: {
-    id: "Acuan Umum: rentang referensi umum industri, bukan spesifikasi Indoko yang terverifikasi. Hubungi kami untuk spesifikasi per lot.",
-    en: "General reference: typical industry ranges, not verified Indoko specifications. Contact us for per-lot specifications.",
-    zh: "通用参考：行业常见范围，并非经核实的 Indoko 规格。如需每批次规格，请联系我们。",
-    vi: "Tham chiếu chung: các khoảng giá trị phổ biến trong ngành, không phải thông số đã được Indoko xác minh. Liên hệ chúng tôi để nhận thông số theo từng lô.",
-    hi: "सामान्य संदर्भ: उद्योग में प्रचलित सामान्य सीमाएँ, Indoko के सत्यापित विनिर्देश नहीं। प्रति लॉट विनिर्देश के लिए हमसे संपर्क करें।",
+  /** Acuan Umum Pasar (design doc §8). zh / vi / hi are drafts translated from en. */
+  acuanTitle: { id: "Acuan Umum Pasar", en: "General Market Reference", zh: "通用市场参考", vi: "Tham chiếu thị trường chung", hi: "सामान्य बाज़ार संदर्भ" },
+  acuanTag: { id: "Acuan", en: "Reference", zh: "参考", vi: "Tham chiếu", hi: "संदर्भ" },
+  acuanNote: {
+    id: "Rentang umum pasar sebagai acuan, bukan spesifikasi Indoko. Spesifikasi aktual dan COA per pengiriman tersedia atas permintaan.",
+    en: "Typical market ranges for reference, not Indoko's specification. Actual specifications and a COA for each shipment are available on request.",
+    zh: "典型市场范围，仅供参考，并非 Indoko 的规格。每批货物的实际规格和 COA 可应要求提供。",
+    vi: "Các khoảng giá trị điển hình trên thị trường để tham khảo, không phải thông số của Indoko. Thông số thực tế và COA cho từng lô hàng được cung cấp theo yêu cầu.",
+    hi: "संदर्भ के लिए सामान्य बाज़ार सीमाएँ, Indoko का विनिर्देश नहीं। प्रत्येक शिपमेंट के वास्तविक विनिर्देश और COA अनुरोध पर उपलब्ध हैं।",
   },
+  acuanCta: { id: "Minta Spesifikasi Aktual & COA", en: "Request Actual Specs & COA", zh: "索取实际规格和 COA", vi: "Yêu cầu thông số thực tế & COA", hi: "वास्तविक विनिर्देश और COA का अनुरोध करें" },
+  acuanStandards: { id: "Acuan:", en: "Reference standards:", zh: "参考标准：", vi: "Tiêu chuẩn tham chiếu:", hi: "संदर्भ मानक:" },
+  indokoSpecs: { id: "Spesifikasi Indoko", en: "Indoko Specifications", zh: "Indoko 规格", vi: "Thông số Indoko", hi: "Indoko विनिर्देश" },
   specParameter: { id: "Parameter", en: "Parameter", zh: "参数", vi: "Thông số", hi: "पैरामीटर" },
-  specReference: { id: "Acuan umum", en: "General reference", zh: "通用参考", vi: "Tham chiếu chung", hi: "सामान्य संदर्भ" },
+  specRange: { id: "Rentang", en: "Range", zh: "范围", vi: "Khoảng", hi: "सीमा" },
+  specUnit: { id: "Satuan", en: "Unit", zh: "单位", vi: "Đơn vị", hi: "इकाई" },
+  specValue: { id: "Nilai", en: "Value", zh: "数值", vi: "Giá trị", hi: "मान" },
   overview: { id: "Ikhtisar produk", en: "Product overview" },
   related: { id: "Komoditi lain", en: "Other commodities" },
   applyWhatsApp: { id: "Lamar via WhatsApp", en: "Apply via WhatsApp" },
@@ -267,7 +274,7 @@ export type Product = {
   availableDocuments?: string[]
   /** Public URL or path to a PDF once the client supplies one. */
   specSheetUrl?: string
-  /** Brief v2 "Acuan Umum" general reference tables (basis "acuanUmum"). Shown only while no confirmed specs exist. */
+  /** Brief v2 "Acuan Umum Pasar" reference tables (rows source "reference"). Shown only while no confirmed specs exist. */
   referenceSpecTables?: ReferenceSpecTable[]
   availabilityStatus?: AvailabilityStatus
   /** Per-locale publish flags; when set, false hides the product for that locale. */

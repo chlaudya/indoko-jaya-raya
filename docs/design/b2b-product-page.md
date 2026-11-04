@@ -68,3 +68,14 @@ States:
 - Harvest strip readable without colour. Accordion uses native `<details>/<summary>`.
 - Card images: `sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"`; gallery below the fold lazy.
 - Test at 390, 768, 1440 in id and zh (CJK wraps) and hi (Devanagari line height).
+
+## 8. "Acuan Umum Pasar" reference tables (Chlaudya, Nov 4, 2026)
+Used until the client sends Indoko's own numbers. Rows carry `source: "reference"`; once confirmed rows exist the block becomes "Spesifikasi Indoko" and the note and tag disappear.
+- Heading: `display-h2` "Acuan Umum Pasar" (en "General Market Reference") + tag "Acuan" (chip style from section 2, `border-hairline text-muted`).
+- Note directly under the heading, `text-muted`, max ~70ch: "Rentang umum pasar sebagai acuan, bukan spesifikasi Indoko. Spesifikasi aktual dan COA per pengiriman tersedia atas permintaan." / en "Typical market ranges for reference, not Indoko's specification. Actual specifications and a COA for each shipment are available on request."
+- Two-form products (Mete: RCN (gelondong) / Kernel; Kacang Tanah: Kernel / In-shell): tabs above ONE table. Use the `role="tablist"` pattern with arrow keys; active tab `#17201b` text with 2px `#2e6b38` underline, inactive `text-muted`; ≥44px tall. Each tab shows its trade name and "HS acuan 0801.31" style meta line.
+- Table: real `<table>` + `<caption class="sr-only">`; columns Parameter / Rentang / Satuan; rows `border-b border-hairline`, 16px vertical padding; numbers `tabular-nums`. Below 640px each row stacks (parameter as label above value + unit).
+- Aflatoxin row: value "Diuji per lot, COA tersedia" (en "Tested per lot, COA available"), no numbers.
+- Kopi: secondary small table "Mutu SNI 01-2907-2008" (Mutu 1–6 by defect value per 300 g) under the main table, `text-sm`; the defect row links to it with an in-page anchor.
+- Under the table: lime primary button "Minta Spesifikasi Aktual & COA" / en "Request Actual Specs & COA" (WhatsApp prefill with product + form), then footnote `text-xs text-muted`: "Acuan: SNI, TCVN, DEAS, IS, MS, ISO." No links to listing sites.
+- Never show reference ranges on cards, in meta descriptions or in JSON-LD.

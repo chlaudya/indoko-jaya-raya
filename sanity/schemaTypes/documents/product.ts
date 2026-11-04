@@ -90,7 +90,7 @@ export const product = defineType({
     }),
     defineField({
       name: "referenceSpecTables",
-      title: "Acuan Umum reference tables",
+      title: "Acuan Umum Pasar reference tables",
       type: "array",
       description: "General industry reference ranges (Brief v2). Rendered with a disclaimer only while no confirmed spec rows exist.",
       of: [
@@ -98,9 +98,33 @@ export const product = defineType({
           type: "object",
           name: "referenceSpecTable",
           fields: [
-            defineField({ name: "basis", type: "string", initialValue: "acuanUmum", readOnly: true }),
-            defineField({ name: "heading", title: "Heading (e.g. Kernel / In-shell)", type: "localeString" }),
-            defineField({ name: "rows", title: "Rows", type: "array", of: [{ type: "specRow" }] }),
+            defineField({ name: "source", type: "string", initialValue: "reference", readOnly: true }),
+            defineField({ name: "key", title: "Form key", type: "string" }),
+            defineField({ name: "heading", title: "Trade name / tab label (e.g. RCN (gelondong), Kernel)", type: "localeString" }),
+            defineField({ name: "meta", title: "Tab meta line (e.g. HS acuan 0801.31)", type: "localeString" }),
+            defineField({ name: "rows", title: "Rows (label / value / unit, localized id + en)", type: "array", of: [{ type: "specRow" }] }),
+            defineField({ name: "standards", title: "Official standards cited (footnote, no links)", type: "array", of: [{ type: "string" }] }),
+            defineField({
+              name: "subTables",
+              title: "Secondary tables (e.g. Kopi SNI grade table)",
+              type: "array",
+              of: [
+                {
+                  type: "object",
+                  name: "referenceSubTable",
+                  fields: [
+                    defineField({ name: "anchor", type: "string" }),
+                    defineField({ name: "caption", type: "localeString" }),
+                    defineField({ name: "columns", type: "array", of: [{ type: "localeString" }] }),
+                    defineField({
+                      name: "rows",
+                      type: "array",
+                      of: [{ type: "object", name: "subRow", fields: [defineField({ name: "label", type: "localeString" }), defineField({ name: "value", type: "localeString" })] }],
+                    }),
+                  ],
+                },
+              ],
+            }),
           ],
           preview: { select: { title: "heading.id" }, prepare: ({ title }) => ({ title: title || "Acuan Umum" }) },
         },

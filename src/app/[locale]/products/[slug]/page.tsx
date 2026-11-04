@@ -119,7 +119,7 @@ export default async function ProductDetailPage({
         </div>
       </section>
 
-      <ProductSpecifications product={product} locale={locale} title={pickLocale(ui.specifications, locale)} />
+      <ProductSpecifications product={product} locale={locale} productName={name} />
 
       {related.length > 0 && (
         <section className="bg-white">
