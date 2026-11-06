@@ -1,5 +1,6 @@
 import { pickLocale, type Locale } from "./i18n"
 import type { ImageKey } from "./images"
+import { acuanDisplayBySlug } from "./acuan-display"
 import { acuanUmumBySlug, type ReferenceSpecTable } from "./acuan-umum"
 
 type LString = Partial<Record<Locale, string>>
@@ -276,6 +277,10 @@ export type Product = {
   specSheetUrl?: string
   /** Brief v2 "Acuan Umum Pasar" reference tables (rows source "reference"). Shown only while no confirmed specs exist. */
   referenceSpecTables?: ReferenceSpecTable[]
+  /** Short acuan ranges for cards and the product hero. Market reference, not an Indoko assay. */
+  displayChips?: LString[]
+  /** Meta description built from the same acuan ranges. */
+  metaDescription?: LString
   availabilityStatus?: AvailabilityStatus
   /** Per-locale publish flags; when set, false hides the product for that locale. */
   publishLocales?: Partial<Record<Locale, boolean>>
@@ -299,7 +304,7 @@ export const products: Product[] = [
     category: "kacang-kacangan",
     featured: true,
     name: { id: "Kacang Mete", en: "Cashew Nut" },
-    shortBlurb: { id: "Kacang mete kualitas ekspor.", en: "Export-grade cashew nuts." },
+    shortBlurb: { id: "Kacang mete kualitas ekspor.", en: "Export grade cashew nuts." },
     description: { id: "Komoditi kacang mete untuk mitra B2B.", en: "Cashew commodity for B2B partners." },
     specs: [
       { label: { id: "Grade", en: "Grade" }, value: { id: "Premium", en: "Premium" } },
@@ -428,9 +433,16 @@ export const products: Product[] = [
   },
 ]
 
-// Brief v2 Acuan Umum tables (local CMS fallback; Sanity field: product.referenceSpecTables).
+// Brief v2 Acuan Umum tables and buyer copy (local CMS fallback).
 for (const product of products) {
   if (!product.referenceSpecTables && acuanUmumBySlug[product.slug]) product.referenceSpecTables = acuanUmumBySlug[product.slug]
+  const display = acuanDisplayBySlug[product.slug]
+  if (!display) continue
+  product.internationalTradeName = display.tradeName
+  product.shortBlurb = display.card
+  product.description = display.description
+  product.displayChips = display.chips
+  product.metaDescription = display.meta
 }
 
 export const pages = {
@@ -625,8 +637,8 @@ export const redesign = {
       hi: "राष्ट्रीय और अंतरराष्ट्रीय बाज़ारों के लिए स्थानीय कृषि व्यवसाय।",
     } as LString,
     /**
-     * Phrase inside heroTitle that is emphasised: lime-tint (--color-lime-tint) in every locale, italic in Latin
-     * scripts (id/en/vi), upright in zh/hi. Must match heroTitle exactly per locale.
+     * Phrase inside heroTitle that is emphasised with logo lime in every locale.
+     * Must match heroTitle exactly per locale.
      */
     heroTitleEmphasis: {
       id: "nasional dan internasional.",
@@ -738,6 +750,299 @@ export const redesign = {
   },
 }
 
+export type HomeFaqItem = { question: LString; answer: LString }
+export type HomeProcessItem = { title: LString; body: LString }
+
+/**
+ * Conversion-focused Home copy. Every claim is backed by the client brief or existing
+ * product/service data. zh / vi / hi remain draft translations pending native review.
+ */
+export const homeLanding = {
+  heroTitle: {
+    id: "Agrobisnis lokal untuk pasar nasional dan internasional.",
+    en: "Local agribusiness for national and international markets.",
+    zh: "立足本土的农业企业，面向国内与国际市场。",
+    vi: "Doanh nghiệp nông nghiệp địa phương cho thị trường trong nước và quốc tế.",
+    hi: "राष्ट्रीय और अंतरराष्ट्रीय बाज़ारों के लिए स्थानीय कृषि व्यवसाय।",
+  } as LString,
+  heroEmphasis: {
+    id: "nasional dan internasional.",
+    en: "national and international markets.",
+    zh: "国内与国际",
+    vi: "trong nước và quốc tế",
+    hi: "राष्ट्रीय और अंतरराष्ट्रीय",
+  } as LString,
+  heroLead: {
+    id: "Komoditi pertanian Indonesia untuk pembeli dan mitra di pasar nasional dan internasional.",
+    en: "Indonesian agricultural commodities for buyers and partners in national and international markets.",
+    zh: "为国内与国际市场的买家和合作伙伴提供印度尼西亚农产品。",
+    vi: "Nông sản Indonesia cho người mua và đối tác tại thị trường trong nước và quốc tế.",
+    hi: "राष्ट्रीय और अंतरराष्ट्रीय बाज़ारों के ख़रीदारों और साझेदारों के लिए इंडोनेशियाई कृषि जिंसें।",
+  } as LString,
+  primaryCta: {
+    id: "Hubungi kami",
+    en: "Contact us",
+    zh: "联系我们",
+    vi: "Liên hệ chúng tôi",
+    hi: "हमसे संपर्क करें",
+  } as LString,
+  secondaryCta: {
+    id: "Jelajahi komoditi",
+    en: "Explore commodities",
+    zh: "浏览农产品",
+    vi: "Khám phá nông sản",
+    hi: "जिंसें देखें",
+  } as LString,
+  proofLabel: {
+    id: "Dari sumber hingga pengiriman",
+    en: "From source to shipment",
+    zh: "从产地到发货",
+    vi: "Từ nguồn hàng đến giao hàng",
+    hi: "स्रोत से शिपमेंट तक",
+  } as LString,
+  proofItems: [
+    {
+      id: "Disortir sebelum dikirim",
+      en: "Sorted before shipping",
+      zh: "发货前分拣",
+      vi: "Phân loại trước khi giao",
+      hi: "भेजने से पहले छँटाई",
+    },
+    {
+      id: "Bekerja dengan petani lokal",
+      en: "Sourced with local farmers",
+      zh: "与本地农户合作采购",
+      vi: "Thu mua cùng nông dân địa phương",
+      hi: "स्थानीय किसानों के साथ स्रोत",
+    },
+    {
+      id: "Pengiriman dari gudang ke tujuan",
+      en: "Delivery arranged from our warehouse",
+      zh: "从仓库安排配送",
+      vi: "Sắp xếp giao hàng từ kho",
+      hi: "गोदाम से डिलीवरी की व्यवस्था",
+    },
+  ] as LString[],
+  tagline: {
+    id: "Hasil bumi Indonesia, disiapkan dengan cermat untuk pembeli di dalam dan luar negeri.",
+    en: "Indonesian produce, prepared with care for buyers at home and abroad.",
+    zh: "用心准备印度尼西亚农产品，服务国内与海外买家。",
+    vi: "Nông sản Indonesia, được chuẩn bị kỹ lưỡng cho người mua trong nước và quốc tế.",
+    hi: "इंडोनेशियाई उपज, देश और विदेश के खरीदारों के लिए सावधानी से तैयार।",
+  } as LString,
+  commoditiesLabel: {
+    id: "Pilihan komoditi",
+    en: "Selected commodities",
+    zh: "精选农产品",
+    vi: "Nông sản chọn lọc",
+    hi: "चुनी हुई जिंसें",
+  } as LString,
+  commoditiesTitle: {
+    id: "Mulai dari komoditi yang Anda butuhkan.",
+    en: "Start with the commodity you need.",
+    zh: "从您需要的农产品开始。",
+    vi: "Bắt đầu với nông sản bạn cần.",
+    hi: "अपनी ज़रूरत की जिंस से शुरुआत करें।",
+  } as LString,
+  commoditiesBody: {
+    id: "Tinjau produk, spesifikasi acuan, dan informasi yang tersedia sebelum menghubungi tim kami.",
+    en: "Review products, reference specifications and available information before contacting our team.",
+    zh: "联系团队前，请先查看产品、参考规格和现有信息。",
+    vi: "Xem sản phẩm, thông số tham khảo và thông tin hiện có trước khi liên hệ đội ngũ.",
+    hi: "हमारी टीम से संपर्क करने से पहले उत्पाद, संदर्भ विनिर्देश और उपलब्ध जानकारी देखें।",
+  } as LString,
+  benefitsLabel: {
+    id: "Mengapa bermitra dengan kami",
+    en: "Why partner with us",
+    zh: "为何与我们合作",
+    vi: "Vì sao hợp tác với chúng tôi",
+    hi: "हमारे साथ साझेदारी क्यों",
+  } as LString,
+  benefitsTitle: {
+    id: "Penanganan yang jelas untuk setiap kebutuhan pembeli.",
+    en: "Clear handling for every buyer requirement.",
+    zh: "清晰处理每一项买家需求。",
+    vi: "Quy trình rõ ràng cho từng yêu cầu của người mua.",
+    hi: "हर खरीदार की ज़रूरत के लिए स्पष्ट व्यवस्था।",
+  } as LString,
+  processLabel: {
+    id: "Cara kerja",
+    en: "How it works",
+    zh: "合作流程",
+    vi: "Cách thức hợp tác",
+    hi: "प्रक्रिया",
+  } as LString,
+  processTitle: {
+    id: "Dari pencarian produk hingga konfirmasi pasokan.",
+    en: "From product search to supply confirmation.",
+    zh: "从产品查找到供应确认。",
+    vi: "Từ tìm sản phẩm đến xác nhận nguồn cung.",
+    hi: "उत्पाद खोज से आपूर्ति की पुष्टि तक।",
+  } as LString,
+  process: [
+    {
+      title: {
+        id: "Jelajahi komoditi",
+        en: "Browse commodities",
+        zh: "浏览农产品",
+        vi: "Xem nông sản",
+        hi: "जिंसें देखें",
+      },
+      body: {
+        id: "Tinjau produk dan spesifikasi acuan yang tersedia.",
+        en: "Review products and the available reference specifications.",
+        zh: "查看产品及现有参考规格。",
+        vi: "Xem sản phẩm và các thông số tham khảo hiện có.",
+        hi: "उत्पाद और उपलब्ध संदर्भ विनिर्देश देखें।",
+      },
+    },
+    {
+      title: {
+        id: "Bagikan kebutuhan",
+        en: "Share your requirements",
+        zh: "说明您的需求",
+        vi: "Chia sẻ nhu cầu",
+        hi: "अपनी ज़रूरत साझा करें",
+      },
+      body: {
+        id: "Sampaikan komoditi, perkiraan volume, kebutuhan kemasan, dan tujuan melalui WhatsApp.",
+        en: "Send the commodity, estimated volume, packaging requirement and destination through WhatsApp.",
+        zh: "通过 WhatsApp 提供农产品、预估数量、包装需求和目的地。",
+        vi: "Gửi loại nông sản, khối lượng dự kiến, yêu cầu đóng gói và điểm đến qua WhatsApp.",
+        hi: "WhatsApp पर जिंस, अनुमानित मात्रा, पैकेजिंग की ज़रूरत और गंतव्य भेजें।",
+      },
+    },
+    {
+      title: {
+        id: "Konfirmasi pasokan",
+        en: "Confirm supply details",
+        zh: "确认供应详情",
+        vi: "Xác nhận chi tiết nguồn cung",
+        hi: "आपूर्ति विवरण की पुष्टि करें",
+      },
+      body: {
+        id: "Tim kami mengonfirmasi spesifikasi terkini, ketersediaan, dan rincian pengiriman.",
+        en: "Our team confirms current specifications, availability and shipment details.",
+        zh: "我们的团队确认当前规格、供应情况和运输详情。",
+        vi: "Đội ngũ xác nhận thông số hiện tại, tình trạng cung ứng và chi tiết giao hàng.",
+        hi: "हमारी टीम मौजूदा विनिर्देश, उपलब्धता और शिपमेंट विवरण की पुष्टि करती है।",
+      },
+    },
+  ] as HomeProcessItem[],
+  faqLabel: {
+    id: "Pertanyaan pembeli",
+    en: "Buyer questions",
+    zh: "买家常见问题",
+    vi: "Câu hỏi của người mua",
+    hi: "खरीदारों के प्रश्न",
+  } as LString,
+  faqTitle: {
+    id: "Informasi sebelum Anda mengirim inquiry.",
+    en: "What to know before you inquire.",
+    zh: "询价前需要了解的信息。",
+    vi: "Thông tin cần biết trước khi gửi yêu cầu.",
+    hi: "पूछताछ से पहले क्या जानें।",
+  } as LString,
+  faqs: [
+    {
+      question: {
+        id: "Komoditi apa yang tersedia?",
+        en: "Which commodities are available?",
+        zh: "目前有哪些农产品？",
+        vi: "Hiện có những nông sản nào?",
+        hi: "कौन सी जिंसें उपलब्ध हैं?",
+      },
+      answer: {
+        id: "Katalog kami mencakup kacang mete, asam jawa, kacang tanah, kacang hijau, porang, jagung pipil, kopi, dan cengkeh. Hubungi tim untuk ketersediaan terkini.",
+        en: "Our catalog includes cashew, tamarind, peanuts, mung beans, porang, shelled corn, coffee and cloves. Contact the team for current availability.",
+        zh: "我们的目录包括腰果、罗望子、花生、绿豆、魔芋、玉米粒、咖啡和丁香。请联系团队确认当前供应情况。",
+        vi: "Danh mục gồm hạt điều, me, đậu phộng, đậu xanh, porang, ngô tách hạt, cà phê và đinh hương. Hãy liên hệ đội ngũ để xác nhận tình trạng hiện tại.",
+        hi: "हमारे कैटलॉग में काजू, इमली, मूंगफली, मूंग, पोरंग, छिला मक्का, कॉफ़ी और लौंग शामिल हैं। मौजूदा उपलब्धता के लिए टीम से संपर्क करें।",
+      },
+    },
+    {
+      question: {
+        id: "Informasi apa yang diperlukan untuk meminta penawaran?",
+        en: "What information should I send for a quote?",
+        zh: "询价时需要提供哪些信息？",
+        vi: "Cần gửi thông tin gì để nhận báo giá?",
+        hi: "कोट के लिए कौन सी जानकारी भेजनी चाहिए?",
+      },
+      answer: {
+        id: "Sampaikan nama komoditi, perkiraan volume, kebutuhan kemasan, dan tujuan pengiriman. Tim kami akan menindaklanjuti melalui WhatsApp.",
+        en: "Send the commodity name, estimated volume, packaging requirement and delivery destination. Our team will follow up through WhatsApp.",
+        zh: "请提供农产品名称、预估数量、包装需求和交付目的地。我们的团队会通过 WhatsApp 跟进。",
+        vi: "Gửi tên nông sản, khối lượng dự kiến, yêu cầu đóng gói và điểm giao hàng. Đội ngũ sẽ phản hồi qua WhatsApp.",
+        hi: "जिंस का नाम, अनुमानित मात्रा, पैकेजिंग की ज़रूरत और डिलीवरी गंतव्य भेजें। हमारी टीम WhatsApp पर आगे संपर्क करेगी।",
+      },
+    },
+    {
+      question: {
+        id: "Apakah spesifikasi dan COA tersedia?",
+        en: "Are specifications and a COA available?",
+        zh: "是否提供规格和 COA？",
+        vi: "Có thông số và COA không?",
+        hi: "क्या विनिर्देश और COA उपलब्ध हैं?",
+      },
+      answer: {
+        id: "Halaman produk menampilkan spesifikasi acuan bila tersedia. Mintalah spesifikasi aktual dan COA untuk setiap pengiriman kepada tim kami.",
+        en: "Product pages show reference specifications where available. Ask our team for actual specifications and a COA for each shipment.",
+        zh: "产品页面会在适用时显示参考规格。请向团队索取每批货物的实际规格和 COA。",
+        vi: "Trang sản phẩm hiển thị thông số tham khảo khi có. Hãy yêu cầu đội ngũ cung cấp thông số thực tế và COA cho từng lô hàng.",
+        hi: "जहाँ उपलब्ध हों, उत्पाद पेज संदर्भ विनिर्देश दिखाते हैं। हर शिपमेंट के वास्तविक विनिर्देश और COA के लिए हमारी टीम से पूछें।",
+      },
+    },
+    {
+      question: {
+        id: "Bagaimana ketersediaan produk dikonfirmasi?",
+        en: "How is product availability confirmed?",
+        zh: "如何确认产品供应情况？",
+        vi: "Tình trạng sản phẩm được xác nhận thế nào?",
+        hi: "उत्पाद उपलब्धता की पुष्टि कैसे होती है?",
+      },
+      answer: {
+        id: "Ketersediaan dapat berubah menurut komoditi dan waktu inquiry. Tim kami mengonfirmasi kondisi terkini setelah menerima kebutuhan Anda.",
+        en: "Availability can vary by commodity and inquiry date. Our team confirms the current position after receiving your requirements.",
+        zh: "供应情况会因农产品和询价时间而异。收到您的需求后，团队会确认当前情况。",
+        vi: "Tình trạng có thể thay đổi theo nông sản và thời điểm gửi yêu cầu. Đội ngũ xác nhận thông tin hiện tại sau khi nhận nhu cầu.",
+        hi: "उपलब्धता जिंस और पूछताछ की तारीख के अनुसार बदल सकती है। आपकी ज़रूरत मिलने के बाद टीम मौजूदा स्थिति की पुष्टि करती है।",
+      },
+    },
+    {
+      question: {
+        id: "Pasar mana yang dilayani?",
+        en: "Which markets do you serve?",
+        zh: "你们服务哪些市场？",
+        vi: "Công ty phục vụ những thị trường nào?",
+        hi: "आप किन बाज़ारों को सेवा देते हैं?",
+      },
+      answer: {
+        id: "Indoko melayani pembeli dan mitra di pasar nasional dan internasional. Rincian pengiriman dikonfirmasi untuk setiap inquiry.",
+        en: "Indoko serves buyers and partners in national and international markets. Shipment details are confirmed for each inquiry.",
+        zh: "Indoko 服务国内和国际市场的买家与合作伙伴。每次询价都会确认运输详情。",
+        vi: "Indoko phục vụ người mua và đối tác tại thị trường trong nước và quốc tế. Chi tiết giao hàng được xác nhận cho từng yêu cầu.",
+        hi: "Indoko राष्ट्रीय और अंतरराष्ट्रीय बाज़ारों में खरीदारों और साझेदारों को सेवा देता है। हर पूछताछ के लिए शिपमेंट विवरण की पुष्टि की जाती है।",
+      },
+    },
+    {
+      question: {
+        id: "Apakah Indoko menyediakan jasa penjemuran?",
+        en: "Does Indoko provide commodity drying?",
+        zh: "Indoko 是否提供农产品晾晒服务？",
+        vi: "Indoko có cung cấp dịch vụ phơi nông sản không?",
+        hi: "क्या Indoko जिंस सुखाने की सेवा देता है?",
+      },
+      answer: {
+        id: "Ya. Indoko menyediakan jasa penjemuran komoditi untuk menjaga kualitas hasil panen sebelum distribusi. Hubungi tim untuk proses dan jadwal terkini.",
+        en: "Yes. Indoko provides commodity drying to preserve harvest quality before distribution. Contact the team for the current process and schedule.",
+        zh: "是的。Indoko 提供农产品晾晒服务，以在配送前保持收获品质。请联系团队了解当前流程和安排。",
+        vi: "Có. Indoko cung cấp dịch vụ phơi nông sản để giữ chất lượng mùa vụ trước khi phân phối. Hãy liên hệ đội ngũ về quy trình và lịch hiện tại.",
+        hi: "हाँ। Indoko वितरण से पहले फसल की गुणवत्ता बनाए रखने के लिए जिंस सुखाने की सेवा देता है। मौजूदा प्रक्रिया और समय के लिए टीम से संपर्क करें।",
+      },
+    },
+  ] as HomeFaqItem[],
+} as const
+
 /**
  * Trust stats (CMS: home.stats[]). Empty: no confirmed client numbers yet, and none may be invented. Display rule:
  * every filled entry (value + label) shows and the row re-centres; with none the row is hidden.
@@ -769,18 +1074,18 @@ export const whyChoose: TrustItem[] = [
   {
     icon: "price",
     title: {
-      id: "Harga Tangan Pertama",
-      en: "First-hand prices",
-      zh: "源头直供价格",
-      vi: "Giá tận gốc",
-      hi: "सीधे स्रोत से दाम",
+      id: "Sumber lokal langsung",
+      en: "Direct local sourcing",
+      zh: "本地直接采购",
+      vi: "Thu mua trực tiếp tại địa phương",
+      hi: "स्थानीय स्रोत से सीधी खरीद",
     },
     body: {
-      id: "Kami bermitra langsung dengan petani lokal tanpa rantai perantara, sehingga harga tetap bersaing. Penawaran disesuaikan dengan volume dan spesifikasi pesanan Anda.",
-      en: "We partner directly with local farmers with no chain of middlemen, so prices stay competitive. Offers are tailored to the volume and specifications of your order.",
-      zh: "我们直接与本地农户合作，没有中间商环节，因此价格始终具有竞争力。报价将根据您订单的数量和规格量身制定。",
-      vi: "Chúng tôi hợp tác trực tiếp với nông dân địa phương, không qua chuỗi trung gian, nên giá luôn cạnh tranh. Báo giá được điều chỉnh theo khối lượng và quy cách đơn hàng của bạn.",
-      hi: "हम बिना बिचौलियों की शृंखला के सीधे स्थानीय किसानों के साथ साझेदारी करते हैं, इसलिए दाम प्रतिस्पर्धी बने रहते हैं। प्रस्ताव आपके ऑर्डर की मात्रा और विनिर्देशों के अनुसार तय किया जाता है।",
+      id: "Kami bekerja langsung dengan petani lokal dan menyesuaikan setiap inquiry dengan volume serta spesifikasi yang diminta.",
+      en: "We work directly with local farmers and tailor each inquiry to the requested volume and specifications.",
+      zh: "我们直接与本地农户合作，并根据所需数量和规格处理每次询价。",
+      vi: "Chúng tôi làm việc trực tiếp với nông dân địa phương và xử lý từng yêu cầu theo khối lượng cùng quy cách cần thiết.",
+      hi: "हम स्थानीय किसानों के साथ सीधे काम करते हैं और हर पूछताछ को माँगी गई मात्रा और विनिर्देश के अनुसार देखते हैं।",
     },
   },
   {

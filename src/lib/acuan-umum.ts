@@ -47,6 +47,7 @@ const hs = (code: string, note = ""): ReferenceSpecRow =>
 const aflatoxin = (): ReferenceSpecRow => r("Aflatoksin", "Aflatoxin", "Diuji per lot, COA tersedia", "Tested per lot, COA available")
 
 export const KOPI_GRADE_ANCHOR = "kopi-mutu-sni"
+export const JAGUNG_SNI_ANCHOR = "jagung-sni-pangan"
 
 /** Brief v2 (af161036…pdf) §5, keyed by product slug. CMS: product.referenceSpecTables (same shape). */
 export const acuanUmumBySlug: Record<string, ReferenceSpecTable[]> = {
@@ -216,7 +217,29 @@ export const acuanUmumBySlug: Record<string, ReferenceSpecTable[]> = {
         r("Protein", "Protein", "Sekitar 8–10", "About 8–10", "%"),
         r("Berat uji (test weight)", "Test weight", "Min. sekitar 72 kg/hl (sekitar 700–750 g/l)", "Min. about 72 kg/hl (about 700–750 g/l)"),
         r("Peruntukan", "Use", "Pakan (feed grade) atau pangan (food grade)", "Feed grade or food grade"),
+        r("Kelas SNI pangan", "SNI food grades", "Lihat tabel SNI 8926:2020 di bawah", "See the SNI 8926:2020 table below", undefined, JAGUNG_SNI_ANCHOR),
         r("Kemasan", "Packing", "Karung PP 25 / 50 kg atau curah (bulk)", "PP bags 25 / 50 kg or bulk"),
+      ],
+      subTables: [
+        {
+          anchor: JAGUNG_SNI_ANCHOR,
+          caption: {
+            id: "SNI 8926:2020 jagung pipil kering untuk pangan (acuan standar, bukan hasil uji Indoko)",
+            en: "SNI 8926:2020 dried shelled corn for food (standard reference, not an Indoko assay)",
+          },
+          columns: [
+            { id: "Komponen mutu", en: "Quality component" },
+            { id: "Premium / Medium I / Medium II", en: "Premium / Medium I / Medium II" },
+          ],
+          rows: [
+            [{ id: "Kadar air (maks.)", en: "Moisture (max.)" }, { id: "14% / 14,5% / 15%", en: "14% / 14.5% / 15%" }],
+            [{ id: "Biji rusak (maks.)", en: "Damaged kernels (max.)" }, { id: "3% / 5% / 7%", en: "3% / 5% / 7%" }],
+            [{ id: "Biji warna lain (maks.)", en: "Other colours (max.)" }, { id: "1% / 7% / 10%", en: "1% / 7% / 10%" }],
+            [{ id: "Biji pecah (maks.)", en: "Broken kernels (max.)" }, { id: "1% / 2% / 3%", en: "1% / 2% / 3%" }],
+            [{ id: "Benda asing (maks.)", en: "Foreign matter (max.)" }, { id: "1% / 2% / 2%", en: "1% / 2% / 2%" }],
+            [{ id: "Aflatoksin total (maks.)", en: "Total aflatoxin (max.)" }, { id: "15 / 20 / 20 µg/kg", en: "15 / 20 / 20 µg/kg" }],
+          ],
+        },
       ],
     },
   ],
@@ -278,6 +301,21 @@ export const acuanUmumBySlug: Record<string, ReferenceSpecTable[]> = {
         r("Kemasan", "Packing", "Karung anyam 10 / 20 / 25 / 50 kg atau master box", "Woven bags 10 / 20 / 25 / 50 kg or master box"),
         r("Inspeksi dan dokumen", "Inspection and documents", "COA per lot, SGS atau Sucofindo atas permintaan, Phytosanitary, COO", "COA per lot, SGS or Sucofindo on request, Phytosanitary, COO"),
         r("Peruntukan", "Use", "Rokok kretek (tobacco grade), rempah, minyak atsiri", "Kretek cigarettes (tobacco grade), spice, essential oil"),
+      ],
+    },
+    {
+      source: "reference",
+      key: "stems",
+      heading: { id: "Gagang Cengkeh", en: "Clove stems" },
+      meta: { id: "HS acuan 0907.10", en: "HS reference 0907.10" },
+      rows: [
+        hs("0907.10"),
+        r("Bentuk", "Form", "Gagang kering, dibersihkan, disortir", "Dried stems, cleaned and sorted"),
+        r("Kadar air", "Moisture", "Ditentukan bersama pembeli. Acuan publik tidak tersedia", "Agreed with the buyer. No public reference range"),
+        r("Kotoran dan benda asing", "Foreign matter", "Ditentukan bersama pembeli", "Agreed with the buyer"),
+        r("Kadar eugenol / hasil minyak", "Eugenol / oil yield", "Parameter utama untuk penyulingan. Metode uji disepakati dengan pembeli", "Main parameter for distillation. Test method agreed with the buyer"),
+        r("Peruntukan", "Use", "Penyulingan minyak gagang cengkeh, industri", "Clove stem oil distillation, industrial use"),
+        r("Kemasan", "Packing", "Karung anyam atau bal", "Woven bags or bales"),
       ],
     },
   ],

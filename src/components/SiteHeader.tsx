@@ -67,16 +67,14 @@ export function SiteHeader({ locale }: { locale: Locale }) {
   const isCurrent = (href: string) => !href.startsWith("#") && pathname === itemHref(locale, href)
 
   return (
-    // Floating bar: fixed over the hero (16px from top, 12px once scrolled). Pages without a
+    // Floating bar: fixed over the hero. Pages without a
     // hero get top padding from `main#content` in globals.css so nothing hides beneath it.
     <header
-      className={`pointer-events-none fixed inset-x-0 z-50 px-6 motion-safe:transition-[top] motion-safe:duration-200 ${
-        scrolled ? "top-3" : "top-4"
-      }`}
+      className="pointer-events-none fixed inset-x-0 top-4 z-50 px-6"
     >
       <div
         data-scrolled={scrolled ? "" : undefined}
-        className="header-bar pointer-events-auto relative mx-auto flex h-16 max-w-[1280px] items-center gap-4 rounded-[12px] border border-white/70 bg-white/70 pr-2 pl-4 shadow-[0_10px_30px_-12px_rgba(23,32,27,0.28)] backdrop-blur-md motion-safe:transition-colors motion-safe:duration-200 sm:pl-5 lg:gap-6 lg:pr-3 data-[scrolled]:bg-white/88"
+        className="header-bar pointer-events-auto relative mx-auto flex h-16 max-w-[1280px] items-center gap-4 rounded-xl border border-white/70 bg-white/70 pr-2 pl-4 shadow-[0_10px_30px_-12px_rgba(23,32,27,0.28)] backdrop-blur-md motion-safe:transition-colors motion-safe:duration-300 sm:pl-5 lg:gap-6 lg:pr-3 data-[scrolled]:bg-white/88"
       >
         <Logo locale={locale} />
         <nav className="hidden h-full flex-1 items-center justify-center gap-1 lg:flex xl:gap-4" aria-label="Primary">
@@ -119,7 +117,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             rel="noopener noreferrer"
             aria-label={`${ctaLabel} — WhatsApp`}
             data-header-cta=""
-            className="inline-flex min-h-11 shrink-0 items-center justify-center gap-1.5 rounded-[8px] border border-forest btn-lime bg-lime px-3 text-sm font-semibold whitespace-nowrap text-forest hover:bg-lime-tint active:bg-lime-tint motion-safe:transition-colors lg:h-10 lg:min-h-0 lg:gap-2 lg:border-0 lg:px-4"
+            className="button-sm btn-lime inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-lg border border-forest bg-lime px-3 py-2 whitespace-nowrap text-forest hover:bg-lime-tint active:scale-[0.98] motion-safe:transition-[transform,background-color] motion-safe:duration-300 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)] lg:h-10 lg:min-h-0 lg:border-0"
           >
             <WhatsAppIcon className="size-4" />
             {/* Visible text on mobile + desktop (mobile was icon-only). ui.requestQuoteShort kept for narrow fallbacks. */}
@@ -135,7 +133,27 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             onClick={() => setOpen(true)}
           >
             <svg viewBox="0 0 24 24" aria-hidden="true" className="size-6">
-              <path d="M3 7h18M3 12h18M3 17h18" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              <path
+                d="M3 7h18"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                className={`origin-center motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)] ${open ? "translate-y-[5px] rotate-45" : ""}`}
+              />
+              <path
+                d="M3 12h18"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                className={`motion-safe:transition-opacity motion-safe:duration-300 ${open ? "opacity-0" : ""}`}
+              />
+              <path
+                d="M3 17h18"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                className={`origin-center motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)] ${open ? "-translate-y-[5px] -rotate-45" : ""}`}
+              />
             </svg>
           </button>
         </div>
@@ -158,7 +176,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           role="dialog"
           aria-modal="true"
           aria-label={pickLocale(ui.menu, locale)}
-          className={`absolute inset-y-0 right-0 flex w-[min(88vw,400px)] flex-col bg-white motion-safe:transition-transform motion-safe:duration-300 ${
+          className={`absolute inset-y-0 right-0 flex w-[min(88vw,400px)] flex-col bg-white/95 backdrop-blur-xl motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)] ${
             open ? "translate-x-0" : "translate-x-full"
           }`}
         >
@@ -180,13 +198,16 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           <div className="flex-1 overflow-y-auto px-5 py-4">
             <nav aria-label="Primary mobile">
               <ul>
-                {nav.map((item) => (
+                {nav.map((item, index) => (
                   <li key={item.href} className="border-b border-charcoal/10">
                     <Link
                       href={itemHref(locale, item.href)}
                       tabIndex={open ? 0 : -1}
                       onClick={() => setOpen(false)}
-                      className="flex min-h-12 items-center justify-between text-lg text-charcoal"
+                      className={`flex min-h-12 items-center justify-between text-lg text-charcoal motion-safe:transition-[transform,opacity] motion-safe:duration-500 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                        open ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+                      }`}
+                      style={{ transitionDelay: `${Math.min(index * 60, 360)}ms` }}
                     >
                       {pickLocale(item.label, locale)}
                       <span aria-hidden="true" className="text-forest">→</span>

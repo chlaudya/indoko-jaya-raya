@@ -13,9 +13,9 @@ function featuredForMenu() {
     .slice(0, 4)
 }
 
-/** Shared desktop nav item look: bold charcoal, leaf underline on hover/current. */
+/** Shared desktop nav item look: bold charcoal, logo-lime underline on hover/current. */
 export const navLinkClass =
-  "header-link relative inline-flex h-11 items-center px-1 text-[0.9375rem] font-semibold text-charcoal hover:text-leaf after:absolute after:inset-x-1 after:bottom-1.5 after:h-0.5 after:rounded-full after:bg-leaf after:opacity-0 hover:after:opacity-100 aria-[current=page]:after:opacity-100"
+  "header-link relative inline-flex h-11 items-center px-1 text-[0.9375rem] font-semibold text-charcoal after:absolute after:inset-x-1 after:bottom-1.5 after:h-0.5 after:rounded-full after:bg-lime after:opacity-0 hover:after:opacity-100 aria-[current=page]:after:opacity-100"
 
 export function NavChevron({ open }: { open: boolean }) {
   return (
@@ -26,7 +26,7 @@ export function NavChevron({ open }: { open: boolean }) {
 }
 
 export const chevronButtonClass =
-  "header-link -ml-0.5 inline-flex size-8 items-center justify-center rounded-[6px] text-charcoal hover:bg-ivory hover:text-leaf aria-expanded:text-leaf"
+  "header-link -ml-0.5 inline-flex size-8 items-center justify-center rounded-[6px] text-charcoal hover:bg-ivory aria-expanded:text-charcoal"
 
 /** Hover-intent + Escape/outside-click handling shared by the header dropdowns. */
 export function useDropdown() {
@@ -190,7 +190,7 @@ export function NavDropdown({
                 <Link
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="flex min-h-11 items-center rounded-[6px] px-3 text-sm font-medium text-charcoal hover:bg-ivory/80 hover:text-leaf"
+                  className="flex min-h-11 items-center rounded-[6px] px-3 text-sm font-medium text-charcoal hover:bg-ivory/80 hover:underline hover:decoration-lime hover:underline-offset-4"
                 >
                   {item.label}
                 </Link>

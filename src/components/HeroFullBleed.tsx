@@ -46,7 +46,10 @@ const TALL_OVERLAY = "hero-overlay absolute inset-0 flex flex-col";
 function HeroScrim() {
   return (
     <>
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-black/45" />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-black/45"
+      />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.32)_0%,rgba(0,0,0,0.32)_55%,rgba(0,0,0,0)_80%)] lg:bg-[linear-gradient(to_right,rgba(0,0,0,0.32)_0%,rgba(0,0,0,0.32)_45%,rgba(0,0,0,0)_70%)]"
@@ -113,7 +116,7 @@ export function HeroFullBleed({
   videoSrc?: string;
   eyebrow?: string;
   title: string;
-  /** Home: phrase inside `title` set in italic; the rest stays upright (roman). */
+  /** Home: phrase inside `title` set in logo lime. */
   titleEmphasis?: string;
   lead?: string;
   children?: React.ReactNode;
@@ -149,21 +152,16 @@ export function HeroFullBleed({
   const copy = (
     <div className="fade-up">
       {eyebrow && <p className="label text-white!">{eyebrow}</p>}
-      <Heading
-        className={`display display-h1 mt-4 max-w-[13em] leading-[1.05]! text-balance ${
-          // Key phrase in lime-tint in every locale; italic in Latin scripts, upright in zh/hi (system serif).
-          `[&_em]:text-lime-tint ${locale === "zh" || locale === "hi" ? "[&_em]:not-italic" : "[&_em]:italic"}`
-        }`}
-      >
+      <Heading className="heading-1 mt-6 max-w-[680px] text-balance [&_em]:text-lime [&_em]:not-italic">
         {renderEmphasis(title, titleEmphasis)}
       </Heading>
       {lead && (
-        <p className="mt-5 line-clamp-3 max-w-[30rem] text-base leading-relaxed text-white sm:text-lg">
+        <p className="body-3 mt-6 max-w-[680px] text-pretty text-white sm:text-lg sm:leading-7">
           {lead}
         </p>
       )}
       {children && (
-        <div className="mt-7 flex flex-wrap items-center gap-3">{children}</div>
+        <div className="mt-8 flex flex-wrap items-center gap-6">{children}</div>
       )}
     </div>
   );
@@ -171,8 +169,19 @@ export function HeroFullBleed({
   // LCP: slide 1 is preloaded at high fetch priority. Same src / srcset / sizes / quality as HeroSlider's first <Image>, so React
   // dedupes it with next/image's own (low-priority) preload and the browser reuses this response for the <img>.
   if (isSlider && slides?.[0]) {
-    const first = getImageProps({ src: IMAGES[slides[0].image].src, alt: "", fill: true, sizes: "100vw", quality: HERO_SLIDE_QUALITY }).props;
-    preload(first.src, { as: "image", fetchPriority: "high", imageSrcSet: first.srcSet, imageSizes: first.sizes });
+    const first = getImageProps({
+      src: IMAGES[slides[0].image].src,
+      alt: "",
+      fill: true,
+      sizes: "100vw",
+      quality: HERO_SLIDE_QUALITY,
+    }).props;
+    preload(first.src, {
+      as: "image",
+      fetchPriority: "high",
+      imageSrcSet: first.srcSet,
+      imageSizes: first.sizes,
+    });
   }
 
   return (
@@ -193,7 +202,9 @@ export function HeroFullBleed({
             src: IMAGES[slide.image].src,
             alt: pickLocale(IMAGES[slide.image].alt, locale),
             position: slidePosition(slide),
-            positionMobile: slide.hotspot ? slidePosition(slide) : slide.positionMobile,
+            positionMobile: slide.hotspot
+              ? slidePosition(slide)
+              : slide.positionMobile,
           }))}
           photoClassName={TALL_PHOTO}
           overlayClassName={TALL_OVERLAY}
@@ -292,7 +303,9 @@ function PhotoHero({
             preload
             sizes="100vw"
             className="object-cover"
-            style={imagePosition ? { objectPosition: imagePosition } : undefined}
+            style={
+              imagePosition ? { objectPosition: imagePosition } : undefined
+            }
           />
         ) : (
           <div className="ph ph-field absolute inset-0" />

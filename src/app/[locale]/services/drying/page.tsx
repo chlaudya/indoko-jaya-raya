@@ -62,11 +62,11 @@ export default async function DryingServicePage({ params }: { params: Promise<{ 
       {processSteps.length > 0 ? (
         <section className="surface-dark bg-forest text-white">
           <div className="site-wrap section-y">
-            <p className="label text-soft-sage!">{t(ui.process)}</p>
+            <p className="label">{t(ui.process)}</p>
             <ol className="mt-10 grid gap-10 md:grid-cols-3 lg:mt-14">
               {processSteps.map((step, index) => (
                 <li key={index} className="reveal border-t border-white/20 pt-8">
-                  <p className="display nums text-[clamp(3rem,5vw,4.5rem)] leading-none text-soft-sage">{String(index + 1).padStart(2, "0")}</p>
+                  <p className="display nums text-[clamp(3rem,5vw,4.5rem)] leading-none text-lime">{String(index + 1).padStart(2, "0")}</p>
                   <h3 className="display display-h3 mt-6">{t(step.title)}</h3>
                   <p className="mt-3 text-white/75">{t(step.body)}</p>
                 </li>

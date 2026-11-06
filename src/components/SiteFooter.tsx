@@ -7,11 +7,11 @@ import { WhatsAppIcon } from "./WaButton"
 import { BrandMark } from "./BrandMark"
 
 const linkClass =
-  "inline-flex min-h-10 items-center text-[0.9375rem] leading-[1.9] text-[#d9e0d4] hover:text-white hover:underline hover:decoration-lime-tint hover:underline-offset-4"
+  "inline-flex min-h-10 items-center text-[0.9375rem] leading-[1.9] text-[#d9e0d4] hover:text-white hover:underline hover:decoration-lime hover:underline-offset-4"
 
 function Icon({ d }: { d: string }) {
   return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mt-[0.3em] size-[18px] shrink-0 text-soft-sage">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mt-[0.3em] size-[18px] shrink-0 text-lime">
       <path d={d} />
     </svg>
   )
@@ -44,7 +44,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
     ...products.filter((p) => p.kind === "product").map((p) => ({ href: `/${locale}/products/${p.slug}`, label: t(p.name) })),
     { href: `/${locale}/products`, label: `${t(ui.viewAllCommodities)} →` },
   ]
-  const heading = "label text-lime-tint!"
+  const heading = "label"
 
   return (
     <footer className="relative isolate overflow-hidden border-t border-white/10 bg-forest text-ivory">
@@ -119,7 +119,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
               {email ? (
                 <li className="flex gap-3">
                   <Icon d={MAIL} />
-                  <a href={`mailto:${email}`} className="hover:text-white hover:underline hover:decoration-lime-tint hover:underline-offset-4">{email}</a>
+                  <a href={`mailto:${email}`} className="hover:text-white hover:underline hover:decoration-lime hover:underline-offset-4">{email}</a>
                 </li>
               ) : null}
               <li>

@@ -15,7 +15,7 @@ const CELL_W = 480;
 const CELL_H = 300;
 
 /** Preview fill (sampled). Brand leaf is too dark against these crops. */
-const COLLAGE_GREEN = "#3d8443"; /* --color-leaf */
+const COLLAGE_GREEN = "#97f44b"; /* --color-lime */
 
 type Cell = {
   image: ImageKey;
@@ -104,7 +104,7 @@ export function HeroCollage({ locale }: { locale: Locale }) {
             key={row}
             d={waveStroke(row)}
             fill="none"
-            stroke="#c3cfb8" /* --color-soft-sage */
+            stroke="#17201b" /* --color-charcoal */
             strokeWidth="3"
             vectorEffect="non-scaling-stroke"
           />

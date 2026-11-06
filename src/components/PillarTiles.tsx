@@ -45,8 +45,8 @@ export function PillarTiles({
             <div className="flex flex-1 flex-col p-6 lg:p-7">
               <h3 className="display display-h3 text-forest">{item.title}</h3>
               <p className="mt-2 line-clamp-2 text-[0.9375rem] leading-relaxed text-muted">{item.body}</p>
-              <span className="text-link mt-auto pt-2 text-leaf">
-                <span className="group-hover:underline">{pickLocale(ui.discover, locale)}</span>
+              <span className="text-link mt-auto pt-2 text-charcoal">
+                <span className="group-hover:underline group-hover:decoration-lime">{pickLocale(ui.discover, locale)}</span>
                 <span aria-hidden="true" className="arrow">→</span>
               </span>
             </div>

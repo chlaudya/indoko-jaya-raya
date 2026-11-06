@@ -31,7 +31,9 @@ export function Photo({
   tone?: "ph" | "ph-field" | "ph-harvest" | "ph-dark"
 }) {
   const frame = `relative overflow-hidden ${rounded ? "rounded-[8px]" : ""} ${aspect} ${className}`
-  const zoomClass = zoom ? "motion-safe:transition-transform motion-safe:duration-500 motion-safe:group-hover:scale-[1.03]" : ""
+  const zoomClass = zoom
+    ? "motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)] motion-safe:group-hover:scale-[1.03]"
+    : ""
 
   if (!image) {
     return <div className={`${frame} ph ${tone}`} aria-hidden="true" />
@@ -39,7 +41,7 @@ export function Photo({
 
   const meta = IMAGES[image]
   return (
-    <div className={`${frame} bg-leaf`}>
+    <div className={`${frame} bg-forest`}>
       <Image
         src={meta.src}
         alt={pickLocale(meta.alt, locale)}

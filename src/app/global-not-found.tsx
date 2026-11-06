@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { siteUrl } from "@/lib/seo"
-import { Cormorant_Garamond, Inter } from "next/font/google"
+import { Geist } from "next/font/google"
 import { headers } from "next/headers"
 import {
   DEFAULT_LOCALE,
@@ -16,17 +16,9 @@ import { NotFoundView } from "@/components/NotFoundView"
 import { notFoundDocumentTitle } from "@/lib/not-found-copy"
 import "./globals.css"
 
-const inter = Inter({
+const geist = Geist({
   subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-})
-
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["500", "600"],
-  style: ["normal", "italic"],
-  variable: "--font-cormorant",
+  variable: "--font-geist",
   display: "swap",
 })
 
@@ -60,7 +52,7 @@ async function resolveLocale(): Promise<Locale> {
 export default async function GlobalNotFound() {
   const locale = await resolveLocale()
   return (
-    <html lang={LOCALE_LANG_TAGS[locale]} className={`${inter.variable} ${cormorant.variable}`}>
+    <html lang={LOCALE_LANG_TAGS[locale]} className={geist.variable}>
       <body>
         <a
           href="#content"

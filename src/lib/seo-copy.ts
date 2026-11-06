@@ -113,8 +113,8 @@ export const pageDescriptions: Record<string, LString> = {
   }
 }
 
-/** Product detail meta descriptions (140–160), from name + category + existing blurb only. */
-export const productDescriptions: Record<string, LString> = {
+/** @deprecated Product metas now live on `product.metaDescription` (acuan umum). Kept so older imports still typecheck. */
+const productDescriptions: Record<string, LString> = {
   "kacang-mete": {
     id: "Kacang Mete dari PT Indoko Jaya Raya—komoditi kacang-kacangan Indonesia. Kacang mete kualitas ekspor. Detail spesifikasi dan ketersediaan ditanyakan ke tim.",
     en: "Cashew Nut from PT Indoko Jaya Raya—Indonesian nuts and legumes commodity. Export-grade cashew nuts. Ask our sales team for current specifications and.",
@@ -182,7 +182,7 @@ export function pageMeta(page: keyof typeof pageTitles, locale: Locale) {
 
 /** Build product meta from curated copy (fallback: name + category + blurb, clipped). */
 export function productMeta(product: Product, locale: Locale) {
-  const curated = productDescriptions[product.slug]
+  const curated = product.metaDescription ?? productDescriptions[product.slug]
   const title = pickLocale(product.name, locale)
   if (curated) {
     return { title, description: pickLocale(curated, locale) }

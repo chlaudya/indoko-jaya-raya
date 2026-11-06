@@ -57,7 +57,7 @@ export function SpecTabs({
                 tabIndex={selected ? 0 : -1}
                 onClick={() => setActive(i)}
                 className={`-mb-px flex min-h-11 flex-col items-start justify-center border-b-2 px-3 py-2 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#17201b] ${
-                  selected ? "border-[#2e6b38] text-[#17201b]" : "border-transparent text-muted hover:text-charcoal"
+                  selected ? "border-lime text-[#17201b]" : "border-transparent text-muted hover:text-charcoal"
                 }`}
               >
                 <span className="text-[0.9375rem] font-semibold">{tab.label}</span>

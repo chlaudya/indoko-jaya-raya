@@ -19,13 +19,13 @@ const variants: Record<ButtonVariant, string> = {
   "wa-on-dark": "border border-white/70 bg-transparent text-white hover:bg-white hover:text-forest",
 }
 
-/** Buttons: 8px radius (DESIGN.md §11; no pills). `lg` = 56px, for the single most prominent CTA (Home banner). */
+/** Buttons: 8px radius, 8px vertical and 12px horizontal padding. */
 export function buttonClass(variant: ButtonVariant = "primary", className = "", size: "md" | "lg" = "md") {
   return [
     size === "lg"
-      ? "inline-flex min-h-14 items-center justify-center gap-2.5 px-8 text-base font-semibold"
-      : "inline-flex min-h-12 items-center justify-center gap-2 px-6 text-sm font-semibold",
-    "rounded-[8px] motion-safe:transition-colors motion-safe:duration-200",
+      ? "button-lg inline-flex min-h-12 items-center justify-center gap-2 px-3 py-2"
+      : "button-md inline-flex min-h-12 items-center justify-center gap-2 px-3 py-2",
+    "rounded-lg active:scale-[0.98] motion-safe:transition-[transform,background-color,color,border-color] motion-safe:duration-300 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)]",
     variants[variant],
     className,
   ]

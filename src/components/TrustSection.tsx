@@ -178,7 +178,7 @@ export function TrustSection({
                 key={index}
                 className="reveal border-white/15 py-8 first:border-t-0 max-sm:border-t sm:px-8 sm:py-14 sm:[&:nth-child(n+3)]:border-t sm:[&:nth-child(n+3)]:pt-10 lg:border-l lg:px-10 lg:py-16 lg:first:border-l-0 lg:first:pl-0 lg:last:pr-0 lg:[&:nth-child(n+3)]:border-t-0 lg:[&:nth-child(n+3)]:pt-16"
               >
-                <TrustIcon name={item.icon} className="size-8 text-soft-sage lg:size-9" />
+                <TrustIcon name={item.icon} className="size-8 text-lime lg:size-9" />
                 <h3 className="display mt-5 text-[1.75rem] leading-tight text-balance">
                   {pickLocale(item.title, locale)}
                 </h3>

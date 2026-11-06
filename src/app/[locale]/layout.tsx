@@ -1,29 +1,18 @@
 import { notFound } from "next/navigation"
-import { Cormorant_Garamond, Inter } from "next/font/google"
+import { Geist } from "next/font/google"
 import { isLocale, pickLocale, LOCALES, LOCALE_LANG_TAGS, type Locale } from "@/lib/i18n"
 import { setRequestLocale } from "@/lib/request-locale"
 import { ui } from "@/lib/fixtures"
 import { SiteHeader } from "@/components/SiteHeader"
 import { SiteFooter } from "@/components/SiteFooter"
 
-// `subsets` = what is PRELOADED. Only latin is preloaded (keeps bandwidth for the LCP hero photo); latin-ext and
-// vietnamese faces stay in the CSS via unicode-range and download only on pages that use those glyphs (e.g. /vi).
-const inter = Inter({
+// Geist is the single brand typeface. Chinese and Hindi use the script-aware
+// system fallbacks in globals.css when Geist has no matching glyph.
+const geist = Geist({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-geist",
   display: "swap",
 })
-
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["500", "600"],
-  style: ["normal", "italic"],
-  variable: "--font-cormorant",
-  display: "swap",
-})
-
-// zh / hi headings use system serif stacks (globals.css): no CJK / Devanagari webfont download, and any character
-// the CMS adds later still renders (no subsetting).
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }))
@@ -42,7 +31,7 @@ export default async function LocaleLayout({
   setRequestLocale(locale)
 
   return (
-    <html lang={LOCALE_LANG_TAGS[locale]} className={`${inter.variable} ${cormorant.variable}`}>
+    <html lang={LOCALE_LANG_TAGS[locale]} className={geist.variable}>
       <body>
         <a
           href="#content"
