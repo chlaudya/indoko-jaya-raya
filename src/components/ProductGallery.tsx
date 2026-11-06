@@ -36,7 +36,7 @@ export function ProductGallery({
         if (event.key === "ArrowRight") go(index + 1)
       }}
     >
-      <div className="relative aspect-[4/3] overflow-hidden rounded-[8px] bg-leaf">
+      <div className="relative aspect-[4/3] overflow-hidden rounded-[8px] bg-forest">
         {images.map((key, i) => {
           const meta = IMAGES[key]
           const active = i === index
@@ -97,7 +97,7 @@ export function ProductGallery({
               >
                 <span
                   aria-hidden="true"
-                  className={`block h-2 rounded-full motion-safe:transition-all ${i === index ? "w-6 bg-forest" : "w-2 bg-forest/35 group-hover:bg-forest/70"}`}
+                  className={`block h-2 rounded-full motion-safe:transition-all ${i === index ? "w-6 bg-lime" : "w-2 bg-forest/35 group-hover:bg-forest/70"}`}
                 />
               </button>
             ))}

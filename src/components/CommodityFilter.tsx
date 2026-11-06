@@ -71,7 +71,7 @@ export function CommodityFilter({
             <Link href={href()} aria-current={!category ? "true" : undefined} className={chipClass(!category)}>
               {pickLocale(ui.allCategories, locale)}
             </Link>
-            {categories.map((item) => {
+            {categories.filter((item) => item.slug !== "layanan").map((item) => {
               const active = category === item.slug
               return (
                 <Link

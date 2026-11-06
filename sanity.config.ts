@@ -9,7 +9,7 @@ const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production"
 
 export default defineConfig({
   name: "indoco-jaya-raya",
-  title: "PT Indoco Jaya Raya",
+  title: "PT Indoko Jaya Raya",
   projectId,
   dataset,
   basePath: "/studio",

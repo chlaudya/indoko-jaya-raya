@@ -62,8 +62,8 @@ function whenIdle(fn: () => void) {
 /**
  * Crossfading photo layer for the Home hero, no visible controls. `children` (glass + copy) stay
  * fixed above the photos (phones: in flow at the bottom; ≥768px: covering the hero).
- * - Only slide 1 is preloaded; slides 2..n mount once the page is idle and the rotation only
- *   advances to a slide whose image has loaded (never fades to a blank layer).
+ * - Only slide 1 is preloaded; later slides mount one-ahead after idle (not all at once) and
+ *   rotation only advances to a slide whose image has loaded (never fades to a blank layer).
  * - Pauses on mouse hover over the hero, focus inside it, a hidden tab, or the pause button
  *   (keyboard-reachable, visually hidden until focused: WCAG 2.2.2).
  * - prefers-reduced-motion: first photo only, no rotation, no button.
@@ -134,11 +134,17 @@ export function HeroSlider({
     };
   }, []);
 
-  // Slides 2..n mount once the page is idle, well before their first turn (LCP stays slide 1).
+  // Prime the next slide shortly before the crossfade — not on idle — so the initial
+  // network at 390px requests slide 1 alone. LCP stays slide 1.
   useEffect(() => {
-    if (!rotates) return;
-    return whenIdle(() => setMountRest(true));
-  }, [rotates]);
+    if (!rotates || !playing) return;
+    // Load next ~400ms before the fade starts (HOLD_MS), after slide 1 has had time as LCP.
+    const delay = Math.max(400, HOLD_MS - 400);
+    const timer = setTimeout(() => setMountRest(true), delay);
+    return () => clearTimeout(timer);
+  }, [rotates, playing, index]);
+
+  const nextIndex = total > 1 ? (index + 1) % total : 0;
 
   const markLoaded = useCallback((i: number) => {
     setLoaded((prev) =>
@@ -173,7 +179,15 @@ export function HeroSlider({
     >
       <div className={photoClassName} aria-live="off">
         {slides.map((slide, i) => {
-          if (i > 0 && (!mountRest || reduced)) return null;
+          // Slide 1 always. Later slides mount only after idle, and only once they are
+          // the current slide, the immediate next slide, or already loaded — so initial
+          // network at 390px requests slide 1 alone.
+          const allow =
+            i === 0 ||
+            (!reduced &&
+              mountRest &&
+              (i === shown || i === nextIndex || loaded[i]));
+          if (!allow) return null;
           const active = i === shown;
           return (
             <div
@@ -195,7 +209,7 @@ export function HeroSlider({
                 sizes="100vw"
                 quality={HERO_SLIDE_QUALITY}
                 preload={i === 0}
-                loading={i === 0 ? undefined : "eager"}
+                loading={i === 0 ? undefined : "lazy"}
                 onLoad={() => markLoaded(i)}
                 className="hero-photo object-cover"
                 style={photoVars(slide)}

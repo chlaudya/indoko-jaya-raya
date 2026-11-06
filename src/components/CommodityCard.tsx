@@ -2,6 +2,7 @@ import Link from "next/link"
 import { pickLocale, type Locale } from "@/lib/i18n"
 import { categories, ui, type Product } from "@/lib/fixtures"
 import { buildWhatsAppUrl } from "@/lib/whatsapp"
+import { AcuanChips } from "./AcuanChips"
 import { Photo } from "./Photo"
 import { WhatsAppIcon } from "./WaButton"
 
@@ -70,7 +71,8 @@ export function CommodityCard({
             {name}
           </Link>
         </Heading>
-        <p className="mt-1 line-clamp-1 text-sm text-muted">{pickLocale(product.shortBlurb, locale)}</p>
+        <p className="body-6 mt-2 line-clamp-3 text-pretty text-muted">{pickLocale(product.shortBlurb, locale)}</p>
+        {!isService && <AcuanChips product={product} locale={locale} />}
         <div className="mt-auto flex flex-wrap items-center gap-x-5 pt-3">
           <Link href={href} className="text-link text-forest" aria-label={`${cta}: ${name}`}>
             <span>{cta}</span>
@@ -80,7 +82,7 @@ export function CommodityCard({
             href={wa}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-link text-leaf"
+            className="text-link text-charcoal"
             aria-label={`${pickLocale(ui.askViaWhatsApp, locale)}: ${name}`}
           >
             <WhatsAppIcon className="size-4" />
@@ -92,12 +94,27 @@ export function CommodityCard({
   )
 }
 
-export function CommodityGrid({ products, locale }: { products: Product[]; locale: Locale }) {
+export function CommodityGrid({
+  products,
+  locale,
+  sizes = GRID_CARD_SIZES,
+  columns = "catalog",
+}: {
+  products: Product[]
+  locale: Locale
+  sizes?: string
+  /** Home uses a denser 4-col layout at large breakpoints. */
+  columns?: "catalog" | "home"
+}) {
+  const grid =
+    columns === "home"
+      ? "grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+      : "grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
   return (
-    <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <ul className={grid}>
       {products.map((product) => (
         <li key={product.slug} className="reveal">
-          <CommodityCard product={product} locale={locale} />
+          <CommodityCard product={product} locale={locale} sizes={sizes} />
         </li>
       ))}
     </ul>

@@ -1,7 +1,7 @@
 /**
- * Purpose statement band with large-type commitments. Default: deep forest (#123b2a).
+ * Purpose statement band with large-type commitments. Default: charcoal dark (#17201b).
  * `continued` (Home "Misi"): white surface; label + statement in cols 1–4, the numbered goals in cols 6–12
- * (Cormorant 48px numerals in #6f8f62, large text ≥3:1; goals at --text-h3; #e3e1d6 hairlines).
+ * (Cormorant 48px numerals in #17201b; goals at --text-h3; #e3e1d6 hairlines).
  */
 export function PurposeBand({
   label,
@@ -48,13 +48,13 @@ export function PurposeBand({
       <div className="site-wrap section-y">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <p className="label text-soft-sage!">{label}</p>
+            <p className="label">{label}</p>
             {title && <p className="mt-5 max-w-sm text-lg leading-relaxed text-white/80">{title}</p>}
           </div>
           <ol className="grid gap-10 lg:col-span-8">
             {points.map((point, index) => (
               <li key={index} className="reveal grid grid-cols-[3rem_1fr] gap-4 border-t border-white/20 pt-8 sm:grid-cols-[4rem_1fr]">
-                <span className="label pt-2 text-soft-sage!">{String(index + 1).padStart(2, "0")}</span>
+                <span className="label pt-2">{String(index + 1).padStart(2, "0")}</span>
                 <p className="display display-h2 text-balance">{point}</p>
               </li>
             ))}

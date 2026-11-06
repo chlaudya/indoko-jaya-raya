@@ -1,8 +1,11 @@
 import Link from "next/link"
 import type { Metadata } from "next"
+import { productMeta } from "@/lib/seo-copy"
+import { withLocaleAlternates } from "@/lib/seo"
 import { notFound, redirect } from "next/navigation"
-import { isLocale, pickLocale, type Locale } from "@/lib/i18n"
+import { isLocale, pickLocale, LOCALES, type Locale } from "@/lib/i18n"
 import { categories, products, ui } from "@/lib/fixtures"
+import { AcuanChips } from "@/components/AcuanChips"
 import { CardRail } from "@/components/CardRail"
 import { CommodityCard, RAIL_CARD_SIZES } from "@/components/CommodityCard"
 import { InquirySection } from "@/components/InquirySection"
@@ -10,6 +13,18 @@ import { Photo } from "@/components/Photo"
 import { ProductGallery } from "@/components/ProductGallery"
 import { ProductSpecifications } from "@/components/ProductSpecifications"
 import { WaButton } from "@/components/WaButton"
+
+/** Unknown slugs must NOT call notFound() on a matched segment — Next SSR would emit the
+ * empty `__next_error__` shell (no lang, blank without JS). With `dynamicParams=false`,
+ * unknown slugs are unmatched routes and SSR `[locale]/not-found` inside the locale layout.
+ */
+export const dynamicParams = false
+
+export function generateStaticParams() {
+  return LOCALES.flatMap((locale) =>
+    products.map((product) => ({ locale, slug: product.slug }))
+  )
+}
 
 export async function generateMetadata({
   params,
@@ -20,10 +35,7 @@ export async function generateMetadata({
   if (!isLocale(raw)) return {}
   const product = products.find((item) => item.slug === slug)
   if (!product) return {}
-  return {
-    title: pickLocale(product.name, raw),
-    description: pickLocale(product.shortBlurb, raw),
-  }
+  return withLocaleAlternates(raw, `products/${product.slug}`, productMeta(product, raw))
 }
 
 export default async function ProductDetailPage({
@@ -42,7 +54,7 @@ export default async function ProductDetailPage({
 
   const category = categories.find((item) => item.slug === product.category)
   const name = pickLocale(product.name, locale)
-  const intro = pickLocale(product.shortBlurb, locale)
+  const tradeName = pickLocale(product.internationalTradeName, locale)
   const overview = pickLocale(product.description, locale)
   const askLabel = `${pickLocale(ui.askAbout, locale)} ${name}`
   const related = products.filter((item) => item.slug !== slug && item.kind === "product")
@@ -53,16 +65,16 @@ export default async function ProductDetailPage({
       {/* Split hero: gallery left, name/category/summary/WA right */}
       <section className="band-lime">
         <div className="site-wrap pt-8 pb-16 lg:pt-12 lg:pb-24">
-          <nav aria-label="Breadcrumb" className="text-sm text-muted">
+          <nav aria-label="Breadcrumb" className="text-sm text-charcoal">
             <ol className="flex flex-wrap gap-2">
               <li>
-                <Link href={`/${locale}`} className="hover:text-charcoal hover:underline">
+                <Link href={`/${locale}`} className="hover:text-charcoal hover:underline hover:decoration-lime hover:underline-offset-4">
                   {pickLocale(ui.home, locale)}
                 </Link>
               </li>
               <li aria-hidden="true">/</li>
               <li>
-                <Link href={`/${locale}/products`} className="hover:text-charcoal hover:underline">
+                <Link href={`/${locale}/products`} className="hover:text-charcoal hover:underline hover:decoration-lime hover:underline-offset-4">
                   {pickLocale(ui.ourCommodities, locale)}
                 </Link>
               </li>
@@ -92,29 +104,19 @@ export default async function ProductDetailPage({
             </div>
             <div className="lg:sticky lg:top-28 lg:col-span-5">
               <p className="label">{category ? pickLocale(category.title, locale) : product.category}</p>
-              <h1 className="display display-h1 mt-4 text-forest">{name}</h1>
-              <p className="mt-6 text-lg leading-relaxed text-muted">{intro}</p>
+              <h1 className="display display-h1 mt-4 text-balance text-forest">{name}</h1>
+              {tradeName && <p className="title-2 mt-3 max-w-[680px] text-pretty text-charcoal">{tradeName}</p>}
+              <p className="body-3 mt-6 max-w-[680px] text-pretty text-charcoal">{overview}</p>
+              <AcuanChips product={product} locale={locale} />
               <div className="mt-8">
                 <WaButton locale={locale} templateKey="productPage" tokens={{ productName: name }} label={askLabel} />
               </div>
-              {overview !== intro && (
-                <div className="mt-10 border-t border-charcoal/10 pt-8">
-                  <h2 className="label">{pickLocale(ui.overview, locale)}</h2>
-                  <p className="mt-3 leading-relaxed text-charcoal">{overview}</p>
-                </div>
-              )}
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-ivory">
-        <div className="site-wrap section-y">
-          <div className="max-w-4xl">
-            <ProductSpecifications product={product} locale={locale} title={pickLocale(ui.specifications, locale)} />
-          </div>
-        </div>
-      </section>
+      <ProductSpecifications product={product} locale={locale} productName={name} />
 
       {related.length > 0 && (
         <section className="bg-white">

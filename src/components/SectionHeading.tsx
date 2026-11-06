@@ -11,7 +11,7 @@ export function SectionHeading({
 }) {
   return (
     <div className="max-w-3xl">
-      {label && <p className={tone === "light" ? "label text-soft-sage!" : "label"}>{label}</p>}
+      {label && <p className={tone === "light" ? "label text-lime!" : "label"}>{label}</p>}
       <h2 className={`display display-h2 mt-4 ${tone === "light" ? "text-white" : "text-forest"}`}>{title}</h2>
       {body && (
         <p className={`mt-6 text-lg leading-relaxed ${tone === "light" ? "text-white/80" : "text-muted"}`}>{body}</p>

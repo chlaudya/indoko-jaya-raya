@@ -1,4 +1,4 @@
-# Indoco Jaya Raya
+# Indoko Jaya Raya
 
 International agribusiness company profile and commodity catalog website connecting Indonesian agricultural products with national and global buyers.
 
@@ -47,7 +47,7 @@ This file gives AI coding agents the context they need to work effectively in th
 
 ## Notes
 
-Build a premium international B2B agribusiness website for PT Indoco Jaya Raya.
+Build a premium international B2B agribusiness website for PT Indoko Jaya Raya.
 
 The visual direction should combine:
 

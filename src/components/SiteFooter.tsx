@@ -1,17 +1,17 @@
 import Image from "next/image"
 import Link from "next/link"
 import { pickLocale, type Locale } from "@/lib/i18n"
-import { products, redesign, siteSettings, ui, visiblePhone } from "@/lib/fixtures"
+import { products, redesign, siteSettings, ui, confirmedAddress, visiblePhone } from "@/lib/fixtures"
 import { buildWhatsAppUrl } from "@/lib/whatsapp"
 import { WhatsAppIcon } from "./WaButton"
 import { BrandMark } from "./BrandMark"
 
 const linkClass =
-  "inline-flex min-h-10 items-center text-[0.9375rem] leading-[1.9] text-[#d9e0d4] hover:text-white hover:underline hover:decoration-lime-tint hover:underline-offset-4"
+  "inline-flex min-h-10 items-center text-[0.9375rem] leading-[1.9] text-[#d9e0d4] hover:text-white hover:underline hover:decoration-lime hover:underline-offset-4"
 
 function Icon({ d }: { d: string }) {
   return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mt-[0.3em] size-[18px] shrink-0 text-soft-sage">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mt-[0.3em] size-[18px] shrink-0 text-lime">
       <path d={d} />
     </svg>
   )
@@ -21,15 +21,17 @@ const PHONE = "M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1.5 1.5 0
 const MAIL = "M3.5 6.5h17v11h-17zM3.5 7l8.5 6.5L20.5 7"
 
 /**
- * Footer: brand · Navigasi · Komoditi · Kontak (4 → 2 → 1 columns). Links 15px #d9e0d4 (≈10:1 on forest),
- * line-height 1.9. Phone and email show "Menyusul" until the client confirms them (siteSettings.phonePending /
- * siteSettings.email); WhatsApp always uses the configured destination.
+ * Footer: brand · Navigasi · Komoditi · Kontak (4 → 2 → 1 columns). Links 15px #d9e0d4 (≈10:1 on charcoal),
+ * line-height 1.9. Address, phone and email rows render only when confirmed (siteSettings.phonePending /
+ * siteSettings.email / non-pending address). WhatsApp always uses the configured destination.
  */
 export function SiteFooter({ locale }: { locale: Locale }) {
   const t = (v: Parameters<typeof pickLocale>[0]) => pickLocale(v, locale)
   const wa = buildWhatsAppUrl({ locale, templateKey: "contact" })
   const phone = visiblePhone()
   const email = siteSettings.email.trim()
+  // Hide until siteSettings.addressPending is cleared (locale-independent).
+  const addressLine = confirmedAddress(locale)
   const nav = [
     { href: `/${locale}/about`, label: t(ui.aboutUs) },
     { href: `/${locale}/company`, label: t(ui.companyProfile) },
@@ -42,23 +44,24 @@ export function SiteFooter({ locale }: { locale: Locale }) {
     ...products.filter((p) => p.kind === "product").map((p) => ({ href: `/${locale}/products/${p.slug}`, label: t(p.name) })),
     { href: `/${locale}/products`, label: `${t(ui.viewAllCommodities)} →` },
   ]
-  const heading = "label text-lime-tint!"
+  const heading = "label"
 
   return (
     <footer className="relative isolate overflow-hidden border-t border-white/10 bg-forest text-ivory">
       {/* Decorative client background (coffee leaves): lazy, never preloaded, cropped freely on small screens.
-          Overlay .35→.8; from xl the top stop is .6 because the Kontak column sits on the top-right leaves (keeps ≥4.5:1). */}
+          Charcoal overlay (#17201b) so the leaf photo is only a subtle dark texture with no forest-green cast. */}
+      {/* Leaf photo kept only as a subtle dark texture: grayscale + low brightness so no green cast. */}
       <Image
         src="/images/optimized/footer-bg.webp"
         alt=""
         fill
         sizes="100vw"
         loading="lazy"
-        className="-z-20 object-cover object-center"
+        className="-z-20 object-cover object-center brightness-[0.45] grayscale contrast-125"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgba(18,59,42,0.35),rgba(18,59,42,0.8))] xl:bg-[linear-gradient(to_bottom,rgba(18,59,42,0.6),rgba(18,59,42,0.8))]"
+        className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgba(23,32,27,0.72),rgba(23,32,27,0.94))] xl:bg-[linear-gradient(to_bottom,rgba(23,32,27,0.82),rgba(23,32,27,0.96))]"
       />
       <div className="site-wrap relative pt-16 pb-8 lg:pt-20">
         <div className="grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-12">
@@ -95,28 +98,30 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           <div className="col-span-2 md:col-span-1 lg:col-span-3 lg:col-start-10">
             <h2 className={heading}>{t(ui.footerContact)}</h2>
             <ul className="mt-4 space-y-3 text-[0.9375rem] leading-relaxed text-[#d9e0d4]">
-              <li className="flex gap-3">
-                <Icon d={PIN} />
-                <span>
-                  <span className="sr-only">{t(ui.address)}: </span>
-                  {t(siteSettings.address)}
-                </span>
-              </li>
-              <li className="flex gap-3">
-                <Icon d={PHONE} />
-                <span>
-                  <span className="sr-only">{t(ui.phone)}: </span>
-                  {phone ?? <span>{t(ui.phone)} · {t(ui.pending)}</span>}
-                </span>
-              </li>
-              <li className="flex gap-3">
-                <Icon d={MAIL} />
-                {email ? (
-                  <a href={`mailto:${email}`} className="hover:text-white hover:underline hover:decoration-lime-tint hover:underline-offset-4">{email}</a>
-                ) : (
-                  <span>{t(ui.email)} · {t(ui.pending)}</span>
-                )}
-              </li>
+              {addressLine ? (
+                <li className="flex gap-3">
+                  <Icon d={PIN} />
+                  <span>
+                    <span className="sr-only">{t(ui.address)}: </span>
+                    {addressLine}
+                  </span>
+                </li>
+              ) : null}
+              {phone ? (
+                <li className="flex gap-3">
+                  <Icon d={PHONE} />
+                  <span>
+                    <span className="sr-only">{t(ui.phone)}: </span>
+                    {phone}
+                  </span>
+                </li>
+              ) : null}
+              {email ? (
+                <li className="flex gap-3">
+                  <Icon d={MAIL} />
+                  <a href={`mailto:${email}`} className="hover:text-white hover:underline hover:decoration-lime hover:underline-offset-4">{email}</a>
+                </li>
+              ) : null}
               <li>
                 <a
                   href={wa}
@@ -133,7 +138,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         </div>
 
         <div className="mt-14 border-t border-white/15 pt-6">
-          <p className="text-sm text-[#d9e0d4]">© {new Date().getFullYear()} PT Indoco Jaya Raya</p>
+          <p className="text-sm text-[#d9e0d4]">© {new Date().getFullYear()} PT Indoko Jaya Raya</p>
         </div>
       </div>
     </footer>

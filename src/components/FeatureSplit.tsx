@@ -51,14 +51,14 @@ export function FeatureSplit({
         />
         <div className={`lg:col-span-5 ${reverse ? "lg:order-1" : ""}`}>
           {eyebrow && <p className="label">{eyebrow}</p>}
-          <Heading className="display display-h2 mt-4 text-balance text-forest">{title}</Heading>
-          {body && <p className="mt-6 text-lg leading-relaxed text-muted">{body}</p>}
+          <Heading className="heading-3 mt-6 text-balance text-forest">{title}</Heading>
+          {body && <p className="body-3 mt-6 text-pretty text-muted">{body}</p>}
           {facts.length > 0 && (
             <dl className="mt-8 grid gap-4 sm:grid-cols-2">
               {facts.map((fact) => (
                 <div key={fact.label} className="border-t border-hairline pt-3">
                   <dt className="label">{fact.label}</dt>
-                  <dd className="mt-1 text-base text-charcoal">{fact.value}</dd>
+                  <dd className="body-3 mt-1 text-charcoal">{fact.value}</dd>
                 </div>
               ))}
             </dl>
@@ -69,7 +69,7 @@ export function FeatureSplit({
               <ol className="mt-3">
                 {steps.map((step, index) => (
                   <li key={index} className="grid grid-cols-[2.25rem_1fr] gap-3 border-t border-hairline py-3 first:border-t-0">
-                    <span aria-hidden="true" className="display nums text-xl leading-7 text-sage">
+                    <span aria-hidden="true" className="display nums text-xl leading-7 text-charcoal">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <p className="text-[0.9375rem] leading-7 text-charcoal">

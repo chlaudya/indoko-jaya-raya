@@ -1,10 +1,10 @@
 # DESIGN.md
 
-# INDOCO JAYA RAYA — DESIGN SYSTEM
+# INDOKO JAYA RAYA — DESIGN SYSTEM
 
 > **Rooted in Indonesia. Connected to the World.**
 
-This file is the visual and UX source of truth for the Indoco Jaya Raya website.
+This file is the visual and UX source of truth for the Indoko Jaya Raya website.
 
 Before creating or modifying any UI, read and follow this file.
 
@@ -126,189 +126,79 @@ Do not use decorative effects to manufacture a premium feeling.
 
 # 4. COLOR TOKENS
 
-Use these colors as the default design system.
+The logo is two colors: lime `#97f44b` and black. The site uses that pair. Charcoal `#17201b` is the black. There is no second brand green.
 
-## Primary
-
-```css
---color-forest: #123b2a;
-```
-
-Primary brand color.
-
-Use for:
-
-- header
-- hero backgrounds
-- primary CTA
-- footer
-- major dark sections
-
-## Secondary
+Retired, do not reintroduce: forest `#123b2a`, leaf `#2e6b38`, mid green `#3d8443`, sage `#557048`, numeral `#6f8f62`, and the old lime values `#7afa52` / `#c8e6a0`.
 
 ```css
---color-green: #1f5a3d;
-```
-
-Use for:
-
-- hover states
-- secondary green sections
-- accents
-
-## Natural
-
-```css
---color-sage: #557048;
-```
-
-(Darkened from #6f8f62 so small labels pass 4.5:1 on ivory. #6f8f62 survives only as `--color-numeral` for large numerals, 32px and up.)
-
-Use sparingly for:
-
-- category labels
-- subtle highlights
-- secondary accents
-
-## Soft Sage
-
-```css
---color-soft-sage: #c3cfb8;
---color-hover-line: #a8b89c;
-```
-
-Use sparingly.
-
-## Warm Ivory
-
-```css
---color-ivory: #f5f3ea;
-```
-
-Primary light background.
-
-Prefer ivory over pure white for editorial sections.
-
-## White
-
-```css
+--color-lime: #97f44b;       /* logo. Buttons, Why Choose Us, accents on #17201b, rules, focus on dark */
+--color-lime-tint: #66c344;  /* button hover only */
+--color-lime-wash: #f4f9ef;  /* pale bands (.band-lime). Same ground as --color-mist */
+--color-forest: #17201b;     /* dark panels, footer, button text on lime. Alias of charcoal */
+--color-charcoal: #17201b;   /* text, headings, links on white */
+--color-ivory: #ffffff;      /* page base */
 --color-white: #ffffff;
+--color-muted: #5a665f;      /* secondary text on white */
+--color-mist: #f4f9ef;
+--color-hairline: #e3e1d6;
+--color-hover-line: #a8b89c;
+/* Aliases so old utility names cannot bring a different green back. */
+--color-leaf: #17201b;
+--color-green: #97f44b;
+--color-sage: #17201b;
+--color-numeral: #17201b;
 ```
 
-Use for:
-
-- clean content areas
-- cards
-- text on dark backgrounds
-
-## Charcoal
-
-```css
---color-charcoal: #17201b;
-```
-
-Primary text.
-
-Never use pure black for normal body text.
-
-## Muted
-
-```css
---color-muted: #5a665f;
-```
-
-(Darkened from #66736b for 4.5:1 on ivory.)
-
-Use for:
-
-- secondary text
-- metadata
-- descriptions
-
-## Brand Accent: APEL Group logo lime
-
-The logo (APEL Group mark, `public/images/brand/apel-logo.svg`) is lime and black. Bring it into the site as a small accent family, not as a main color. Forest, ivory and sage stay the base.
-
-```css
---color-lime: #7afa52;       /* logo lime */
---color-lime-tint: #c8e6a0;  /* soft lime, the bridge between logo and forest */
-```
-
-Contrast (measured):
-
-| Pair | Ratio | Allowed |
+| Token | Role | Value |
 |---|---|---|
-| lime-tint on forest #123b2a | 9.1:1 | text, icons, markers |
-| lime-tint on green #1f5a3d | 5.9:1 | text, icons, markers |
-| lime on forest #123b2a | 9.3:1 | icons, focus ring, dots, 2px lines |
-| forest text on lime-tint fill | 9.1:1 | small badges |
-| lime or lime-tint on ivory or white | 1.2–1.3:1 | never (fails text and 3:1 UI) |
+| `--color-lime` | Button fill, Why Choose Us, hero accent words, footer labels, icons and focus on dark, nav underline, eyebrow rule | `#97f44b` |
+| `--color-lime-tint` | Button hover fill only | `#66c344` |
+| `--color-lime-wash` / `--color-mist` | Pale page-header and alternate bands | `#f4f9ef` |
+| `--color-forest` / `--color-charcoal` | Ink, dark panels, footer, text on lime | `#17201b` |
+| `--color-muted` | Secondary text on white | `#5a665f` |
 
-Use lime-tint, **on dark sections only** (hero, WhatsApp banner, footer):
+## Where lime goes
 
-- hero headline accent words in all 5 languages (replaces the white italic accent; extends `--hero-accent-cjk`)
-- eyebrow labels on dark (e.g. "MARI BEKERJA SAMA")
-- footer column headings
-- link hover underline on dark
+- Primary and WhatsApp buttons: fill `#97f44b`, text and border `#17201b`. Hover fill `#66c344`. Focus ring on the button is `#17201b`.
+- Why Choose Us (`.surface-lime`): full `#97f44b` ground. Every text token on it is `#17201b`.
+- On `#17201b` (footer, dark bands, hero scrim): labels, accent words, icon strokes, and the focus ring are `#97f44b`.
+- On white: section eyebrows (`.label` on `p` / `h2` / `h3` / `h4`) are `#17201b` with a 24×2px `#97f44b` rule. Links stay `#17201b` and take a `#97f44b` underline. Nav current and hover use a `#97f44b` underline, not a green word.
 
-Use logo lime (`--color-lime`), **on dark only and very small**:
+## Where lime does not go
 
-- the logo itself
-- keyboard focus ring on dark sections (2px, 2px offset)
-- tiny details: an active slide dot, a 2px rule, an icon stroke
+`#97f44b` on white is 1.37:1 (1.28:1 on `#f4f9ef`). It fails text and it fails a 3:1 UI boundary. Do not set lime as text, a small icon, or the only state indicator on white or `#f4f9ef`. The charcoal word carries the contrast. The lime rule is the brand mark beside it.
 
-On light sections (ivory, white, mist):
+Never white or grey text on `#97f44b` or `#66c344`.
 
-- active tabs, hover underlines, focus rings and labels stay forest or sage
-- lime-tint may appear only as a fill behind forest text (e.g. a small "Baru" badge), never as text, a line or a marker
+## Contrast
 
-Never:
-
-- lime text or lines on light backgrounds
-- large lime fills, lime buttons, lime section backgrounds
-- recoloring the logo
-
----
-
-## Lime-forward update (approved by Chlaudya, Oct 19, 2026)
-
-This extends the Brand Accent rules above. Forest, ivory and the serif type stay the base, and lime moves into buttons and one light band. Ship it as its own commit so it's easy to revert.
-
-Buttons (all primary and WhatsApp buttons, `bg-leaf` today):
-- Fill `--color-lime` `#7afa52` with forest `#123b2a` text and icons (9.3:1). Hover uses `--color-lime-tint` `#c8e6a0` (9.1:1).
-- Focus ring on lime buttons: 2px forest. Never white text on lime.
-- Secondary (white) buttons don't change.
-
-Why Choose Us band (Home `TrustSection`, ivory today):
-- Background `--color-lime-wash: #e6f5d0`.
-- Body text `#2f4a3a`; labels, numerals and icons `#1f5a3d`; hairlines `#9fc77a`.
-- Focus ring forest, and links in body text are underlined.
-
-Dark sections (hero, forest bands, footer): labels, footer headings, hero accent words and hover underlines are lime tint, and the focus ring is lime, as in Brand Accent.
-
-Unchanged: every other ivory or white section, the nav links, and forest or charcoal text. Lime text or lines on ivory or white are never used (about 1.3:1).
+| Pair | Ratio | Use |
+|---|---|---|
+| `#17201b` on `#97f44b` | 12.2:1 | Button and Why Choose Us text |
+| `#17201b` on `#66c344` | 7.5:1 | Button hover text |
+| `#17201b` on `#ffffff` | 16.7:1 | Body, headings, links, labels |
+| `#17201b` on `#f4f9ef` | 15.6:1 | Text on pale bands |
+| `#ffffff` on `#17201b` | 16.7:1 | Dark panel and footer body |
+| `#97f44b` on `#17201b` | 12.2:1 | Accents, footer labels, icons, focus |
+| `#5a665f` on `#ffffff` | 6.0:1 | Muted secondary text |
 
 # 5. COLOR RULES
 
-Use green intentionally.
-
-Recommended visual balance:
-
 ```text
-Light backgrounds       40%
-Forest green            30%
+White and pale wash     40%
+Charcoal #17201b        30%
 Photography             15%
-Secondary greens        10%
-Accent details           5%   (lime accents count here, and only on dark)
+Logo lime #97f44b       10%
+Hairline and muted       5%
 ```
 
-Do NOT:
+Do not:
 
-- introduce random greens
-- use bright neon green (exception: `--color-lime`, the logo color, under the Brand Accent rules above)
-- use excessive gradients
-- use green overlays on every image
-- use multiple unrelated accent colors
+- add another green
+- paint headings, body, or links `#97f44b` on white
+- put white text on lime
+- recolor the logo
+- lay a green wash over photography
 
 If a new color is required, use an existing token first.
 
@@ -412,7 +302,7 @@ Prefer:
 
 Over:
 
-> Welcome to PT Indoco Jaya Raya Official Company Website.
+> Welcome to PT Indoko Jaya Raya Official Company Website.
 
 Prefer:
 
@@ -586,7 +476,7 @@ Recommended order:
 01 Hero
 02 Company Introduction
 03 Commodity Showcase
-04 Why Partner With Indoco
+04 Why Partner With Indoko
 05 Indonesia → Global Markets
 06 Commodity Drying Service
 07 Sustainability / Community
@@ -605,7 +495,7 @@ The hero must communicate the company immediately.
 Recommended:
 
 ```text
-INDOCO JAYA RAYA
+INDOKO JAYA RAYA
 
 Rooted in Indonesia.
 Connected to the World.
@@ -853,7 +743,7 @@ unless ecommerce functionality is explicitly added later.
 
 ---
 
-# 24. WHY PARTNER WITH INDOCO
+# 24. WHY PARTNER WITH INDOKO
 
 Use four concise pillars:
 
@@ -1011,22 +901,24 @@ or a CV form if implemented.
 ## Primary
 
 ```css
-background: #123b2a;
-color: #ffffff;
+background: #97f44b;
+color: #17201b;
+border: 1px solid #17201b;
 ```
 
 Hover:
 
 ```css
-background: #1f5a3d;
+background: #66c344;
+color: #17201b;
 ```
 
 ## Secondary
 
 ```css
 background: transparent;
-border: 1px solid #123b2a;
-color: #123b2a;
+border: 1px solid #17201b;
+color: #17201b;
 ```
 
 ## Dark Background Secondary
@@ -1456,7 +1348,7 @@ Would an international buyer consider the interface professional and trustworthy
 
 ### Product
 
-Can users quickly understand what Indoco supplies?
+Can users quickly understand what Indoko supplies?
 
 ### Conversion
 

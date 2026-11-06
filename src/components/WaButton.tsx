@@ -3,9 +3,9 @@ import type { Locale } from "@/lib/i18n"
 
 export type ButtonVariant = "primary" | "secondary" | "on-dark" | "inverse" | "wa" | "wa-secondary" | "wa-on-dark"
 
-// Lime-forward (DESIGN.md "Lime-forward update"): primary and WhatsApp buttons are logo lime with forest text and
-// icon (9.3:1), hover / active lime-tint (9.1:1), forest focus ring. No stroke — the fill is the shape.
-const lime = "btn-lime bg-lime text-forest hover:bg-lime-tint active:bg-lime-tint"
+// Designer final palette: primary / WhatsApp buttons card lime #97f44b with charcoal #17201b (forest) text and 1px border,
+// hover #66c344 (lime-tint), charcoal focus ring via .btn-lime.
+const lime = "btn-lime border border-forest bg-lime text-forest hover:bg-lime-tint active:bg-lime-tint"
 
 const variants: Record<ButtonVariant, string> = {
   primary: lime,
@@ -19,13 +19,13 @@ const variants: Record<ButtonVariant, string> = {
   "wa-on-dark": "border border-white/70 bg-transparent text-white hover:bg-white hover:text-forest",
 }
 
-/** Buttons: 8px radius (DESIGN.md §11; no pills). `lg` = 56px, for the single most prominent CTA (Home banner). */
+/** Buttons: 8px radius, 8px vertical and 12px horizontal padding. */
 export function buttonClass(variant: ButtonVariant = "primary", className = "", size: "md" | "lg" = "md") {
   return [
     size === "lg"
-      ? "inline-flex min-h-14 items-center justify-center gap-2.5 px-8 text-base font-semibold"
-      : "inline-flex min-h-12 items-center justify-center gap-2 px-6 text-sm font-semibold",
-    "rounded-[8px] motion-safe:transition-colors motion-safe:duration-200",
+      ? "button-lg inline-flex min-h-12 items-center justify-center gap-2 px-3 py-2"
+      : "button-md inline-flex min-h-12 items-center justify-center gap-2 px-3 py-2",
+    "rounded-lg active:scale-[0.98] motion-safe:transition-[transform,background-color,color,border-color] motion-safe:duration-300 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)]",
     variants[variant],
     className,
   ]

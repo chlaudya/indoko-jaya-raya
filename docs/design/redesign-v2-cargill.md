@@ -1,4 +1,4 @@
-# Indoco Jaya Raya — Redesign v2 (Cargill-inspired)
+# Indoko Jaya Raya — Redesign v2 (Cargill-inspired)
 
 **Reference:** [cargill.com/home](https://www.cargill.com/home)
 **Applies to:** all 7 shells already live (routes, CMS schemas, WA CTAs, i18n stay unchanged — this is a visual/layout pass only).
@@ -10,11 +10,11 @@ We borrow Cargill's **structure and rhythm**, not its brand, copy, or imagery.
 
 ## 1. What we take from Cargill
 
-| Cargill pattern | Indoco adaptation |
+| Cargill pattern | Indoko adaptation |
 |---|---|
 | Purpose-led full-bleed hero ("Creating a more food secure world") with video/photo + one big statement | Full-bleed hero photo/video of fields or drying yard, one-line mission headline from Visi, single "Watch / Lihat profil" + WA CTA |
 | Clean white header, utility bar on top (region/language), mega-menu nav | Thin utility bar (language switcher + WA number) above a white sticky main nav; Produk menu opens a mega-panel listing categories + featured commodities |
-| Alternating editorial feature blocks (image one side, eyebrow + H2 + paragraph + text link other side) — "Grow forward", "Building a more resilient food system" | Home: "Tentang Indoco", "Jasa Penjemuran", "Pasar Internasional" as alternating image/text bands |
+| Alternating editorial feature blocks (image one side, eyebrow + H2 + paragraph + text link other side) — "Grow forward", "Building a more resilient food system" | Home: "Tentang Indoko", "Jasa Penjemuran", "Pasar Internasional" as alternating image/text bands |
 | Purpose statement band ("To nourish the world…") with bullet commitments | Misi band: 3 misi points on a deep-forest background, large type |
 | Three pillars as big image tiles (People / Products / Planet) | Three pillars: **Petani & Karyawan** (people) · **Komoditi** (products) · **Keberlanjutan** (planet) — each tile links to About / Produk / Company |
 | Big stat callouts (155K+ team, 70 countries) | Stats strip from CMS (e.g. komoditi count, kapasitas, negara tujuan) — only real client numbers, hidden if empty |
@@ -41,7 +41,7 @@ We borrow Cargill's **structure and rhythm**, not its brand, copy, or imagery.
 1. Full-bleed hero (min-h 80vh, dark overlay gradient bottom-left), H1 display size, lead, 2 CTAs (primary WA, secondary "Lihat Komoditi").
 2. Purpose band — misi as 3 large-type commitments on forest bg.
 3. Three pillar tiles (image, overlay title, arrow link) — 3-col desktop, stacked mobile.
-4. Alternating feature: Tentang Indoco (image left).
+4. Alternating feature: Tentang Indoko (image left).
 5. Alternating feature: Jasa Penjemuran (image right) → `/services/drying`.
 6. Stats strip (CMS, hide if empty).
 7. Komoditi Unggulan card rail → `/products`.

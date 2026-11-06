@@ -35,7 +35,7 @@ export function LanguageSwitcher({ locale, tone = "light" }: { locale: Locale; t
       {LOCALES.map((code, index) => (
         <span key={code} className="inline-flex items-center gap-2">
           {index > 0 && (
-            <span aria-hidden="true" className={tone === "light" ? "text-white/35" : "text-soft-sage"}>
+            <span aria-hidden="true" className={tone === "light" ? "text-white/35" : "text-charcoal/30"}>
               |
             </span>
           )}
