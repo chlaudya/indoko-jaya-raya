@@ -4,9 +4,9 @@ import { pageMeta } from "@/lib/seo-copy"
 import { withLocaleAlternates } from "@/lib/seo"
 import { notFound } from "next/navigation"
 import { isLocale, pickLocale, type Locale } from "@/lib/i18n"
-import { homeLanding, pages, products, redesign, ui, whyChoose } from "@/lib/fixtures"
+import { homeLanding, homeStats, iconStrip, pages, products, redesign, ui, whyChoose } from "@/lib/fixtures"
 import type { ImageKey } from "@/lib/images"
-import { BuyerBenefits } from "@/components/buyer-benefits"
+import { TrustSection } from "@/components/TrustSection"
 import { BuyerFaq } from "@/components/buyer-faq"
 import { BuyerProcess } from "@/components/buyer-process"
 import { CompanyMission } from "@/components/company-mission"
@@ -116,13 +116,13 @@ export default async function HomePage({
         products={selectedProducts}
       />
 
-      <BuyerBenefits
-        label={pickLocale(homeLanding.benefitsLabel, locale)}
-        title={pickLocale(homeLanding.benefitsTitle, locale)}
-        items={whyChoose.map((item) => ({
-          title: pickLocale(item.title, locale),
-          body: pickLocale(item.body, locale),
-        }))}
+      <TrustSection
+        locale={locale}
+        label={pickLocale(ui.whyChooseLabel, locale)}
+        title={pickLocale(ui.whyChooseUs, locale)}
+        points={whyChoose}
+        stats={homeStats}
+        strip={iconStrip}
       />
 
       <BuyerProcess
