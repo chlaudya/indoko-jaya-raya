@@ -131,34 +131,27 @@ export function TrustSection({
   if (cards.length === 0 && !hasStats && stripItems.length === 0) return null;
   return (
     <section aria-labelledby="why-choose-title">
-      <div className="surface-lime">
+      <div className="surface-lime text-charcoal">
         <div className="site-wrap section-y">
           {label && <p className="label">{label}</p>}
           <h2
             id="why-choose-title"
-            className={`display display-h2 max-w-3xl text-balance text-forest ${label ? "mt-4" : ""}`}
+            className={`heading-2 max-w-[680px] text-balance ${label ? "mt-6" : ""}`}
           >
             {title}
           </h2>
           {cards.length > 0 && (
-            <ol className="mt-12 grid gap-10 md:grid-cols-3 md:gap-x-12 lg:mt-16 lg:gap-x-16">
+            <ol className="mt-12 grid gap-10 md:grid-cols-3 md:gap-x-12">
               {cards.map((card, index) => (
                 <li key={index} className="reveal">
                   <div className="flex items-center gap-4">
-                    <span className="display nums text-[1.75rem] leading-none text-numeral lg:text-[2.25rem]">
+                    <span className="heading-5 tabular-nums">
                       {String(index + 1).padStart(2, "0")}
                     </span>
-                    <TrustIcon
-                      name={card.icon}
-                      className="size-12 text-leaf lg:size-14"
-                    />
+                    <TrustIcon name={card.icon} className="size-12 text-charcoal" />
                   </div>
-                  <h3 className="display mt-5 text-[1.75rem] leading-tight text-balance text-forest">
-                    {pickLocale(card.title, locale)}
-                  </h3>
-                  <p className="mt-3 max-w-sm text-[0.9375rem] leading-relaxed text-muted">
-                    {pickLocale(card.body, locale)}
-                  </p>
+                  <h3 className="heading-5 mt-6 text-balance">{pickLocale(card.title, locale)}</h3>
+                  <p className="body-3 mt-4 max-w-sm text-pretty">{pickLocale(card.body, locale)}</p>
                 </li>
               ))}
             </ol>
@@ -171,18 +164,16 @@ export function TrustSection({
         </div>
       </div>
       {stripItems.length > 0 && (
-        <div className="bg-forest text-white">
+        <div className="bg-charcoal text-ivory">
           <ul className="site-wrap grid sm:grid-cols-2 lg:grid-cols-4">
             {stripItems.map((item, index) => (
               <li
                 key={index}
-                className="reveal border-white/15 py-8 first:border-t-0 max-sm:border-t sm:px-8 sm:py-14 sm:[&:nth-child(n+3)]:border-t sm:[&:nth-child(n+3)]:pt-10 lg:border-l lg:px-10 lg:py-16 lg:first:border-l-0 lg:first:pl-0 lg:last:pr-0 lg:[&:nth-child(n+3)]:border-t-0 lg:[&:nth-child(n+3)]:pt-16"
+                className="reveal border-ivory/20 py-8 first:border-t-0 max-sm:border-t sm:px-8 sm:py-16 sm:[&:nth-child(n+3)]:border-t sm:[&:nth-child(n+3)]:pt-10 lg:border-l lg:px-10 lg:py-16 lg:first:border-l-0 lg:first:pl-0 lg:last:pr-0 lg:[&:nth-child(n+3)]:border-t-0 lg:[&:nth-child(n+3)]:pt-16"
               >
-                <TrustIcon name={item.icon} className="size-8 text-lime lg:size-9" />
-                <h3 className="display mt-5 text-[1.75rem] leading-tight text-balance">
-                  {pickLocale(item.title, locale)}
-                </h3>
-                <p className="mt-2 max-w-[18rem] text-[0.9375rem] leading-relaxed text-white/75">
+                <TrustIcon name={item.icon} className="size-8 text-lime" />
+                <h3 className="heading-5 mt-6 text-balance">{pickLocale(item.title, locale)}</h3>
+                <p className="body-6 mt-3 max-w-xs text-pretty text-ivory/80">
                   {pickLocale(item.body, locale)}
                 </p>
               </li>

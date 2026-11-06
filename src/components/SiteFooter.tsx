@@ -1,4 +1,3 @@
-import Image from "next/image"
 import Link from "next/link"
 import { pickLocale, type Locale } from "@/lib/i18n"
 import { products, redesign, siteSettings, ui, confirmedAddress, visiblePhone } from "@/lib/fixtures"
@@ -51,13 +50,15 @@ export function SiteFooter({ locale }: { locale: Locale }) {
       {/* Decorative client background (coffee leaves): lazy, never preloaded, cropped freely on small screens.
           Charcoal overlay (#17201b) so the leaf photo is only a subtle dark texture with no forest-green cast. */}
       {/* Leaf photo kept only as a subtle dark texture: grayscale + low brightness so no green cast. */}
-      <Image
+      {/* Already-optimized decorative texture. Native img so next/image does not flag it as LCP. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
         src="/images/optimized/footer-bg.webp"
         alt=""
-        fill
-        sizes="100vw"
         loading="lazy"
-        className="-z-20 object-cover object-center brightness-[0.45] grayscale contrast-125"
+        decoding="async"
+        fetchPriority="low"
+        className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover object-center brightness-[0.45] grayscale contrast-125"
       />
       <div
         aria-hidden="true"

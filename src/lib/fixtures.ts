@@ -1074,18 +1074,18 @@ export const whyChoose: TrustItem[] = [
   {
     icon: "price",
     title: {
-      id: "Sumber lokal langsung",
-      en: "Direct local sourcing",
-      zh: "本地直接采购",
-      vi: "Thu mua trực tiếp tại địa phương",
-      hi: "स्थानीय स्रोत से सीधी खरीद",
+      id: "Harga Tangan Pertama",
+      en: "First hand prices",
+      zh: "一手货源价格",
+      vi: "Giá từ nguồn đầu",
+      hi: "सीधे स्रोत की कीमत",
     },
     body: {
-      id: "Kami bekerja langsung dengan petani lokal dan menyesuaikan setiap inquiry dengan volume serta spesifikasi yang diminta.",
-      en: "We work directly with local farmers and tailor each inquiry to the requested volume and specifications.",
-      zh: "我们直接与本地农户合作，并根据所需数量和规格处理每次询价。",
-      vi: "Chúng tôi làm việc trực tiếp với nông dân địa phương và xử lý từng yêu cầu theo khối lượng cùng quy cách cần thiết.",
-      hi: "हम स्थानीय किसानों के साथ सीधे काम करते हैं और हर पूछताछ को माँगी गई मात्रा और विनिर्देश के अनुसार देखते हैं।",
+      id: "Kami bermitra langsung dengan petani lokal tanpa rantai perantara, sehingga harga tetap bersaing. Penawaran disesuaikan dengan volume dan spesifikasi pesanan Anda.",
+      en: "We partner directly with local farmers, with no middleman, so the price stays competitive. Quotes follow the volume and specifications of your order.",
+      zh: "我们直接与本地农户合作，没有中间环节，因此价格保持竞争力。报价按订单数量和规格调整。",
+      vi: "Chúng tôi hợp tác trực tiếp với nông dân địa phương, không qua trung gian, nên giá vẫn cạnh tranh. Báo giá theo khối lượng và quy cách đơn hàng.",
+      hi: "हम स्थानीय किसानों के साथ सीधे साझेदारी करते हैं, बिना बिचौलिये के, इसलिए कीमत प्रतिस्पर्धी रहती है। कोट ऑर्डर की मात्रा और विनिर्देश के अनुसार होता है।",
     },
   },
   {
