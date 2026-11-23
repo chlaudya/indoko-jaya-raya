@@ -7,6 +7,7 @@ export const companyProfile = defineType({
   fields: [
     defineField({ name: "legalName", type: "localeString", validation: (Rule) => Rule.required() }),
     defineField({ name: "tagline", type: "localeString" }),
+    defineField({ name: "foundingDate", title: "Tahun berdiri", type: "date", description: "Official founding date (Akta Pendirian)." }),
     defineField({ name: "logo", type: "image", options: { hotspot: true } }),
     defineField({ name: "vision", type: "localeBlock" }),
     defineField({ name: "mission", type: "localeBlock" }),
@@ -22,6 +23,29 @@ export const companyProfile = defineType({
             { name: "value", type: "localeString" },
           ],
           preview: { select: { title: "label.id", subtitle: "value.id" } },
+        },
+      ],
+    }),
+    defineField({
+      name: "documents",
+      title: "Public documents (only items approved to publish)",
+      type: "array",
+      description: "Do not upload the Akta PDF (contains personal data). Use kind 'request' for documents available on request. Leave empty rather than adding placeholder slots.",
+      of: [
+        {
+          type: "object",
+          name: "companyDocument",
+          fields: [
+            { name: "kind", type: "string", options: { list: [
+              { title: "Published file", value: "file" },
+              { title: "Copy on request (no public file)", value: "request" },
+            ] }, validation: (Rule) => Rule.required() },
+            { name: "title", type: "localeString" },
+            { name: "summary", type: "localeText" },
+            { name: "fileUrl", title: "Public file path or URL", type: "string" },
+            { name: "thumbnailUrl", type: "string" },
+          ],
+          preview: { select: { title: "title.id", subtitle: "kind" } },
         },
       ],
     }),

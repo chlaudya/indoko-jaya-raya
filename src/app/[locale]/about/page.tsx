@@ -84,7 +84,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         <div className="site-wrap flex flex-col gap-6 py-12 md:flex-row md:items-center md:justify-between lg:py-16">
           <div>
             <p className="label">{pickLocale(ui.companyProfile, locale)}</p>
-            <p className="display display-h3 mt-3 max-w-2xl text-forest">{pickLocale(pages.company.note, locale)}</p>
+            <p className="display display-h3 mt-3 max-w-2xl text-forest">{pickLocale(pages.company.profileLead, locale)}</p>
           </div>
           <TextLink href={`/${locale}/company`}>{pickLocale(ui.companyProfile, locale)}</TextLink>
         </div>

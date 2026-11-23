@@ -76,6 +76,9 @@ export const siteSettings = {
   },
   /** Map/photo panel on the contact page. Off until a real map or photo is supplied. Independent of address. */
   showMap: false as boolean,
+  legalName: "PT Indoko Jaya Raya",
+  /** ISO date for JSON-LD; display strings live on pages.company.founded. */
+  foundingDate: "2020-08-26",
 }
 
 export const nav = [
@@ -202,6 +205,11 @@ export const ui = {
   previous: { id: "Sebelumnya", en: "Previous" },
   next: { id: "Berikutnya", en: "Next" },
   identity: { id: "Identitas", en: "Identity" },
+  legalName: { id: "Nama Badan Usaha", en: "Legal name", zh: "Legal name", vi: "Legal name", hi: "Legal name" },
+  founded: { id: "Tahun Berdiri", en: "Founded", zh: "Founded", vi: "Founded", hi: "Founded" },
+  officeAddress: { id: "Alamat Kantor", en: "Office address", zh: "Office address", vi: "Office address", hi: "Office address" },
+  downloadPdf: { id: "Unduh PDF", en: "Download PDF", zh: "Download PDF", vi: "Download PDF", hi: "Download PDF" },
+  copyOnRequest: { id: "Salinan tersedia atas permintaan", en: "Copy available on request", zh: "Copy available on request", vi: "Copy available on request", hi: "Copy available on request" },
   legal: { id: "Legalitas", en: "Legal" },
   management: { id: "Manajemen", en: "Management" },
   facilities: { id: "Fasilitas", en: "Facilities" },
@@ -553,18 +561,51 @@ export const pages = {
     heroTitle: { id: "Profil perusahaan", en: "Company profile" },
     legalName: { id: "PT Indoko Jaya Raya", en: "PT Indoko Jaya Raya" },
     tagline: { id: "Agribisnis hasil bumi lokal", en: "Local agribusiness commodities" },
-    note: {
-      id: "Identitas hukum, struktur, lokasi, dan sertifikasi hanya ditampilkan setelah data disetujui untuk publik.",
-      en: "Legal identity, structure, locations, and certifications appear only after the data is approved for publication.",
+    founded: { id: "26 Agustus 2020", en: "26 August 2020" },
+    profileLead: {
+      id: "Lihat identitas hukum, alamat kantor, dan dokumen legalitas PT Indoko Jaya Raya.",
+      en: "See PT Indoko Jaya Raya's legal identity, office address and legal documents.",
     },
-    sections: [
-      { title: { id: "Identitas hukum", en: "Legal identity" } },
-      { title: { id: "Dokumen hukum", en: "Legal documents" } },
-      { title: { id: "Manajemen", en: "Management" } },
-      { title: { id: "Organisasi", en: "Organization" } },
-      { title: { id: "Lokasi", en: "Locations" } },
-      { title: { id: "Fasilitas", en: "Facilities" } },
-      { title: { id: "Sertifikasi", en: "Certifications" } },
+    /** Only confirmed public documents. No placeholder slots (NIB, NPWP, certifications, etc.). */
+    documents: [
+      {
+        kind: "file" as const,
+        title: {
+          id: "Surat Keterangan Registrasi Kebun/Lahan Usaha",
+          en: "Plantation/Business Land Registration Certificate",
+          zh: "Plantation/Business Land Registration Certificate",
+          vi: "Plantation/Business Land Registration Certificate",
+          hi: "Plantation/Business Land Registration Certificate",
+        },
+        summary: {
+          id: 'Surat Keterangan Registrasi Kebun/Lahan Usaha, Dinas Pertanian dan Ketahanan Pangan Provinsi Bali. IndoGAP (SNI 8969:2021), No. GAP.A–51.08.19–III.19. Kebun porang 10 ha, Seririt, Buleleng, a.n. Komang Astawa. Ditetapkan 23 Juni 2022, berlaku 2 tahun.',
+          en: 'Plantation/Business Land Registration Certificate, Bali Provincial Department of Agriculture and Food Security. IndoGAP (SNI 8969:2021), No. GAP.A–51.08.19–III.19. Porang plantation 10 ha, Seririt, Buleleng, in the name of Komang Astawa. Issued 23 June 2022, valid for 2 years.',
+          zh: 'Plantation/Business Land Registration Certificate, Bali Provincial Department of Agriculture and Food Security. IndoGAP (SNI 8969:2021), No. GAP.A–51.08.19–III.19. Porang plantation 10 ha, Seririt, Buleleng, in the name of Komang Astawa. Issued 23 June 2022, valid for 2 years.',
+          vi: 'Plantation/Business Land Registration Certificate, Bali Provincial Department of Agriculture and Food Security. IndoGAP (SNI 8969:2021), No. GAP.A–51.08.19–III.19. Porang plantation 10 ha, Seririt, Buleleng, in the name of Komang Astawa. Issued 23 June 2022, valid for 2 years.',
+          hi: 'Plantation/Business Land Registration Certificate, Bali Provincial Department of Agriculture and Food Security. IndoGAP (SNI 8969:2021), No. GAP.A–51.08.19–III.19. Porang plantation 10 ha, Seririt, Buleleng, in the name of Komang Astawa. Issued 23 June 2022, valid for 2 years.',
+        },
+        href: "/documents/sk-registrasi-kebun-porang-indogap-2022.pdf",
+        thumbnail: "/documents/sk-registrasi-kebun-porang-indogap-2022.webp",
+        thumbnailWidth: 800,
+        thumbnailHeight: 1132,
+      },
+      {
+        kind: "request" as const,
+        title: {
+          id: "Akta Pendirian",
+          en: "Deed of Establishment",
+          zh: "Deed of Establishment",
+          vi: "Deed of Establishment",
+          hi: "Deed of Establishment",
+        },
+        summary: {
+          id: 'Akta Pendirian No. 03, 26 Agustus 2020, Notaris Putu Lasmini Ariestya Dewi, S.H., M.Kn.',
+          en: 'Deed of Establishment No. 03, 26 August 2020, Notary Putu Lasmini Ariestya Dewi, S.H., M.Kn.',
+          zh: 'Deed of Establishment No. 03, 26 August 2020, Notary Putu Lasmini Ariestya Dewi, S.H., M.Kn.',
+          vi: 'Deed of Establishment No. 03, 26 August 2020, Notary Putu Lasmini Ariestya Dewi, S.H., M.Kn.',
+          hi: 'Deed of Establishment No. 03, 26 August 2020, Notary Putu Lasmini Ariestya Dewi, S.H., M.Kn.',
+        },
+      },
     ],
   },
   productsIndex: {
