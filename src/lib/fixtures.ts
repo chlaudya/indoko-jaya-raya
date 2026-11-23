@@ -205,12 +205,13 @@ export const ui = {
   previous: { id: "Sebelumnya", en: "Previous" },
   next: { id: "Berikutnya", en: "Next" },
   identity: { id: "Identitas", en: "Identity" },
-  legalName: { id: "Nama Badan Usaha", en: "Legal name", zh: "Legal name", vi: "Legal name", hi: "Legal name" },
+  /** zh / vi / hi drafts live in src/lib/i18n-drafts.ts. */
+  legalName: { id: "Nama Badan Usaha", en: "Legal name" },
   /** zh / vi / hi are drafts. */
   founded: { id: "Tahun Berdiri", en: "Founded", zh: "成立时间", vi: "Năm thành lập", hi: "स्थापना वर्ष" },
-  officeAddress: { id: "Alamat Kantor", en: "Office address", zh: "Office address", vi: "Office address", hi: "Office address" },
-  downloadPdf: { id: "Unduh PDF", en: "Download PDF", zh: "Download PDF", vi: "Download PDF", hi: "Download PDF" },
-  copyOnRequest: { id: "Salinan tersedia atas permintaan", en: "Copy available on request", zh: "Copy available on request", vi: "Copy available on request", hi: "Copy available on request" },
+  officeAddress: { id: "Alamat Kantor", en: "Office address" },
+  downloadPdf: { id: "Unduh PDF", en: "Download PDF" },
+  copyOnRequest: { id: "Salinan tersedia atas permintaan", en: "Copy available on request" },
   legal: { id: "Legalitas", en: "Legal" },
   management: { id: "Manajemen", en: "Management" },
   facilities: { id: "Fasilitas", en: "Facilities" },
@@ -592,19 +593,14 @@ export const pages = {
       },
       {
         kind: "request" as const,
+        // zh / vi / hi drafts live in src/lib/i18n-drafts.ts. Keep the notary's name as-is.
         title: {
           id: "Akta Pendirian",
           en: "Deed of Establishment",
-          zh: "Deed of Establishment",
-          vi: "Deed of Establishment",
-          hi: "Deed of Establishment",
         },
         summary: {
-          id: 'Akta Pendirian No. 03, 26 Agustus 2020, Notaris Putu Lasmini Ariestya Dewi, S.H., M.Kn.',
-          en: 'Deed of Establishment No. 03, 26 August 2020, Notary Putu Lasmini Ariestya Dewi, S.H., M.Kn.',
-          zh: 'Deed of Establishment No. 03, 26 August 2020, Notary Putu Lasmini Ariestya Dewi, S.H., M.Kn.',
-          vi: 'Deed of Establishment No. 03, 26 August 2020, Notary Putu Lasmini Ariestya Dewi, S.H., M.Kn.',
-          hi: 'Deed of Establishment No. 03, 26 August 2020, Notary Putu Lasmini Ariestya Dewi, S.H., M.Kn.',
+          id: "Akta Pendirian No. 03, 26 Agustus 2020, Notaris Putu Lasmini Ariestya Dewi, S.H., M.Kn.",
+          en: "Deed of Establishment No. 03, 26 August 2020, Notary Putu Lasmini Ariestya Dewi, S.H., M.Kn.",
         },
       },
     ],

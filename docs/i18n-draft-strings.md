@@ -4,7 +4,7 @@ Status: **DRAFT**. Machine-assisted zh / vi / hi translations for every string t
 
 How it works: `pickLocale` (src/lib/i18n.ts) uses an explicit locale value (fixture or Sanity) first, then `src/lib/i18n-drafts.ts` (keyed by the Indonesian text), then Indonesian. To approve or correct a string, enter it in Sanity / on the fixture, or edit the drafts file. If the Indonesian source changes, its draft stops matching and that locale falls back to Indonesian again.
 
-Counts per locale (zh / vi / hi each): hero headline 1 · landing page 31 (why-choose label + heading + 3 cards × title/body, 4 icon-strip items × title/body, 5 WhatsApp templates, 10 UI strings) · site strings 196 · image alt text 26 · **total 254**. Not translated (names): WhatsApp, Indoko Jaya Raya, PT Indoko Jaya Raya.
+Counts per locale (zh / vi / hi each): hero headline 1 · landing page 31 (why-choose label + heading + 3 cards × title/body, 4 icon-strip items × title/body, 5 WhatsApp templates, 10 UI strings) · site strings 202 · image alt text 26 · **total 260**. Not translated (names): WhatsApp, Indoko Jaya Raya, PT Indoko Jaya Raya.
 
 ## Client pending
 - **Real trust stats (optional).** No stats ship: the mock numbers were removed. `home.stats` stays in the CMS; the row is hidden until the client supplies confirmed numbers (1–3 re-centre).
@@ -144,6 +144,12 @@ Document title format: `{title} | Indoko Jaya Raya`.
 | Sebelumnya | 上一个 | Trước | पिछला |
 | Berikutnya | 下一个 | Tiếp | अगला |
 | Identitas | 公司信息 | Thông tin nhận diện | पहचान |
+| Nama Badan Usaha | 企业法定名称 | Tên pháp nhân | कानूनी नाम |
+| Alamat Kantor | 办公地址 | Địa chỉ văn phòng | कार्यालय का पता |
+| Unduh PDF | 下载 PDF | Tải PDF | PDF डाउनलोड करें |
+| Salinan tersedia atas permintaan | 副本可应要求提供 | Bản sao cung cấp theo yêu cầu | प्रतिलिपि अनुरोध पर उपलब्ध |
+| Akta Pendirian | 成立公证书 | Chứng thư thành lập | स्थापना विलेख |
+| Akta Pendirian No. 03, 26 Agustus 2020, Notaris Putu Lasmini Ariestya Dewi, S.H., M.Kn. | 成立公证书第 03 号，2020年8月26日，公证员 Putu Lasmini Ariestya Dewi, S.H., M.Kn. | Chứng thư thành lập số 03, ngày 26 tháng 8 năm 2020, công chứng viên Putu Lasmini Ariestya Dewi, S.H., M.Kn. | स्थापना विलेख संख्या 03, 26 अगस्त 2020, नोटरी Putu Lasmini Ariestya Dewi, S.H., M.Kn. |
 | Legalitas | 法律资质 | Pháp lý | कानूनी |
 | Manajemen | 管理层 | Ban lãnh đạo | प्रबंधन |
 | Fasilitas | 设施 | Cơ sở vật chất | सुविधाएँ |
