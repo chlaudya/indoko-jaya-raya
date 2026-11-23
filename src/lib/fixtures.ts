@@ -206,7 +206,8 @@ export const ui = {
   next: { id: "Berikutnya", en: "Next" },
   identity: { id: "Identitas", en: "Identity" },
   legalName: { id: "Nama Badan Usaha", en: "Legal name", zh: "Legal name", vi: "Legal name", hi: "Legal name" },
-  founded: { id: "Tahun Berdiri", en: "Founded", zh: "Founded", vi: "Founded", hi: "Founded" },
+  /** zh / vi / hi are drafts. */
+  founded: { id: "Tahun Berdiri", en: "Founded", zh: "成立时间", vi: "Năm thành lập", hi: "स्थापना वर्ष" },
   officeAddress: { id: "Alamat Kantor", en: "Office address", zh: "Office address", vi: "Office address", hi: "Office address" },
   downloadPdf: { id: "Unduh PDF", en: "Download PDF", zh: "Download PDF", vi: "Download PDF", hi: "Download PDF" },
   copyOnRequest: { id: "Salinan tersedia atas permintaan", en: "Copy available on request", zh: "Copy available on request", vi: "Copy available on request", hi: "Copy available on request" },
@@ -571,18 +572,18 @@ export const pages = {
       {
         kind: "file" as const,
         title: {
-          id: "Surat Keterangan Registrasi Kebun/Lahan Usaha",
-          en: "Plantation/Business Land Registration Certificate",
-          zh: "Plantation/Business Land Registration Certificate",
-          vi: "Plantation/Business Land Registration Certificate",
-          hi: "Plantation/Business Land Registration Certificate",
+          id: "Registrasi Kebun IndoGAP – Porang",
+          en: "IndoGAP Farm Registration – Porang",
+          zh: "IndoGAP 农园登记 – Porang",
+          vi: "Đăng ký canh tác IndoGAP – Porang",
+          hi: "IndoGAP फार्म पंजीकरण – पोरंग",
         },
         summary: {
-          id: 'Surat Keterangan Registrasi Kebun/Lahan Usaha, Dinas Pertanian dan Ketahanan Pangan Provinsi Bali. IndoGAP (SNI 8969:2021), No. GAP.A–51.08.19–III.19. Kebun porang 10 ha, Seririt, Buleleng, a.n. Komang Astawa. Ditetapkan 23 Juni 2022, berlaku 2 tahun.',
-          en: 'Plantation/Business Land Registration Certificate, Bali Provincial Department of Agriculture and Food Security. IndoGAP (SNI 8969:2021), No. GAP.A–51.08.19–III.19. Porang plantation 10 ha, Seririt, Buleleng, in the name of Komang Astawa. Issued 23 June 2022, valid for 2 years.',
-          zh: 'Plantation/Business Land Registration Certificate, Bali Provincial Department of Agriculture and Food Security. IndoGAP (SNI 8969:2021), No. GAP.A–51.08.19–III.19. Porang plantation 10 ha, Seririt, Buleleng, in the name of Komang Astawa. Issued 23 June 2022, valid for 2 years.',
-          vi: 'Plantation/Business Land Registration Certificate, Bali Provincial Department of Agriculture and Food Security. IndoGAP (SNI 8969:2021), No. GAP.A–51.08.19–III.19. Porang plantation 10 ha, Seririt, Buleleng, in the name of Komang Astawa. Issued 23 June 2022, valid for 2 years.',
-          hi: 'Plantation/Business Land Registration Certificate, Bali Provincial Department of Agriculture and Food Security. IndoGAP (SNI 8969:2021), No. GAP.A–51.08.19–III.19. Porang plantation 10 ha, Seririt, Buleleng, in the name of Komang Astawa. Issued 23 June 2022, valid for 2 years.',
+          id: "atas nama Komang Astawa, terbit 23 Juni 2022, berlaku s.d. 23 Juni 2024",
+          en: "issued to Komang Astawa, 23 June 2022, valid until 23 June 2024",
+          zh: "签发予 Komang Astawa，2022年6月23日，有效期至2024年6月23日",
+          vi: "đứng tên Komang Astawa, ban hành ngày 23 tháng 6 năm 2022, có hiệu lực đến 23 tháng 6 năm 2024",
+          hi: "Komang Astawa के नाम पर जारी, 23 जून 2022, 23 जून 2024 तक वैध",
         },
         href: "/documents/sk-registrasi-kebun-porang-indogap-2022.pdf",
         thumbnail: "/documents/sk-registrasi-kebun-porang-indogap-2022.webp",
@@ -1250,4 +1251,23 @@ export function waDisplayNumber(): string {
   if (!raw.startsWith("62")) return `+${raw}`
   const rest = raw.slice(2)
   return `+62 ${rest.slice(0, 3)}-${rest.slice(3, 7)}-${rest.slice(7)}`
+}
+
+/** Dialable href for the public number (`tel:+6285739093040`). Independent of WhatsApp buttons. */
+export function telHref(): string | null {
+  const raw = siteSettings.waTargets[0]?.phoneE164 || ""
+  if (!raw || siteSettings.phonePending) return null
+  return `tel:+${raw}`
+}
+
+/**
+ * Founding date for the company profile. id and en are the agreed wordings;
+ * zh / vi / hi use Intl (drafts) from the ISO date, so they never show "Agustus".
+ */
+export function formatFoundedDate(locale: Locale, iso: string = siteSettings.foundingDate): string {
+  if (locale === "id") return "26 Agustus 2020"
+  if (locale === "en") return "26 August 2020"
+  const [year, month, day] = iso.split("-").map(Number)
+  const tag = { zh: "zh-Hans", vi: "vi", hi: "hi" }[locale] ?? locale
+  return new Intl.DateTimeFormat(tag, { day: "numeric", month: "long", year: "numeric" }).format(new Date(year, month - 1, day))
 }

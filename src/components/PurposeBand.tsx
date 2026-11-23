@@ -29,12 +29,12 @@ export function PurposeBand({
             {points.map((point, index) => (
               <li
                 key={index}
-                className="reveal grid grid-cols-[3.5rem_1fr] items-baseline gap-4 border-t border-hairline py-7 first:border-t-0 first:pt-0 last:pb-0 sm:grid-cols-[4.5rem_1fr]"
+                className="reveal grid min-w-0 grid-cols-[3.5rem_minmax(0,1fr)] items-baseline gap-4 border-t border-hairline py-7 first:border-t-0 first:pt-0 last:pb-0 sm:grid-cols-[4.5rem_minmax(0,1fr)]"
               >
                 <span aria-hidden="true" className="display nums text-[48px] leading-none text-numeral">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <p className="display display-h3 text-balance text-forest">{point}</p>
+                <p className="display display-h3 min-w-0 text-pretty break-words text-forest">{point}</p>
               </li>
             ))}
           </ol>
@@ -53,9 +53,9 @@ export function PurposeBand({
           </div>
           <ol className="grid gap-10 lg:col-span-8">
             {points.map((point, index) => (
-              <li key={index} className="reveal grid grid-cols-[3rem_1fr] gap-4 border-t border-white/20 pt-8 sm:grid-cols-[4rem_1fr]">
+              <li key={index} className="reveal grid min-w-0 grid-cols-[3rem_minmax(0,1fr)] gap-4 border-t border-white/20 pt-8 sm:grid-cols-[4rem_minmax(0,1fr)]">
                 <span className="label pt-2">{String(index + 1).padStart(2, "0")}</span>
-                <p className="display display-h2 text-balance">{point}</p>
+                <p className="display display-h2 min-w-0 text-pretty break-words">{point}</p>
               </li>
             ))}
           </ol>

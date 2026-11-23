@@ -3,8 +3,7 @@ import { pageMeta } from "@/lib/seo-copy"
 import { withLocaleAlternates } from "@/lib/seo"
 import { notFound } from "next/navigation"
 import { isLocale, pickLocale, type Locale } from "@/lib/i18n"
-import { pages, ui, siteSettings, confirmedAddress, visiblePhone } from "@/lib/fixtures"
-import { buildWhatsAppUrl } from "@/lib/whatsapp"
+import { pages, ui, confirmedAddress, visiblePhone, telHref, formatFoundedDate } from "@/lib/fixtures"
 import { Gallery } from "@/components/Gallery"
 import { InquirySection } from "@/components/InquirySection"
 import { PageHeader } from "@/components/PageHeader"
@@ -28,15 +27,15 @@ export default async function CompanyPage({ params }: { params: Promise<{ locale
   const t = (v: Parameters<typeof pickLocale>[0]) => pickLocale(v, locale)
   const address = confirmedAddress(locale)
   const phone = visiblePhone()
-  const wa = buildWhatsAppUrl({ locale, templateKey: "contact" })
+  const phoneHref = telHref()
   const documents = content.documents ?? []
 
   const facts = [
     { label: t(ui.legalName), value: t(content.legalName) },
-    { label: t(ui.founded), value: t(content.founded) },
+    { label: t(ui.founded), value: formatFoundedDate(locale) },
     address ? { label: t(ui.officeAddress), value: address } : null,
-    phone
-      ? { label: t(ui.whatsapp), value: phone, href: wa }
+    phone && phoneHref
+      ? { label: t(ui.phone), value: phone, href: phoneHref }
       : null,
   ].filter(Boolean) as { label: string; value: string; href?: string }[]
 
@@ -56,13 +55,17 @@ export default async function CompanyPage({ params }: { params: Promise<{ locale
           <div className="lg:col-span-7">
             <p className="label">{t(ui.identity)}</p>
             <h2 className="display display-h2 mt-4 text-forest">{t(content.legalName)}</h2>
-            <dl className="mt-8 grid gap-6 sm:grid-cols-2">
+            <dl className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
               {facts.map((row) => (
-                <div key={row.label}>
+                <div key={row.label} className="min-w-0">
                   <dt className="label">{row.label}</dt>
                   <dd className="mt-2 text-sm leading-relaxed text-charcoal">
                     {row.href ? (
-                      <a href={row.href} target="_blank" rel="noopener noreferrer" className="underline-offset-4 hover:text-forest hover:underline">
+                      <a
+                        href={row.href}
+                        {...(row.href.startsWith("tel:") ? {} : { target: "_blank", rel: "noopener noreferrer" })}
+                        className="underline-offset-4 hover:text-forest hover:underline"
+                      >
                         {row.value}
                       </a>
                     ) : (
@@ -72,14 +75,14 @@ export default async function CompanyPage({ params }: { params: Promise<{ locale
                 </div>
               ))}
             </dl>
-            <dl className="mt-10 grid gap-6 border-t border-charcoal/10 pt-8 sm:grid-cols-2">
-              <div>
+            <dl className="mt-10 grid grid-cols-1 gap-6 border-t border-charcoal/10 pt-8 md:grid-cols-2">
+              <div className="min-w-0">
                 <dt className="label">{t(ui.vision)}</dt>
-                <dd className="mt-2 text-sm leading-relaxed text-charcoal">{t(pages.about.vision)}</dd>
+                <dd className="mt-2 text-pretty break-words text-sm leading-relaxed text-charcoal">{t(pages.about.vision)}</dd>
               </div>
-              <div>
+              <div className="min-w-0">
                 <dt className="label">{t(ui.mission)}</dt>
-                <dd className="mt-2 text-sm leading-relaxed text-charcoal">{t(pages.about.mission)}</dd>
+                <dd className="mt-2 text-pretty break-words text-sm leading-relaxed text-charcoal">{t(pages.about.mission)}</dd>
               </div>
             </dl>
           </div>

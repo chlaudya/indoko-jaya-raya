@@ -3,8 +3,7 @@ import { pageMeta } from "@/lib/seo-copy"
 import { withLocaleAlternates } from "@/lib/seo"
 import { notFound } from "next/navigation"
 import { isLocale, pickLocale, type Locale } from "@/lib/i18n"
-import { pages, ui, siteSettings, confirmedAddress, visiblePhone } from "@/lib/fixtures"
-import { buildWhatsAppUrl } from "@/lib/whatsapp"
+import { pages, ui, siteSettings, confirmedAddress, visiblePhone, telHref } from "@/lib/fixtures"
 import { WaButton } from "@/components/WaButton"
 import { PageHeader } from "@/components/PageHeader"
 
@@ -18,8 +17,8 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
   const { locale: raw } = await params
   if (!isLocale(raw)) notFound()
   const locale = raw as Locale
-  const wa = buildWhatsAppUrl({ locale, templateKey: "contact" })
   const phone = visiblePhone()
+  const phoneHref = telHref()
   // Address and map are gated separately: a confirmed address does not unlock the map
   // until siteSettings.showMap is on (needs a real map or photo).
   const address = confirmedAddress(locale)
@@ -56,14 +55,16 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                   <dd className="mt-2 text-charcoal">{address}</dd>
                 </div>
               ) : null}
-              <div>
-                <dt className="label">{pickLocale(ui.whatsapp, locale)}</dt>
-                <dd className="mt-2">
-                  <a href={wa} target="_blank" rel="noopener noreferrer" className="text-charcoal underline-offset-4 hover:text-forest hover:underline">
-                    {phone ?? pickLocale(ui.whatsapp, locale)}
-                  </a>
-                </dd>
-              </div>
+              {phone && phoneHref ? (
+                <div>
+                  <dt className="label">{pickLocale(ui.phone, locale)}</dt>
+                  <dd className="mt-2">
+                    <a href={phoneHref} className="text-charcoal underline-offset-4 hover:text-forest hover:underline">
+                      {phone}
+                    </a>
+                  </dd>
+                </div>
+              ) : null}
             </dl>
             <div className="mt-10">
               <WaButton locale={locale} templateKey="contact" label={pickLocale(ui.requestInquiry, locale)} />

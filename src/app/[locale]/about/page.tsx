@@ -8,7 +8,6 @@ import type { ImageKey } from "@/lib/images"
 import { FeatureSplit } from "@/components/FeatureSplit"
 import { HeroFullBleed } from "@/components/HeroFullBleed"
 import { InquirySection } from "@/components/InquirySection"
-import { PurposeBand } from "@/components/PurposeBand"
 import { TextLink } from "@/components/TextLink"
 
 const strengthImages: ImageKey[] = ["sectionCashewSorting", "sectionSortingMachine", "sectionWarehouseStock", "sectionTruckLoading"]
@@ -43,20 +42,30 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             <h2 className="label">{pickLocale(ui.ourStory, locale)}</h2>
             <p className="mt-6 text-xl leading-relaxed text-charcoal lg:text-2xl lg:leading-relaxed">{pickLocale(content.story, locale)}</p>
             <p className="mt-6 text-lg leading-relaxed text-muted">{pickLocale(pages.home.sustainabilityBody, locale)}</p>
-            <blockquote className="my-12 border-l-2 border-sage pl-6 lg:-ml-16 lg:pl-14">
-              <p className="display display-h2 text-balance text-forest">“{pickLocale(redesign.about.pullQuote, locale)}”</p>
+            <blockquote className="my-12 min-w-0 border-l-2 border-sage pl-6 lg:-ml-16 lg:pl-14">
+              <p className="display display-h2 text-pretty break-words text-forest">“{pickLocale(redesign.about.pullQuote, locale)}”</p>
               <footer className="label mt-4">PT Indoko Jaya Raya</footer>
             </blockquote>
           </div>
         </div>
       </section>
 
-      {/* Visi / misi band */}
-      <PurposeBand
-        label={pickLocale(ui.visionMission, locale)}
-        title={pickLocale(content.vision, locale)}
-        points={redesign.home.missionPoints.map((p) => pickLocale(p, locale))}
-      />
+      {/* Visi & Misi: one column on small screens, two from md, min-w-0 so long words cannot force overflow. */}
+      <section className="surface-dark bg-forest text-white">
+        <div className="site-wrap section-y">
+          <p className="label">{pickLocale(ui.visionMission, locale)}</p>
+          <dl className="mt-8 grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-12">
+            <div className="min-w-0">
+              <dt className="label">{pickLocale(ui.vision, locale)}</dt>
+              <dd className="mt-4 text-pretty break-words text-lg leading-relaxed text-white/90">{pickLocale(content.vision, locale)}</dd>
+            </div>
+            <div className="min-w-0">
+              <dt className="label">{pickLocale(ui.mission, locale)}</dt>
+              <dd className="mt-4 text-pretty break-words text-lg leading-relaxed text-white/90">{pickLocale(content.mission, locale)}</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
 
       {/* Alternating strengths */}
       <section className="bg-white">

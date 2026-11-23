@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { pickLocale, type Locale } from "@/lib/i18n"
-import { products, redesign, siteSettings, ui, confirmedAddress, visiblePhone } from "@/lib/fixtures"
+import { products, redesign, siteSettings, ui, confirmedAddress, visiblePhone, telHref } from "@/lib/fixtures"
 import { buildWhatsAppUrl } from "@/lib/whatsapp"
 import { WhatsAppIcon } from "./WaButton"
 import { BrandMark } from "./BrandMark"
@@ -28,6 +28,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
   const t = (v: Parameters<typeof pickLocale>[0]) => pickLocale(v, locale)
   const wa = buildWhatsAppUrl({ locale, templateKey: "contact" })
   const phone = visiblePhone()
+  const phoneHref = telHref()
   const email = siteSettings.email.trim()
   // Hide until siteSettings.addressPending is cleared (locale-independent).
   const addressLine = confirmedAddress(locale)
@@ -65,7 +66,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgba(23,32,27,0.72),rgba(23,32,27,0.94))] xl:bg-[linear-gradient(to_bottom,rgba(23,32,27,0.82),rgba(23,32,27,0.96))]"
       />
       <div className="site-wrap relative pt-16 pb-8 lg:pt-20">
-        <div className="grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-12">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-12 [&>*]:min-w-0">
           <div className="col-span-2 md:col-span-1 lg:col-span-4">
             <Link href={`/${locale}`} className="inline-flex min-h-11 items-center">
               <BrandMark variant="footer" />
@@ -108,12 +109,12 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                   </span>
                 </li>
               ) : null}
-              {phone ? (
+              {phone && phoneHref ? (
                 <li className="flex gap-3">
                   <Icon d={PHONE} />
                   <span>
                     <span className="sr-only">{t(ui.phone)}: </span>
-                    {phone}
+                    <a href={phoneHref} className="hover:text-white hover:underline hover:decoration-lime hover:underline-offset-4">{phone}</a>
                   </span>
                 </li>
               ) : null}
