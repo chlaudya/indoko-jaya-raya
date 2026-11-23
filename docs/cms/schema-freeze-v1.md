@@ -29,9 +29,9 @@ Mapped 1:1 from `docs/design/wireframes-v1.md`.
 - `settings.applyMode`: `wa` | `form` | `both`
 
 ## Client pending
-- **Launch blocker: WhatsApp number.** `settings.waTargets` still holds the placeholder 6281234567890; every WhatsApp button reads it
+- **WhatsApp number.** `settings.waTargets` holds the official sales number `6285739093040`; every WhatsApp button reads it
 - Supply real trust stats (optional; `home.stats`, row hidden until filled, no defaults ship)
-- Confirm public phone and email (`contactPage.email`; the phone is hidden while `phonePending`): the footer shows "Menyusul" until then
+- Confirm a public email (`contactPage.email`); the official phone and address are published. The footer email row stays hidden until an email is set
 - Full address (footer and Kontak show "Indonesia — alamat lengkap menyusul dari klien.")
 - Asam (Kupas) and Ubi Porang photos (placeholders ship)
 - Approve draft zh / vi / hi copy: see `docs/i18n-draft-strings.md`

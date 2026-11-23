@@ -8,8 +8,8 @@ Counts per locale (zh / vi / hi each): hero headline 1 · landing page 31 (why-c
 
 ## Client pending
 - **Real trust stats (optional).** No stats ship: the mock numbers were removed. `home.stats` stays in the CMS; the row is hidden until the client supplies confirmed numbers (1–3 re-centre).
-- **WhatsApp number (launch blocker).** Every button reads `settings.waTargets`, which still holds the placeholder 6281234567890.
-- **Phone and email.** The footer shows "Menyusul" until confirmed; no email is configured.
+- **WhatsApp number.** Every button reads `settings.waTargets` (`6285739093040`, the official sales number).
+- **Email.** The footer email row stays hidden; no public email is configured. The official phone and address now show in the footer and on the contact page.
 - Review every zh / vi / hi string below, and the id / en why-choose, icon-strip and WhatsApp-template copy (drafted from the PM brief; no stats, certification or sustainability claims).
 
 ## Hero headline (designer drafts; emphasised phrase in bold/italic)

@@ -8,9 +8,9 @@ type LString = Partial<Record<Locale, string>>
 export const siteSettings = {
   waTransport: "wame" as "wame" | "api",
   applyMode: "wa" as "wa" | "form" | "both",
-  waTargets: [{ key: "default", label: "Sales", phoneE164: "6281234567890" }],
-  /** Placeholder WA number until the client confirms; hides the visible number (links still use waTargets). */
-  phonePending: true as boolean,
+  waTargets: [{ key: "default", label: "Sales", phoneE164: "6285739093040" }],
+  /** False once the public WhatsApp number is confirmed; hides the visible number while true (links still use waTargets). */
+  phonePending: false as boolean,
   waTemplates: {
     home: {
       id: "Halo Indoko Jaya Raya, saya ingin mengetahui lebih lanjut tentang perusahaan Anda.",
@@ -62,11 +62,20 @@ export const siteSettings = {
    * True until the client confirms a public street address. Hide address in every locale
    * based on this flag (never on translated "menyusul" / "pending" text).
    */
-  addressPending: true as boolean,
+  addressPending: false as boolean,
+  /**
+   * Official office address, kept in Indonesian in every locale.
+   * Province is omitted: the official line does not include it, and the site does not append one.
+   */
   address: {
-    id: "Indonesia — alamat lengkap menyusul dari klien.",
-    en: "Indonesia — full address pending client confirmation.",
+    id: "Br. Dns. Brongbong, Desa Celukan Bawang, Kec. Gerokgak, Kab. Buleleng",
+    en: "Br. Dns. Brongbong, Desa Celukan Bawang, Kec. Gerokgak, Kab. Buleleng",
+    zh: "Br. Dns. Brongbong, Desa Celukan Bawang, Kec. Gerokgak, Kab. Buleleng",
+    vi: "Br. Dns. Brongbong, Desa Celukan Bawang, Kec. Gerokgak, Kab. Buleleng",
+    hi: "Br. Dns. Brongbong, Desa Celukan Bawang, Kec. Gerokgak, Kab. Buleleng",
   },
+  /** Map/photo panel on the contact page. Off until a real map or photo is supplied. Independent of address. */
+  showMap: false as boolean,
 }
 
 export const nav = [
