@@ -2,7 +2,7 @@ import { notFound } from "next/navigation"
 import { Geist } from "next/font/google"
 import { isLocale, pickLocale, LOCALES, LOCALE_LANG_TAGS, type Locale } from "@/lib/i18n"
 import { setRequestLocale } from "@/lib/request-locale"
-import { ui } from "@/lib/fixtures"
+import { ui, siteSettings, mapExternalUrl } from "@/lib/fixtures"
 import { SiteHeader } from "@/components/SiteHeader"
 import { SiteFooter } from "@/components/SiteFooter"
 
@@ -16,6 +16,38 @@ const geist = Geist({
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }))
+}
+
+
+function organizationJsonLd() {
+  const telephone = siteSettings.phonePending ? undefined : `+${siteSettings.waTargets[0]?.phoneE164 ?? ""}`
+  const street = siteSettings.addressPending ? undefined : (siteSettings.address.id || "").trim() || undefined
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: siteSettings.legalName,
+    foundingDate: siteSettings.foundingDate,
+    ...(telephone ? { telephone } : {}),
+    ...(street
+      ? {
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: street,
+            addressCountry: "ID",
+          },
+        }
+      : {}),
+    ...(siteSettings.showMap
+      ? {
+          hasMap: mapExternalUrl(),
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: siteSettings.map.lat,
+            longitude: siteSettings.map.lng,
+          },
+        }
+      : {}),
+  }
 }
 
 export default async function LocaleLayout({
@@ -42,6 +74,12 @@ export default async function LocaleLayout({
         <SiteHeader locale={locale} />
         <main id="content">{children}</main>
         <SiteFooter locale={locale} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd()).replace(/</g, "\\u003c"),
+          }}
+        />
       </body>
     </html>
   )

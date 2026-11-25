@@ -3,8 +3,7 @@ import { pageMeta } from "@/lib/seo-copy"
 import { withLocaleAlternates } from "@/lib/seo"
 import { notFound } from "next/navigation"
 import { isLocale, pickLocale, type Locale } from "@/lib/i18n"
-import { pages, ui, confirmedAddress, visiblePhone } from "@/lib/fixtures"
-import { buildWhatsAppUrl } from "@/lib/whatsapp"
+import { pages, ui, siteSettings, confirmedAddress, mapEmbedUrl, mapExternalUrl, visiblePhone, telHref } from "@/lib/fixtures"
 import { WaButton } from "@/components/WaButton"
 import { PageHeader } from "@/components/PageHeader"
 
@@ -18,10 +17,11 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
   const { locale: raw } = await params
   if (!isLocale(raw)) notFound()
   const locale = raw as Locale
-  const wa = buildWhatsAppUrl({ locale, templateKey: "contact" })
   const phone = visiblePhone()
-  // Same gate as the address row: no confirmed address → no map DOM / no empty grid column.
+  const phoneHref = telHref()
+  // Address and map stay independent: the pin only renders when showMap is on.
   const address = confirmedAddress(locale)
+  const showMap = Boolean(address) && siteSettings.showMap === true
 
   return (
     <div>
@@ -35,17 +35,9 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
         title={pickLocale(pages.contact.heroTitle, locale)}
         lead={pickLocale(pages.contact.heroLead, locale)}
       />
-      <div className={address ? "grid lg:min-h-[560px] lg:grid-cols-2" : undefined}>
-        {/* Contact details: full-width until a confirmed address unlocks the map column. */}
-        <div className="band-lime">
-          <div
-            className={
-              address
-                ? "site-wrap flex flex-col justify-center py-16 lg:mr-0 lg:max-w-[688px] lg:py-24"
-                : "site-wrap flex flex-col justify-center py-16 lg:py-24"
-            }
-          >
-            <div className={address ? undefined : "max-w-3xl"}>
+      <section className="band-lime">
+        <div className="site-wrap grid items-center gap-10 py-16 lg:grid-cols-2 lg:gap-16 lg:py-24">
+          <div className={showMap ? undefined : "max-w-3xl"}>
             <h2 className="label">{pickLocale(ui.contactDetails, locale)}</h2>
             <dl className="mt-6 grid gap-8 border-t border-charcoal/10 pt-8 sm:grid-cols-2">
               {address ? (
@@ -54,25 +46,45 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                   <dd className="mt-2 text-charcoal">{address}</dd>
                 </div>
               ) : null}
-              <div>
-                <dt className="label">{pickLocale(ui.whatsapp, locale)}</dt>
-                <dd className="mt-2">
-                  <a href={wa} target="_blank" rel="noopener noreferrer" className="text-charcoal underline-offset-4 hover:text-forest hover:underline">
-                    {phone ?? pickLocale(ui.whatsapp, locale)}
-                  </a>
-                </dd>
-              </div>
+              {phone && phoneHref ? (
+                <div>
+                  <dt className="label">{pickLocale(ui.phone, locale)}</dt>
+                  <dd className="mt-2">
+                    <a href={phoneHref} className="text-charcoal underline-offset-4 hover:text-forest hover:underline">
+                      {phone}
+                    </a>
+                  </dd>
+                </div>
+              ) : null}
             </dl>
             <div className="mt-10">
               <WaButton locale={locale} templateKey="contact" label={pickLocale(ui.requestInquiry, locale)} />
             </div>
-            </div>
           </div>
+          {showMap ? (
+            <figure className="overflow-hidden rounded-[8px] border border-hairline bg-white">
+              <iframe
+                title={pickLocale(ui.officeMap, locale)}
+                src={mapEmbedUrl(locale)}
+                className="block h-[320px] w-full border-0 sm:h-[420px]"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+              <figcaption className="border-t border-hairline px-5 py-4">
+                <a
+                  href={mapExternalUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-medium text-charcoal underline-offset-4 hover:text-forest hover:underline"
+                >
+                  {pickLocale(ui.openMap, locale)}
+                </a>
+              </figcaption>
+            </figure>
+          ) : null}
         </div>
-        {address ? (
-          <div className="ph ph-dark relative min-h-[360px] lg:min-h-full" aria-hidden="true" />
-        ) : null}
-      </div>
+      </section>
     </div>
   )
 }

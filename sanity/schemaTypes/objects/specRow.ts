@@ -59,10 +59,10 @@ export const specRow = defineType({
     }),
     defineField({ name: "linkTo", title: "Links to in-page anchor (optional)", type: "string" }),
     defineField({
-      name: "source",
-      title: "Source (optional)",
+      name: "provenance",
+      title: "Provenance (optional)",
       type: "string",
-      description: "Editor-only provenance (e.g. client email / call date). Not shown on the site.",
+      description: "Editor-only note (e.g. client email / call date). Not shown on the site.",
     }),
   ],
   preview: {

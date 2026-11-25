@@ -19,12 +19,12 @@ const variants: Record<ButtonVariant, string> = {
   "wa-on-dark": "border border-white/70 bg-transparent text-white hover:bg-white hover:text-forest",
 }
 
-/** Buttons: 8px radius, 8px vertical and 12px horizontal padding. */
+/** Buttons: 8px radius, 8px vertical and 12px horizontal padding. Labels wrap inside max-w-full (min 44px tall); no truncation or font shrink. */
 export function buttonClass(variant: ButtonVariant = "primary", className = "", size: "md" | "lg" = "md") {
   return [
     size === "lg"
-      ? "button-lg inline-flex min-h-12 items-center justify-center gap-2 px-3 py-2"
-      : "button-md inline-flex min-h-12 items-center justify-center gap-2 px-3 py-2",
+      ? "button-lg inline-flex min-h-12 max-w-full min-w-0 items-center justify-center gap-2 px-3 py-2 text-center"
+      : "button-md inline-flex min-h-12 max-w-full min-w-0 items-center justify-center gap-2 px-3 py-2 text-center",
     "rounded-lg active:scale-[0.98] motion-safe:transition-[transform,background-color,color,border-color] motion-safe:duration-300 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)]",
     variants[variant],
     className,
@@ -64,8 +64,8 @@ export function WaButton({
   const href = buildWhatsAppUrl({ locale, templateKey, tokens })
   return (
     <a href={href} target="_blank" rel="noopener noreferrer" aria-label={ariaLabel} className={buttonClass(variant, className, size)}>
-      <WhatsAppIcon className={size === "lg" ? "size-5" : "size-4"} />
-      {label}
+      <WhatsAppIcon className={`${size === "lg" ? "size-5" : "size-4"} shrink-0`} />
+      <span className="min-w-0 text-center text-pretty whitespace-normal">{label}</span>
     </a>
   )
 }

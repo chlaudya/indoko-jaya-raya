@@ -77,11 +77,11 @@ export const pageDescriptions: Record<string, LString> = {
     hi: "PT Indoko Jaya Raya के बारे में: स्थानीय फसल एकत्र कर इंडोनेशियाई जिंसें राष्ट्रीय और अंतरराष्ट्रीय B2B साझेदारों को आपूर्ति करने वाला कृषि व्यवसाय।"
   },
   company: {
-    id: "Profil PT Indoko Jaya Raya—visi, misi, dan galeri fasilitas. Identitas hukum dan sertifikasi ditampilkan setelah data disetujui untuk publikasi.",
-    en: "Company profile for PT Indoko Jaya Raya—vision, mission and facility gallery. Legal identity and certifications appear once approved for publication.",
-    zh: "PT Indoko Jaya Raya 公司简介，涵盖愿景、使命与设施图库。法律身份与认证仅在获准公开后展示。如需了解更多，请通过 WhatsApp 联系团队。 目录另有花生、绿豆、魔芋等品类；下单前请确认规格与包装。目录另有花生、绿豆、魔芋等品类；下单前请确认规格与包装。目录另",
-    vi: "Hồ sơ PT Indoko Jaya Raya gồm tầm nhìn, sứ mệnh và thư viện cơ sở. Danh tính pháp lý cùng chứng nhận chỉ hiện khi được duyệt công bố. Chúng tôi hỗ trợ báo giá.",
-    hi: "PT Indoko Jaya Raya प्रोफ़ाइल में दृष्टि, मिशन और सुविधा गैलरी हैं। कानूनी पहचान व प्रमाणपत्र प्रकाशन हेतु स्वीकृत होने पर ही दिखते हैं. बिक्री टीम विनिर्देश."
+    id: "Profil PT Indoko Jaya Raya, berdiri 26 Agustus 2020. Kantor di Celukan Bawang, Gerokgak, Buleleng. Visi, misi, dan dokumen legalitas. Hubungi kami via WhatsApp.",
+    en: "PT Indoko Jaya Raya profile, founded 26 August 2020. Office in Celukan Bawang, Gerokgak, Buleleng. Vision, mission and legal documents. Contact us on WhatsApp.",
+    zh: "PT Indoko Jaya Raya 公司简介，成立于 2020 年 8 月 26 日，办公地址位于 Celukan Bawang, Gerokgak, Buleleng。介绍愿景、使命与法律文件。欢迎通过 WhatsApp 联系我们。",
+    vi: "Hồ sơ PT Indoko Jaya Raya, thành lập 26/8/2020. Văn phòng tại Celukan Bawang, Gerokgak, Buleleng. Tầm nhìn, sứ mệnh và giấy tờ pháp lý. Liên hệ qua WhatsApp.",
+    hi: "PT Indoko Jaya Raya प्रोफ़ाइल, स्थापना 26 अगस्त 2020। कार्यालय Celukan Bawang, Gerokgak, Buleleng में। दृष्टि, मिशन व कानूनी दस्तावेज़। WhatsApp पर संपर्क करें।"
   },
   products: {
     id: "Katalog komoditi PT Indoko Jaya Raya: kacang mete, asam jawa, kacang tanah, jagung pipil, kopi, cengkeh, porang, dan lainnya untuk pembeli B2B.",

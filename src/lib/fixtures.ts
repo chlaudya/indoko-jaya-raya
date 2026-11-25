@@ -8,9 +8,9 @@ type LString = Partial<Record<Locale, string>>
 export const siteSettings = {
   waTransport: "wame" as "wame" | "api",
   applyMode: "wa" as "wa" | "form" | "both",
-  waTargets: [{ key: "default", label: "Sales", phoneE164: "6281234567890" }],
-  /** Placeholder WA number until the client confirms; hides the visible number (links still use waTargets). */
-  phonePending: true as boolean,
+  waTargets: [{ key: "default", label: "Sales", phoneE164: "6285739093040" }],
+  /** False once the public WhatsApp number is confirmed; hides the visible number while true (links still use waTargets). */
+  phonePending: false as boolean,
   waTemplates: {
     home: {
       id: "Halo Indoko Jaya Raya, saya ingin mengetahui lebih lanjut tentang perusahaan Anda.",
@@ -62,11 +62,25 @@ export const siteSettings = {
    * True until the client confirms a public street address. Hide address in every locale
    * based on this flag (never on translated "menyusul" / "pending" text).
    */
-  addressPending: true as boolean,
+  addressPending: false as boolean,
+  /**
+   * Official office address, kept in Indonesian in every locale.
+   * Province is omitted: the official line does not include it, and the site does not append one.
+   */
   address: {
-    id: "Indonesia — alamat lengkap menyusul dari klien.",
-    en: "Indonesia — full address pending client confirmation.",
+    id: "Br. Dns. Brongbong, Desa Celukan Bawang, Kec. Gerokgak, Kab. Buleleng",
+    en: "Br. Dns. Brongbong, Desa Celukan Bawang, Kec. Gerokgak, Kab. Buleleng",
+    zh: "Br. Dns. Brongbong, Desa Celukan Bawang, Kec. Gerokgak, Kab. Buleleng",
+    vi: "Br. Dns. Brongbong, Desa Celukan Bawang, Kec. Gerokgak, Kab. Buleleng",
+    hi: "Br. Dns. Brongbong, Desa Celukan Bawang, Kec. Gerokgak, Kab. Buleleng",
   },
+  /** Contact-page map. Independent of the address text. */
+  showMap: true as boolean,
+  /** Office pin. https://maps.google.com/?q=-8.204314,114.881554 */
+  map: { lat: -8.204314, lng: 114.881554, zoom: 16 },
+  legalName: "PT Indoko Jaya Raya",
+  /** ISO date for JSON-LD; display strings live on pages.company.founded. */
+  foundingDate: "2020-08-26",
 }
 
 export const nav = [
@@ -123,6 +137,20 @@ export const ui = {
   vision: { id: "Visi", en: "Vision" },
   mission: { id: "Misi", en: "Mission" },
   address: { id: "Alamat", en: "Address" },
+  openMap: {
+    id: "Buka di Google Maps",
+    en: "Open in Google Maps",
+    zh: "在 Google 地图中打开",
+    vi: "Mở trong Google Maps",
+    hi: "Google Maps में खोलें",
+  },
+  officeMap: {
+    id: "Peta lokasi kantor PT Indoko Jaya Raya",
+    en: "Map of the PT Indoko Jaya Raya office",
+    zh: "PT Indoko Jaya Raya 办公地点地图",
+    vi: "Bản đồ văn phòng PT Indoko Jaya Raya",
+    hi: "PT Indoko Jaya Raya कार्यालय का मानचित्र",
+  },
   capacity: { id: "Kapasitas", en: "Capacity" },
   mapPending: { id: "Peta menyusul", en: "Map pending" },
   openPositions: { id: "Posisi terbuka", en: "Open positions" },
@@ -193,6 +221,13 @@ export const ui = {
   previous: { id: "Sebelumnya", en: "Previous" },
   next: { id: "Berikutnya", en: "Next" },
   identity: { id: "Identitas", en: "Identity" },
+  /** zh / vi / hi drafts live in src/lib/i18n-drafts.ts. */
+  legalName: { id: "Nama Badan Usaha", en: "Legal name" },
+  /** zh / vi / hi are drafts. */
+  founded: { id: "Tahun Berdiri", en: "Founded", zh: "成立时间", vi: "Năm thành lập", hi: "स्थापना वर्ष" },
+  officeAddress: { id: "Alamat Kantor", en: "Office address" },
+  downloadPdf: { id: "Unduh PDF", en: "Download PDF" },
+  copyOnRequest: { id: "Salinan tersedia atas permintaan", en: "Copy available on request" },
   legal: { id: "Legalitas", en: "Legal" },
   management: { id: "Manajemen", en: "Management" },
   facilities: { id: "Fasilitas", en: "Facilities" },
@@ -234,8 +269,10 @@ export type SpecRow = {
   testMethod?: LString
   /** Client-confirmed only. Omitted/false → row is hidden from the product page. */
   confirmed?: boolean
-  /** Optional provenance note for editors (e.g. "client email 2026-11-01"); not rendered. */
-  source?: string
+  /** reference = Acuan Umum Pasar; confirmed = Indoko's own. Separate from `confirmed`. */
+  source?: "reference" | "confirmed"
+  /** Optional editor note (e.g. "client email 2026-11-01"); not rendered. */
+  provenance?: string
 }
 
 export type AvailabilityStatus =
@@ -544,18 +581,46 @@ export const pages = {
     heroTitle: { id: "Profil perusahaan", en: "Company profile" },
     legalName: { id: "PT Indoko Jaya Raya", en: "PT Indoko Jaya Raya" },
     tagline: { id: "Agribisnis hasil bumi lokal", en: "Local agribusiness commodities" },
-    note: {
-      id: "Identitas hukum, struktur, lokasi, dan sertifikasi hanya ditampilkan setelah data disetujui untuk publik.",
-      en: "Legal identity, structure, locations, and certifications appear only after the data is approved for publication.",
+    founded: { id: "26 Agustus 2020", en: "26 August 2020" },
+    profileLead: {
+      id: "Lihat identitas hukum, alamat kantor, dan dokumen legalitas PT Indoko Jaya Raya.",
+      en: "See PT Indoko Jaya Raya's legal identity, office address and legal documents.",
     },
-    sections: [
-      { title: { id: "Identitas hukum", en: "Legal identity" } },
-      { title: { id: "Dokumen hukum", en: "Legal documents" } },
-      { title: { id: "Manajemen", en: "Management" } },
-      { title: { id: "Organisasi", en: "Organization" } },
-      { title: { id: "Lokasi", en: "Locations" } },
-      { title: { id: "Fasilitas", en: "Facilities" } },
-      { title: { id: "Sertifikasi", en: "Certifications" } },
+    /** Only confirmed public documents. No placeholder slots (NIB, NPWP, certifications, etc.). */
+    documents: [
+      {
+        kind: "file" as const,
+        title: {
+          id: "Registrasi Kebun IndoGAP – Porang",
+          en: "IndoGAP Farm Registration – Porang",
+          zh: "IndoGAP 农园登记 – Porang",
+          vi: "Đăng ký canh tác IndoGAP – Porang",
+          hi: "IndoGAP फार्म पंजीकरण – पोरंग",
+        },
+        summary: {
+          id: "atas nama Komang Astawa, terbit 23 Juni 2022, berlaku s.d. 23 Juni 2024",
+          en: "issued to Komang Astawa, 23 June 2022, valid until 23 June 2024",
+          zh: "签发予 Komang Astawa，2022年6月23日，有效期至2024年6月23日",
+          vi: "đứng tên Komang Astawa, ban hành ngày 23 tháng 6 năm 2022, có hiệu lực đến 23 tháng 6 năm 2024",
+          hi: "Komang Astawa के नाम पर जारी, 23 जून 2022, 23 जून 2024 तक वैध",
+        },
+        href: "/documents/sk-registrasi-kebun-porang-indogap-2022.pdf",
+        thumbnail: "/documents/sk-registrasi-kebun-porang-indogap-2022.webp",
+        thumbnailWidth: 800,
+        thumbnailHeight: 1132,
+      },
+      {
+        kind: "request" as const,
+        // zh / vi / hi drafts live in src/lib/i18n-drafts.ts. Keep the notary's name as-is.
+        title: {
+          id: "Akta Pendirian",
+          en: "Deed of Establishment",
+        },
+        summary: {
+          id: "Akta Pendirian No. 03, 26 Agustus 2020, Notaris Putu Lasmini Ariestya Dewi, S.H., M.Kn.",
+          en: "Deed of Establishment No. 03, 26 August 2020, Notary Putu Lasmini Ariestya Dewi, S.H., M.Kn.",
+        },
+      },
     ],
   },
   productsIndex: {
@@ -1194,10 +1259,55 @@ export function confirmedAddress(locale: Locale): string | null {
   return value || null
 }
 
+const MAP_HL: Record<Locale, string> = {
+  id: "id",
+  en: "en",
+  zh: "zh-CN",
+  vi: "vi",
+  hi: "hi",
+}
+
+/** Share link for the office pin. */
+export function mapExternalUrl(): string {
+  const { lat, lng } = siteSettings.map
+  return `https://maps.google.com/?q=${lat},${lng}`
+}
+
+/** Iframe src. `output=embed` needs no Maps API key. */
+export function mapEmbedUrl(locale: Locale): string {
+  const { lat, lng, zoom } = siteSettings.map
+  const params = new URLSearchParams({
+    q: `${lat},${lng}`,
+    z: String(zoom),
+    hl: MAP_HL[locale],
+    output: "embed",
+  })
+  return `https://maps.google.com/maps?${params.toString()}`
+}
+
 
 export function waDisplayNumber(): string {
   const raw = siteSettings.waTargets[0]?.phoneE164 || ""
   if (!raw.startsWith("62")) return `+${raw}`
   const rest = raw.slice(2)
   return `+62 ${rest.slice(0, 3)}-${rest.slice(3, 7)}-${rest.slice(7)}`
+}
+
+/** Dialable href for the public number (`tel:+6285739093040`). Independent of WhatsApp buttons. */
+export function telHref(): string | null {
+  const raw = siteSettings.waTargets[0]?.phoneE164 || ""
+  if (!raw || siteSettings.phonePending) return null
+  return `tel:+${raw}`
+}
+
+/**
+ * Founding date for the company profile. id and en are the agreed wordings;
+ * zh / vi / hi use Intl (drafts) from the ISO date, so they never show "Agustus".
+ */
+export function formatFoundedDate(locale: Locale, iso: string = siteSettings.foundingDate): string {
+  if (locale === "id") return "26 Agustus 2020"
+  if (locale === "en") return "26 August 2020"
+  const [year, month, day] = iso.split("-").map(Number)
+  const tag = { zh: "zh-Hans", vi: "vi", hi: "hi" }[locale] ?? locale
+  return new Intl.DateTimeFormat(tag, { day: "numeric", month: "long", year: "numeric" }).format(new Date(year, month - 1, day))
 }

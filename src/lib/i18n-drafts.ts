@@ -257,4 +257,12 @@ export const I18N_DRAFTS: Drafts = {
   "Halo Indoko Jaya Raya, saya tertarik dengan {{productName}} yang saya lihat di halaman produk website Anda. Mohon informasi lebih lanjut.": { zh: "您好，Indoko Jaya Raya，我在贵公司网站的产品页面上看到{{productName}}，很感兴趣，请提供更多信息。", vi: "Xin chào Indoko Jaya Raya, tôi quan tâm đến {{productName}} mà tôi thấy trên trang sản phẩm của website bạn. Vui lòng cho tôi biết thêm thông tin.", hi: "नमस्ते Indoko Jaya Raya, मैंने आपकी वेबसाइट के उत्पाद पेज पर {{productName}} देखा और मुझे इसमें रुचि है। कृपया और जानकारी साझा करें।" },
   // --- Home trust label (ui.whyChooseLabel) ---
   "Keunggulan kami": { zh: "我们的优势", vi: "Thế mạnh của chúng tôi", hi: "हमारी ख़ूबियाँ" },
+  // --- Company page labels (DRAFT zh / vi / hi, for native review) ---
+  "Nama Badan Usaha": { zh: "企业法定名称", vi: "Tên pháp nhân", hi: "कानूनी नाम" },
+  "Alamat Kantor": { zh: "办公地址", vi: "Địa chỉ văn phòng", hi: "कार्यालय का पता" },
+  "Unduh PDF": { zh: "下载 PDF", vi: "Tải PDF", hi: "PDF डाउनलोड करें" },
+  "Salinan tersedia atas permintaan": { zh: "副本可应要求提供", vi: "Bản sao cung cấp theo yêu cầu", hi: "प्रतिलिपि अनुरोध पर उपलब्ध" },
+  "Akta Pendirian": { zh: "成立公证书", vi: "Chứng thư thành lập", hi: "स्थापना विलेख" },
+  "Akta Pendirian No. 03, 26 Agustus 2020, Notaris Putu Lasmini Ariestya Dewi, S.H., M.Kn.": { zh: "成立公证书第 03 号，2020年8月26日，公证员 Putu Lasmini Ariestya Dewi, S.H., M.Kn.", vi: "Chứng thư thành lập số 03, ngày 26 tháng 8 năm 2020, công chứng viên Putu Lasmini Ariestya Dewi, S.H., M.Kn.", hi: "स्थापना विलेख संख्या 03, 26 अगस्त 2020, नोटरी Putu Lasmini Ariestya Dewi, S.H., M.Kn." },
 }
+
