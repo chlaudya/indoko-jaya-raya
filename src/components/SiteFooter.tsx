@@ -48,23 +48,24 @@ export function SiteFooter({ locale }: { locale: Locale }) {
 
   return (
     <footer className="relative isolate overflow-hidden border-t border-white/10 bg-forest text-ivory">
-      {/* Decorative client background (coffee leaves): lazy, never preloaded, cropped freely on small screens.
-          Charcoal overlay (#17201b) so the leaf photo is only a subtle dark texture with no forest-green cast. */}
-      {/* Leaf photo kept only as a subtle dark texture: grayscale + low brightness so no green cast. */}
-      {/* Already-optimized decorative texture. Native img so next/image does not flag it as LCP. */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/images/optimized/footer-bg.webp"
-        alt=""
-        loading="lazy"
-        decoding="async"
-        fetchPriority="low"
-        className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover object-center brightness-[0.45] grayscale contrast-125"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgba(23,32,27,0.72),rgba(23,32,27,0.94))] xl:bg-[linear-gradient(to_bottom,rgba(23,32,27,0.82),rgba(23,32,27,0.96))]"
-      />
+      {/* Leaf plate is 1983×793, clusters in the corners. Keep that ratio, capped to the
+          footer, so a tall or wide footer cannot crop them off. Scrim stays light and
+          ends on solid #17201b. */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 -z-10 flex h-full items-start justify-center">
+        <div className="relative aspect-[1983/793] w-full max-h-full">
+          {/* Already-optimized decorative texture. Native img so next/image does not flag it as LCP. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/optimized/footer-bg.webp"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            fetchPriority="low"
+            className="h-full w-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(23,32,27,0.5)_0%,rgba(23,32,27,0.38)_42%,rgba(23,32,27,0.5)_80%,#17201b_100%)]" />
+        </div>
+      </div>
       <div className="site-wrap relative pt-16 pb-8 lg:pt-20">
         <div className="grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-12 [&>*]:min-w-0">
           <div className="col-span-2 md:col-span-1 lg:col-span-4">

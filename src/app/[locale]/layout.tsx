@@ -2,7 +2,7 @@ import { notFound } from "next/navigation"
 import { Geist } from "next/font/google"
 import { isLocale, pickLocale, LOCALES, LOCALE_LANG_TAGS, type Locale } from "@/lib/i18n"
 import { setRequestLocale } from "@/lib/request-locale"
-import { ui, siteSettings } from "@/lib/fixtures"
+import { ui, siteSettings, mapExternalUrl } from "@/lib/fixtures"
 import { SiteHeader } from "@/components/SiteHeader"
 import { SiteFooter } from "@/components/SiteFooter"
 
@@ -34,6 +34,16 @@ function organizationJsonLd() {
             "@type": "PostalAddress",
             streetAddress: street,
             addressCountry: "ID",
+          },
+        }
+      : {}),
+    ...(siteSettings.showMap
+      ? {
+          hasMap: mapExternalUrl(),
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: siteSettings.map.lat,
+            longitude: siteSettings.map.lng,
           },
         }
       : {}),

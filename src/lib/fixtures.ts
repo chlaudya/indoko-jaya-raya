@@ -74,8 +74,10 @@ export const siteSettings = {
     vi: "Br. Dns. Brongbong, Desa Celukan Bawang, Kec. Gerokgak, Kab. Buleleng",
     hi: "Br. Dns. Brongbong, Desa Celukan Bawang, Kec. Gerokgak, Kab. Buleleng",
   },
-  /** Map/photo panel on the contact page. Off until a real map or photo is supplied. Independent of address. */
-  showMap: false as boolean,
+  /** Contact-page map. Independent of the address text. */
+  showMap: true as boolean,
+  /** Office pin. https://maps.google.com/?q=-8.204314,114.881554 */
+  map: { lat: -8.204314, lng: 114.881554, zoom: 16 },
   legalName: "PT Indoko Jaya Raya",
   /** ISO date for JSON-LD; display strings live on pages.company.founded. */
   foundingDate: "2020-08-26",
@@ -135,6 +137,20 @@ export const ui = {
   vision: { id: "Visi", en: "Vision" },
   mission: { id: "Misi", en: "Mission" },
   address: { id: "Alamat", en: "Address" },
+  openMap: {
+    id: "Buka di Google Maps",
+    en: "Open in Google Maps",
+    zh: "在 Google 地图中打开",
+    vi: "Mở trong Google Maps",
+    hi: "Google Maps में खोलें",
+  },
+  officeMap: {
+    id: "Peta lokasi kantor PT Indoko Jaya Raya",
+    en: "Map of the PT Indoko Jaya Raya office",
+    zh: "PT Indoko Jaya Raya 办公地点地图",
+    vi: "Bản đồ văn phòng PT Indoko Jaya Raya",
+    hi: "PT Indoko Jaya Raya कार्यालय का मानचित्र",
+  },
   capacity: { id: "Kapasitas", en: "Capacity" },
   mapPending: { id: "Peta menyusul", en: "Map pending" },
   openPositions: { id: "Posisi terbuka", en: "Open positions" },
@@ -253,8 +269,10 @@ export type SpecRow = {
   testMethod?: LString
   /** Client-confirmed only. Omitted/false → row is hidden from the product page. */
   confirmed?: boolean
-  /** Optional provenance note for editors (e.g. "client email 2026-11-01"); not rendered. */
-  source?: string
+  /** reference = Acuan Umum Pasar; confirmed = Indoko's own. Separate from `confirmed`. */
+  source?: "reference" | "confirmed"
+  /** Optional editor note (e.g. "client email 2026-11-01"); not rendered. */
+  provenance?: string
 }
 
 export type AvailabilityStatus =
@@ -1239,6 +1257,32 @@ export function confirmedAddress(locale: Locale): string | null {
   if (siteSettings.addressPending) return null
   const value = pickLocale(siteSettings.address, locale).trim()
   return value || null
+}
+
+const MAP_HL: Record<Locale, string> = {
+  id: "id",
+  en: "en",
+  zh: "zh-CN",
+  vi: "vi",
+  hi: "hi",
+}
+
+/** Share link for the office pin. */
+export function mapExternalUrl(): string {
+  const { lat, lng } = siteSettings.map
+  return `https://maps.google.com/?q=${lat},${lng}`
+}
+
+/** Iframe src. `output=embed` needs no Maps API key. */
+export function mapEmbedUrl(locale: Locale): string {
+  const { lat, lng, zoom } = siteSettings.map
+  const params = new URLSearchParams({
+    q: `${lat},${lng}`,
+    z: String(zoom),
+    hl: MAP_HL[locale],
+    output: "embed",
+  })
+  return `https://maps.google.com/maps?${params.toString()}`
 }
 
 

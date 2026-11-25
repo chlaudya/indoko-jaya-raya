@@ -3,7 +3,7 @@ import { pageMeta } from "@/lib/seo-copy"
 import { withLocaleAlternates } from "@/lib/seo"
 import { notFound } from "next/navigation"
 import { isLocale, pickLocale, type Locale } from "@/lib/i18n"
-import { pages, ui, siteSettings, confirmedAddress, visiblePhone, telHref } from "@/lib/fixtures"
+import { pages, ui, siteSettings, confirmedAddress, mapEmbedUrl, mapExternalUrl, visiblePhone, telHref } from "@/lib/fixtures"
 import { WaButton } from "@/components/WaButton"
 import { PageHeader } from "@/components/PageHeader"
 
@@ -19,8 +19,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
   const locale = raw as Locale
   const phone = visiblePhone()
   const phoneHref = telHref()
-  // Address and map are gated separately: a confirmed address does not unlock the map
-  // until siteSettings.showMap is on (needs a real map or photo).
+  // Address and map stay independent: the pin only renders when showMap is on.
   const address = confirmedAddress(locale)
   const showMap = Boolean(address) && siteSettings.showMap === true
 
@@ -36,17 +35,9 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
         title={pickLocale(pages.contact.heroTitle, locale)}
         lead={pickLocale(pages.contact.heroLead, locale)}
       />
-      <div className={showMap ? "grid lg:min-h-[560px] lg:grid-cols-2" : undefined}>
-        {/* Contact details: full-width until showMap unlocks the map column. Address can show without a map. */}
-        <div className="band-lime">
-          <div
-            className={
-              showMap
-                ? "site-wrap flex flex-col justify-center py-16 lg:mr-0 lg:max-w-[688px] lg:py-24"
-                : "site-wrap flex flex-col justify-center py-16 lg:py-24"
-            }
-          >
-            <div className={showMap ? undefined : "max-w-3xl"}>
+      <section className="band-lime">
+        <div className="site-wrap grid items-center gap-10 py-16 lg:grid-cols-2 lg:gap-16 lg:py-24">
+          <div className={showMap ? undefined : "max-w-3xl"}>
             <h2 className="label">{pickLocale(ui.contactDetails, locale)}</h2>
             <dl className="mt-6 grid gap-8 border-t border-charcoal/10 pt-8 sm:grid-cols-2">
               {address ? (
@@ -69,13 +60,31 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
             <div className="mt-10">
               <WaButton locale={locale} templateKey="contact" label={pickLocale(ui.requestInquiry, locale)} />
             </div>
-            </div>
           </div>
+          {showMap ? (
+            <figure className="overflow-hidden rounded-[8px] border border-hairline bg-white">
+              <iframe
+                title={pickLocale(ui.officeMap, locale)}
+                src={mapEmbedUrl(locale)}
+                className="block h-[320px] w-full border-0 sm:h-[420px]"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+              <figcaption className="border-t border-hairline px-5 py-4">
+                <a
+                  href={mapExternalUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-medium text-charcoal underline-offset-4 hover:text-forest hover:underline"
+                >
+                  {pickLocale(ui.openMap, locale)}
+                </a>
+              </figcaption>
+            </figure>
+          ) : null}
         </div>
-        {showMap ? (
-          <div className="ph ph-dark relative min-h-[360px] lg:min-h-full" aria-hidden="true" />
-        ) : null}
-      </div>
+      </section>
     </div>
   )
 }
