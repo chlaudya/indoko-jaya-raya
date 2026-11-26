@@ -610,7 +610,7 @@ export const pages = {
         thumbnailHeight: 1132,
       },
       {
-        kind: "request" as const,
+        kind: "file" as const,
         // zh / vi / hi drafts live in src/lib/i18n-drafts.ts. Keep the notary's name as-is.
         title: {
           id: "Akta Pendirian",
@@ -620,6 +620,10 @@ export const pages = {
           id: "Akta Pendirian No. 03, 26 Agustus 2020, Notaris Putu Lasmini Ariestya Dewi, S.H., M.Kn.",
           en: "Deed of Establishment No. 03, 26 August 2020, Notary Putu Lasmini Ariestya Dewi, S.H., M.Kn.",
         },
+        href: "/documents/akta-pendirian-no-03-2020.pdf",
+        thumbnail: "/documents/akta-pendirian-no-03-2020.jpg",
+        thumbnailWidth: 1200,
+        thumbnailHeight: 1698,
       },
     ],
   },
