@@ -5,6 +5,23 @@ import { acuanUmumBySlug, type ReferenceSpecTable } from "./acuan-umum"
 
 type LString = Partial<Record<Locale, string>>
 
+/** Public file, or a document we only send on request. */
+export type CompanyDocument =
+  | {
+      kind: "file"
+      title: LString
+      summary: LString
+      href: string
+      thumbnail?: string
+      thumbnailWidth?: number
+      thumbnailHeight?: number
+    }
+  | {
+      kind: "request"
+      title: LString
+      summary: LString
+    }
+
 export const siteSettings = {
   waTransport: "wame" as "wame" | "api",
   applyMode: "wa" as "wa" | "form" | "both",
@@ -625,7 +642,7 @@ export const pages = {
         thumbnailWidth: 1200,
         thumbnailHeight: 1698,
       },
-    ],
+    ] as CompanyDocument[],
   },
   productsIndex: {
     heroTitle: { id: "Komoditi kami", en: "Our commodities" },

@@ -70,11 +70,11 @@ export function SiteHeader({ locale }: { locale: Locale }) {
     // Floating bar: fixed over the hero. Pages without a
     // hero get top padding from `main#content` in globals.css so nothing hides beneath it.
     <header
-      className="pointer-events-none fixed inset-x-0 top-4 z-50 px-6"
+      className="pointer-events-none fixed inset-x-0 top-4 z-50 px-4 sm:px-6"
     >
       <div
         data-scrolled={scrolled ? "" : undefined}
-        className="header-bar pointer-events-auto relative mx-auto flex h-16 max-w-[1280px] items-center gap-4 rounded-xl border border-white/70 bg-white/70 pr-2 pl-4 shadow-[0_10px_30px_-12px_rgba(23,32,27,0.28)] backdrop-blur-md motion-safe:transition-colors motion-safe:duration-300 sm:pl-5 lg:gap-6 lg:pr-3 data-[scrolled]:bg-white/88"
+        className="header-bar pointer-events-auto relative mx-auto flex h-16 max-w-[1280px] items-center gap-2 rounded-xl border border-white/70 bg-white/70 pr-2 pl-3 shadow-[0_10px_30px_-12px_rgba(23,32,27,0.28)] backdrop-blur-md motion-safe:transition-colors motion-safe:duration-300 sm:gap-4 sm:pl-5 lg:gap-6 lg:pr-3 data-[scrolled]:bg-white/88"
       >
         <Logo locale={locale} />
         <nav className="hidden h-full flex-1 items-center justify-center gap-1 lg:flex xl:gap-4" aria-label="Primary">
@@ -120,19 +120,19 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             className="button-sm btn-lime inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-lg border border-forest bg-lime px-3 py-2 whitespace-nowrap text-forest hover:bg-lime-tint active:scale-[0.98] motion-safe:transition-[transform,background-color] motion-safe:duration-300 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)] lg:h-10 lg:min-h-0 lg:border-0"
           >
             <WhatsAppIcon className="size-4" />
-            {/* Visible text on mobile + desktop (mobile was icon-only). ui.requestQuoteShort kept for narrow fallbacks. */}
-            <span>{ctaLabel}</span>
+            <span className="sm:hidden">{pickLocale(ui.requestQuoteShort, locale)}</span>
+            <span className="hidden sm:inline">{ctaLabel}</span>
           </a>
           <button
             ref={menuButtonRef}
             type="button"
-            className="inline-flex size-11 items-center justify-center rounded-[6px] text-charcoal hover:bg-ivory lg:hidden"
+            className="inline-flex size-11 shrink-0 items-center justify-center rounded-[6px] text-charcoal hover:bg-ivory lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={pickLocale(ui.openMenu, locale)}
             onClick={() => setOpen(true)}
           >
-            <svg viewBox="0 0 24 24" aria-hidden="true" className="size-6">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" className="size-6">
               <path
                 d="M3 7h18"
                 stroke="currentColor"
