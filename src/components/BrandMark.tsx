@@ -8,7 +8,7 @@ import Image from "next/image"
  */
 const MARKS = {
   // Black apple on the lime triangle, for light surfaces (floating header bar, mobile drawer).
-  header: { src: "/images/brand/apel-logo.svg", width: 75, height: 56, className: "h-12 w-auto md:h-14" },
+  header: { src: "/images/brand/apel-logo.svg", width: 75, height: 56, className: "h-10 w-auto sm:h-12 md:h-14" },
   // Knockout: the apple is cut out so the dark footer shows through.
   footer: { src: "/images/brand/apel-logo-knockout.svg", width: 96, height: 72, className: "h-[72px] w-auto" },
 } as const
